@@ -1,0 +1,267 @@
+#main {
+  z-index: 3;
+}
+
+.navApp {
+  background: white;
+}
+
+ul li:hover a {
+  background: #007bff;
+}
+
+.activeNav {
+  margin-top: 5px !important;
+  color: #007bff !important;
+}
+
+ul li:hover a.activeNav {
+  visibility: hidden !important;
+}
+
+.activeNavS {
+  margin-top: 5px !important;
+  color: #007bff !important;
+}
+
+ul li:hover a.activeNavS {
+  
+}
+
+#cuadroImagenNavbar {
+  height: 120px;
+  width: 300px;
+  background: black;
+}
+
+.tx {
+  display: inline-block;
+  padding: 0 10px;
+  font: normal normal normal 15px/1.4em atlas-aaa-500,sans-serif;
+  color: #444444;
+  transition: color 0.4s ease 0s;
+}
+
+.itemNegro {
+  margin-top: 5px !important;
+  color: #100c0c !important;
+}
+
+
+.txt-pbx {
+  text-align: right;
+  display: inline;
+  padding: 0rem 1rem;
+}
+
+.closess {
+  right: 10px;
+  cursor: pointer;
+  position: absolute;
+}
+
+@media screen and (max-width: 992px) {
+  #btn_login {
+    display: block; content: “ “;
+  }
+}
+/*--------------------------------------------------------------
+# Why Us
+--------------------------------------------------------------*/
+.why-us {
+  background-image: url(../img/reunion.jpg);
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  position: relative;
+  z-index: 3;
+}
+
+.why-us .content {
+  padding: 120px;
+  text-align: center;
+  border-radius: 4px;
+  color: #fff;
+}
+
+.why-us .content h1 {
+  margin-bottom: 0;
+  font-size: 45px;
+}
+
+.why-us .content h2 {
+  font-size: 45px;
+}
+
+/*--------------------------------------------------------------
+# web_aplication
+--------------------------------------------------------------*/
+.cuadro_web {
+  width: 100%;
+  height: 180px;
+  background: blue;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#btn_aplicar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+/*--------------------------------------------------------------
+# Services
+--------------------------------------------------------------*/
+.services {
+  background-image: url(../img/reunion.jpg);
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  position: relative;
+  z-index: 3;
+}
+.services .icon-box {
+  padding: 50px 20px; 
+  margin-bottom: 25px;
+  text-align: center;
+  height: 120px;
+  position: relative;
+  box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
+}
+
+.services .title {
+  font-weight: 700;
+  margin-bottom: 15px;
+  font-size: 18px;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.title_services {
+  padding-top: 50px;
+  margin-bottom: 0;
+  text-align: center;
+  color: #fff;
+  margin-bottom: 0;
+  font-size: 45px;
+}
+
+#docmento_vista {
+  width: 100%;
+  height: 80%;
+  border: 2px;
+}
+/*--------------------------------------------------------------
+# Fin services
+--------------------------------------------------------------*/
+/*--------------------------------------------------------------
+# Footer
+--------------------------------------------------------------*/
+.lineFooter {
+  height: 6px;
+  width: 100%;
+  background: orange;
+}
+
+.footer {
+  height: 100%;
+  width: 100%;
+  background: black;
+}
+
+.txtTituloFooter {
+  /*text-decoration-line: underline;
+  text-decoration-color: orange;*/
+  color: orange;
+}
+
+.txtTituloVisitanosFooter {
+  color: white;
+  /*text-decoration-line: underline;
+  text-decoration-color: white;*/
+  text-align: center;
+}
+
+.cuadroMapa {
+  height: 250px;
+  width: 100%;
+  display: inline-block;
+}
+
+.copyRight {
+  padding: 5px;
+  text-align: center;
+  background: gray;
+  height: 100%;
+  width: 100%;
+}
+/*--------------------------------------------------------------
+# Fin footeer
+--------------------------------------------------------------*/
+.txtSpanPasos {
+  font-size: 12px;
+  color: orange;
+  position: fixed;
+}
+
+.titleRecordar {
+  text-align: center;
+}
+/*--------------------------------------------------------------
+# Mensaje(Alerta)
+--------------------------------------------------------------*/
+.message {
+    position: fixed;
+    z-index: 99999;
+    bottom: 15px;
+    right: 15px;
+    padding: 10px 25px;
+    line-height: 16px;
+}
+
+.message.success {
+    color: #ffffff;
+    background: #0fb534;
+}
+
+.message.error {
+    color: #ffffff;
+    background: #FF0505;
+}
+/*--------------------------------------------------------------
+# Fin
+--------------------------------------------------------------*/
+/*--------------------------------------------------------------
+# Quienes somos
+--------------------------------------------------------------*/
+.sessionPagSomos {
+  padding: 20px;
+}
+
+.seccionSomos {
+  padding: 30px;
+  box-shadow: 10px 10px 10px rgb(181, 181, 181);
+  box-shadow: 10px 10px 10px rgb(181, 181, 181);
+  box-shadow: 5px 5px 40px rgb(181, 181, 181) inset;
+}
+.txtP {
+  font-size: 18px !important;
+}
+/*--------------------------------------------------------------
+# Fin quienes somos
+--------------------------------------------------------------*/
+/*--------------------------------------------------------------
+# Comercios afiliados Crediventas
+--------------------------------------------------------------*/
+.cuadroBusinnes {
+  height: 380px;
+  width: 100%;
+  position: relative;
+  padding: 20px;
+}
+/*--------------------------------------------------------------
+# Fin Comercios afiliados Crediventas
+--------------------------------------------------------------*/
