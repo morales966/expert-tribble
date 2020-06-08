@@ -1,10 +1,6 @@
 <?php
 App::uses('AppModel', 'Model');
-/**
- * Credit Model
- *
- * @property User $User
- */
+
 class Credit extends AppModel {
 
 	public $validate = array(
@@ -60,4 +56,16 @@ class Credit extends AppModel {
 			'order' => ''
 		)
 	);
+
+	/**
+        * @author Diego Morales <dlmorales096@gmail.com>
+        * @date(07-06-2019)
+        * @description Metodo que se encarga de devolver los registros en estado solicitud
+        * @return Los registros en estado solicitud
+    */
+	public function all_state_solicitud() {
+		$state 				= Configure::read('variables.nombres_estados_creditos.Solicitud');
+		$conditions 		= array('Credit.state' => $state);
+		return $this->find('all',compact('conditions')); 
+	}
 }

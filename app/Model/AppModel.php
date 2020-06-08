@@ -1,33 +1,28 @@
 <?php
-/**
- * Application model for CakePHP.
- *
- * This file is application-wide model file. You can put all
- * application-wide model-related methods here.
- *
- * CakePHP(tm) : Rapid Development Framework (https://cakephp.org)
- * Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
- *
- * Licensed under The MIT License
- * For full copyright and license information, please see the LICENSE.txt
- * Redistributions of files must retain the above copyright notice.
- *
- * @copyright     Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
- * @link          https://cakephp.org CakePHP(tm) Project
- * @package       app.Model
- * @since         CakePHP(tm) v 0.2.9
- * @license       https://opensource.org/licenses/mit-license.php MIT License
- */
 
 App::uses('Model', 'Model');
 
-/**
- * Application model for Cake.
- *
- * Add your application-wide methods in the class below, your models
- * will inherit them.
- *
- * @package       app.Model
- */
 class AppModel extends Model {
+	/**
+        * @author Diego Morales <dlmorales096@gmail.com>
+        * @date(07-06-2019)
+        * @description Metodo para buscar el proximo ID ya que aveces hay problemas con cakephp para insertar un nuevo registro
+        * @return Proximo ID de la tabla(modelo)
+    */
+    public function new_row_model(){
+        return $this->find('count');
+    }
+
+    /**
+        * @author Diego Morales <dlmorales096@gmail.com>
+        * @date(07-06-2019)
+        * @description Metodo que se encarga de devolver los datos del registro
+        * @variables $model = nombre de la tabla(modelo), $model_id = id de la fila a devolver
+        * @return Ddatos del registro
+    */
+    public function get_data($model,$model_id){
+		$this->recursive 	= -1;
+		$conditions 		= array($model.'.id' => $model_id);
+		return $this->find('first',compact('conditions')); 
+	}
 }

@@ -6,35 +6,42 @@ class CreditsController extends AppController {
 	public $components = array('Paginator');
 
 	public function index() {
-		$get 						= $this->request->query;
-		if (!empty($get)) {
-			if (isset($get['q'])) {
-				$conditions				= array('OR' => array(
-									            'Credit.cedula_persona LIKE' 			=> '%'.mb_strtolower($get['q']).'%'
-									        )
-										);
-				if (isset($get['filterState'])) {
-					$conditions1 		= $this->filterUser($get['filterState']);
-					$conditions			= array_merge($conditions, $conditions1);
-				}
-			} else {
-				$conditions 			= $this->filterUser($get['filterState']);
-			}
-		} else {
-			if (AuthComponent::user('role') == 'admin') {
-				$conditions 		= array();
-			} else if (AuthComponent::user('role') == 'cliente') {
-				$conditions 		= array('Credit.user_id' => AuthComponent::user('id'));
-			}
-		}
-		$order						= array('Credit.id' => 'desc');
-		$this->paginate 			= array(
-										'order' 		=> $order,
-							        	'limit' 		=> 10,
-							        	'conditions' 	=> $conditions
-							    	);
-		$credits 					= $this->paginate('Credit');
-		$this->set(compact('credits'));
+        if (AuthComponent::user('role') == 'cliente') {
+
+            $get                        = $this->request->query;
+            if (!empty($get)) {
+                if (isset($get['q'])) {
+                    $conditions             = array('OR' => array(
+                                                    'Credit.cedula_persona LIKE'            => '%'.mb_strtolower($get['q']).'%'
+                                                )
+                                            );
+                    if (isset($get['filterState'])) {
+                        $conditions1        = $this->filterUser($get['filterState']);
+                        $conditions         = array_merge($conditions, $conditions1);
+                    }
+                } else {
+                    $conditions             = $this->filterUser($get['filterState']);
+                }
+            } else {
+                $conditions         = array('Credit.user_id' => AuthComponent::user('id'));
+            }
+            $order                      = array('Credit.id' => 'desc');
+            $this->paginate             = array(
+                                            'order'         => $order,
+                                            'limit'         => 10,
+                                            'conditions'    => $conditions
+                                        );
+            $credits                    = $this->paginate('Credit');
+            $creditos_solicitud         = array();
+
+        } else {
+
+            $credits                    = array();
+            $creditos_solicitud         = $this->Credit->all_state_solicitud();
+
+
+        }
+		$this->set(compact('credits','creditos_solicitud'));
 	}
 
 	public function filterUser($state){
