@@ -22,9 +22,7 @@ $(document).ready(function () {
 	}
 
 	if (copy_js.user_id > 0) {
-		evitarExpiracion();
-	} else {
-
+		evitar_expiracion();
 	}
 	
 });
@@ -44,7 +42,7 @@ $("body").on("click", ".closess", function() {
 
 $("body").on("click", "#btn_login", function() {
 	$.post(copy_js.base_url+'Users/login',{}, function(result){
-       $('#resultModal').html(result);
+    	$('#resultModal').html(result);
 		$('#modalTitle').text('Iniciar sesión');
 		$('#exampleModalCenter').modal('show');
     });
@@ -88,7 +86,7 @@ function login(){
 	}
 }
 
-function evitarExpiracion(){
+function evitar_expiracion(){
 	var milisegundos = 10 * 1000;
 	    setInterval(function(){
 		$.post(copy_js.base_url+'Users/evitarExpiracion',{}, function(result){});

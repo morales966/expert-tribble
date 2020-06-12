@@ -42,7 +42,7 @@
 		
 	    <?php
     		echo $this->Html->script(array('lib/popper.min.js','lib/bootstrap.js','lib/parsley/parsley.js','lib/parsley/es.js'));
-				echo $this->Html->script(array('app.js?'.rand()));
+			echo $this->Html->script(array('app.js?'.rand()));
     		if (AuthComponent::user('id')) {
 				echo $this->Html->script(array('appSession.js?'.rand()));
 			}

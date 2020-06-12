@@ -36,7 +36,7 @@
 				<div class="form-row">
 					<div class="form-group col-md-3">
 						<b>Nombres</b>
-						<?php echo $this->Form->input('nomre_persona',array('label' => false,'class' => 'form-control','placeholder' => 'Ingresar nombres')); ?>
+						<?php echo $this->Form->input('nombre_persona',array('label' => false,'class' => 'form-control','placeholder' => 'Ingresar nombres')); ?>
 					</div>
 					<div class="form-group col-md-3">
 						<b>Apellidos</b>

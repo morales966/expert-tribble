@@ -2436,7 +2436,7 @@ body.sidebar-collapse:not(.sidebar-mini-md):not(.sidebar-mini) .main-header::bef
 .container_progreso {
   width: 100%;
   height: 600px;
-  overflow: scroll;
+  overflow: auto;
 }
 
 .div_hight_description {

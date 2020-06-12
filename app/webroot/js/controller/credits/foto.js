@@ -26,7 +26,7 @@ $("body").on("click", ".btn_abrir_modalCD", function() {
 				$video.pause();
 			});
 
-			btn_cancelar_foto.addEventListener("click", function(){
+			$btn_cancelar_foto.addEventListener("click", function(){
 				$video.play();
 			});
 
@@ -103,7 +103,7 @@ $("body").on("click", ".btn_abrir_modalCT", function() {
 				$video.pause();
 			});
 
-			btn_cancelar_foto.addEventListener("click", function(){
+			$btn_cancelar_foto.addEventListener("click", function(){
 				$video.play();
 			});
 
@@ -167,7 +167,7 @@ $("body").on("click", ".btn_abrir_modalFP", function() {
 				$video.pause();
 			});
 
-			btn_cancelar_foto.addEventListener("click", function(){
+			$btn_cancelar_foto.addEventListener("click", function(){
 				$video.play();
 			});
 

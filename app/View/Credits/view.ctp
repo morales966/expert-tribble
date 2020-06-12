@@ -32,7 +32,7 @@
 						</p>
 						<p class="txtDatosVista">
 							<b>Nombre de la persona:</b> 
-							<?php echo h($credit['Credit']['nomre_persona'].' '.$credit['Credit']['apellido_persona']); ?>&nbsp;
+							<?php echo h($credit['Credit']['nombre_persona'].' '.$credit['Credit']['apellido_persona']); ?>&nbsp;
 						</p>
 						<p class="txtDatosVista">
 							<b>Cedula:</b> <?php echo h($credit['Credit']['cedula_persona']); ?>&nbsp;

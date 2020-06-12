@@ -14,9 +14,12 @@ $("body").on("keyup", "#CreditValorCredito", function() {
 			calcular_valor();
 		} else {
 			$('.meses_credito').empty();
+			$('#CreditValorCuota').val('0');
+
 		}
 	} else {
 		$('.meses_credito').empty();
+		$('#CreditValorCuota').val('0');
 	}
 });
 
@@ -143,6 +146,7 @@ function valorCuota(valor,meses) {
 
 function opcionesSelect(valor) {
 	$('.meses_credito').empty();
+	$('#CreditValorCuota').val('0');
 	var sel = $('<select class="form-control" id="CreditNumeroMeses" name="select_dias">').appendTo('.meses_credito');
 	if (parseInt(valor) >= 50000 && parseInt(valor) <= 100000) {
 		var arr = [

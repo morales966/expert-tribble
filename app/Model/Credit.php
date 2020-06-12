@@ -18,10 +18,10 @@ class Credit extends AppModel {
 		),
 		'valor_cuota' => array(
 			'notBlank' => array(
-				'rule' => array('notBlank')
+				'rule' => array('notBlank'),
 			),
 		),
-		'nomre_persona' => array(
+		'nombre_persona' => array(
 			'notBlank' => array(
 				'rule' => array('notBlank'),
 				'required' => true,
@@ -59,13 +59,27 @@ class Credit extends AppModel {
 
 	/**
         * @author Diego Morales <dlmorales096@gmail.com>
-        * @date(07-06-2019)
-        * @description Metodo que se encarga de devolver los registros en estado solicitud
-        * @return Los registros en estado solicitud
+        * @date(09-06-2019)
+        * @description Metodo que se encarga de devolver los registros del estado solicitado
+        * @return Los registros del estado solicitado en orden descendente
     */
-	public function all_state_solicitud() {
-		$state 				= Configure::read('variables.nombres_estados_creditos.Solicitud');
+	public function all_data_state($state) {
 		$conditions 		= array('Credit.state' => $state);
-		return $this->find('all',compact('conditions')); 
+		$order				= array('Credit.id' => 'desc');
+		return $this->find('all',compact('conditions','order'));
+	}
+
+	/**
+        * @author Diego Morales <dlmorales096@gmail.com>
+        * @date(12-06-2019)
+        * @description Metodo que se encarga de devolver el total(valor_credito) del estado solicitado
+        * @return El del estado solicitado
+    */
+	public function sum_total_state($state) {
+		$fields 			= array('SUM(Credit.valor_credito) as total');
+		$conditions 		= array('Credit.state' => $state);
+		return $this->find('first',compact('fields','conditions'));
+
+
 	}
 }

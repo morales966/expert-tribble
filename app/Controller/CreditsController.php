@@ -16,11 +16,11 @@ class CreditsController extends AppController {
                                                 )
                                             );
                     if (isset($get['filterState'])) {
-                        $conditions1        = $this->filterUser($get['filterState']);
+                        $conditions1        = $this->filterStateGet($get['filterState']);
                         $conditions         = array_merge($conditions, $conditions1);
                     }
                 } else {
-                    $conditions             = $this->filterUser($get['filterState']);
+                    $conditions             = $this->filterStateGet($get['filterState']);
                 }
             } else {
                 $conditions         = array('Credit.user_id' => AuthComponent::user('id'));
@@ -31,20 +31,56 @@ class CreditsController extends AppController {
                                             'limit'         => 10,
                                             'conditions'    => $conditions
                                         );
-            $credits                    = $this->paginate('Credit');
-            $creditos_solicitud         = array();
+            $credits                                = $this->paginate('Credit');
+            $creditos_solicitud                     = array();
+            $creditos_estudio                       = array();
+            $creditos_detenido                      = array();
+            $creditos_aprobado_no_retirado          = array();
+            $creditos_aprobado_retirado             = array();
 
         } else {
 
-            $credits                    = array();
-            $creditos_solicitud         = $this->Credit->all_state_solicitud();
-
-
+            $conditions                           = array(
+                                                        'Credit.state' => array(
+                                                            Configure::read('variables.nombres_estados_creditos.Negado'),
+                                                            Configure::read('variables.nombres_estados_creditos.Pagado')
+                                                        )
+                                                  );
+            $order                                = array('Credit.id' => 'desc');
+            $this->paginate                       = array(
+                                                        'order'         => $order,
+                                                        'limit'         => 5,
+                                                        'conditions'    => $conditions
+                                                  );
+            $credits                              = $this->paginate('Credit');
+            $creditos_solicitud                   = $this->Credit->all_data_state(Configure::read('variables.nombres_estados_creditos.Solicitud'));
+            $creditos_estudio                     = $this->Credit->all_data_state(Configure::read('variables.nombres_estados_creditos.En_estudio'));
+            $creditos_detenido                    = $this->Credit->all_data_state(Configure::read('variables.nombres_estados_creditos.Detenido'));
+            $creditos_aprobado_no_retirado        = $this->Credit->all_data_state(Configure::read('variables.nombres_estados_creditos.Aprobado_no_retirado'));
+            $creditos_aprobado_retirado           = $this->Credit->all_data_state(Configure::read('variables.nombres_estados_creditos.Aprobado_retirado'));
         }
-		$this->set(compact('credits','creditos_solicitud'));
+		$this->set(compact('credits','creditos_solicitud','creditos_estudio','creditos_detenido','creditos_aprobado_no_retirado','creditos_aprobado_retirado'));
 	}
 
-	public function filterUser($state){
+    public function sumTotalStateSolicitado() {
+        $this->autoRender               = false;
+        $suma                           = $this->Credit->sum_total_state(Configure::read('variables.nombres_estados_creditos.Solicitud'));
+        return number_format($suma[0]['total'],0,",",".");
+    }
+
+    public function sumTotalStateEstudio() {
+        $this->autoRender               = false;
+        $suma                           = $this->Credit->sum_total_state(Configure::read('variables.nombres_estados_creditos.En_estudio'));
+        return number_format($suma[0]['total'],0,",",".");
+    }
+
+    public function sumTotalStateDetenido() {
+        $this->autoRender               = false;
+        $suma                           = $this->Credit->sum_total_state(Configure::read('variables.nombres_estados_creditos.Detenido'));
+        return number_format($suma[0]['total'],0,",",".");
+    }
+
+	public function filterStateGet($state){
             switch ($state) {
                 case 0:
                     $conditions    = array('Credit.state' => Configure::read('variables.nombres_estados_creditos.Negado'));
@@ -77,6 +113,8 @@ class CreditsController extends AppController {
 
 	public function add() {
 		if ($this->request->is('post')) {
+            $this->request->data['Credit']['numero_meses']                  = $this->request->data['select_dias'];
+            unset($this->request->data['select_dias']);
 			$this->request->data['Credit']['user_id'] 						= AuthComponent::user('id');
 			$this->request->data['Credit']['valor_cuota'] 					= $this->replaceText($this->request->data['Credit']['valor_cuota'],".","");
 			if ($this->request->data['Credit']['foto_cedula_delantera']['name'] == '') {
@@ -90,9 +128,9 @@ class CreditsController extends AppController {
 				$this->request->data['Credit']['foto_cedula_delantera'] 		= $this->Session->read('archivo_'.'foto_cedula_delantera');
 				$this->request->data['Credit']['foto_cedula_trasera'] 			= $this->Session->read('archivo_'.'foto_cedula_trasera');
 				$this->request->data['Credit']['foto_perfil'] 					= $this->Session->read('archivo_'.'perfil');
-			}
+            }
 			$this->Credit->create();
-			if ($this->Credit->save($this->request->data)) {
+			if ($this->Credit->save($this->request->data['Credit'])) {
 				$this->deleteCache();
 				$this->Session->setFlash('El crédito se ha guardado satisfactoriamente','Flash/success');
 				return $this->redirect(array('action' => 'index'));
