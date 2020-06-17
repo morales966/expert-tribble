@@ -1,5 +1,5 @@
 .kanban-col {
-    width: 205px;
+    width: 174px;
     float: left;
 }
 
@@ -253,10 +253,7 @@
 
 .panel-heading {
     cursor: context-menu;
-}
-
-.panel-heading i {
-    cursor: pointer;
+    margin: -2px;
 }
 
 .modal-static {
@@ -288,11 +285,26 @@
 }
 
 .container_state {
-  width: 100%;
-  height: 300px;
-  overflow: auto;
+    width: 100%;
+    height: 350px;
+    overflow: auto;
 }
 
 .txt_total_estado {
-    text-align: center
+    text-align: center;
+}
+
+.txt_cantidad_div {
+    font-size: 10px;
+    position: absolute;
+    margin: -2px; 
+}
+
+.txt_titulo_etapa {
+    font-size: 15px;
+}
+
+.btn_accion_estado {
+    background-color: orange;
+    font-size: 10px;
 }

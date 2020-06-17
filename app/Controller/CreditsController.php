@@ -37,13 +37,13 @@ class CreditsController extends AppController {
             $creditos_detenido                      = array();
             $creditos_aprobado_no_retirado          = array();
             $creditos_aprobado_retirado             = array();
+            $creditos_negado                        = array();
 
         } else {
 
             $conditions                           = array(
                                                         'Credit.state' => array(
-                                                            Configure::read('variables.nombres_estados_creditos.Negado'),
-                                                            Configure::read('variables.nombres_estados_creditos.Pagado')
+                                                            Configure::read('variables.nombres_estados_creditos.Pagado'),
                                                         )
                                                   );
             $order                                = array('Credit.id' => 'desc');
@@ -58,8 +58,9 @@ class CreditsController extends AppController {
             $creditos_detenido                    = $this->Credit->all_data_state(Configure::read('variables.nombres_estados_creditos.Detenido'));
             $creditos_aprobado_no_retirado        = $this->Credit->all_data_state(Configure::read('variables.nombres_estados_creditos.Aprobado_no_retirado'));
             $creditos_aprobado_retirado           = $this->Credit->all_data_state(Configure::read('variables.nombres_estados_creditos.Aprobado_retirado'));
+            $creditos_negado                      = $this->Credit->all_data_state(Configure::read('variables.nombres_estados_creditos.Negado'));
         }
-		$this->set(compact('credits','creditos_solicitud','creditos_estudio','creditos_detenido','creditos_aprobado_no_retirado','creditos_aprobado_retirado'));
+		$this->set(compact('credits','creditos_solicitud','creditos_estudio','creditos_detenido','creditos_aprobado_no_retirado','creditos_aprobado_retirado','creditos_negado'));
 	}
 
     public function sumTotalStateSolicitado() {

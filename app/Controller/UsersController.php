@@ -1,11 +1,6 @@
 <?php
 App::uses('AppController', 'Controller');
-/**
- * Users Controller
- *
- * @property User $User
- * @property PaginatorComponent $Paginator
- */
+
 class UsersController extends AppController {
 
 	public $components = array('Paginator');
@@ -41,83 +36,63 @@ class UsersController extends AppController {
 		$this->set('user', $this->User->find('first', $options));
 	}
 
-/**
- * add method
- *
- * @return void
- */
-	public function add() {
+
+
+
+
+	public function profile() {
+		$user 					= $this->User->get_data('User',AuthComponent::user('id'));
 		if ($this->request->is('post')) {
-			$this->User->create();
+			if (isset($this->request->data['User']['email'])) {
+				unset($this->request->data['User']['email']);
+			}
+			if (isset($this->request->data['User']['role'])) {
+				unset($this->request->data['User']['role']);
+			}
+			$this->request->data['User']['id']			= AuthComponent::user('id');
 			if ($this->User->save($this->request->data)) {
-				$this->Flash->success(__('The user has been saved.'));
-				return $this->redirect(array('action' => 'index'));
+				$this->Session->setFlash('La información se ha guardado satisfactoriamente', 'Flash/success');
+				$this->overwrite_session_user();
+				$this->redirect(array('controller' => 'users', 'action' => 'profile'));
 			} else {
-				$this->Flash->error(__('The user could not be saved. Please, try again.'));
+				$this->Session->setFlash('La información no se ha guardado, por favor inténtalo mas tarde','Flash/error');
+			}
+		}
+		$this->set(compact('user'));
+	}
+
+	public function changePasswordUser(){
+		$this->autoRender = false;
+		if ($this->request->is('ajax')) {
+			$datos 		= $this->User->get_data('User',AuthComponent::user('id'));
+			$actual 	= AuthComponent::password($this->request->data['actual']);
+			$nueva 		= $this->request->data['nueva'];
+			if ($actual == $datos['User']['password']) {
+				$datos['User']['password'] = $nueva;
+				if ($this->User->save($datos)) {
+					return 1;
+				} else {
+					return 0;
+				}
+			} else {
+				return 2;
 			}
 		}
 	}
 
-/**
- * edit method
- *
- * @throws NotFoundException
- * @param string $id
- * @return void
- */
-	public function edit($id = null) {
-		if (!$this->User->exists($id)) {
-			throw new NotFoundException(__('Invalid user'));
-		}
-		if ($this->request->is(array('post', 'put'))) {
-			if ($this->User->save($this->request->data)) {
-				$this->Flash->success(__('The user has been saved.'));
-				return $this->redirect(array('action' => 'index'));
-			} else {
-				$this->Flash->error(__('The user could not be saved. Please, try again.'));
-			}
-		} else {
-			$options = array('conditions' => array('User.' . $this->User->primaryKey => $id));
-			$this->request->data = $this->User->find('first', $options);
-		}
-	}
-
-/**
- * delete method
- *
- * @throws NotFoundException
- * @param string $id
- * @return void
- */
-	public function delete($id = null) {
-		$this->User->id = $id;
-		if (!$this->User->exists()) {
-			throw new NotFoundException(__('Invalid user'));
-		}
-		$this->request->allowMethod('post', 'delete');
-		if ($this->User->delete()) {
-			$this->Flash->success(__('The user has been deleted.'));
-		} else {
-			$this->Flash->error(__('The user could not be deleted. Please, try again.'));
-		}
-		return $this->redirect(array('action' => 'index'));
-	}
-
-
-
-
-
-
-	
-
-	public function login() {
-		$this->layout 					= false;
+	public function overwrite_session_user(){
+		$user 				= $this->User->get_data('User',AuthComponent::user('id'));
+        $this->Session->write('Auth.User', $user['User'], true);
 	}
 
 	public function evitarExpiracion(){
 		$this->autoRender 				= false;
     	@session_start();
     }
+
+	public function login() {
+		$this->layout 					= false;
+	}
 
 	public function loginData(){
 		$this->autoRender 				= false;

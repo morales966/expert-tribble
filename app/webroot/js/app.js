@@ -19,6 +19,9 @@ $(document).ready(function () {
 		case 'CREDITS':
 			$('#creditos').addClass("activeNavS");
 		break;
+		case 'USERS':
+			$('#profile').addClass("activeNavS");
+		break;
 	}
 
 	if (copy_js.user_id > 0) {
@@ -44,7 +47,7 @@ $("body").on("click", "#btn_login", function() {
 	$.post(copy_js.base_url+'Users/login',{}, function(result){
     	$('#resultModal').html(result);
 		$('#modalTitle').text('Iniciar sesión');
-		$('#exampleModalCenter').modal('show');
+		$('#modalLogin').modal('show');
     });
 });
 
@@ -61,7 +64,11 @@ $("body").on("click", "#btn_login_app", function() {
 
 function message_alert(mensaje,type){
     $("#message_alert").css("display", "block");
-    var alert = '<div class="banneralert '+type+'"><i class="fa fa-4 fa-exclamation-triangle"></i><i class="fa fa-times closess"></i><div class="copiealertmin">'+type+'</div><div>'+mensaje+'</div></div>';
+    if (type == 'Bien') {
+    	var alert = '<div class="message success"><i class="fa fa-4 fa-thumbs-up"></i><i class="fa fa-times closess"></i><div class="copiealertmin">BIEN!</div><div>'+mensaje+'</div></div>';
+    } else { //Error
+    	var alert = '<div class="message error"><i class="fa fa-4 fa-exclamation-triangle"></i><i class="fa fa-times closess"></i><div class="copiealertmin">ERROR!</div><div>'+mensaje+'</div></div>';
+    }
     $("#message_alert").html(alert);
     setTimeout(function() {$("#message_alert").fadeOut("slow");},9000);
     $(".closess").click(function() {

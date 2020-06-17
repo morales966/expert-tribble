@@ -15,7 +15,7 @@
 			<div class="col-md-4">
 				<div class="seccionSomos">
 					<h3>SISTEMA DE CRÉDITO</h3>
-					<p class="txtP">Realizamos todo el proceso de credito desde tu negocio sin hacer desplazar tu cliente a otros lugares.</p>
+					<p class="txtP">Realizamos todo el proceso de crédito desde tu negocio sin hacer desplazar tu cliente a otros lugares.</p>
 					<ul style="list-style-type: square">
 						<li>Crédito en 20 minutos (ágil y rápido) en línea.</li>
 						<li>Tu cliente paga hasta 24 cuotas máximo.</li>

@@ -2,14 +2,15 @@
 	<div class="container cuadro_panding">
 		<?php if (AuthComponent::user('role') == 'admin') { ?>
 	
-			<h2 class="titleView">Creditos</h2>
+			<h2 class="titleView">Créditos</h2>
 			<div class="container-fluid">
 		        <div id="sortableKanbanBoards" class="row">
 
 		            <div class="panel panel-primary kanban-col">
 		                <div class="panel-heading">
-		                    <?php echo Configure::read('variables.estados_creditos.1') ?>
+		                    <strong class="txt_titulo_etapa"><?php echo Configure::read('variables.estados_creditos.1') ?></strong>
 		                </div>
+		                <span class="txt_cantidad_div" id="txt_cantidad_solicitud"></span>
 		                <div class="container_state">
 		                	<div class="panel-body_solicitud">
 			                    <div id="DOING10" class="kanban-centered">
@@ -20,8 +21,8 @@
 				                            <div class="kanban-entry-inner">
 				                                <div class="kanban-label">
 				                                    <h2>
-				                                    	<?php echo $this->Html->link($credit['User']['name'], array('controller' => 'users', 'action' => 'view', $credit['User']['id'])); ?> <br>
-				                                    	<span>
+				                                    	<?php echo $this->Html->link($credit['User']['name'], array('controller' => 'users', 'action' => 'view', $credit['User']['id'])); ?>
+				                                    	<span style="display: block;">
 				                                    		<?php echo h($credit['Credit']['nombre_persona']).' '.h($credit['Credit']['apellido_persona']).' - '.h($credit['Credit']['cedula_persona']).' - '.h($credit['Credit']['telefono_persona'])?>
 				                                    	</span>
 				                                    </h2>
@@ -46,8 +47,9 @@
 
 		            <div class="panel panel-primary kanban-col">
 		                <div class="panel-heading">
-		                    <?php echo Configure::read('variables.estados_creditos.2') ?>
+		                    <strong class="txt_titulo_etapa"><?php echo Configure::read('variables.estados_creditos.2') ?></strong>
 		                </div>
+		                <span class="txt_cantidad_div" id="txt_cantidad_estudio"></span>
 		                <div class="container_state">
 			                <div class="panel-body_estudio">
 			                    <div id="DOING20" class="kanban-centered">
@@ -58,8 +60,8 @@
 				                            <div class="kanban-entry-inner">
 				                                <div class="kanban-label">
 				                                    <h2>
-				                                    	<?php echo $this->Html->link($credit['User']['name'], array('controller' => 'users', 'action' => 'view', $credit['User']['id'])); ?> <br>
-				                                    	<span>
+				                                    	<?php echo $this->Html->link($credit['User']['name'], array('controller' => 'users', 'action' => 'view', $credit['User']['id'])); ?>
+				                                    	<span style="display: block;">
 				                                    		<?php echo h($credit['Credit']['nombre_persona']).' '.h($credit['Credit']['apellido_persona']).' - '.h($credit['Credit']['cedula_persona']).' - '.h($credit['Credit']['telefono_persona'])?>
 				                                    	</span>
 				                                    </h2>
@@ -70,6 +72,20 @@
 				                                    		<?php echo h(number_format($credit['Credit']['valor_cuota'],0,",","."));?>
 				                                    	</span>
 				                                    </p>
+				                                    <span>
+				                                    	<a data-toggle="tooltip" title="Descargar foto de perfil" download href="<?php echo $this->Html->url('/img/creditos/perfil/'.$credit['Credit']['foto_perfil']) ?>" >
+				                                    		<i class="fa fa-file-image-o"></i>
+				                                    	</a>
+				                                    	<a data-toggle="tooltip" title="Descargar cedula delantera" download href="<?php echo $this->Html->url('/img/creditos/cedula/'.$credit['Credit']['foto_cedula_delantera']) ?>" >
+				                                    		<i class="fa fa-file-image-o"></i>
+				                                    	</a>
+				                                    	<a data-toggle="tooltip" title="Descargar cedula trasera" download href="<?php echo $this->Html->url('/img/creditos/cedula/'.$credit['Credit']['foto_cedula_trasera']) ?>" >
+				                                    		<i class="fa fa-file-image-o"></i>
+				                                    	</a>
+				                                    	<a href="<?php echo 'https://api.whatsapp.com/send?phone=57'.$credit["Credit"]["telefono_persona"]?>" data-toggle="tooltip" data-placement="top" title="Conversar en whatsapp" target="_blank">
+															<i class="fa fa-whatsapp"></i>
+														</a>
+				                                    </span>
 				                                </div>
 				                            </div>
 				                        </article>
@@ -83,9 +99,10 @@
 		            </div>
 
 		            <div class="panel panel-primary kanban-col">
-		                <div class="panel-heading">
-		                    <?php echo Configure::read('variables.estados_creditos.3') ?>
+		            	<div class="panel-heading">
+		                    <strong class="txt_titulo_etapa"><?php echo Configure::read('variables.estados_creditos.3') ?></strong>
 		                </div>
+		                <span class="txt_cantidad_div" id="txt_cantidad_detenido"></span>
 		                <div class="container_state">
 			                <div class="panel-body_detenido">
 			                    <div id="DOING30" class="kanban-centered">
@@ -96,8 +113,8 @@
 				                            <div class="kanban-entry-inner">
 				                                <div class="kanban-label">
 				                                    <h2>
-				                                    	<?php echo $this->Html->link($credit['User']['name'], array('controller' => 'users', 'action' => 'view', $credit['User']['id'])); ?> <br>
-				                                    	<span>
+				                                    	<?php echo $this->Html->link($credit['User']['name'], array('controller' => 'users', 'action' => 'view', $credit['User']['id'])); ?>
+				                                    	<span style="display: block;">
 				                                    		<?php echo h($credit['Credit']['nombre_persona']).' '.h($credit['Credit']['apellido_persona']).' - '.h($credit['Credit']['cedula_persona']).' - '.h($credit['Credit']['telefono_persona'])?>
 				                                    	</span>
 				                                    </h2>
@@ -108,6 +125,12 @@
 				                                    		<?php echo h(number_format($credit['Credit']['valor_cuota'],0,",","."));?>
 				                                    	</span>
 				                                    </p>
+				                                    <span>
+				                                    	<a href="<?php echo 'https://api.whatsapp.com/send?phone=57'.$credit["Credit"]["telefono_persona"]?>" data-toggle="tooltip" data-placement="top" title="Conversar en whatsapp" target="_blank">
+															<i class="fa fa-whatsapp"></i>
+														</a>
+				                                    </span>
+				                                    <button type="button" class="btn btn_accion_estado form-control">Observación</button>
 				                                </div>
 				                            </div>
 				                        </article>
@@ -122,8 +145,9 @@
 
 		            <div class="panel panel-primary kanban-col">
 		                <div class="panel-heading">
-		                    <?php echo Configure::read('variables.estados_creditos.4') ?>
+		                    <strong class="txt_titulo_etapa"><?php echo Configure::read('variables.estados_creditos.4') ?></strong>
 		                </div>
+		                <span class="txt_cantidad_div" id="txt_cantidad_aprobado_no_retirado"></span>
 		                <div class="container_state">
 			                <div class="panel-body_aprobado-no-retirado">
 			                    <div id="DOING40" class="kanban-centered">
@@ -134,8 +158,8 @@
 				                            <div class="kanban-entry-inner">
 				                                <div class="kanban-label">
 				                                    <h2>
-				                                    	<?php echo $this->Html->link($credit['User']['name'], array('controller' => 'users', 'action' => 'view', $credit['User']['id'])); ?> <br>
-				                                    	<span>
+				                                    	<?php echo $this->Html->link($credit['User']['name'], array('controller' => 'users', 'action' => 'view', $credit['User']['id'])); ?>
+				                                    	<span style="display: block;">
 				                                    		<?php echo h($credit['Credit']['nombre_persona']).' '.h($credit['Credit']['apellido_persona']).' - '.h($credit['Credit']['cedula_persona']).' - '.h($credit['Credit']['telefono_persona'])?>
 				                                    	</span>
 				                                    </h2>
@@ -146,6 +170,16 @@
 				                                    		<?php echo h(number_format($credit['Credit']['valor_cuota'],0,",","."));?>
 				                                    	</span>
 				                                    </p>
+				                                    <span>
+				                                    	<a href="#" data-toggle="tooltip" data-placement="top" title="Enviar mensaje">
+															<i class="fa fa-comment-o"></i>
+														</a>
+				                                    	<a href="<?php echo 'https://api.whatsapp.com/send?phone=57'.$credit["Credit"]["telefono_persona"]?>" data-toggle="tooltip" data-placement="top" title="Conversar en whatsapp" target="_blank">
+															<i class="fa fa-whatsapp"></i>
+														</a>
+				                                    </span>
+				                                    <button type="button" class="btn btn_accion_estado form-control">Observación</button>
+				                                    <button type="button" class="btn btn_accion_estado form-control">Cupo aprobado</button>
 				                                </div>
 				                            </div>
 				                        </article>
@@ -155,13 +189,14 @@
 			                    </div>
 			                </div>
 			            </div>
-		                <p class="txt_total_estado">Total<span></span></p>
+		                <p class="txt_total_estado">Total: <span id="total_aprobado_no_retirado"></span></p>
 		            </div>
 
 		            <div class="panel panel-primary kanban-col">
-		                <div class="panel-heading">
-		                    <?php echo Configure::read('variables.estados_creditos.5') ?>
+		            	<div class="panel-heading">
+		                    <strong class="txt_titulo_etapa"><?php echo Configure::read('variables.estados_creditos.5') ?></strong>
 		                </div>
+		                <span class="txt_cantidad_div" id="txt_cantidad_aprobado_retirado"></span>
 		                <div class="container_state">
 			                <div class="panel-body_aprobado-retirado">
 			                    <div id="DOING50" class="kanban-centered">
@@ -172,8 +207,8 @@
 				                            <div class="kanban-entry-inner">
 				                                <div class="kanban-label">
 				                                    <h2>
-				                                    	<?php echo $this->Html->link($credit['User']['name'], array('controller' => 'users', 'action' => 'view', $credit['User']['id'])); ?> <br>
-				                                    	<span>
+				                                    	<?php echo $this->Html->link($credit['User']['name'], array('controller' => 'users', 'action' => 'view', $credit['User']['id'])); ?>
+				                                    	<span style="display: block;">
 				                                    		<?php echo h($credit['Credit']['nombre_persona']).' '.h($credit['Credit']['apellido_persona']).' - '.h($credit['Credit']['cedula_persona']).' - '.h($credit['Credit']['telefono_persona'])?>
 				                                    	</span>
 				                                    </h2>
@@ -184,6 +219,16 @@
 				                                    		<?php echo h(number_format($credit['Credit']['valor_cuota'],0,",","."));?>
 				                                    	</span>
 				                                    </p>
+				                                    <span>
+				                                    	<a href="<?php echo 'https://api.whatsapp.com/send?phone=57'.$credit["Credit"]["telefono_persona"]?>" data-toggle="tooltip" data-placement="top" title="Conversar en whatsapp" target="_blank">
+															<i class="fa fa-whatsapp"></i>
+														</a>
+				                                    </span>
+				                                    <button type="button" class="btn btn_accion_estado form-control">Observación</button>
+				                                    <button type="button" class="btn btn_accion_estado form-control">Cupo aprobado</button>
+				                                    <button type="button" class="btn btn_accion_estado form-control">Cupo retirado</button>
+				                                    <button type="button" class="btn btn_accion_estado form-control">Cupo preaprobado</button>
+				                                    <button type="button" class="btn btn_accion_estado form-control">Adjuntar plan pago</button>
 				                                </div>
 				                            </div>
 				                        </article>
@@ -193,7 +238,53 @@
 			                    </div>
 			                </div>
 			            </div>
-		                <p class="txt_total_estado">Total<span></span></p>
+		                <p class="txt_total_estado">Total: <span id="total_aprobado_retirado"></span></p>
+		            </div>
+
+		            <div class="panel panel-primary kanban-col">
+		                <div class="panel-heading">
+		                    <strong class="txt_titulo_etapa"><?php echo Configure::read('variables.estados_creditos.0') ?></strong>
+		                </div>
+		                <span class="txt_cantidad_div" id="txt_cantidad_negado"></span>
+		                <div class="container_state">
+			                <div class="panel-body_negado">
+			                    <div id="DOING0" class="kanban-centered">
+
+		                    		<?php foreach ($creditos_negado as $credit): ?>
+
+										<article class="kanban-entry grab" id="<?php echo $credit['Credit']['id']; ?>" draggable="true">
+				                            <div class="kanban-entry-inner">
+				                                <div class="kanban-label">
+				                                    <h2>
+				                                    	<?php echo $this->Html->link($credit['User']['name'], array('controller' => 'users', 'action' => 'view', $credit['User']['id'])); ?>
+				                                    	<span style="display: block;">
+				                                    		<?php echo h($credit['Credit']['nombre_persona']).' '.h($credit['Credit']['apellido_persona']).' - '.h($credit['Credit']['cedula_persona']).' - '.h($credit['Credit']['telefono_persona'])?>
+				                                    	</span>
+				                                    </h2>
+				                                    <p>
+				                                    	<strong><?php echo h(number_format($credit['Credit']['valor_credito'],0,",","."));?></strong>
+				                                    	<span class="txt_cuotas">
+				                                    		<?php echo h($credit['Credit']['numero_meses']).' cuotas:';?>
+				                                    		<?php echo h(number_format($credit['Credit']['valor_cuota'],0,",","."));?>
+				                                    	</span>
+				                                    </p>
+				                                    <span>
+				                                    	<a href="<?php echo 'https://api.whatsapp.com/send?phone=57'.$credit["Credit"]["telefono_persona"]?>" data-toggle="tooltip" data-placement="top" title="Conversar en whatsapp" target="_blank">
+															<i class="fa fa-whatsapp"></i>
+														</a>
+				                                    </span>
+				                                    <button type="button" class="btn btn_accion_estado form-control">Observación</button>
+				                                    <button type="button" class="btn btn_accion_estado form-control">Causa de negación</button>
+				                                </div>
+				                            </div>
+				                        </article>
+
+									<?php endforeach; ?>
+
+			                    </div>
+			                </div>
+			            </div>
+		                <p class="txt_total_estado">Total: <span id="total_negado"></span></p>
 		            </div>
 
 		        </div>
@@ -211,7 +302,7 @@
 			    </div>
 			</div>
 
-			<h2 class="titleView">Creditos finalizados y cancelados</h2>
+			<h2 class="titleView">Créditos finalizados</h2>
     		<div class="table-responsive">
 				<table class="table">
 		   			<thead class="thead-dark">
@@ -235,13 +326,7 @@
 							<td><?php echo h($credit['Credit']['nombre_persona']).' '.h($credit['Credit']['apellido_persona']); ?>&nbsp;</td>
 							<td><?php echo h($credit['Credit']['cedula_persona']); ?>&nbsp;</td>
 							<td><?php echo h($credit['Credit']['telefono_persona']); ?>&nbsp;</td>
-							<td>
-								<strong><?php echo h(number_format($credit['Credit']['valor_credito'],0,",","."));?></strong>
-                            	<span class="txt_cuotas">
-                            		<?php echo h($credit['Credit']['numero_meses']).' cuotas:';?>
-                            		<?php echo h(number_format($credit['Credit']['valor_cuota'],0,",","."));?>
-                            	</span>
-                            </td>
+							<td><?php echo h(number_format($credit['Credit']['valor_credito'],0,",","."));?>&nbsp;</td>
 							<td><?php echo $this->Utilities->estados_creditos($credit['Credit']['state']); ?>&nbsp;</td>
 							<td><?php echo h($credit['Credit']['created']); ?>&nbsp;</td>
 							<td class="actions">
@@ -274,12 +359,12 @@
 			
 			<div class="row">
 				<div class="col-md-2">
-					<h2 class="tittle">Creditos</h2>
+					<h2 class="tittle">Créditos</h2>
 				</div>
 				<div class="col-md-4">
 					<div class="dropdown text-right">
 						<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-							Filtros por estados de los creditos
+							Filtros por estados de los créditos
 						</button>
 						<div class="dropdown-menu">
 							<?php
@@ -311,19 +396,19 @@
 				<div class="col-md-5 text-right">
 					<div class="input-group">
 						<a href="<?php echo $this->Html->url(array('action'=>'add')) ?>" class="crearEnlace">
-							<i class="fa fa-1x fa-plus-square"></i> Nuevo credito
+							<i class="fa fa-1x fa-plus-square"></i> Nuevo crédito
 						</a>
 						<?php if (isset($this->request->query['q'])){ ?>
 							<input type="text" class="form-control" value="<?php echo $this->request->query['q']; ?>" placeholder="Buscador por cedula"  disabled="disabled">
 						    <div class="input-group-append">
-								<button class="btn btn-secondary" type="button" id="texto_busqueda" title="Eliminar">
+								<button class="btn btn-secondary" type="button" id="texto_busqueda" data-toggle="tooltip" data-placement="top" title="Eliminar">
 				        			<i class="fa fa-trash"></i>
 								</button>
 						    </div>
 						<?php } else { ?>
 						    <input type="text" class="form-control" placeholder="Buscador por cedula" id="txt_buscador">
 						    <div class="input-group-append">
-								<button class="btn btn-secondary btn_buscar" type="button" title="Buscador">
+								<button class="btn btn-secondary btn_buscar" type="button" data-toggle="tooltip" data-placement="top" title="Buscador">
 									<i class="fa fa-search"></i>
 								</button>
 						    </div>
@@ -342,7 +427,7 @@
 							<th>NNombre cliente</th>
 							<th>Identificación</th>
 							<th>Celular</th>
-							<th>Valor credito</th>
+							<th>Valor crédito</th>
 							<th>Estado</th>
 							<th>Fecha registro</th>
 							<th class="actions">Acciones</th>
@@ -359,13 +444,7 @@
 							<td><?php echo h($credit['Credit']['nombre_persona']).' '.h($credit['Credit']['apellido_persona']); ?>&nbsp;</td>
 							<td><?php echo h($credit['Credit']['cedula_persona']); ?>&nbsp;</td>
 							<td><?php echo h($credit['Credit']['telefono_persona']); ?>&nbsp;</td>
-							<td>
-								<strong><?php echo h(number_format($credit['Credit']['valor_credito'],0,",","."));?></strong>
-                            	<span class="txt_cuotas">
-                            		<?php echo h($credit['Credit']['numero_meses']).' cuotas:';?>
-                            		<?php echo h(number_format($credit['Credit']['valor_cuota'],0,",","."));?>
-                            	</span>
-                            </td>
+							<td><?php echo h(number_format($credit['Credit']['valor_credito'],0,",","."));?>&nbsp;</td>
 							<td><?php echo $this->Utilities->estados_creditos($credit['Credit']['state']); ?>&nbsp;</td>
 							<td><?php echo h($credit['Credit']['created']); ?>&nbsp;</td>
 							<td class="actions">

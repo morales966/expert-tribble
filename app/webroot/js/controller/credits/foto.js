@@ -58,13 +58,12 @@ $("body").on("click", ".btn_abrir_modalCD", function() {
 				});
 			});
         }, function (error) {
-        	message_alert("Has denegado el permiso para la camara","error");
+        	message_alert("Has denegado el permiso para la camara","Error");
 		    $('.cuadro_tomar_foto').hide();
 		    $('.cuadro_adjuntar_foto').show();
         });
 	} else {
-        message_alert("Lo siento. Tu navegador no soporta esta característica","error");
-	    // message_alert("El NIT esta disponible","Bien");
+        message_alert("Lo siento. Tu navegador no soporta esta característica","Error");
 	    $('.cuadro_tomar_foto').hide();
 	    quitar_required_cuadro_tomar_foto();
 	    $('.cuadro_adjuntar_foto').show();

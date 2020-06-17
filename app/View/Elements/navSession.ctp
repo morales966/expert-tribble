@@ -22,7 +22,9 @@
 
     <ul class="navbar-nav ml-auto">
     	<li class="nav-item">
-			<a href="#" class="nav-link"><?php echo AuthComponent::user('name') ?></a>
+    		<a class="nav-link" href="<?php echo $this->Html->url(array('controller'=>'Users','action'=>'profile')) ?>" >
+            	<?php echo AuthComponent::user('name'); ?>
+            </a>
 		</li>
 		<li class="nav-item">
 			<a href="<?php echo $this->Html->url(array('controller'=>'Users','action'=>'logout')) ?>" class="nav-link">
@@ -45,10 +47,17 @@
 						</p>
 					</a>
 				</li>
+        <li class="nav-item">
+          <a href="<?php echo $this->Html->url(array('controller'=>'Users','action'=>'profile')) ?>" class="nav-link" id="profile">
+            <p>
+              Perfil
+            </p>
+          </a>
+        </li>
 				<li class="nav-item">
 					<a href="<?php echo $this->Html->url(array('controller'=>'Credits','action'=>'index')) ?>" class="nav-link" id="creditos">
 						<p>
-							Creditos
+							Créditos
 						</p>
 					</a>
 				</li>

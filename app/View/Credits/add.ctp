@@ -1,7 +1,9 @@
 <div class="content-wrapper">
 	<div class="container cuadro_panding">
 		<h1 class="titleTable">Solicitar crédito</h1>
-		<p class="tittleEnlace"><a href="<?php echo $this->Html->url(array('action'=>'index')) ?>">Listar creditos</a></p>
+		<p class="tittleEnlace">
+			<a href="<?php echo $this->Html->url(array('action'=>'index')) ?>">Listar créditos</a>
+		</p>
 		<?php echo $this->Form->create('Credit',array('data-parsley-validate','enctype'=>"multipart/form-data")); ?>
 			<p class="txtDerecho">Crediventas te ofrece la opción de solicitar un crédito Tradicional.</p>
 			<div class="border_cuadro">
@@ -109,33 +111,57 @@
 				</div>
 			</div>
 			<br>
-		<?php echo $this->Form->button('SOLICITAR CREDITO',array("class" => "btn btn-primary form-control")); ?>
+		<?php echo $this->Form->button('SOLICITAR CRÉDITO',array("class" => "btn btn-primary form-control")); ?>
 		</form>
 		<br>
 	</div>
 </div>
 
 <div class="modal fade bd-example-modal-lg" id="modalTerminosCondiciones" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" id="btn_cerrar_camara" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <iframe id="docmento_vista" src="<?php echo $this->Html->url('/files/terminos.pdf') ?>"></iframe>
-        <div class="row">
-          <div class="col-md-6">
-            <button type="button" id="btn_aceptar_documento"  class="btn btn-primary form-control">Acepto</button>
-          </div>
-          <div class="col-md-6">
-            <button type="button" id="btn_cancelar_foto" data-dismiss="modal" aria-label="Close" class="btn btn-primary form-control">Cancelar</button>
-          </div>
-        </div>
-      </div>
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content cuadro_terminos">
+			<div class="modal-header">
+				Terminos y condiciones
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<iframe id="docmento_vista" src="<?php echo $this->Html->url('/files/terminos.pdf') ?>"></iframe>>
+			</div>
+			<div class="modal-footer">
+		        <button type="button" id="btn_aceptar_documento"  class="btn btn-primary">Acepto</button>
+				<button type="button" data-dismiss="modal" aria-label="Close" class="btn btn-secondary">Cancelar</button>
+		     </div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="modalTomarFoto" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog" role="document">
+		<div class="modal-content cuadro_foto">
+			<div class="modal-header">
+				<button type="button" id="btn_cerrar_camara" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<video muted="muted" id="video"></video>
+				<button type="button" id="btn_tomar" class="btn btn-primary form-control">Tomar foto</button>
+			 	<canvas id="canvas" style="display: none;"></canvas>
+				<div class="cuadro_botones" style="display: none;">
+					<div class="row">
+						<div class="col-md-6">
+							<button type="button" id="btn_guardar_foto" class="btn btn-primary form-control">Guardar</button>
+						</div>
+						<div class="col-md-6">
+							<button type="button" id="btn_cancelar_foto" class="btn btn-primary form-control">Tomar otra foto</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
     </div>
-  </div>
 </div>
 
 <?php 
