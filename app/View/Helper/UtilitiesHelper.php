@@ -6,13 +6,13 @@ class UtilitiesHelper extends HtmlHelper {
 
 	public $helpers = array('Html');
 
-	public function UtilitiesHelper(){
-		// App::import("model","ClientsLegal");
+	public function UtilitiesHelper() {
+		App::import("model","User");
 
-		// $this->__ClientsLegal			= new ClientsLegal();
+		$this->__User			= new User();
 	}
 
-	public function estados_creditos($state){
+	public function estados_creditos($state) {
 		$texto = '';
 		switch ($state) {
 			case '0':
@@ -38,6 +38,10 @@ class UtilitiesHelper extends HtmlHelper {
 				break;
 		}
 		return $texto;
+	}
+
+	public function name_user($user_id) {
+		return $this->__User->name_user($user_id);
 	}
 
 }

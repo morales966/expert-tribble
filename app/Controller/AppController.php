@@ -47,7 +47,7 @@ class AppController extends Controller {
                     $this->Session->setFlash('La sesión se ha perdido, por favor vuelvete a iniciar sesión','Flash/error');
                     $this->redirect(array('controller' => 'Pages','action' => 'home'));
                 } else {
-                    $this->Session->setFlash('La sesión se ha perdido, por favor vuelvete a iniciar sesión','Flash/error');
+                    $this->Session->setFlash('La sesión se ha perdido, por favor vuélvete a iniciar sesión','Flash/error');
                     $this->redirect(array('controller' => 'Pages','action' => 'home'));
                 }
             }

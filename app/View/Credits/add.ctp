@@ -107,7 +107,7 @@
 			<div class="chek">
 				<div>
 					<input id="checkbox2" type="checkbox" data-parsley-required="true" data-parsley-trigger="click">
-					<label> Acepta las <a id="TerminosCondiciones" href="#">condiciones legales y la Politica de privacidad de crediventas.</a></label>
+					<label> Acepta las <a id="TerminosCondiciones" href="javascript:void(0)">condiciones legales y la Politica de privacidad de crediventas.</a></label>
 				</div>
 			</div>
 			<br>

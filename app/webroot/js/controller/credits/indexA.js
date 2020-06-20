@@ -8,6 +8,40 @@ $(function () {
     }, 1000);
 });
 
+$("body").on("click", ".ver_asesor", function() {
+    var user_asesor       = $(this).data('asesor');
+    $.post(copy_js.base_url+'Credits/find_asesor_estudio',{user_asesor:user_asesor}, function(result){
+        $('#resultModal').html(result);
+        $('#modalTitle').text('Asesor');
+        $('#modalSession').modal('show');
+    }); 
+});
+
+$("body").on("click", ".ver_cupo_aprobado", function() {
+    var credit_id       = $(this).data('uid');
+    $.post(copy_js.base_url+'Credits/ver_cupo_aprobado',{credit_id:credit_id}, function(result){
+        $('#resultModal').html(result);
+        $('#modalTitle').text('Cupo aprobado');
+        $('#modalSession').modal('show');
+    }); 
+});
+
+$("body").on("click", ".btn_comentario", function() {
+    var credit_id       = $(this).data('uid');
+    $('#modalTitle').text('Añadir comentario');
+    $('#modalSessionCancelar').modal('show');
+});
+
+$("body").on("click", ".ver_causa_negacion", function() {
+    var credit_id       = $(this).data('uid');
+    $.post(copy_js.base_url+'Credits/ver_descripcion_credito',{credit_id:credit_id}, function(result){
+        $('#resultModal').html(result);
+        $('#modalTitle').text('Causa de negación');
+        $('#modalSession').modal('show');
+    }); 
+});
+
+
 function total_estados() {
     $('#txt_cantidad_solicitud').text('Cantidad: '+$('#DOING10').find('article').length);
     $.post(copy_js.base_url+'Credits/sumTotalStateSolicitado',{}, function(result){
@@ -29,7 +63,7 @@ function total_estados() {
 }
 
 function validar_articulos() {
-    var txt1 = "<br><br><br><br><br>";
+    var txt1 = "<br><br><br><br><br><br>";
     if ($('#DOING10').find('article').length > 0) {
         $('br').remove();
     }
@@ -71,11 +105,13 @@ function validar_articulos() {
 
 function draggableInit() {
     var sourceId;
+    var credit_id;
+    console.log('ssss');
     $('[draggable=true]').bind('dragstart', function (event) {
         sourceId = $(this).parent().attr('id');
         event.originalEvent.dataTransfer.setData("text/plain", event.target.getAttribute('id'));
+        credit_id       = $(this).data('uid');
     });
-
     $('.panel-body_solicitud').bind('dragover', function (event) {
         event.preventDefault();
     });
@@ -83,22 +119,8 @@ function draggableInit() {
     $('.panel-body_solicitud').bind('drop', function (event) {
         var children = $(this).children();
         var targetId = children.attr('id');
-
         if (sourceId != targetId) {
-            var elementId = event.originalEvent.dataTransfer.getData("text/plain");
-
-            $('#processing-modal').modal('toggle');
-
-            setTimeout(function () {
-                console.log('Solicitud');
-                var element = document.getElementById(elementId);
-                children.prepend(element);
-                total_estados();
-            }, 1000);
-            setTimeout(function () {
-                validar_articulos();
-                $('#processing-modal').modal('toggle');
-            }, 2000);
+            message_alert("Por favor valida, no puedes volver a poner el credito en estado de solicitud","Error");
         }
         event.preventDefault();
     });
@@ -110,21 +132,15 @@ function draggableInit() {
     $('.panel-body_estudio').bind('drop', function (event) {
         var children = $(this).children();
         var targetId = children.attr('id');
-
         if (sourceId != targetId) {
-            var elementId = event.originalEvent.dataTransfer.getData("text/plain");
-
+            var elementId           = event.originalEvent.dataTransfer.getData("text/plain");
+            var element             = document.getElementById(elementId);
             $('#processing-modal').modal('toggle');
-
+            children.prepend(element);
+            var cupo_aprobado      = 0;
+            var txt_descripcion    = '';
             setTimeout(function () {
-                console.log('En estudio');
-                var element = document.getElementById(elementId);
-                children.prepend(element);
-                total_estados();
-            }, 1000);
-            setTimeout(function () {
-                validar_articulos();
-                $('#processing-modal').modal('toggle');
+                progreso(credit_id,cupo_aprobado,txt_descripcion,copy_js.state_credito_id_estudio);
             }, 2000);
         }
         event.preventDefault();
@@ -139,20 +155,13 @@ function draggableInit() {
         var targetId = children.attr('id');
 
         if (sourceId != targetId) {
-            var elementId = event.originalEvent.dataTransfer.getData("text/plain");
-
+            var elementId           = event.originalEvent.dataTransfer.getData("text/plain");
+            var element             = document.getElementById(elementId);
             $('#processing-modal').modal('toggle');
-
-            setTimeout(function () {
-                console.log('Detenido');
-                var element = document.getElementById(elementId);
-                children.prepend(element);
-                total_estados();
-            }, 1000);
-            setTimeout(function () {
-                validar_articulos();
-                $('#processing-modal').modal('toggle');
-            }, 2000);
+            children.prepend(element);
+            var cupo_aprobado      = 0;
+            var txt_descripcion    = '';
+            progreso(credit_id,cupo_aprobado,txt_descripcion,copy_js.state_credito_id_detenido);
         }
         event.preventDefault();
     });
@@ -166,20 +175,19 @@ function draggableInit() {
         var targetId = children.attr('id');
 
         if (sourceId != targetId) {
-            var elementId = event.originalEvent.dataTransfer.getData("text/plain");
-
-            $('#processing-modal').modal('toggle');
-
-            setTimeout(function () {
-                console.log('Aprobado no retirado');
-                var element = document.getElementById(elementId);
-                children.prepend(element);
-                total_estados();
-            }, 1000);
-            setTimeout(function () {
-                validar_articulos();
+            $.post(copy_js.base_url+'Credits/cupo_aprobado',{}, function(result){
+                $('#resultModalCancelar').html(result);
+                $('#modalTitleCancelar').text('Cupo aprobado');
+                $('#modalSessionCancelar').modal('show');
+            });
+            $("body").on("click", "#btn_cupo", function() {
+                var cupo_aprobado       = $('#cupo_aprobado').val();
+                $('#modalSessionCancelar').modal('hide');
+                $('#resultModalCancelar').empty();
                 $('#processing-modal').modal('toggle');
-            }, 2000);
+                var txt_descripcion    = '';
+                progreso(credit_id,cupo_aprobado,txt_descripcion,copy_js.state_credito_id_aprobadoNoRetirado);
+            });
         }
         event.preventDefault();
     });
@@ -193,20 +201,13 @@ function draggableInit() {
         var targetId = children.attr('id');
 
         if (sourceId != targetId) {
-            var elementId = event.originalEvent.dataTransfer.getData("text/plain");
-
+            var elementId           = event.originalEvent.dataTransfer.getData("text/plain");
+            var element             = document.getElementById(elementId);
             $('#processing-modal').modal('toggle');
-
-            setTimeout(function () {
-                console.log('Aprobado, retirado');
-                var element = document.getElementById(elementId);
-                children.prepend(element);
-                total_estados();
-            }, 1000);
-            setTimeout(function () {
-                validar_articulos();
-                $('#processing-modal').modal('toggle');
-            }, 2000);
+            children.prepend(element);
+            var cupo_aprobado      = 0;
+            var txt_descripcion    = '';
+            progreso(credit_id,cupo_aprobado,txt_descripcion,copy_js.state_credito_id_aprobadoRetirado);
         }
         event.preventDefault();
     });
@@ -218,24 +219,49 @@ function draggableInit() {
     $('.panel-body_negado').bind('drop', function (event) {
         var children = $(this).children();
         var targetId = children.attr('id');
-
         if (sourceId != targetId) {
-            var elementId = event.originalEvent.dataTransfer.getData("text/plain");
-
-            $('#processing-modal').modal('toggle');
-
-            setTimeout(function () {
-                console.log('Negado');
-                var element = document.getElementById(elementId);
-                children.prepend(element);
-                total_estados();
-            }, 1000);
-            setTimeout(function () {
-                validar_articulos();
+            $.post(copy_js.base_url+'Credits/descripcion_credito',{}, function(result){
+                $('#resultModalCancelar').html(result);
+                $('#modalTitleCancelar').text('Causa de negación');
+                $('#modalSessionCancelar').modal('show');
+            });
+            $("body").on("click", "#btn_descripcion", function() {
+                var txt_descripcion      = $('#txt_descripcion').val();
+                $('#modalSessionCancelar').modal('hide');
+                $('#resultModalCancelar').empty();
                 $('#processing-modal').modal('toggle');
-            }, 2000);
+                var cupo_aprobado       = 0;
+                progreso(credit_id,cupo_aprobado,txt_descripcion,copy_js.state_credito_id_negado);
+            });
         }
         event.preventDefault();
     });
     return true;
+}
+
+function progreso(credit_id,cupo_aprobado,descripcion,state) {
+    setTimeout(function () {
+    //     alert(credit_id);
+    //     alert(cupo_aprobado);
+    //     alert(descripcion);
+    //     alert(state);
+
+        $.post(copy_js.base_url+'Credits/updateState',{credit_id:credit_id,cupo_aprobado:cupo_aprobado,descripcion:descripcion,state:state}, function(result){
+            if (result == 2) {
+                message_alert("Por favor valida, el credito ya tiene asesor","Error");
+            }
+            $.post(copy_js.base_url+'Credits/view_creditos',{}, function(result){
+                $('#container_creditos').empty();
+                $('#container_creditos').html(result);
+            });
+        });
+    }, 1000);
+
+    setTimeout(function () {
+        total_estados();
+        validar_articulos();
+        $('[data-toggle="tooltip"]').tooltip();
+        draggableInit(); 
+        $('#processing-modal').modal('toggle');
+    }, 8000);
 }

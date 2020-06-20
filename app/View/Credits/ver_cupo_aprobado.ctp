@@ -1,0 +1,1 @@
+<p><?php echo $descripcion['Credit']['cupo_aprobado']; ?></p>

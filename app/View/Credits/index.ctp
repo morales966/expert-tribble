@@ -1,10 +1,10 @@
 <div class="content-wrapper">
 	<div class="container cuadro_panding">
-		<?php if (AuthComponent::user('role') == 'admin') { ?>
+		<?php if (AuthComponent::user('role') != 'cliente') { ?>
 	
 			<h2 class="titleView">Créditos</h2>
 			<div class="container-fluid">
-		        <div id="sortableKanbanBoards" class="row">
+		        <div id="container_creditos" class="row">
 
 		            <div class="panel panel-primary kanban-col">
 		                <div class="panel-heading">
@@ -17,11 +17,14 @@
 
 		                    		<?php foreach ($creditos_solicitud as $credit): ?>
 
-										<article class="kanban-entry grab" id="<?php echo $credit['Credit']['id']; ?>" draggable="true">
+										<article class="kanban-entry grab" data-uid="<?php echo $credit['Credit']['id']; ?>" id="<?php echo $credit['Credit']['id']; ?>" draggable="true">
 				                            <div class="kanban-entry-inner">
 				                                <div class="kanban-label">
 				                                    <h2>
-				                                    	<?php echo $this->Html->link($credit['User']['name'], array('controller' => 'users', 'action' => 'view', $credit['User']['id'])); ?>
+				                                    	<?php echo $credit['User']['name'] ?>
+				                                    	<a href="<?php echo $this->Html->url(array('controller'=>'Users','action'=>'view',$credit['User']['id'])) ?>" data-toggle="tooltip" data-placement="top" title="Ver datos del cliente">
+				                                    		<i class="fa fa-eye"></i>
+				                                    	</a>
 				                                    	<span style="display: block;">
 				                                    		<?php echo h($credit['Credit']['nombre_persona']).' '.h($credit['Credit']['apellido_persona']).' - '.h($credit['Credit']['cedula_persona']).' - '.h($credit['Credit']['telefono_persona'])?>
 				                                    	</span>
@@ -33,6 +36,11 @@
 				                                    		<?php echo h(number_format($credit['Credit']['valor_cuota'],0,",","."));?>
 				                                    	</span>
 				                                    </p>
+				                                    <span>
+				                                    	<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Ver datos del crédito" class="ver_credito" data-uid="<?php echo $credit['Credit']['id']; ?>">
+				                                    		<i class="fa fa-eye"></i>
+				                                    	</a>
+				                                    </span>
 				                                </div>
 				                            </div>
 				                        </article>
@@ -56,11 +64,14 @@
 
 		                    		<?php foreach ($creditos_estudio as $credit): ?>
 
-										<article class="kanban-entry grab" id="<?php echo $credit['Credit']['id']; ?>" draggable="true">
+										<article class="kanban-entry grab" data-uid="<?php echo $credit['Credit']['id']; ?>" id="<?php echo $credit['Credit']['id']; ?>" draggable="true">
 				                            <div class="kanban-entry-inner">
 				                                <div class="kanban-label">
 				                                    <h2>
-				                                    	<?php echo $this->Html->link($credit['User']['name'], array('controller' => 'users', 'action' => 'view', $credit['User']['id'])); ?>
+				                                    	<?php echo $credit['User']['name'] ?>
+				                                    	<a href="<?php echo $this->Html->url(array('controller'=>'Users','action'=>'view',$credit['User']['id'])) ?>" data-toggle="tooltip" data-placement="top" title="Ver datos del cliente">
+				                                    		<i class="fa fa-eye"></i>
+				                                    	</a>
 				                                    	<span style="display: block;">
 				                                    		<?php echo h($credit['Credit']['nombre_persona']).' '.h($credit['Credit']['apellido_persona']).' - '.h($credit['Credit']['cedula_persona']).' - '.h($credit['Credit']['telefono_persona'])?>
 				                                    	</span>
@@ -73,6 +84,12 @@
 				                                    	</span>
 				                                    </p>
 				                                    <span>
+				                                    	<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Ver datos del crédito" class="ver_credito" data-uid="<?php echo $credit['Credit']['id']; ?>">
+				                                    		<i class="fa fa-eye"></i>
+				                                    	</a>
+				                                    	<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Ver asesor" class="ver_asesor" data-asesor="<?php echo $credit['Credit']['user_asesor']; ?>">
+				                                    		<i class="fa fa-user"></i>
+				                                    	</a>
 				                                    	<a data-toggle="tooltip" title="Descargar foto de perfil" download href="<?php echo $this->Html->url('/img/creditos/perfil/'.$credit['Credit']['foto_perfil']) ?>" >
 				                                    		<i class="fa fa-file-image-o"></i>
 				                                    	</a>
@@ -109,11 +126,14 @@
 
 		                    		<?php foreach ($creditos_detenido as $credit): ?>
 
-										<article class="kanban-entry grab" id="<?php echo $credit['Credit']['id']; ?>" draggable="true">
+										<article class="kanban-entry grab" data-uid="<?php echo $credit['Credit']['id']; ?>" id="<?php echo $credit['Credit']['id']; ?>" draggable="true">
 				                            <div class="kanban-entry-inner">
 				                                <div class="kanban-label">
 				                                    <h2>
-				                                    	<?php echo $this->Html->link($credit['User']['name'], array('controller' => 'users', 'action' => 'view', $credit['User']['id'])); ?>
+				                                    	<?php echo $credit['User']['name'] ?>
+				                                    	<a href="<?php echo $this->Html->url(array('controller'=>'Users','action'=>'view',$credit['User']['id'])) ?>" data-toggle="tooltip" data-placement="top" title="Ver datos del cliente">
+				                                    		<i class="fa fa-eye"></i>
+				                                    	</a>
 				                                    	<span style="display: block;">
 				                                    		<?php echo h($credit['Credit']['nombre_persona']).' '.h($credit['Credit']['apellido_persona']).' - '.h($credit['Credit']['cedula_persona']).' - '.h($credit['Credit']['telefono_persona'])?>
 				                                    	</span>
@@ -126,11 +146,16 @@
 				                                    	</span>
 				                                    </p>
 				                                    <span>
+				                                    	<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Ver datos del crédito" class="ver_credito" data-uid="<?php echo $credit['Credit']['id']; ?>">
+				                                    		<i class="fa fa-eye"></i>
+				                                    	</a>
+				                                    	<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Añadir comentario" class="btn_comentario" data-uid="<?php echo $credit['Credit']['id']; ?>">
+															<i class="fa fa-comment-o"></i>
+														</a>
 				                                    	<a href="<?php echo 'https://api.whatsapp.com/send?phone=57'.$credit["Credit"]["telefono_persona"]?>" data-toggle="tooltip" data-placement="top" title="Conversar en whatsapp" target="_blank">
 															<i class="fa fa-whatsapp"></i>
 														</a>
 				                                    </span>
-				                                    <button type="button" class="btn btn_accion_estado form-control">Observación</button>
 				                                </div>
 				                            </div>
 				                        </article>
@@ -154,11 +179,14 @@
 
 		                    		<?php foreach ($creditos_aprobado_no_retirado as $credit): ?>
 
-										<article class="kanban-entry grab" id="<?php echo $credit['Credit']['id']; ?>" draggable="true">
+										<article class="kanban-entry grab" data-uid="<?php echo $credit['Credit']['id']; ?>" id="<?php echo $credit['Credit']['id']; ?>" draggable="true">
 				                            <div class="kanban-entry-inner">
 				                                <div class="kanban-label">
 				                                    <h2>
-				                                    	<?php echo $this->Html->link($credit['User']['name'], array('controller' => 'users', 'action' => 'view', $credit['User']['id'])); ?>
+				                                    	<?php echo $credit['User']['name'] ?>
+				                                    	<a href="<?php echo $this->Html->url(array('controller'=>'Users','action'=>'view',$credit['User']['id'])) ?>" data-toggle="tooltip" data-placement="top" title="Ver datos del cliente">
+				                                    		<i class="fa fa-eye"></i>
+				                                    	</a>
 				                                    	<span style="display: block;">
 				                                    		<?php echo h($credit['Credit']['nombre_persona']).' '.h($credit['Credit']['apellido_persona']).' - '.h($credit['Credit']['cedula_persona']).' - '.h($credit['Credit']['telefono_persona'])?>
 				                                    	</span>
@@ -171,15 +199,22 @@
 				                                    	</span>
 				                                    </p>
 				                                    <span>
-				                                    	<a href="#" data-toggle="tooltip" data-placement="top" title="Enviar mensaje">
+				                                    	<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Ver cupo aprobado" class="ver_cupo_aprobado" data-uid="<?php echo $credit['Credit']['id']; ?>">
+				                                    		<i class="fa fa-sort-numeric-asc"></i>
+				                                    	</a>
+				                                    	<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Ver datos del crédito" class="ver_credito" data-uid="<?php echo $credit['Credit']['id']; ?>">
+				                                    		<i class="fa fa-eye"></i>
+				                                    	</a>
+				                                    	<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Añadir comentario" class="btn_comentario" data-uid="<?php echo $credit['Credit']['id']; ?>">
 															<i class="fa fa-comment-o"></i>
+														</a>
+				                                    	<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Enviar mensaje de texto">
+															<i class="fa fa-mobile"></i>
 														</a>
 				                                    	<a href="<?php echo 'https://api.whatsapp.com/send?phone=57'.$credit["Credit"]["telefono_persona"]?>" data-toggle="tooltip" data-placement="top" title="Conversar en whatsapp" target="_blank">
 															<i class="fa fa-whatsapp"></i>
 														</a>
 				                                    </span>
-				                                    <button type="button" class="btn btn_accion_estado form-control">Observación</button>
-				                                    <button type="button" class="btn btn_accion_estado form-control">Cupo aprobado</button>
 				                                </div>
 				                            </div>
 				                        </article>
@@ -203,11 +238,14 @@
 			                    	
 		                    		<?php foreach ($creditos_aprobado_retirado as $credit): ?>
 
-										<article class="kanban-entry grab" id="<?php echo $credit['Credit']['id']; ?>" draggable="true">
+										<article class="kanban-entry grab" data-uid="<?php echo $credit['Credit']['id']; ?>" id="<?php echo $credit['Credit']['id']; ?>" draggable="true">
 				                            <div class="kanban-entry-inner">
 				                                <div class="kanban-label">
 				                                    <h2>
-				                                    	<?php echo $this->Html->link($credit['User']['name'], array('controller' => 'users', 'action' => 'view', $credit['User']['id'])); ?>
+				                                    	<?php echo $credit['User']['name'] ?>
+				                                    	<a href="<?php echo $this->Html->url(array('controller'=>'Users','action'=>'view',$credit['User']['id'])) ?>" data-toggle="tooltip" data-placement="top" title="Ver datos del cliente">
+				                                    		<i class="fa fa-eye"></i>
+				                                    	</a>
 				                                    	<span style="display: block;">
 				                                    		<?php echo h($credit['Credit']['nombre_persona']).' '.h($credit['Credit']['apellido_persona']).' - '.h($credit['Credit']['cedula_persona']).' - '.h($credit['Credit']['telefono_persona'])?>
 				                                    	</span>
@@ -220,12 +258,19 @@
 				                                    	</span>
 				                                    </p>
 				                                    <span>
+				                                    	<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Ver cupo aprobado" class="ver_cupo_aprobado" data-uid="<?php echo $credit['Credit']['id']; ?>">
+				                                    		<i class="fa fa-sort-numeric-asc"></i>
+				                                    	</a>
+				                                    	<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Ver datos del crédito" class="ver_credito" data-uid="<?php echo $credit['Credit']['id']; ?>">
+				                                    		<i class="fa fa-eye"></i>
+				                                    	</a>
+				                                    	<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Añadir comentario" class="btn_comentario" data-uid="<?php echo $credit['Credit']['id']; ?>">
+															<i class="fa fa-comment-o"></i>
+														</a>
 				                                    	<a href="<?php echo 'https://api.whatsapp.com/send?phone=57'.$credit["Credit"]["telefono_persona"]?>" data-toggle="tooltip" data-placement="top" title="Conversar en whatsapp" target="_blank">
 															<i class="fa fa-whatsapp"></i>
 														</a>
 				                                    </span>
-				                                    <button type="button" class="btn btn_accion_estado form-control">Observación</button>
-				                                    <button type="button" class="btn btn_accion_estado form-control">Cupo aprobado</button>
 				                                    <button type="button" class="btn btn_accion_estado form-control">Cupo retirado</button>
 				                                    <button type="button" class="btn btn_accion_estado form-control">Cupo preaprobado</button>
 				                                    <button type="button" class="btn btn_accion_estado form-control">Adjuntar plan pago</button>
@@ -252,11 +297,14 @@
 
 		                    		<?php foreach ($creditos_negado as $credit): ?>
 
-										<article class="kanban-entry grab" id="<?php echo $credit['Credit']['id']; ?>" draggable="true">
+										<article class="kanban-entry grab" data-uid="<?php echo $credit['Credit']['id']; ?>" id="<?php echo $credit['Credit']['id']; ?>" draggable="true">
 				                            <div class="kanban-entry-inner">
 				                                <div class="kanban-label">
 				                                    <h2>
-				                                    	<?php echo $this->Html->link($credit['User']['name'], array('controller' => 'users', 'action' => 'view', $credit['User']['id'])); ?>
+				                                    	<?php echo $credit['User']['name'] ?>
+				                                    	<a href="<?php echo $this->Html->url(array('controller'=>'Users','action'=>'view',$credit['User']['id'])) ?>" data-toggle="tooltip" data-placement="top" title="Ver datos del cliente">
+				                                    		<i class="fa fa-eye"></i>
+				                                    	</a>
 				                                    	<span style="display: block;">
 				                                    		<?php echo h($credit['Credit']['nombre_persona']).' '.h($credit['Credit']['apellido_persona']).' - '.h($credit['Credit']['cedula_persona']).' - '.h($credit['Credit']['telefono_persona'])?>
 				                                    	</span>
@@ -269,12 +317,19 @@
 				                                    	</span>
 				                                    </p>
 				                                    <span>
+				                                    	<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Ver causa de la negación" class="ver_causa_negacion" data-uid="<?php echo $credit['Credit']['id']; ?>">
+				                                    		<i class="fa fa-text-width"></i>
+				                                    	</a>
+				                                    	<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Ver datos del crédito" class="ver_credito" data-uid="<?php echo $credit['Credit']['id']; ?>">
+				                                    		<i class="fa fa-eye"></i>
+				                                    	</a>
+				                                    	<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Añadir comentario" class="btn_comentario" data-uid="<?php echo $credit['Credit']['id']; ?>">
+															<i class="fa fa-comment-o"></i>
+														</a>
 				                                    	<a href="<?php echo 'https://api.whatsapp.com/send?phone=57'.$credit["Credit"]["telefono_persona"]?>" data-toggle="tooltip" data-placement="top" title="Conversar en whatsapp" target="_blank">
 															<i class="fa fa-whatsapp"></i>
 														</a>
 				                                    </span>
-				                                    <button type="button" class="btn btn_accion_estado form-control">Observación</button>
-				                                    <button type="button" class="btn btn_accion_estado form-control">Causa de negación</button>
 				                                </div>
 				                            </div>
 				                        </article>
@@ -289,18 +344,6 @@
 
 		        </div>
 		    </div>
-		    <div class="modal modal-static fade" id="processing-modal" role="dialog" aria-hidden="true">
-			    <div class="modal-dialog">
-			        <div class="modal-content">
-			            <div class="modal-body">
-			                <div class="text-center">
-			                    <i class="fa fa-refresh fa-5x fa-spin"></i>
-			                    <h4>Procesando</h4>
-			                </div>
-			            </div>
-			        </div>
-			    </div>
-			</div>
 
 			<h2 class="titleView">Créditos finalizados</h2>
     		<div class="table-responsive">
@@ -330,7 +373,7 @@
 							<td><?php echo $this->Utilities->estados_creditos($credit['Credit']['state']); ?>&nbsp;</td>
 							<td><?php echo h($credit['Credit']['created']); ?>&nbsp;</td>
 							<td class="actions">
-								<a href="<?php echo $this->Html->url(array('action' => 'view', $credit['Credit']['id'])) ?>" data-toggle="tooltip" data-placement="top" title="Ver credito">
+								<a class="ver_credito" href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Ver crédito">
 									<i class="fa fa-fw fa-eye"></i>
 								</a>
 						</tr>
@@ -421,9 +464,6 @@
 				<table class="table">
 		   			<thead class="thead-dark">
 						<tr>
-							<?php if (!AuthComponent::user('role') == 'cliente'): ?>
-								<th>Cliente</th>
-							<?php endif ?>
 							<th>NNombre cliente</th>
 							<th>Identificación</th>
 							<th>Celular</th>
@@ -436,11 +476,6 @@
 					<tbody>
 					<?php foreach ($credits as $credit): ?>
 						<tr>
-							<?php if (!AuthComponent::user('role') == 'cliente'): ?>
-								<th>
-									<?php echo $this->Html->link($credit['User']['name'], array('controller' => 'users', 'action' => 'view', $credit['User']['id'])); ?>
-								</th>
-							<?php endif ?>
 							<td><?php echo h($credit['Credit']['nombre_persona']).' '.h($credit['Credit']['apellido_persona']); ?>&nbsp;</td>
 							<td><?php echo h($credit['Credit']['cedula_persona']); ?>&nbsp;</td>
 							<td><?php echo h($credit['Credit']['telefono_persona']); ?>&nbsp;</td>
@@ -448,7 +483,7 @@
 							<td><?php echo $this->Utilities->estados_creditos($credit['Credit']['state']); ?>&nbsp;</td>
 							<td><?php echo h($credit['Credit']['created']); ?>&nbsp;</td>
 							<td class="actions">
-								<a href="<?php echo $this->Html->url(array('action' => 'view', $credit['Credit']['id'])) ?>" data-toggle="tooltip" data-placement="top" title="Ver credito">
+								<a class="ver_credito" href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Ver crédito">
 									<i class="fa fa-fw fa-eye"></i>
 								</a>
 						</tr>
@@ -478,12 +513,26 @@
 </div>
 
 
+<?php if (AuthComponent::user('role') != 'cliente'): ?>
+	 <div class="modal modal-static fade" id="processing-modal" role="dialog" aria-hidden="true">
+	    <div class="modal-dialog">
+	        <div class="modal-content">
+	            <div class="modal-body">
+	                <div class="text-center">
+	                    <i class="fa fa-refresh fa-5x fa-spin"></i>
+	                    <h4>Procesando</h4>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+<?php endif ?>
+
 <?php
-	if (AuthComponent::user('role') == 'admin') {
+	if (AuthComponent::user('role') != 'cliente') {
 		echo $this->Html->css("controller/credits/indexA.css?".rand(),							array('block' => 'AppCss'));
 
 		echo $this->Html->script("controller/credits/indexA.js?".rand(),						array('block' => 'AppScript'));
-	} else {
-		echo $this->Html->script("controller/credits/index.js?".rand(),							array('block' => 'AppScript'));
-	}
+	} 
+	echo $this->Html->script("controller/credits/index.js?".rand(),							array('block' => 'AppScript'));
 ?>
