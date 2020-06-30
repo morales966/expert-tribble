@@ -15,9 +15,8 @@ $("body").on("click", "#texto_busqueda", function() {
 $("body").on("click", ".ver_credito", function() {
     var credit_id       = $(this).data('uid');
     $.post(copy_js.base_url+'Credits/view_modal',{credit_id:credit_id}, function(result){
-        $('#resultModal').html(result);
-        $('#modalTitle').text('Datos y progreso');
-    	$('#modalSession').modal('show');
+        $('#resultModalGrande').html(result);
+    	$('#modalGrande').modal('show');
     }); 
 });
 

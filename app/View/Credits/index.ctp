@@ -208,7 +208,7 @@
 				                                    	<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Añadir comentario" class="btn_comentario" data-uid="<?php echo $credit['Credit']['id']; ?>">
 															<i class="fa fa-comment-o"></i>
 														</a>
-				                                    	<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Enviar mensaje de texto">
+				                                    	<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Enviar mensaje de texto" class="btn_mensaje_texto" data-uid="<?php echo $credit['Credit']['id']; ?>">
 															<i class="fa fa-mobile"></i>
 														</a>
 				                                    	<a href="<?php echo 'https://api.whatsapp.com/send?phone=57'.$credit["Credit"]["telefono_persona"]?>" data-toggle="tooltip" data-placement="top" title="Conversar en whatsapp" target="_blank">
@@ -258,6 +258,15 @@
 				                                    	</span>
 				                                    </p>
 				                                    <span>
+				                                    	<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Adjuntar plan pago" class="adjuntar_plan_pago" data-uid="<?php echo $credit['Credit']['id']; ?>">
+				                                    		<i class="fa fa-paperclip"></i>
+				                                    	</a>
+				                                    	<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Ver preaprobado" class="ver_preaprobado" data-uid="<?php echo $credit['Credit']['id']; ?>">
+				                                    		<i class="fa fa-sort-numeric-desc"></i>
+				                                    	</a>
+				                                    	<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Registrar cupo retirado" class="registrar_cupo_aprobado" data-uid="<?php echo $credit['Credit']['id']; ?>">
+				                                    		<i class="fa fa-edit"></i>
+				                                    	</a>
 				                                    	<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Ver cupo aprobado" class="ver_cupo_aprobado" data-uid="<?php echo $credit['Credit']['id']; ?>">
 				                                    		<i class="fa fa-sort-numeric-asc"></i>
 				                                    	</a>
@@ -271,9 +280,6 @@
 															<i class="fa fa-whatsapp"></i>
 														</a>
 				                                    </span>
-				                                    <button type="button" class="btn btn_accion_estado form-control">Cupo retirado</button>
-				                                    <button type="button" class="btn btn_accion_estado form-control">Cupo preaprobado</button>
-				                                    <button type="button" class="btn btn_accion_estado form-control">Adjuntar plan pago</button>
 				                                </div>
 				                            </div>
 				                        </article>
@@ -317,9 +323,6 @@
 				                                    	</span>
 				                                    </p>
 				                                    <span>
-				                                    	<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Ver causa de la negación" class="ver_causa_negacion" data-uid="<?php echo $credit['Credit']['id']; ?>">
-				                                    		<i class="fa fa-text-width"></i>
-				                                    	</a>
 				                                    	<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Ver datos del crédito" class="ver_credito" data-uid="<?php echo $credit['Credit']['id']; ?>">
 				                                    		<i class="fa fa-eye"></i>
 				                                    	</a>
@@ -376,6 +379,7 @@
 								<a class="ver_credito" href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Ver crédito">
 									<i class="fa fa-fw fa-eye"></i>
 								</a>
+							</td>
 						</tr>
 					<?php endforeach; ?>
 					</tbody>
@@ -483,9 +487,10 @@
 							<td><?php echo $this->Utilities->estados_creditos($credit['Credit']['state']); ?>&nbsp;</td>
 							<td><?php echo h($credit['Credit']['created']); ?>&nbsp;</td>
 							<td class="actions">
-								<a class="ver_credito" href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Ver crédito">
-									<i class="fa fa-fw fa-eye"></i>
-								</a>
+								<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Ver datos del crédito" class="ver_credito" data-uid="<?php echo $credit['Credit']['id']; ?>">
+                            		<i class="fa fa-eye"></i>
+                            	</a>
+							</td>
 						</tr>
 					<?php endforeach; ?>
 					</tbody>
@@ -512,7 +517,6 @@
 	</div>
 </div>
 
-
 <?php if (AuthComponent::user('role') != 'cliente'): ?>
 	 <div class="modal modal-static fade" id="processing-modal" role="dialog" aria-hidden="true">
 	    <div class="modal-dialog">
@@ -534,5 +538,7 @@
 
 		echo $this->Html->script("controller/credits/indexA.js?".rand(),						array('block' => 'AppScript'));
 	} 
+	echo $this->Html->css("controller/credits/view.css?".rand(),							array('block' => 'AppCss'));
 	echo $this->Html->script("controller/credits/index.js?".rand(),							array('block' => 'AppScript'));
+	echo $this->Html->script("controller/credits/view.js?".rand(),							array('block' => 'AppScript'));
 ?>

@@ -17,41 +17,7 @@ class Credit extends AppModel {
 				'required' => true,
 				'on' => 'create',
 			),
-		),
-		'valor_cuota' => array(
-			'notBlank' => array(
-				'rule' => array('notBlank'),
-				'on' => 'create',
-			),
-		),
-		'nombre_persona' => array(
-			'notBlank' => array(
-				'rule' => array('notBlank'),
-				'required' => true,
-				'on' => 'create',
-			),
-		),
-		'apellido_persona' => array(
-			'notBlank' => array(
-				'rule' => array('notBlank'),
-				'required' => true,
-				'on' => 'create',
-			),
-		),
-		'cedula_persona' => array(
-			'numeric' => array(
-				'rule' => array('numeric'),
-				'required' => true,
-				'on' => 'create',
-			),
-		),
-		'telefono_persona' => array(
-			'notBlank' => array(
-				'rule' => array('notBlank'),
-				'required' => true,
-				'on' => 'create',
-			),
-		),
+		)
 	);
 
 	public $belongsTo = array(
@@ -63,6 +29,26 @@ class Credit extends AppModel {
 			'order' => ''
 		)
 	);
+
+	public $hasMany = array(
+		'Stage' => array(
+			'className' => 'Stage',
+			'foreignKey' => 'credit_id',
+			'dependent' => false
+		)
+	);
+
+	/**
+        * @author Diego Morales <dlmorales096@gmail.com>
+        * @date(22-06-2019)
+        * @description Metodo que se encargara de devolver los datos del credito
+        * @variables $credit_id = id del credito
+        * @return Los datos del credito
+    */
+	public function all_data_credit($credit_id) {
+		$conditions 		= array('Credit.id' => $credit_id);
+		return $this->find('first',compact('conditions'));
+	}
 
 	/**
         * @author Diego Morales <dlmorales096@gmail.com>
@@ -82,10 +68,23 @@ class Credit extends AppModel {
         * @date(12-06-2019)
         * @description Metodo que se encarga de devolver el total(valor_credito) del estado solicitado
         * @variables $state = Estado solicitado
-        * @return El del estado solicitado
+        * @return El total del estado solicitado
     */
 	public function sum_total_state($state) {
 		$fields 			= array('SUM(Credit.valor_credito) as total');
+		$conditions 		= array('Credit.state' => $state);
+		return $this->find('first',compact('fields','conditions'));
+	}
+
+	/**
+        * @author Diego Morales <dlmorales096@gmail.com>
+        * @date(12-06-2019)
+        * @description Metodo que se encarga de devolver el total(cupo_aprobado) del estado solicitado
+        * @variables $state = Estado solicitado
+        * @return El total del estado solicitado
+    */
+	public function sum_cupo_aprobado_state($state) {
+		$fields 			= array('SUM(Credit.cupo_aprobado) as total');
 		$conditions 		= array('Credit.state' => $state);
 		return $this->find('first',compact('fields','conditions'));
 	}
@@ -112,19 +111,6 @@ class Credit extends AppModel {
     */
 	public function find_cupo_aprobado($credit_id) {
 		$fields 			= array('Credit.cupo_aprobado');
-		$conditions 		= array('Credit.id' => $credit_id);
-		return $this->find('first',compact('fields','conditions'));
-	}
-
-	/**
-        * @author Diego Morales <dlmorales096@gmail.com>
-        * @date(20-06-2019)
-        * @description Metodo que se encargara de devolver la descripción del estado negado del credito
-        * @variables $credit_id = id del credito
-        * @return La descripción del estado negado del credito
-    */
-	public function find_descripcion_negado($credit_id) {
-		$fields 			= array('Credit.descripcion_negado');
 		$conditions 		= array('Credit.id' => $credit_id);
 		return $this->find('first',compact('fields','conditions'));
 	}

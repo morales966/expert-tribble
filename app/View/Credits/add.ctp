@@ -15,7 +15,7 @@
 					<div class="form-group col-md-4">
 						<b>Tiempo en meses</b>
 						<div class="meses_credito">
-							<?php echo $this->Form->input('CreditNumeroMeses1',array('label' => false,'class' => 'form-control','default' => 'Ingresar apellidos','options' => array('Introduc primero el valor que necesitas'))); ?>
+							<?php echo $this->Form->input('CreditNumeroMeses1',array('label' => false,'class' => 'form-control','default' => 'Introduce primero el valor que necesitas','options' => array('Introduce primero el valor que necesitas'))); ?>
 						</div>
 					</div>
 					<div class="form-group col-md-4">

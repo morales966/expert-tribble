@@ -1,1 +1,1 @@
-<p><?php echo $this->Utilities->name_user($user_asesor); ?></p>
+<?php echo $this->Form->input('asesor',array('label' => false, 'class' => 'form-control', 'options' => $users, 'default' => $user_asesor, 'disabled' => true)); ?>

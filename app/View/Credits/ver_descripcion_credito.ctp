@@ -1,1 +1,0 @@
-<p><?php echo $descripcion['Credit']['descripcion_negado']; ?></p>

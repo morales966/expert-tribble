@@ -39,7 +39,6 @@
 	        </div>
 	    </form>
 	    <a href="javascript:void(0)" data-toggle="modal" data-target="#cambiarContrasenaModal">Cambiar contraseña</a>
-		
 	</div>
 </div>
 

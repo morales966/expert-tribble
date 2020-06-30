@@ -55,7 +55,12 @@ $config = array(
 			'3'							=> 'Detenido',
 			'4'							=> 'Aprobado, no retirado',
 			'5'							=> 'Aprobado, retirado',
-			'6' 						=> 'Pagado'
+			'6' 						=> 'Pagado',
+
+			'description' 				=> 'Descripción',
+			'editar_cupo_aprobado'		=> 'Editar cupo aprobado',
+			'registrar_retiro_cupo' 	=> 'Registrar retiro del cupo',
+			'adjuntar_plan_pagos'		=> 'Plan de pagos'
 		),
 		'nombres_estados_creditos' 	=> array(
 			'Negado'					=> '0',
@@ -65,6 +70,16 @@ $config = array(
 			'Aprobado_no_retirado'		=> '4',
 			'Aprobado_retirado'			=> '5',
 			'Pagado'					=> '6'
+		),
+		'pasos_estados' 			=> array(
+			'razones_negado' 			=> array(
+				'Reportado en centrales' 				=> 'Reportado en centrales',
+				'No capacidad de endeudamiento'			=> 'No capacidad de endeudamiento',
+				'Mora en entidades' 					=> 'Mora en entidades',
+				'Sin historial crediticio' 				=> 'Sin historial crediticio',
+				'No cumple con scoring' 				=> 'No cumple con scoring',
+				'Política laboral' 						=> 'Política laboral'
+			)
 		)
 	)
 );

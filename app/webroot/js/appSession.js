@@ -634,6 +634,10 @@
  * --------------------------------------------
  */
 
+$("body").on("click", "#btn_cerrar_mFoto", function() {
+    $('#modalFoto').modal('hide');
+});
+
 function string_valdate_Number(string){
   var out = '';
   var filtro = '1234567890';

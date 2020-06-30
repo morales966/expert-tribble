@@ -21,26 +21,116 @@ $("body").on("click", ".ver_cupo_aprobado", function() {
     var credit_id       = $(this).data('uid');
     $.post(copy_js.base_url+'Credits/ver_cupo_aprobado',{credit_id:credit_id}, function(result){
         $('#resultModal').html(result);
+        $('#btn_cupo_edit').hide();
         $('#modalTitle').text('Cupo aprobado');
         $('#modalSession').modal('show');
     }); 
 });
-
-$("body").on("click", ".btn_comentario", function() {
-    var credit_id       = $(this).data('uid');
-    $('#modalTitle').text('Añadir comentario');
-    $('#modalSessionCancelar').modal('show');
+$("body").on("click", "#icono_edit_cupo", function() {
+    $('#txt_cupo_aprobado').prop('disabled', false);
+    $('#btn_cupo_edit').show();
+});
+$("body").on("click", "#btn_cupo_edit", function() {
+    var credit_id           = $(this).data('uid');
+    var cupo_aprobado       = $('#txt_cupo_aprobado').val();
+    $.post(copy_js.base_url+'Credits/editCupoAprobado',{credit_id:credit_id,cupo_aprobado:cupo_aprobado}, function(result){
+        $('#btn_cupo_edit').hide();
+        $('#modalSession').modal('hide');
+        message_alert("Se actualizó el cupo del crédito correctamente","Bien");
+    });
 });
 
-$("body").on("click", ".ver_causa_negacion", function() {
-    var credit_id       = $(this).data('uid');
-    $.post(copy_js.base_url+'Credits/ver_descripcion_credito',{credit_id:credit_id}, function(result){
+$("body").on("click", ".ver_preaprobado", function() {
+    var credit_id           = $(this).data('uid');
+    $.post(copy_js.base_url+'Credits/ver_preaprobado',{credit_id:credit_id}, function(result){
         $('#resultModal').html(result);
-        $('#modalTitle').text('Causa de negación');
+        $('#modalTitle').text('Preaprobaco');
         $('#modalSession').modal('show');
     }); 
 });
 
+$("body").on("click", ".adjuntar_plan_pago", function() {
+    var credit_id           = $(this).data('uid');
+    $.post(copy_js.base_url+'Credits/adjuntar_archivo',{credit_id:credit_id}, function(result){
+        $('#resultModalCancelar').html(result);
+        $('#modalTitleCancelar').text('Adjuntar plan de pagos');
+        $('#modalSessionCancelar').modal('show');
+    }); 
+});
+
+$("body").on("click", "#btn_adjuntar_archivo", function() {
+    var plan_pagos             = $('#txt_plan_pagos').val();
+    if (plan_pagos != '') {
+        var formData               = new FormData($('#form_adjuntar_plan')[0]);
+        $.ajax({
+            type: 'POST',
+            url: copy_js.base_url+copy_js.controller+'/adjuntarPlanPago',
+            data: formData,
+            contentType: false,
+            cache: false,
+            processData:false,
+            success: function(result){
+                $('#modalSessionCancelar').modal('hide');
+                $('#resultModalCancelar').empty();
+                 message_alert("Se adjunto el plan de pagos correctamente","Bien");
+            }
+        });
+    } else {
+        message_alert("Por favor adjunta el plan de pagos","Error");
+    }
+});
+
+$("body").on("click", ".registrar_cupo_aprobado", function() {
+    var credit_id       = $(this).data('uid');
+    $.post(copy_js.base_url+'Credits/add_retiro_cupo_aprobado',{credit_id:credit_id}, function(result){
+        $('#resultModalCancelar').html(result);
+        $('#modalTitleCancelar').text('Registrar un retiro del crédito aprobado');
+        $('#modalSessionCancelar').modal('show');
+    }); 
+});
+
+$("body").on("click", "#btn_add_retiro_cupo", function() {
+    var credit_id              = $(this).data('uid');
+    var txt_cupo_aprobado      = $('#txt_cupo_aprobado').val();
+    if (txt_cupo_aprobado != '') {
+        $.post(copy_js.base_url+'Credits/addRetiroCupo',{credit_id:credit_id,txt_cupo_aprobado:txt_cupo_aprobado}, function(result){
+            $('#modalSessionCancelar').modal('hide');
+            $('#resultModalCancelar').empty();
+            message_alert("Se registro un retiro del cupo correctamente","Bien");
+        });
+    } else {
+        message_alert("Por favor ingresa el valor del retiro","Error");
+    }
+});
+
+$("body").on("click", ".btn_mensaje_texto", function() {
+    var credit_id       = $(this).data('uid');
+    $('#resultModal').html('<p>Estamos trabajando en la funcionalidad</p>');
+    $('#modalTitle').text('Mensaje de texto');
+    $('#modalSession').modal('show');
+});
+
+$("body").on("click", ".btn_comentario", function() {
+    var credit_id       = $(this).data('uid');
+    $.post(copy_js.base_url+'Credits/add_comentary',{credit_id:credit_id}, function(result){
+        $('#resultModalCancelar').html(result);
+        $('#modalTitleCancelar').text('Añadir comentario');
+        $('#modalSessionCancelar').modal('show');
+    }); 
+});
+
+$("body").on("click", "#btn_comentary", function() {
+    var credit_id            = $(this).data('uid');
+    var txt_descripcion      = $('#txt_descripcion').val();
+    if (txt_descripcion != '') {
+        $.post(copy_js.base_url+'Credits/addComentary',{credit_id:credit_id,txt_descripcion:txt_descripcion}, function(result){
+            $('#modalSessionCancelar').modal('hide');
+            $('#resultModalCancelar').empty();
+        });
+    } else {
+        message_alert("Por favor ingresa algún comentario","Error");
+    }
+});
 
 function total_estados() {
     $('#txt_cantidad_solicitud').text('Cantidad: '+$('#DOING10').find('article').length);
@@ -55,10 +145,18 @@ function total_estados() {
     $.post(copy_js.base_url+'Credits/sumTotalStateDetenido',{}, function(result){
         $('#total_detenido').text(result);
     });
-
     $('#txt_cantidad_aprobado_no_retirado').text('Cantidad: '+$('#DOING40').find('article').length);
+    $.post(copy_js.base_url+'Credits/sumTotalValorAprobadoStateAprobadoNoRetirado',{}, function(result){
+        $('#total_aprobado_no_retirado').text(result);
+    });
     $('#txt_cantidad_aprobado_retirado').text('Cantidad: '+$('#DOING50').find('article').length);
+    $.post(copy_js.base_url+'Credits/sumTotalValorAprobadoStateAprobadoRetirado',{}, function(result){
+        $('#total_aprobado_retirado').text(result);
+    });
     $('#txt_cantidad_negado').text('Cantidad: '+$('#DOING0').find('article').length);
+    $.post(copy_js.base_url+'Credits/sumTotalStateNegado',{}, function(result){
+        $('#total_negado').text(result);
+    });
     return true;
 }
 
@@ -106,7 +204,6 @@ function validar_articulos() {
 function draggableInit() {
     var sourceId;
     var credit_id;
-    console.log('ssss');
     $('[draggable=true]').bind('dragstart', function (event) {
         sourceId = $(this).parent().attr('id');
         event.originalEvent.dataTransfer.setData("text/plain", event.target.getAttribute('id'));
@@ -120,7 +217,7 @@ function draggableInit() {
         var children = $(this).children();
         var targetId = children.attr('id');
         if (sourceId != targetId) {
-            message_alert("Por favor valida, no puedes volver a poner el credito en estado de solicitud","Error");
+            message_alert("Por favor valida, no puedes volver a poner el creéito en estado de solicitud","Error");
         }
         event.preventDefault();
     });
@@ -175,7 +272,7 @@ function draggableInit() {
         var targetId = children.attr('id');
 
         if (sourceId != targetId) {
-            $.post(copy_js.base_url+'Credits/cupo_aprobado',{}, function(result){
+            $.post(copy_js.base_url+'Credits/add_cupo_aprobado',{}, function(result){
                 $('#resultModalCancelar').html(result);
                 $('#modalTitleCancelar').text('Cupo aprobado');
                 $('#modalSessionCancelar').modal('show');
@@ -220,7 +317,7 @@ function draggableInit() {
         var children = $(this).children();
         var targetId = children.attr('id');
         if (sourceId != targetId) {
-            $.post(copy_js.base_url+'Credits/descripcion_credito',{}, function(result){
+            $.post(copy_js.base_url+'Credits/descripcion_credito_negado',{}, function(result){
                 $('#resultModalCancelar').html(result);
                 $('#modalTitleCancelar').text('Causa de negación');
                 $('#modalSessionCancelar').modal('show');
@@ -230,7 +327,7 @@ function draggableInit() {
                 $('#modalSessionCancelar').modal('hide');
                 $('#resultModalCancelar').empty();
                 $('#processing-modal').modal('toggle');
-                var cupo_aprobado       = 0;
+                var cupo_aprobado        = 0;
                 progreso(credit_id,cupo_aprobado,txt_descripcion,copy_js.state_credito_id_negado);
             });
         }
@@ -241,14 +338,9 @@ function draggableInit() {
 
 function progreso(credit_id,cupo_aprobado,descripcion,state) {
     setTimeout(function () {
-    //     alert(credit_id);
-    //     alert(cupo_aprobado);
-    //     alert(descripcion);
-    //     alert(state);
-
         $.post(copy_js.base_url+'Credits/updateState',{credit_id:credit_id,cupo_aprobado:cupo_aprobado,descripcion:descripcion,state:state}, function(result){
             if (result == 2) {
-                message_alert("Por favor valida, el credito ya tiene asesor","Error");
+                message_alert("Por favor valida, el crédito ya tiene asesor","Error");
             }
             $.post(copy_js.base_url+'Credits/view_creditos',{}, function(result){
                 $('#container_creditos').empty();

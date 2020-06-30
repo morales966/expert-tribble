@@ -4,7 +4,7 @@
       <a href="<?php echo $this->Html->url(array('controller'=>'Pages','action'=>'home')) ?>"></a>
     </div>
     <div>
-      <button class="btn btn-outline-primary btn-lg">CREAR CUENTA</button>
+      <button class="btn btn-outline-primary btn-lg" id="btn_agregar_cliente">CREAR CUENTA</button>
       <button class="btn btn-outline-primary btn-lg" id="btn_login">INICIAR SESIÓN</button>
       <h2 class="txt-pbx">PBX: 590 46 03</h2>
       <ul class="nav navbar-nav navbar-riht"> 

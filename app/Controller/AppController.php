@@ -54,11 +54,6 @@ class AppController extends Controller {
         }
     }
 
-    public function deleteCache() {
-        $this->Session->delete('imagen_cedula');
-        $this->Session->delete('imagen_perfil');
-    }
-
 	public function sendMail($options = array()) {
         try {
             $email                      = new CakeEmail();
@@ -87,18 +82,39 @@ class AppController extends Controller {
         return str_replace($caracterRemplazar,$caracterNuevo,$texto);
     }
 
+    public function deleteCache() {
+        $this->Session->delete('archivo_foto_cedula_delantera');
+        $this->Session->delete('archivo_foto_cedula_trasera');
+        $this->Session->delete('archivo_perfil');
+        $this->Session->delete('documento_modelo');
+    }
+
+    public function loadDocumentPdf($documento,$carpeta){
+        if ($documento['error'] < 1) {
+            $type_array                          = explode("/",$documento['type']);
+            $ruta_archivo                        = WWW_ROOT.'files/'.$carpeta.'/';
+            $nombre_archivo                      = $this->name_foto('pan_pagos',$type_array['1']);
+            $this->Session->write('documento_modelo', $nombre_archivo);
+            if(move_uploaded_file($documento['tmp_name'], $ruta_archivo.$nombre_archivo)) {
+                return 1;
+            } else{
+                return 5;
+            }
+        } else {
+            return 2;
+        }
+    }
 
     public function loadFile($imagen,$carpeta,$name_archivo,$session_name,$type_file) {
         if ($imagen['size'] > 0) {
             if ($imagen['error'] < 1) {
                 $type_array                          = explode("/",$imagen['type']);
                 if ($type_array['0'] == $type_file) {
-                    $ruta_img = WWW_ROOT.'img/'.$carpeta.'/';
-                    if (!file_exists($ruta_img)) {
-                        mkdir($ruta_img, 0777, true);
-                    }
-                    $nombreImagenGuardada           = $this->name_foto($name_archivo,$type_array['1']);
-                    $nombre_archivo                 = $nombreImagenGuardada;
+                    $ruta_img                       = WWW_ROOT.'img/'.$carpeta.'/';
+                    $nombre_archivo                 = $this->name_foto($name_archivo,$type_array['1']);
+                    // if (!file_exists($ruta_img.$nombre_archivo)) {
+                    //     mkdir($ruta_img.$nombre_archivo, 0777, true);
+                    // }
                     $this->Session->write('archivo_'.$session_name,$nombre_archivo);
                     if(move_uploaded_file($imagen['tmp_name'], $ruta_img.$nombre_archivo)) {
                         return 1;

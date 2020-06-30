@@ -29,6 +29,14 @@ class User extends AppModel {
 		),
 	);
 
+	public $hasMany = array(
+		'Credit' => array(
+			'className' => 'Credit',
+			'foreignKey' => 'user_id',
+			'dependent' => false
+		)
+	);
+
 	/**
         * @author Diego Morales <dlmorales096@gmail.com>
         * @date(07-06-2019)
@@ -39,6 +47,17 @@ class User extends AppModel {
 		if (isset($this->data[$this->alias]['password']) && !empty($this->data[$this->alias]['password'])){
 			$this->data[$this->alias]['password'] = AuthComponent::password($this->data[$this->alias]['password']);
 		}
+	}
+
+	/**
+        * @author Diego Morales <dlmorales096@gmail.com>
+        * @date(24-06-2019)
+        * @description Metodo que devuelve la lista de usuarios
+        * @return Lista de usuarios
+    */
+	public function list_all_role() {
+		$this->recursive 	= -1;
+		return $this->find('list');
 	}
 	
 	/**

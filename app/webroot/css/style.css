@@ -204,7 +204,30 @@ ul li:hover a.activeNavS {
 .txtSpanPasos {
   font-size: 12px;
   color: orange;
-  position: fixed;
+  position: inherit;
+}
+
+.txtSpanDescription {
+  font-size: 12px;
+  color: black;
+  position: inherit;
+}
+
+.txtDerechoAsesor {
+  font-size: 12px;
+  color: black;
+  position: inherit;
+}
+
+.txtDerechoFecha {
+  font-size: 8px;
+  color: black;
+  position: inherit;
+}
+
+.asesor_fecha {
+  margin: 0px;
+  display:inline-flex;
 }
 
 .titleRecordar {

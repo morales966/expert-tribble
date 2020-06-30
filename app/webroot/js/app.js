@@ -31,8 +31,6 @@ $(document).ready(function () {
 });
 
 $(document).keyup(function(event){
-	// event.preventDefault();
-    // return false;
     if(event.which==13){
         login();
     }
@@ -55,6 +53,16 @@ $("body").on("click", "#btn_login_app", function() {
 	login();
 });
 
+
+
+
+
+$("body").on("click", "#btn_agregar_cliente", function() {
+    // $.post(copy_js.base_url+'Credits/view_modal',{}, function(result){
+        $('#resultModalGrande').html('Hola');
+    	$('#modalGrande').modal('show');
+    // }); 
+});
 
 
 
@@ -91,6 +99,37 @@ function login(){
 			// }
 		});
 	}
+}
+
+function string_valdate_Number(string){
+    var out = '';
+    var filtro = '1234567890';
+    for (var i=0; i<string.length; i++){
+        if (filtro.indexOf(string.charAt(i)) != -1) {
+            out += string.charAt(i);
+        }
+    }
+    return out;
+}
+
+function number_format(numero){
+    numero                  = String(numero);
+    numero                  = numero.replace(/\,/g, "");
+    numero                  = numero.replace(/\./g, "");
+    var resultado           = "";
+    for (var j, i = numero.length - 1, j = 0; i >= 0; i--, j++){
+        resultado = numero.charAt(i) + ((j > 0) && (j % 3 == 0)? ".": "") + resultado;
+    }
+    return resultado;
+}
+
+function format_number(numero,suma){
+    numero              = String(numero);
+    var res             = numero.replace(/\./g, "");
+    res                 = res.replace(/\,/g, "");
+    var precio          = parseFloat(res);
+    var sum             = suma + precio;
+    return sum;
 }
 
 function evitar_expiracion(){
