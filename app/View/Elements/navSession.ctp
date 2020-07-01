@@ -55,20 +55,13 @@
           </a>
         </li>
         <?php if (AuthComponent::user('role') != 'cliente'): ?>
-            <li class="nav-item">
-              <a href="<?php echo $this->Html->url(array('controller'=>'Pages','action'=>'index')) ?>" class="nav-link" id="">
-                <p>
-                  Usuarios
-                </p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="<?php echo $this->Html->url(array('controller'=>'Pages','action'=>'index')) ?>" class="nav-link" id="">
-                <p>
-                  Pagos
-                </p>
-              </a>
-            </li>
+          <li class="nav-item">
+            <a href="<?php echo $this->Html->url(array('controller'=>'Users','action'=>'index')) ?>" class="nav-link" id="usuarios">
+              <p>
+                Usuarios
+              </p>
+            </a>
+          </li>
         <?php endif ?>
 				<li class="nav-item">
 					<a href="<?php echo $this->Html->url(array('controller'=>'Credits','action'=>'index')) ?>" class="nav-link" id="creditos">
@@ -77,6 +70,15 @@
 						</p>
 					</a>
 				</li>
+        <?php if (AuthComponent::user('role') != 'cliente'): ?>
+          <li class="nav-item">
+            <a href="<?php echo $this->Html->url(array('controller'=>'xxx','action'=>'index')) ?>" class="nav-link" id="pagos">
+              <p>
+                Pagos
+              </p>
+            </a>
+          </li>
+        <?php endif ?>
 			</ul>
 		</nav>
     </div>

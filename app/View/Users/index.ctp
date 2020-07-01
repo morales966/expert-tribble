@@ -1,48 +1,110 @@
-<div class="users index">
-	<h2><?php echo __('Users'); ?></h2>
-	<table cellpadding="0" cellspacing="0">
-	<thead>
-	<tr>
-			<th><?php echo $this->Paginator->sort('id'); ?></th>
-			<th><?php echo $this->Paginator->sort('nombre'); ?></th>
-			<th><?php echo $this->Paginator->sort('email'); ?></th>
-			<th><?php echo $this->Paginator->sort('password'); ?></th>
-			<th class="actions"><?php echo __('Actions'); ?></th>
-	</tr>
-	</thead>
-	<tbody>
-	<?php foreach ($users as $user): ?>
-	<tr>
-		<td><?php echo h($user['User']['id']); ?>&nbsp;</td>
-		<td><?php echo h($user['User']['name']); ?>&nbsp;</td>
-		<td><?php echo h($user['User']['email']); ?>&nbsp;</td>
-		<td><?php echo h($user['User']['password']); ?>&nbsp;</td>
-		<td class="actions">
-			<?php echo $this->Html->link(__('View'), array('action' => 'view', $user['User']['id'])); ?>
-			<?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $user['User']['id'])); ?>
-			<?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $user['User']['id']), array('confirm' => __('Are you sure you want to delete # %s?', $user['User']['id']))); ?>
-		</td>
-	</tr>
-<?php endforeach; ?>
-	</tbody>
-	</table>
-	<p>
-	<?php
-	echo $this->Paginator->counter(array(
-		'format' => __('Page {:page} of {:pages}, showing {:current} records out of {:count} total, starting on record {:start}, ending on {:end}')
-	));
-	?>	</p>
-	<div class="paging">
-	<?php
-		echo $this->Paginator->prev('< ' . __('previous'), array(), null, array('class' => 'prev disabled'));
-		echo $this->Paginator->numbers(array('separator' => ''));
-		echo $this->Paginator->next(__('next') . ' >', array(), null, array('class' => 'next disabled'));
-	?>
+<div class="content-wrapper">
+	<div class="container cuadro_panding">
+
+		<div class="row">
+			<div class="col-md-7">
+				<h2 class="tittle">Usuarios</h2>
+			</div>
+			<div class="col-md-5 text-right">
+				<div class="input-group">
+					<a href="<?php echo $this->Html->url(array('action'=>'add')) ?>" class="crearEnlace">
+						<i class="fa fa-1x fa-plus-square"></i> Nuevo usuario
+					</a>
+					<?php if (isset($this->request->query['q'])){ ?>
+						<input type="text" class="form-control" value="<?php echo $this->request->query['q']; ?>" placeholder="Buscador por correo eléctronico"  disabled="disabled">
+					    <div class="input-group-append">
+							<button class="btn btn-secondary" type="button" id="texto_busqueda" data-toggle="tooltip" data-placement="top" title="Eliminar">
+			        			<i class="fa fa-trash"></i>
+							</button>
+					    </div>
+					<?php } else { ?>
+					    <input type="text" class="form-control" placeholder="Buscador por correo eléctronico" id="txt_buscador">
+					    <div class="input-group-append">
+							<button class="btn btn-secondary btn_buscar" type="button" data-toggle="tooltip" data-placement="top" title="Buscador">
+								<i class="fa fa-search"></i>
+							</button>
+					    </div>
+					<?php } ?>
+				 </div>
+			</div>
+		</div>
+		<div class="table-responsive">
+			<table class="table">
+	   			<thead class="thead-dark">
+					<tr>
+						<th>Nombre</th>
+						<th>Correo eléctronico</th>
+						<th>Rol</th>
+						<th>Fecha de registro</th>
+						<th class="actions">Acción</th>
+					</tr>
+				</thead>
+				<tbody>
+					<?php foreach ($users as $user): ?>
+					<tr>
+						<td><?php echo h($user['User']['name']); ?>&nbsp;</td>
+						<td><?php echo h($user['User']['email']); ?>&nbsp;</td>
+						<td><?php echo h($user['User']['role']); ?>&nbsp;</td>
+						<td><?php echo h($user['User']['created']); ?>&nbsp;</td>
+						<td class="actions">
+							<a  href="<?php echo $this->Html->url(array('action' => 'view', $user['User']['id'])) ?>" data-toggle="tooltip" data-placement="top" title="Ver usuario">
+								<i class="fa fa-fw fa-eye"></i>
+							</a>
+						</td>
+					</tr>
+					<?php endforeach; ?>
+				</tbody>
+			</table>
+			<p>
+				<?php
+					echo $this->Paginator->counter(array(
+					'format' => __('Página {:page} de {:pages}, mostrando {:current} resultados en {:count} total')));
+				?>
+			</p>
+			<div class="row numberpages">
+				<?php
+					echo $this->Paginator->first('<< ', array('class' => 'prev'), null);
+					echo $this->Paginator->prev('< ', array(), null, array('class' => 'prev disabled'));
+					echo $this->Paginator->counter(array('format' => '{:page} de {:pages}'));
+					echo $this->Paginator->next(' >', array(), null, array('class' => 'next disabled'));
+					echo $this->Paginator->last(' >>', array('class' => 'next'), null);
+				?>
+				<b><?php echo $this->Paginator->counter(array('format' => '{:count} registros en total')); ?></b>
+			</div>
+		</div>
+
+		<?php if (!isset($this->request->query['q'])): ?>
+			<h2 class="tittle">Clientes</h2>
+			<div class="table-responsive">
+				<table class="table">
+		   			<thead class="thead-dark">
+						<tr>
+							<th>Nombre</th>
+							<th>Correo eléctronico</th>
+							<th>Fecha de registro</th>
+							<th class="actions">Acción</th>
+						</tr>
+					</thead>
+					<tbody>
+						<?php foreach ($users_clientes as $user): ?>
+						<tr>
+							<td><?php echo h($user['User']['name']); ?>&nbsp;</td>
+							<td><?php echo h($user['User']['email']); ?>&nbsp;</td>
+							<td><?php echo h($user['User']['created']); ?>&nbsp;</td>
+							<td class="actions">
+								<a  href="<?php echo $this->Html->url(array('action' => 'view', $user['User']['id'])) ?>" data-toggle="tooltip" data-placement="top" title="Ver usuario">
+									<i class="fa fa-fw fa-eye"></i>
+								</a>
+							</td>
+						</tr>
+						<?php endforeach; ?>
+					</tbody>
+				</table>
+			</div>
+		<?php endif ?>
 	</div>
 </div>
-<div class="actions">
-	<h3><?php echo __('Actions'); ?></h3>
-	<ul>
-		<li><?php echo $this->Html->link(__('New User'), array('action' => 'add')); ?></li>
-	</ul>
-</div>
+
+<?php 
+	echo $this->Html->script("controller/users/index.js?".rand(),							array('block' => 'AppScript'));
+?>

@@ -11,23 +11,14 @@ class UsersController extends AppController {
     }
 
 
-/**
- * index method
- *
- * @return void
- */
-	public function index() {
-		$this->User->recursive = 0;
-		$this->set('users', $this->Paginator->paginate());
-	}
 
-/**
- * view method
- *
- * @throws NotFoundException
- * @param string $id
- * @return void
- */
+
+
+
+
+
+	
+
 	public function view($id = null) {
 		if (!$this->User->exists($id)) {
 			throw new NotFoundException(__('Invalid user'));
@@ -39,6 +30,32 @@ class UsersController extends AppController {
 
 
 
+
+
+
+
+	public function index() {
+		$get                        = $this->request->query;
+        if (!empty($get)) {
+            $conditions            		= array('OR' => array(
+                                            	'User.email LIKE'            => '%'.mb_strtolower($get['q']).'%'
+                                        	)
+                                    	);
+        } else {
+            $conditions 				= array('User.role !=' => 'cliente');
+        }
+		$recursive 								= 0;
+        $order                                	= array('User.id' => 'desc');
+        $this->paginate                       	= array(
+                                                    'order'         => $order,
+                                                    'limit'         => 6,
+                                                    'recursive'		=> $recursive,
+                                                    'conditions'    => $conditions
+                                              	);
+        $users                              	= $this->paginate('User');
+        $users_clientes 						= $this->User->all_role_cliente();
+		$this->set(compact('users','users_clientes'));
+	}
 
 	public function profile() {
 		$user 					= $this->User->get_data('User',AuthComponent::user('id'));

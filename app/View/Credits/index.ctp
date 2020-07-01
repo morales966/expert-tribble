@@ -474,7 +474,7 @@
 							<th>Valor crédito</th>
 							<th>Estado</th>
 							<th>Fecha registro</th>
-							<th class="actions">Acciones</th>
+							<th class="actions">Acción</th>
 						</tr>
 					</thead>
 					<tbody>

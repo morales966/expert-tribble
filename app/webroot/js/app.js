@@ -16,11 +16,18 @@ $(document).ready(function () {
 		        $('#homeS').addClass("activeNavS");
 		    }
 		break;
+		case 'USERS':
+			if (copy_js.action == 'profile') {
+				$('#profile').addClass("activeNavS");
+			} else {
+				$('#usuarios').addClass("activeNavS");
+			}
+		break;
 		case 'CREDITS':
 			$('#creditos').addClass("activeNavS");
 		break;
-		case 'USERS':
-			$('#profile').addClass("activeNavS");
+		case 'XXX':
+			$('#pagos').addClass("activeNavS");
 		break;
 	}
 

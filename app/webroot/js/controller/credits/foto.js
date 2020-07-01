@@ -58,9 +58,11 @@ $("body").on("click", ".btn_abrir_modalCD", function() {
 				});
 			});
         }, function (error) {
+			loadBotones();
+			$('#btn_tomar').hide();
+			$('.resultTomarFoto').empty();
+			$('.resultTomarFoto').html('<p>Revisa la configuración de tu navegador</p>');
         	message_alert("Has denegado el permiso para la camara","Error");
-		    $('.cuadro_tomar_foto').hide();
-		    $('.cuadro_adjuntar_foto').show();
         });
 	} else {
         message_alert("Lo siento. Tu navegador no soporta esta característica","Error");
@@ -69,18 +71,6 @@ $("body").on("click", ".btn_abrir_modalCD", function() {
 	    $('.cuadro_adjuntar_foto').show();
 	}
 });
-
-function quitar_required_cuadro_tomar_foto() {
-	$('#CreditFotoCedulaDelantera1').removeAttr("required");
-    $('#CreditFotoCedulaTrasera1').removeAttr("required");
-    $('#CreditFotoPerfil1').removeAttr("required");
-}
-
-function quitar_required_cuadro_adjuntar_foto() {
-    $('#CreditFotoCedulaDelantera').removeAttr("required");
-    $('#CreditFotoCedulaTrasera').removeAttr("required");
-    $('#CreditFotoPerfil').removeAttr("required");
-}
 
 $("body").on("click", ".btn_abrir_modalCT", function() {
 	loadBotones();
@@ -134,9 +124,11 @@ $("body").on("click", ".btn_abrir_modalCT", function() {
 				});
 			});
         }, function (error) {
-            alert("Permiso denegado");
-		    $('.cuadro_tomar_foto').hide();
-		    $('.cuadro_adjuntar_foto').show();
+        	loadBotones();
+			$('#btn_tomar').hide();
+			$('.resultTomarFoto').empty();
+			$('.resultTomarFoto').html('<p>Revisa la configuración de tu navegador</p>');
+        	message_alert("Has denegado el permiso para la camara","Error");
         });
 	} else {
 	    alert("Lo siento. Tu navegador no soporta esta característica");
@@ -198,9 +190,11 @@ $("body").on("click", ".btn_abrir_modalFP", function() {
 				});
 			});
         }, function (error) {
-            console.log("Permiso denegado");
-		    $('.cuadro_tomar_foto').hide();
-		    $('.cuadro_adjuntar_foto').show();
+        	loadBotones();
+			$('#btn_tomar').hide();
+			$('.resultTomarFoto').empty();
+			$('.resultTomarFoto').html('<p>Revisa la configuración de tu navegador</p>');
+        	message_alert("Has denegado el permiso para la camara","Error");
         });
 	} else {
 	    alert("Lo siento. Tu navegador no soporta esta característica");
@@ -226,4 +220,16 @@ $("body").on("click", "#btn_guardar_foto", function() {
 function loadBotones() {
 	$('.cuadro_botones').hide();
 	$('#btn_tomar').show();
+}
+
+function quitar_required_cuadro_tomar_foto() {
+	$('#CreditFotoCedulaDelantera1').removeAttr("required");
+    $('#CreditFotoCedulaTrasera1').removeAttr("required");
+    $('#CreditFotoPerfil1').removeAttr("required");
+}
+
+function quitar_required_cuadro_adjuntar_foto() {
+    $('#CreditFotoCedulaDelantera').removeAttr("required");
+    $('#CreditFotoCedulaTrasera').removeAttr("required");
+    $('#CreditFotoPerfil').removeAttr("required");
 }

@@ -145,7 +145,7 @@
 					<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
-			<div class="modal-body">
+			<div class="modal-body resultTomarFoto">
 				<video muted="muted" id="video"></video>
 				<button type="button" id="btn_tomar" class="btn btn-primary form-control">Tomar foto</button>
 			 	<canvas id="canvas" style="display: none;"></canvas>

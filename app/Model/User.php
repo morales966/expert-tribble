@@ -97,7 +97,17 @@ class User extends AppModel {
 		$conditions 		= array('User.id' => $user_id);
 		$datos 				= $this->find('first',compact('fields','conditions'));
 		return $datos['User']['name'];
+	}
 
+	/**
+        * @author Diego Morales <dlmorales096@gmail.com>
+        * @date(01-07-2019)
+        * @description Metodo que se encarga de devolver los registros de los usuarios con rol cliente
+        * @return Los registros de los usuarios con rol cliente
+    */
+	public function all_role_cliente() {
+        $conditions 			= array('User.role' => 'cliente');
+		return $this->find('all',compact('conditions'));
 	}
 
 	

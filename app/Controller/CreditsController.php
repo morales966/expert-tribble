@@ -10,9 +10,7 @@ class CreditsController extends AppController {
         if (AuthComponent::user('role') != 'cliente') {
 
              $conditions                           = array(
-                                                        'Credit.state' => array(
-                                                            Configure::read('variables.nombres_estados_creditos.Pagado'),
-                                                        )
+                                                        'Credit.state' => Configure::read('variables.nombres_estados_creditos.Pagado')    
                                                   );
             $order                                = array('Credit.id' => 'desc');
             $this->paginate                       = array(
@@ -42,7 +40,7 @@ class CreditsController extends AppController {
                         $conditions         = array_merge($conditions, $conditions1);
                     }
                 } else {
-                    $conditions             = $this->filterStateGet($get['filterState']);
+                    $conditions         = $this->filterStateGet($get['filterState']);
                 }
             } else {
                 $conditions         = array('Credit.user_id' => AuthComponent::user('id'));
@@ -60,7 +58,6 @@ class CreditsController extends AppController {
             $creditos_aprobado_no_retirado          = array();
             $creditos_aprobado_retirado             = array();
             $creditos_negado                        = array();
-
         }
 		$this->set(compact('credits','creditos_solicitud','creditos_estudio','creditos_detenido','creditos_aprobado_no_retirado','creditos_aprobado_retirado','creditos_negado'));
 	}
