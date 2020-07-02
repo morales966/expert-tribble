@@ -10,30 +10,6 @@ class UsersController extends AppController {
         $this->Auth->allow('add','login','loginData','logout','remember_password','remember_password_step_2');
     }
 
-
-
-
-
-
-
-
-	
-
-	public function view($id = null) {
-		if (!$this->User->exists($id)) {
-			throw new NotFoundException(__('Invalid user'));
-		}
-		$options = array('conditions' => array('User.' . $this->User->primaryKey => $id));
-		$this->set('user', $this->User->find('first', $options));
-	}
-
-
-
-
-
-
-
-
 	public function index() {
 		$get                        = $this->request->query;
         if (!empty($get)) {
@@ -55,6 +31,38 @@ class UsersController extends AppController {
         $users                              	= $this->paginate('User');
         $users_clientes 						= $this->User->all_role_cliente();
 		$this->set(compact('users','users_clientes'));
+	}
+
+	public function view($id = null) {
+		if (!$this->User->exists($id)) {
+			throw new NotFoundException(__('Invalid user'));
+		}
+		$user 						= $this->User->get_data('User',$id);
+		$get                        = $this->request->query;
+        if (!empty($get)) {
+            if (isset($get['q'])) {
+		        $conditions         	    	= array('Credit.user_id' => $id,
+		                								'OR' => array(
+		                                                	'Credit.cedula_persona LIKE'            => '%'.mb_strtolower($get['q']).'%'
+		                                            	)
+		                                        );
+            }
+        } else {
+            $conditions         		= array('Credit.user_id' => $id);
+        }
+	    $order                  	= array('Credit.id' => 'desc');
+        $this->paginate 			= array(
+	        							'Credit' => array(
+		                            		'order'         => $order,
+		                                	'limit'         => 5,
+		                                	'conditions'    => $conditions
+		                            	));
+    	$credits 					= $this->paginate('Credit');
+		$this->set(compact('user','id','credits'));
+	}
+
+	public function add() {
+
 	}
 
 	public function profile() {

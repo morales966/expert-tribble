@@ -114,4 +114,5 @@ class Credit extends AppModel {
 		$conditions 		= array('Credit.id' => $credit_id);
 		return $this->find('first',compact('fields','conditions'));
 	}
+	
 }

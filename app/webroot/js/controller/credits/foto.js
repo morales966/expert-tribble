@@ -8,6 +8,7 @@ function _getUserMedia() {
 
 $("body").on("click", ".btn_abrir_modalCD", function() {
 	loadBotones();
+	$('modalTitleTomarFoto').text('Foto de la cédula frontal');
 	$('#modalTomarFoto').modal('show');
 	var $video 									= document.getElementById("video");
 	var $cerrar 								= document.getElementById("btn_cerrar_camara");
@@ -74,6 +75,7 @@ $("body").on("click", ".btn_abrir_modalCD", function() {
 
 $("body").on("click", ".btn_abrir_modalCT", function() {
 	loadBotones();
+	$('modalTitleTomarFoto').text('Foto de la cédula trasera');
 	$('#modalTomarFoto').modal('show');
 	var $video 									= document.getElementById("video");
 	var $cerrar 								= document.getElementById("btn_cerrar_camara");
@@ -140,6 +142,7 @@ $("body").on("click", ".btn_abrir_modalCT", function() {
 
 $("body").on("click", ".btn_abrir_modalFP", function() {
 	loadBotones();
+	$('modalTitleTomarFoto').text('Foto de tu cara teniendo la cédula');
 	$('#modalTomarFoto').modal('show');
 	var $video 									= document.getElementById("video");
 	var $cerrar 								= document.getElementById("btn_cerrar_camara");

@@ -1,34 +1,94 @@
-<div class="users view">
-<h2><?php echo __('User'); ?></h2>
-	<dl>
-		<dt><?php echo __('Id'); ?></dt>
-		<dd>
-			<?php echo h($user['User']['id']); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('Nombre'); ?></dt>
-		<dd>
-			<?php echo h($user['User']['nombre']); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('Email'); ?></dt>
-		<dd>
-			<?php echo h($user['User']['email']); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('Password'); ?></dt>
-		<dd>
-			<?php echo h($user['User']['password']); ?>
-			&nbsp;
-		</dd>
-	</dl>
+<div class="content-wrapper">
+	<div class="container cuadro_panding">
+		<div class="border_cuadro">
+			<h2 class="txtDatosVista" id="tittle_user_id" data-uid="<?php echo $id ?>">Usuario</h2>
+			<p><b>Nombre: </b><?php echo h($user['User']['name']); ?>&nbsp;</p>
+			<p><b>Teléfono: </b><?php echo h($user['User']['telephone']); ?>&nbsp;</p>
+			<p><b>Rol: </b><?php echo h($user['User']['role']); ?>&nbsp;</p>
+			<p><b>Correo eléctronico: </b><?php echo h($user['User']['email']); ?>&nbsp;</p>
+		</div>
+        <?php if ($user['User']['role'] == 'cliente'): ?>
+			<hr>
+			<div class="border_cuadro">
+				<h2 class="txtDatosVista">Creditos</h2>
+				<div class="row">
+					<div class="col-md-12">
+						<div class="input-group">
+							<?php if (isset($this->request->query['q'])){ ?>
+								<input type="text" class="form-control" value="<?php echo $this->request->query['q']; ?>" placeholder="Buscador por cedula"  disabled="disabled">
+							    <div class="input-group-append">
+									<button class="btn btn-secondary" type="button" id="texto_busqueda" data-toggle="tooltip" data-placement="top" title="Borrar">
+					        			<i class="fa fa-trash"></i>
+									</button>
+							    </div>
+							<?php } else { ?>
+							    <input type="text" class="form-control" placeholder="Buscador por cedula" id="txt_buscador">
+							    <div class="input-group-append">
+									<button class="btn btn-secondary btn_buscar" type="button" data-toggle="tooltip" data-placement="top" title="Buscador">
+										<i class="fa fa-search"></i>
+									</button>
+							    </div>
+							<?php } ?>
+						 </div>
+					</div>
+				</div>
+				<div class="table-responsive">
+					<table class="table">
+			   			<thead class="thead-dark">
+							<tr>
+								<th>Nombre cliente</th>
+								<th>Identificación</th>
+								<th>Celular</th>
+								<th>Valor credito</th>
+								<th>Estado</th>
+								<th>Fecha registro</th>
+								<th class="actions">Acciones</th>
+							</tr>
+						</thead>
+						<tbody>
+						<?php foreach ($credits as $credit): ?>
+							<tr>
+								<td><?php echo h($credit['Credit']['nombre_persona']).' '.h($credit['Credit']['apellido_persona']); ?>&nbsp;</td>
+								<td><?php echo h($credit['Credit']['cedula_persona']); ?>&nbsp;</td>
+								<td><?php echo h($credit['Credit']['telefono_persona']); ?>&nbsp;</td>
+								<td><?php echo h(number_format($credit['Credit']['valor_credito'],0,",","."));?>&nbsp;</td>
+								<td><?php echo $this->Utilities->estados_creditos($credit['Credit']['state']); ?>&nbsp;</td>
+								<td><?php echo h($credit['Credit']['created']); ?>&nbsp;</td>
+								<td class="actions">
+									<a class="ver_credito" data-uid="<?php echo $credit['Credit']['id']; ?>" href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Ver crédito">
+										<i class="fa fa-fw fa-eye"></i>
+									</a>
+								</td>
+							</tr>
+						<?php endforeach; ?>
+						</tbody>
+					</table>
+					<p>
+						<?php
+							echo $this->Paginator->counter(array(
+							'format' => __('Página {:page} de {:pages}, mostrando {:current} resultados en {:count} total')));
+						?>
+					</p>
+					<div class="row numberpages">
+						<?php
+							echo $this->Paginator->first('<< ', array('class' => 'prev'), null);
+							echo $this->Paginator->prev('< ', array(), null, array('class' => 'prev disabled'));
+							echo $this->Paginator->counter(array('format' => '{:page} de {:pages}'));
+							echo $this->Paginator->next(' >', array(), null, array('class' => 'next disabled'));
+							echo $this->Paginator->last(' >>', array('class' => 'next'), null);
+						?>
+						<b><?php echo $this->Paginator->counter(array('format' => '{:count} registros en total')); ?></b>
+					</div>
+				</div>
+			</div>
+		<?php endif ?>
+	</div>
 </div>
-<div class="actions">
-	<h3><?php echo __('Actions'); ?></h3>
-	<ul>
-		<li><?php echo $this->Html->link(__('Edit User'), array('action' => 'edit', $user['User']['id'])); ?> </li>
-		<li><?php echo $this->Form->postLink(__('Delete User'), array('action' => 'delete', $user['User']['id']), array('confirm' => __('Are you sure you want to delete # %s?', $user['User']['id']))); ?> </li>
-		<li><?php echo $this->Html->link(__('List Users'), array('action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New User'), array('action' => 'add')); ?> </li>
-	</ul>
-</div>
+
+<?php
+	echo $this->Html->css("controller/credits/view.css?".rand(),							array('block' => 'AppCss'));
+
+	echo $this->Html->script("controller/credits/index.js?".rand(),							array('block' => 'AppScript'));
+	echo $this->Html->script("controller/credits/view.js?".rand(),							array('block' => 'AppScript'));
+	echo $this->Html->script("controller/users/view.js?".rand(),							array('block' => 'AppScript'));
+?>

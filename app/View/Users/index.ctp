@@ -1,19 +1,12 @@
 <div class="content-wrapper">
 	<div class="container cuadro_panding">
-
 		<div class="row">
-			<div class="col-md-7">
-				<h2 class="tittle">Usuarios</h2>
-			</div>
-			<div class="col-md-5 text-right">
+			<div class="col-md-12">
 				<div class="input-group">
-					<a href="<?php echo $this->Html->url(array('action'=>'add')) ?>" class="crearEnlace">
-						<i class="fa fa-1x fa-plus-square"></i> Nuevo usuario
-					</a>
 					<?php if (isset($this->request->query['q'])){ ?>
 						<input type="text" class="form-control" value="<?php echo $this->request->query['q']; ?>" placeholder="Buscador por correo eléctronico"  disabled="disabled">
 					    <div class="input-group-append">
-							<button class="btn btn-secondary" type="button" id="texto_busqueda" data-toggle="tooltip" data-placement="top" title="Eliminar">
+							<button class="btn btn-secondary" type="button" id="texto_busqueda" data-toggle="tooltip" data-placement="top" title="Borrar">
 			        			<i class="fa fa-trash"></i>
 							</button>
 					    </div>
@@ -28,6 +21,11 @@
 				 </div>
 			</div>
 		</div>
+		<hr>
+		<h2 class="tittle">Usuarios</h2>
+		<a href="<?php echo $this->Html->url(array('action'=>'add')) ?>" class="crearEnlace">
+			<i class="fa fa-1x fa-plus-square"></i> Nuevo usuario
+		</a>
 		<div class="table-responsive">
 			<table class="table">
 	   			<thead class="thead-dark">

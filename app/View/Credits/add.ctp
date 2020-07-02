@@ -121,7 +121,7 @@
 	<div class="modal-dialog modal-lg">
 		<div class="modal-content cuadro_terminos">
 			<div class="modal-header">
-				Terminos y condiciones
+          		<h2 class="modal-title" id="modalTitleGuardarCancelar">Terminos y condiciones</h2>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
@@ -141,6 +141,7 @@
     <div class="modal-dialog" role="document">
 		<div class="modal-content cuadro_foto">
 			<div class="modal-header">
+          		<h2 class="modal-title" id="modalTitleTomarFoto"></h2>
 				<button type="button" id="btn_cerrar_camara" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>

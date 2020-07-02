@@ -376,7 +376,7 @@
 							<td><?php echo $this->Utilities->estados_creditos($credit['Credit']['state']); ?>&nbsp;</td>
 							<td><?php echo h($credit['Credit']['created']); ?>&nbsp;</td>
 							<td class="actions">
-								<a class="ver_credito" href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Ver crédito">
+								<a class="ver_credito" data-uid="<?php echo $credit['Credit']['id']; ?>" href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Ver crédito">
 									<i class="fa fa-fw fa-eye"></i>
 								</a>
 							</td>
@@ -448,7 +448,7 @@
 						<?php if (isset($this->request->query['q'])){ ?>
 							<input type="text" class="form-control" value="<?php echo $this->request->query['q']; ?>" placeholder="Buscador por cedula"  disabled="disabled">
 						    <div class="input-group-append">
-								<button class="btn btn-secondary" type="button" id="texto_busqueda" data-toggle="tooltip" data-placement="top" title="Eliminar">
+								<button class="btn btn-secondary" type="button" id="texto_busqueda" data-toggle="tooltip" data-placement="top" title="Borrar">
 				        			<i class="fa fa-trash"></i>
 								</button>
 						    </div>
