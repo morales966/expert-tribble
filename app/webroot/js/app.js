@@ -1,6 +1,5 @@
 $(document).ready(function () {
 	$('[data-toggle="tooltip"]').tooltip();
-
 	switch (copy_js.controller_menu) {
 		case 'PAGES':
 		    if (copy_js.action == 'home') {
@@ -39,7 +38,9 @@ $(document).ready(function () {
 
 $(document).keyup(function(event){
     if(event.which==13){
-        login();
+		if ( $("#btn_login_app").length > 0 ) {
+	        login();
+	    }
     }
 });
 
@@ -60,22 +61,66 @@ $("body").on("click", "#btn_login_app", function() {
 	login();
 });
 
-
-
-
-
 $("body").on("click", "#btn_agregar_cliente", function() {
-    // $.post(copy_js.base_url+'Credits/view_modal',{}, function(result){
-        $('#resultModalGrande').html('Hola');
+    $.post(copy_js.base_url+'Users/add_client',{}, function(result){
+        $('#resultModalGrande').html(result);
+        $('#modalTitleGrande').text('Regístrate con nosotros');
     	$('#modalGrande').modal('show');
-    // }); 
+    });
 });
 
+$("body").on("click", "#btn_add_client_save", function() {
+	var instance 		= $('#formAddCliemt').parsley();
+	if (instance.isValid() == true) {
+		$('#validacion_texto').empty();
+		var formData               = new FormData($('#formAddCliemt')[0]);
+        $.ajax({
+            type: 'POST',
+            url: copy_js.base_url+'Users/addClientSave',
+            data: formData,
+            contentType: false,
+            cache: false,
+            processData:false,
+            success: function(result){
+				location.reload();
+            }
+        });
+	} else {
+		validarcampos();
+        message_alert("Algo esta mal, por ejemplo todos los campos son requeridos","Error");
+	}
+});
 
+function validarcampos(){
+	var email 						= $('#UserEmail').val();
+	var validacion_number 			= validarEmail(email);
+	switch (validacion_number) {
+		case 1:
+			$('#validacion_texto').text("Todos los campos son requeridos");
+		break;
+		case 2:
+			$('#validacion_texto').text("El correo eléctronico es incorrecto");
+		break;
+		default:
+			$('#validacion_texto').text("Todos los campos son requeridos");
+		break;
+	}
+}
 
-
-
-
+function validarEmail(valor) {
+	var validacion 			= '';
+	if (valor == '') {
+		validacion 				= 1;
+	} else {
+		var emailRegex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
+	    if (emailRegex.test(valor)) {
+			validacion 			= 1;
+	    } else {
+	    	validacion 			= 2;
+	    }
+	}
+    return validacion
+}
 
 function message_alert(mensaje,type){
     $("#message_alert").css("display", "block");
@@ -94,17 +139,16 @@ function message_alert(mensaje,type){
 setTimeout(function() {$("#flashMessage").fadeOut("slow");},9000);
 
 function login(){
-	if ( $("#btn_login_app").length > 0 ) {
+	var instance 		= $('#formLogin').parsley();
+	if (instance.isValid() == true) {
+		$('#validacion_texto').text("");
 		var contrasena 		= $('#UserPassword').val();
 		var email 			= $('#UserEmail').val();
 		$.post(copy_js.base_url+'Users/loginData',{email:email,contrasena:contrasena}, function(result){
 			location.reload();
-			// if (result == 1) {
-			// 	location.href = copy_js.base_url+'pages/index';
-			// } else {
-			//     location.reload();
-			// }
 		});
+	} else {
+		$('#validacion_texto').text("Todos los campos son requeridos");
 	}
 }
 

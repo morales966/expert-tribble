@@ -17,13 +17,6 @@ class Stage extends AppModel {
 	);
 
 	public $belongsTo = array(
-		'User' => array(
-			'className' => 'User',
-			'foreignKey' => 'user_id',
-			'conditions' => '',
-			'fields' => '',
-			'order' => ''
-		),
 		'Credit' => array(
 			'className' => 'Credit',
 			'foreignKey' => 'credit_id',

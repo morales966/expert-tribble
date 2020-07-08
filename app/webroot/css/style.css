@@ -62,7 +62,8 @@ ul li:hover a.activeNavS {
 
 @media screen and (max-width: 992px) {
   #btn_login {
-    display: block; content: “ “;
+    display: block;
+    content: “ “;
   }
 }
 /*--------------------------------------------------------------
@@ -232,6 +233,39 @@ ul li:hover a.activeNavS {
 
 .titleRecordar {
   text-align: center;
+}
+
+#validacion_texto {
+  color: red;
+}
+
+@media screen and (min-width: 992px) {
+  .modal-lg, .modal-xl {
+    max-width: 1100px !important;
+  }
+}
+
+.txtEndSpan {
+  font-size: 15px;
+  color: orange;
+  position: relative;
+  text-align: end !important;
+}
+
+.accesorioslist {
+    background: #f4f9fb;
+    padding: 20px;
+    margin-bottom: 15px;
+}
+
+.accesorioslist .checkbox {
+  border-bottom: 1px solid #e8eef1;
+  vertical-align: middle;
+  display: inline;
+}
+
+.accesorioslist label{
+    margin-left: 10px;
 }
 /*--------------------------------------------------------------
 # Mensaje(Alerta)

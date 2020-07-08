@@ -59,21 +59,21 @@
 
 					<div class="form-row">
 						<div class="form-group col-md-4">
-							<p class="txtLabelImagenes">Por favor tomale una foto a la parte delantera la cedula</p>
+							<label class="txtLabelImagenes">Por favor tomale una foto a la parte delantera la cedula</label>
 							<button type="button" class="btn btn-primary form-control btn_abrir_modalCD">
 								Tomar foto
 							</button>
 							<?php echo $this->Form->input('foto_cedula_delantera1',array('class' => 'form-control','label' => false,'readonly' => true,'required' => true,)); ?>
 						</div>
 						<div class="form-group col-md-4">
-							<p class="txtLabelImagenes">Por favor tomale una foto a la parte trasera de la cedula</p>
+							<label class="txtLabelImagenes">Por favor tomale una foto a la parte trasera de la cedula</label>
 							<button type="button" class="btn btn-primary form-control btn_abrir_modalCT">
 								Tomar foto
 							</button>
 							<?php echo $this->Form->input('foto_cedula_trasera1',array('class' => 'form-control','label' => false,'readonly' => true,'required' => true)); ?>
 						</div>
 						<div class="form-group col-md-4">
-							<p class="txtLabelImagenes">Por favor tomale una foto de la persona</p> <br>
+							<label class="txtLabelImagenes">Por favor tomale una foto de la persona</label> <br><br>
 							<button type="button" class="btn btn-primary form-control btn_abrir_modalFP">
 								Tomar foto
 							</button>
@@ -86,15 +86,15 @@
 					
 					<div class="form-row">
 						<div class="form-group col-md-4">
-							<p class="txtLabelImagenes">Por favor adjunta una foto a la parte delantera la cedula</p>
+							<label class="txtLabelImagenes">Por favor adjunta una foto a la parte delantera la cedula</label>
 							<?php echo $this->Form->input('foto_cedula_delantera',array('type' => 'file','label' => false,'required' => true)); ?>
 						</div>
 						<div class="form-group col-md-4">
-							<p class="txtLabelImagenes">Por favor adjunta una foto a la parte trasera de la cedula</p>
+							<label class="txtLabelImagenes">Por favor adjunta una foto a la parte trasera de la cedula</label>
 							<?php echo $this->Form->input('foto_cedula_trasera',array('type' => 'file','label' => false,'required' => true)); ?>
 						</div>
 						<div class="form-group col-md-4">
-							<p class="txtLabelImagenes">Por favor adjunta una foto de la persona</p> <br>
+							<label class="txtLabelImagenes">Por favor adjunta una foto de la persona</label> <br><br>
 							<?php echo $this->Form->input('foto_perfil',array('type' => 'file','label' => false,'required' => true)); ?>
 						</div>
 					</div>

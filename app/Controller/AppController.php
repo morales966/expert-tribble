@@ -57,15 +57,26 @@ class AppController extends Controller {
 	public function sendMail($options = array()) {
         try {
             $email                      = new CakeEmail();
-            $email->template($options['template'], 'default')
-                ->config('default')
-                ->emailFormat('html')
-                ->subject($options['subject'])
-                ->to($options['to'])
-                ->from(Configure::read('Email.contact_mail'))
-                ->viewVars($options['vars'])
-                ->send();
-            
+            if (isset($options['file'])) {
+                $email->template($options['template'], 'default')
+                    ->config('default')
+                    ->emailFormat('html')
+                    ->subject($options['subject'])
+                    ->to($options['to'])
+                    ->from(Configure::read('Email.contact_mail'))
+                    ->attachments($options['file'])
+                    ->viewVars($options['vars'])
+                    ->send();
+            } else {
+                $email->template($options['template'], 'default')
+                    ->config('default')
+                    ->emailFormat('html')
+                    ->subject($options['subject'])
+                    ->to($options['to'])
+                    ->from(Configure::read('Email.contact_mail'))
+                    ->viewVars($options['vars'])
+                    ->send();
+            }
         } catch(Exception $e){
             $this->log($e->getMessage(),"debug");
         }
@@ -87,6 +98,12 @@ class AppController extends Controller {
         $this->Session->delete('archivo_foto_cedula_trasera');
         $this->Session->delete('archivo_perfil');
         $this->Session->delete('documento_modelo');
+        $this->Session->read('archivo_adjuntar_cedula_delantera');
+        $this->Session->read('archivo_adjuntar_cedula_trasera');
+        $this->Session->read('archivo_adjuntar_camara_comercio');
+        $this->Session->read('archivo_adjuntar_rut');
+        $this->Session->read('archivo_adjuntar_administrador');
+        $this->Session->read('archivo_adjuntar_almacen');
     }
 
     public function loadDocumentPdf($documento,$carpeta){
@@ -95,6 +112,22 @@ class AppController extends Controller {
             $ruta_archivo                        = WWW_ROOT.'files/'.$carpeta.'/';
             $nombre_archivo                      = $this->name_foto('pan_pagos',$type_array['1']);
             $this->Session->write('documento_modelo', $nombre_archivo);
+            if(move_uploaded_file($documento['tmp_name'], $ruta_archivo.$nombre_archivo)) {
+                return 1;
+            } else{
+                return 5;
+            }
+        } else {
+            return 2;
+        }
+    }
+
+    public function loadArchives($documento,$carpeta,$name_archivo,$session_name){
+        if ($documento['error'] < 1) {
+            $type_array                          = explode("/",$documento['type']);
+            $ruta_archivo                        = WWW_ROOT.'files/'.$carpeta.'/';
+            $nombre_archivo                      = $this->name_foto($name_archivo,$type_array['1']);
+            $this->Session->write('archivo_'.$session_name,$nombre_archivo);
             if(move_uploaded_file($documento['tmp_name'], $ruta_archivo.$nombre_archivo)) {
                 return 1;
             } else{

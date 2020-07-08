@@ -1,6 +1,6 @@
 <div class="content-wrapper">
 	<div class="container cuadro_panding">
-		<?php if (AuthComponent::user('role') != 'cliente') { ?>
+		<?php if (AuthComponent::user('role') != Configure::read('variables.rolCliente')) { ?>
 	
 			<h2 class="titleView">Créditos</h2>
 			<div class="container-fluid">
@@ -517,7 +517,7 @@
 	</div>
 </div>
 
-<?php if (AuthComponent::user('role') != 'cliente'): ?>
+<?php if (AuthComponent::user('role') != Configure::read('variables.rolCliente')): ?>
 	 <div class="modal modal-static fade" id="processing-modal" role="dialog" aria-hidden="true">
 	    <div class="modal-dialog">
 	        <div class="modal-content">
@@ -533,7 +533,7 @@
 <?php endif ?>
 
 <?php
-	if (AuthComponent::user('role') != 'cliente') {
+	if (AuthComponent::user('role') != Configure::read('variables.rolCliente')) {
 		echo $this->Html->css("controller/credits/indexA.css?".rand(),							array('block' => 'AppCss'));
 
 		echo $this->Html->script("controller/credits/indexA.js?".rand(),						array('block' => 'AppScript'));

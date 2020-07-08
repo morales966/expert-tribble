@@ -1,46 +1,30 @@
-<form>
-  <div class="form-row">
-    <div class="form-group col-md-6">
-      <label for="inputEmail4">Email</label>
-      <input type="email" class="form-control" id="inputEmail4" placeholder="Email">
-    </div>
-    <div class="form-group col-md-6">
-      <label for="inputPassword4">Password</label>
-      <input type="password" class="form-control" id="inputPassword4" placeholder="Password">
-    </div>
+<div class="content-wrapper">
+  <div class="container">
+    <h1 class="txtDatosVista">Registrar Usuario</h1>
+
+
+    <?php echo $this->Form->create('User',array('data-parsley-validate'=>true)); ?>
+      <div class="form-group">
+        <?php echo $this->Form->input('name',array('label' => 'Nombre','class' => 'form-control','placeholder' => 'Nombre')); ?>
+      </div>
+      <div class="form-group">
+        <?php echo $this->Form->input('email',array('label' => 'Correo eléctronico','class' => 'form-control','placeholder' => 'Correo eléctronico')); ?>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <?php echo $this->Form->input('telephone',array('label' => 'Teléfono','class' => 'form-control','placeholder' => 'Teléfono'));?>
+        </div>
+        <div class="form-group col-md-6">
+          <?php echo $this->Form->input('role',array('label' => 'Rol','class' => 'form-control','options' => $roles,'empty' => 'Selecciona el rol'));?>
+        </div>
+      </div>
+
+
+      <div class="form-group">
+        <?php echo $this->Form->button('Actualizar',array("class" => "btn btn-info form-control")); ?>
+      </div>
+  </form>
+
+
   </div>
-  <div class="form-group">
-    <label for="inputAddress">Address</label>
-    <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
-  </div>
-  <div class="form-group">
-    <label for="inputAddress2">Address 2</label>
-    <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
-  </div>
-  <div class="form-row">
-    <div class="form-group col-md-6">
-      <label for="inputCity">City</label>
-      <input type="text" class="form-control" id="inputCity">
-    </div>
-    <div class="form-group col-md-4">
-      <label for="inputState">State</label>
-      <select id="inputState" class="form-control">
-        <option selected>Choose...</option>
-        <option>...</option>
-      </select>
-    </div>
-    <div class="form-group col-md-2">
-      <label for="inputZip">Zip</label>
-      <input type="text" class="form-control" id="inputZip">
-    </div>
-  </div>
-  <div class="form-group">
-    <div class="form-check">
-      <input class="form-check-input" type="checkbox" id="gridCheck">
-      <label class="form-check-label" for="gridCheck">
-        Check me out
-      </label>
-    </div>
-  </div>
-  <button type="submit" class="btn btn-primary">Sign in</button>
-</form>
+</div>

@@ -6,35 +6,53 @@ class User extends AppModel {
 
 	public $validate = array(
 		'name' => array(
-			'notBlank' => array(
-				'rule' => array('notBlank'),
+			'notBlank' 	=> array(
+				'rule' 		=> array('notBlank'),
 			),
 		),
 		'telephone' => array(
-			'notBlank' => array(
-				'rule' => array('notBlank'),
+			'notBlank' 	=> array(
+				'rule' 		=> array('notBlank'),
+				'on' 		=> 'create',
 			),
 		),
 		'email' => array(
-			'email' => array(
-				'rule' => array('email'),
-				'on' => 'create',
+			'email' 	=> array(
+				'rule' 		=> array('email'),
+				'on' 		=> 'create',
 			),
 		),
 		'password' => array(
-			'notBlank' => array(
-				'rule' => array('notBlank'),
-				'on' => 'create',
+			'notBlank' 	=> array(
+				'rule' 		=> array('notBlank'),
+				'on'		=> 'create',
+			),
+		),
+		'role' => array(
+			'notBlank' 	=> array(
+				'rule' 		=> array('notBlank'),
+				'on' 		=> 'create',
 			),
 		),
 	);
 
 	public $hasMany = array(
+		'Client' => array(
+			'className' => 'Client',
+			'foreignKey' => 'user_id',
+			'dependent' => false
+		),
+		'Accessory' => array(
+			'className' => 'Accessory',
+			'foreignKey' => 'user_id',
+			'dependent' => false
+		),
 		'Credit' => array(
 			'className' => 'Credit',
 			'foreignKey' => 'user_id',
 			'dependent' => false
 		)
+
 	);
 
 	/**
@@ -102,11 +120,11 @@ class User extends AppModel {
 	/**
         * @author Diego Morales <dlmorales096@gmail.com>
         * @date(01-07-2019)
-        * @description Metodo que se encarga de devolver los registros de los usuarios con rol cliente
-        * @return Los registros de los usuarios con rol cliente
+        * @description Metodo que se encarga de devolver los registros de los usuarios con rol Comercios
+        * @return Los registros de los usuarios con rol Comercios
     */
 	public function all_role_cliente() {
-        $conditions 			= array('User.role' => 'cliente');
+        $conditions 			= array('User.role' => Configure::read('variables.rolCliente'));
 		return $this->find('all',compact('conditions'));
 	}
 

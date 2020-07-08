@@ -54,7 +54,7 @@
             </p>
           </a>
         </li>
-        <?php if (AuthComponent::user('role') != 'cliente'): ?>
+        <?php if (AuthComponent::user('role') != Configure::read('variables.rolCliente')): ?>
           <li class="nav-item">
             <a href="<?php echo $this->Html->url(array('controller'=>'Users','action'=>'index')) ?>" class="nav-link" id="usuarios">
               <p>
@@ -70,7 +70,7 @@
 						</p>
 					</a>
 				</li>
-        <?php if (AuthComponent::user('role') != 'cliente'): ?>
+        <?php if (AuthComponent::user('role') != Configure::read('variables.rolCliente')): ?>
           <li class="nav-item">
             <a href="<?php echo $this->Html->url(array('controller'=>'xxx','action'=>'index')) ?>" class="nav-link" id="pagos">
               <p>

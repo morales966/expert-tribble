@@ -7,10 +7,10 @@ class CreditsController extends AppController {
 
 	public function index() {
         $this->deleteCache();
-        if (AuthComponent::user('role') != 'cliente') {
+        if (AuthComponent::user('role') != Configure::read('variables.rolCliente')) {
 
              $conditions                           = array(
-                                                        'Credit.state' => Configure::read('variables.nombres_estados_creditos.Pagado')    
+                                                        'Credit.state' => Configure::read('variables.nombres_estados_creditos.Pagado')
                                                   );
             $order                                = array('Credit.id' => 'desc');
             $this->paginate                       = array(
@@ -31,7 +31,9 @@ class CreditsController extends AppController {
             $get                        = $this->request->query;
             if (!empty($get)) {
                 if (isset($get['q'])) {
-                    $conditions             = array('OR' => array(
+                    $conditions             = array(
+                                                'Credit.user_id' => AuthComponent::user('id'),
+                                                'OR' => array(
                                                     'Credit.cedula_persona LIKE'            => '%'.mb_strtolower($get['q']).'%'
                                                 )
                                             );

@@ -2430,25 +2430,15 @@ body.sidebar-collapse:not(.sidebar-mini-md):not(.sidebar-mini) .main-header::bef
   text-align: center;
 }
 
-.txtEndSpan {
-  font-size: 15px;
-  color: orange;
-  position: relative;
-  text-align: end !important;
-}
-
 .container_progreso {
   width: 100%;
-  height: 311px;
+  height: 309px;
   overflow: auto;
 }
 /*--------------------------------------------------------------
 # Fin view
 --------------------------------------------------------------*/
 #btn_password {
-    color: #007bff;
-    font-weight: 600;
-}
-#validacion_texto {
-  color: red;
+  color: #007bff;
+  font-weight: 600;
 }

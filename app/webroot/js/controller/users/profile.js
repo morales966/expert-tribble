@@ -13,6 +13,7 @@ $("#btn_cambiar").click(function() {
 				$('#actual').val('');
 				$('#nueva').val('');
 				$('#r_nueva').val('');
+				$('#validacion_texto').empty();
 				message_alert("Se ha actualizado tu contraseña satisfactoriamente","Bien");
 			} else {
 				$('#validacion_texto').text("No hemos podido guardar tu contraseña, por favor inténtalo mas tarde");

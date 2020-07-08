@@ -23,6 +23,8 @@ $config = array(
 	),
 
 	'variables' 				=> array(
+		'habilitado' 				=> '1',
+		'deshabilitado' 			=> '0',
 		'tiempos_creditos'			=> array(
 			'2' 						=> '2 meses',
 			'3' 						=> '3 meses',
@@ -80,7 +82,94 @@ $config = array(
 				'No cumple con scoring' 				=> 'No cumple con scoring',
 				'Política laboral' 						=> 'Política laboral'
 			)
+		),
+		'roles'						=> array(
+			'Administrador'				=> 'Administrador',
+			'Administrador_secundario' 	=> 'Administrador secundario',
+			'Coordinador_analista' 		=> 'Coordinador analista',
+			'Finanzas' 					=> 'Ejecutivos',
+			'Analista_credito' 			=> 'Analista crédito'
+		),
+		'rolCliente' 				=> 'Comercios',
+		'password'					=> 'crediventas2020',
+		'lista_gremios' 			=> array(
+			'Accesorios' 				=> 'Accesorios',
+			'Accesorios Militares' 		=> 'Accesorios Militares',
+			'Asesorias' 				=> 'Asesorias',
+			'Calzado' 					=> 'Calzado',
+			'Cascos y accesorios' 		=> 'Cascos y accesorios',
+			'Construcción' 				=> 'Construcción',
+			'Deporte' 					=> 'Deporte',
+			'Escuela de conducción' 	=> 'Escuela de conducción',
+			'Hogar' 					=> 'Hogar',
+			'Maquinas de coser' 		=> 'Maquinas de coser',
+			'Motos' 					=> 'Motos',
+			'Odontologia' 				=> 'Odontologia',
+			'Optica' 					=> 'Optica',
+			'Pinturas' 					=> 'Pinturas',
+			'Salud y belleza' 			=> 'Salud y belleza',
+			'Seguridad' 				=> 'Seguridad',
+			'Sex Shop' 					=> 'Sex Shop',
+			'Tatuajes' 					=> 'Tatuajes',
+			'Tecnología' 				=> 'Tecnología',
+			'Vehiculos' 				=> 'Vehiculos',
+			'Viajes' 					=> 'Viajes',
+			'Vestuario' 				=> 'Vestuario'
+		),
+		'tipos_cuenta' 				=> array(
+			'Ahorros' 					=> 'Ahorros',
+			'Corriente' 				=> 'Corriente'
+		),
+		'lista_planes'				=> array(
+			'Clase A' 					=> 'Clase A',
+			'Clase B'					=> 'Clase B'
+		),
+		'lista_como_paga'			=> array(
+			'Contado (efectivo-transferencia)' 			=> 'Contado (efectivo-transferencia)',
+			'Tarjeta de Crédito' 						=> 'Tarjeta de Crédito $400.800',
+			'Con financiación' 							=> 'Con financiación'
+		),
+		'lista_cantidad_comercios' 	=> array(
+			'1' 						=> '1',
+			'2' 						=> '2',
+			'3' 						=> '3',
+			'4' 						=> '4',
+			'5' 						=> '5',
+			'6' 						=> '6',
+			'7' 						=> '7',
+			'8' 						=> '8',
+			'9' 						=> '9',
+			'10' 						=> '10',
+			'11' 						=> '11',
+			'12' 						=> '12',
+			'13' 						=> '13',
+			'14' 						=> '14',
+			'15' 						=> '15',
+			'16' 						=> '16'
+		),
+		'lista_cuenta_con'			=> array(
+			'1' 						=> 'Cámara de seguridad',
+			'2' 						=> 'Software contable',
+			'3' 						=> 'Software administración',
+			'4' 						=> 'Página web',
+			'5' 						=> 'Ventas en redes sociales',
+			'6' 						=> 'Manejo de seguros',
+			'0' 						=> 'Ninguno'
+		),
+
+		'ejecutivos' 				=> array(
+			'1' 						=> 'Cristian Villa',
+			'2' 						=> 'Ingrid Gutierrez',
+			'3' 						=> 'Juan Mejía',
+			'4' 						=> 'Carlos Zambrano',
+			'5' 						=> 'Juan Esteban Trujillo',
+			'6'							=> 'Guillermo Reyes',
+			'7' 						=> 'Juan Ospina',
+			'8' 						=> 'Luz Marlen Mora',
+			'9' 						=> 'Milena Restrepo'
 		)
+
+
 	)
 );
 

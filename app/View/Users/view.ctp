@@ -7,7 +7,7 @@
 			<p><b>Rol: </b><?php echo h($user['User']['role']); ?>&nbsp;</p>
 			<p><b>Correo eléctronico: </b><?php echo h($user['User']['email']); ?>&nbsp;</p>
 		</div>
-        <?php if ($user['User']['role'] == 'cliente'): ?>
+        <?php if ($user['User']['role'] == Configure::read('variables.rolCliente')): ?>
 			<hr>
 			<div class="border_cuadro">
 				<h2 class="txtDatosVista">Creditos</h2>
