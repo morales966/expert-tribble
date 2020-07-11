@@ -21,16 +21,27 @@
     </form> -->
 
     <ul class="navbar-nav ml-auto">
+      <li class="nav-item dropdown ">
+        <a class="nav-link dropdown-toggle mr-lg-2" id="alertsDropdown" href="javascript:void(0)" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="fa fa-bell"></i>
+          <span class="indicator" id="count_notificaciones">
+            <?php echo $this->Utilities->count_notificaciones_user(); ?>
+          </span>
+        </a>
+        <div class="dropdown-menu dropdown-menu-right" id="paint_notificaciones" aria-labelledby="alertsDropdown">
+        </div>
+
+      </li>
     	<li class="nav-item">
     		<a class="nav-link" href="<?php echo $this->Html->url(array('controller'=>'Users','action'=>'profile')) ?>" >
-            	<?php echo AuthComponent::user('name'); ?>
-            </a>
-		</li>
-		<li class="nav-item">
-			<a href="<?php echo $this->Html->url(array('controller'=>'Users','action'=>'logout')) ?>" class="nav-link">
-				Cerrar
-			</a>
-		</li>
+        	<?php echo AuthComponent::user('name'); ?>
+        </a>
+		  </li>
+  		<li class="nav-item">
+  			<a href="<?php echo $this->Html->url(array('controller'=>'Users','action'=>'logout')) ?>" class="nav-link">
+  				Cerrar
+  			</a>
+  		</li>
     </ul>
 </nav>
 <!-- Fin menu horizontal -->

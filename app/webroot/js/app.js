@@ -31,6 +31,7 @@ $(document).ready(function () {
 	}
 
 	if (copy_js.user_id > 0) {
+		cargar_notificaciones();
 		evitar_expiracion();
 	}
 	
@@ -42,6 +43,32 @@ $(document).keyup(function(event){
 	        login();
 	    }
     }
+});
+
+$("body").on("click", "#notificaciones_leidas", function() {
+    swal({
+        title: "¿Estas seguro de marcar todas las notificaciones en leidas?",
+        text: "¿Deseas continuar con la acción?",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonClass: "btn-danger",
+        cancelButtonText:"Cancelar",
+        confirmButtonText: "Aceptar",
+        closeOnConfirm: false
+    },
+    function(){
+        $.post(copy_js.base_url+'Messages/marcarNotificacionesLeidas',{}, function(result){
+            location.href =copy_js.base_url+copy_js.controller+'/'+copy_js.action;
+        });
+    });
+});
+
+$("body").on( "click", ".stateNotificacion", function() {
+    var notificacion_id         = $(this).data('uid');
+    var state                   = $(this).data('state');
+    $.post(copy_js.base_url+'Messages/changestate',{notificacion_id:notificacion_id,state:state}, function(result){
+        location.href = result;
+    });
 });
 
 $("body").on("click", ".closess", function() {
@@ -90,6 +117,12 @@ $("body").on("click", "#btn_add_client_save", function() {
         message_alert("Algo esta mal, por ejemplo todos los campos son requeridos","Error");
 	}
 });
+
+function cargar_notificaciones(){
+    $.post(copy_js.base_url+'Messages/notificaciones',{}, function(result){
+        $('#paint_notificaciones').html(result);
+    });
+}
 
 function validarcampos(){
 	var email 						= $('#UserEmail').val();

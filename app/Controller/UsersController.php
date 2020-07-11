@@ -71,6 +71,14 @@ class UsersController extends AppController {
 			$this->User->create();
 			if ($this->User->save($this->request->data)) {
 				$this->enviarCorreoBienvenida($this->request->data['User']['email'],Configure::read('variables.password'),$this->request->data['User']['name'],$this->request->data['User']['role']);
+				$description                                               = Configure::read('variables.description_notificaciones.crear_usuario_sistema');
+                $url                                                       = $this->webroot.'Users/index';
+                $usuarios                                                  = $this->User->all_role_administradores();
+                foreach ($usuarios as $user) {
+                	if ($user['User']['id'] != AuthComponent::user('id')) {
+                    	$this->saveManagesUser($description,$user['User']['id'],$url);
+                	}
+                }
 				$this->Session->setFlash('Se ha creado el usuario satisfactoriamente', 'Flash/success');
 				$this->redirect(array('action' => 'index'));
 			} else {
@@ -84,7 +92,7 @@ class UsersController extends AppController {
 		$this->layout 					= false;
 		$gremio 						= Configure::read('variables.lista_gremios');
 		$tipo_cuenta 					= Configure::read('variables.tipos_cuenta');
-		$ejecutivo 						= Configure::read('variables.ejecutivos');
+		$ejecutivo 						= $this->User->list_all_role_ejecutivos();
 		$clase 							= Configure::read('variables.lista_planes');
 		$como_paga 						= Configure::read('variables.lista_como_paga');
 		$cantidad_comercios 			= Configure::read('variables.lista_cantidad_comercios');
@@ -101,7 +109,7 @@ class UsersController extends AppController {
 			$datos['User']['role'] 							= Configure::read('variables.rolCliente');
 			$datos['User']['password'] 						= Configure::read('variables.password');
 			$datos['User']['hash_change_password'] 			= '';
-			$datos['User']['state']				 			= Configure::read('variables.deshabilitado');
+			$datos['User']['state']				 			= Configure::read('variables.revision');
 			if ($this->User->save($datos['User'])) {
 				$user_id 										= $this->User->id;
 				$datos['Client']['user_id'] 					= $user_id;
@@ -165,15 +173,25 @@ class UsersController extends AppController {
 		$this->loadArchives($data['adjuntar_rut'],'data_clients','adjuntar_rut','adjuntar_rut');
 		$this->loadArchives($data['adjuntar_administrador'],'data_clients','adjuntar_administrador','adjuntar_administrador');
 		$this->loadArchives($data['adjuntar_almacen'],'data_clients','adjuntar_almacen','adjuntar_almacen');
-		$datosClient['Client']['adjuntar_cedula_delantera'] 						= $this->Session->read('archivo_adjuntar_cedula_delantera');
-		$datosClient['Client']['adjuntar_cedula_trasra'] 							= $this->Session->read('archivo_adjuntar_cedula_trasera');
-		$datosClient['Client']['adjuntar_camara_comercio'] 							= $this->Session->read('archivo_adjuntar_camara_comercio');
-		$datosClient['Client']['adjuntar_rut'] 										= $this->Session->read('archivo_adjuntar_rut');
-		$datosClient['Client']['adjuntar_administrador'] 							= $this->Session->read('archivo_adjuntar_administrador');
-		$datosClient['Client']['adjuntar_almacen'] 									= $this->Session->read('archivo_adjuntar_almacen');
+		$datosClient['Client']['adjuntar_cedula_delantera'] 					= $this->Session->read('archivo_adjuntar_cedula_delantera');
+		$datosClient['Client']['adjuntar_cedula_trasra'] 						= $this->Session->read('archivo_adjuntar_cedula_trasera');
+		$datosClient['Client']['adjuntar_camara_comercio'] 						= $this->Session->read('archivo_adjuntar_camara_comercio');
+		$datosClient['Client']['adjuntar_rut'] 									= $this->Session->read('archivo_adjuntar_rut');
+		$datosClient['Client']['adjuntar_administrador'] 						= $this->Session->read('archivo_adjuntar_administrador');
+		$datosClient['Client']['adjuntar_almacen'] 								= $this->Session->read('archivo_adjuntar_almacen');
 		if ($this->User->Client->save($datosClient)) {
-			$this->Session->setFlash('Registro correctamente, revisa el correo eléctronico y sigue las instrucciones', 'Flash/success');
+			$description                                               = Configure::read('variables.description_notificaciones.crear_usuario_sistema');
+            $url                                                       = $this->webroot.'Users/index';
+            $usuarios                                                  = $this->User->all_role_administradores();
+            foreach ($usuarios as $user) {
+            	if ($user['User']['id'] != AuthComponent::user('id')) {
+                	$this->saveManagesUser($description,$user['User']['id'],$url);
+            	}
+            }
 			$this->enviarCorreoBienvenida($datos['User']['email'],Configure::read('variables.password'),$datos['User']['name'],Configure::read('variables.rolCliente'));
+			$this->Session->setFlash('Registro correctamente, revisa el correo eléctronico y sigue las instrucciones, recuerda revisar la carpeta spam', 'Flash/success');
+		} else {
+			$this->Session->setFlash('Los datos no se ha guardado, por favor inténtalo mas tarde','Flash/error');
 		}
 	}
 
@@ -257,13 +275,25 @@ class UsersController extends AppController {
 			$this->request->data['User']['email'] 			= $this->request->data['email'];
     		$this->request->data['User']['password'] 		= $this->request->data['contrasena'];
 			if ($this->Auth->login()) {
-				$this->Session->setFlash('Bienvenido', 'Flash/success');
-				// $this->paintValidateMenu(AuthComponent::user('role'));
-                return 1;
+				if (AuthComponent::user('state') != Configure::read('variables.habilitado')) {
+					$this->validStateConnexion(AuthComponent::user('state'));
+				} else {
+					$this->Session->setFlash('Bienvenido', 'Flash/success');
+					// $this->paintValidateMenu(AuthComponent::user('role'));
+				}
 			} else {
 				$this->Session->setFlash('Correo electrónico o contraseña incorrectos', 'Flash/Error');
-                return 0;
 			}
+			return true;
+		}
+	}
+
+	public function validStateConnexion($state) {
+		$this->Session->destroy();
+		if ($state == Configure::read('variables.revision')) {
+			$this->Session->setFlash('Un asesor se encuentra revisando tu registro', 'Flash/Error');
+		} else {
+			$this->Session->setFlash('Comunícate con el administrador ya que tu cuenta esta deshabilitada', 'Flash/Error');
 		}
 	}
 

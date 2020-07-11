@@ -54,6 +54,17 @@ class AppController extends Controller {
         }
     }
 
+    public function saveManagesUser($description,$user_id,$url){
+        $this->loadModel('Message');
+        $datosM['Message']['description']                = $description;
+        $datosM['Message']['url']                        = $url;
+        $datosM['Message']['state']                      = Configure::read('variables.noti_por_leer');
+        $datosM['Message']['user_id']                    = $user_id;
+        $this->Message->create();
+        $this->Message->save($datosM);
+        return true;
+    }
+
 	public function sendMail($options = array()) {
         try {
             $email                      = new CakeEmail();

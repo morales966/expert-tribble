@@ -175,7 +175,7 @@ class CreditsController extends AppController {
 
     public function find_asesor_estudio() {
         $this->layout                           = false;
-        $users                                  = $this->Credit->User->list_all_role();
+        $users                                  = $this->Credit->User->list_all_users();
         $user_asesor                            = $this->request->data['user_asesor'];
         $this->set(compact('users','user_asesor'));
     }
@@ -335,6 +335,12 @@ class CreditsController extends AppController {
 			if ($this->Credit->save($this->request->data['Credit'])) {
                 $state_name                                                 = Configure::read('variables.estados_creditos.1');
                 $this->saveStage($state_name,AuthComponent::user('id'),$this->Credit->id,'','',0);
+                $description                                                = Configure::read('variables.description_notificaciones.crear_credito');
+                $url                                                        = $this->webroot.'Credits/index';
+                $usuarios                                                   = $this->Credit->User->all_role_coordinador_analista();
+                foreach ($usuarios as $user) {
+                    $this->saveManagesUser($description,$user['User']['id'],$url);
+                }
 				$this->deleteCache();
 				$this->Session->setFlash('El crédito se ha guardado satisfactoriamente','Flash/success');
 				return $this->redirect(array('action' => 'index'));

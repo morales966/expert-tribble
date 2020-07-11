@@ -6,7 +6,7 @@
 	    	<?php echo Configure::read('Application.name') ?>
 		</title>
 		<?php
-			echo $this->Html->css(array('style.css?'.rand(),'lib/font-awesome/css/font-awesome.css','lib/font/flaticon.css','lib/bootstrap.css','lib/parsley.css'));
+			echo $this->Html->css(array('style.css?'.rand(),'lib/font-awesome/css/font-awesome.css','lib/font/flaticon.css','lib/bootstrap.css','lib/parsley.css','lib/sweetalert.css'));
 			if (AuthComponent::user('id')) {
 				echo $this->Html->css(array('styleSession.css?'.rand()));
 			}
@@ -41,7 +41,7 @@
 
 		
 	    <?php
-    		echo $this->Html->script(array('lib/popper.min.js','lib/bootstrap.js','lib/parsley/parsley.js','lib/parsley/es.js'));
+    		echo $this->Html->script(array('lib/popper.min.js','lib/bootstrap.js','lib/parsley/parsley.js','lib/parsley/es.js','lib/sweetalert.js'));
 			echo $this->Html->script(array('app.js?'.rand()));
     		if (AuthComponent::user('id')) {
 				echo $this->Html->script(array('appSession.js?'.rand()));

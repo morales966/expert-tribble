@@ -25,6 +25,9 @@ $config = array(
 	'variables' 				=> array(
 		'habilitado' 				=> '1',
 		'deshabilitado' 			=> '0',
+		'revision' 					=> '2',
+		'noti_por_leer'				=> '0',
+		'noti_vista'				=> '1',
 		'tiempos_creditos'			=> array(
 			'2' 						=> '2 meses',
 			'3' 						=> '3 meses',
@@ -58,7 +61,6 @@ $config = array(
 			'4'							=> 'Aprobado, no retirado',
 			'5'							=> 'Aprobado, retirado',
 			'6' 						=> 'Pagado',
-
 			'description' 				=> 'Descripción',
 			'editar_cupo_aprobado'		=> 'Editar cupo aprobado',
 			'registrar_retiro_cupo' 	=> 'Registrar retiro del cupo',
@@ -87,7 +89,8 @@ $config = array(
 			'Administrador'				=> 'Administrador',
 			'Administrador_secundario' 	=> 'Administrador secundario',
 			'Coordinador_analista' 		=> 'Coordinador analista',
-			'Finanzas' 					=> 'Ejecutivos',
+			'Finanzas' 					=> 'Finanzas',
+			'Ejecutivo' 				=> 'Ejecutivo',
 			'Analista_credito' 			=> 'Analista crédito'
 		),
 		'rolCliente' 				=> 'Comercios',
@@ -156,19 +159,10 @@ $config = array(
 			'6' 						=> 'Manejo de seguros',
 			'0' 						=> 'Ninguno'
 		),
-
-		'ejecutivos' 				=> array(
-			'1' 						=> 'Cristian Villa',
-			'2' 						=> 'Ingrid Gutierrez',
-			'3' 						=> 'Juan Mejía',
-			'4' 						=> 'Carlos Zambrano',
-			'5' 						=> 'Juan Esteban Trujillo',
-			'6'							=> 'Guillermo Reyes',
-			'7' 						=> 'Juan Ospina',
-			'8' 						=> 'Luz Marlen Mora',
-			'9' 						=> 'Milena Restrepo'
-		)
-
+		'description_notificaciones' 	=> array(
+			'crear_credito' 			=> 	'Han registrado un nuevo crédito',
+			'crear_usuario_sistema' 	=> 	'Han registrado un nuevo usuario'
+		),
 
 	)
 );

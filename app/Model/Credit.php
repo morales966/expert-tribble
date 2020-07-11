@@ -23,10 +23,7 @@ class Credit extends AppModel {
 	public $belongsTo = array(
 		'User' => array(
 			'className' => 'User',
-			'foreignKey' => 'user_id',
-			'conditions' => '',
-			'fields' => '',
-			'order' => ''
+			'foreignKey' => 'user_id'
 		)
 	);
 
@@ -40,7 +37,7 @@ class Credit extends AppModel {
 
 	/**
         * @author Diego Morales <dlmorales096@gmail.com>
-        * @date(22-06-2019)
+        * @date(22-06-2020)
         * @description Metodo que se encargara de devolver los datos del credito
         * @variables $credit_id = id del credito
         * @return Los datos del credito
@@ -52,7 +49,7 @@ class Credit extends AppModel {
 
 	/**
         * @author Diego Morales <dlmorales096@gmail.com>
-        * @date(09-06-2019)
+        * @date(09-06-2020)
         * @description Metodo que se encarga de devolver los registros del estado solicitado
         * @variables $state = Estado solicitado
         * @return Los registros del estado solicitado en orden descendente
@@ -65,7 +62,7 @@ class Credit extends AppModel {
 
 	/**
         * @author Diego Morales <dlmorales096@gmail.com>
-        * @date(12-06-2019)
+        * @date(12-06-2020)
         * @description Metodo que se encarga de devolver el total(valor_credito) del estado solicitado
         * @variables $state = Estado solicitado
         * @return El total del estado solicitado
@@ -78,7 +75,7 @@ class Credit extends AppModel {
 
 	/**
         * @author Diego Morales <dlmorales096@gmail.com>
-        * @date(12-06-2019)
+        * @date(12-06-2020)
         * @description Metodo que se encarga de devolver el total(cupo_aprobado) del estado solicitado
         * @variables $state = Estado solicitado
         * @return El total del estado solicitado
@@ -91,7 +88,7 @@ class Credit extends AppModel {
 
 	/**
         * @author Diego Morales <dlmorales096@gmail.com>
-        * @date(19-06-2019)
+        * @date(19-06-2020)
         * @description Metodo que se encargara de devolver el estado del credito solicitado
         * @variables $credit_id = id del credito
         * @return El estado del credito
@@ -104,7 +101,7 @@ class Credit extends AppModel {
 
 	/**
         * @author Diego Morales <dlmorales096@gmail.com>
-        * @date(20-06-2019)
+        * @date(20-06-2020)
         * @description Metodo que se encargara de devolver el cupo aprobado del credito solicitado
         * @variables $credit_id = id del credito
         * @return El cupo aprobado del credito

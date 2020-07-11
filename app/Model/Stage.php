@@ -19,16 +19,13 @@ class Stage extends AppModel {
 	public $belongsTo = array(
 		'Credit' => array(
 			'className' => 'Credit',
-			'foreignKey' => 'credit_id',
-			'conditions' => '',
-			'fields' => '',
-			'order' => ''
+			'foreignKey' => 'credit_id'
 		)
 	);
 
 	/**
         * @author Diego Morales <dlmorales096@gmail.com>
-        * @date(22-06-2019)
+        * @date(22-06-2020)
         * @description Metodo que se encargara de devolver los datos del credito
         * @variables $credit_id = id del credito
         * @return Los datos del credito
@@ -40,7 +37,7 @@ class Stage extends AppModel {
 
 	/**
         * @author Diego Morales <dlmorales096@gmail.com>
-        * @date(30-06-2019)
+        * @date(30-06-2020)
         * @description Metodo que se encarga de devolver el total(cupo_aprobado) del estado solicitado
         * @variables $state = Estado solicitado,$credit_id = id del credito
         * @return suma(total) del estado solicitado po identificador del credito
@@ -53,7 +50,7 @@ class Stage extends AppModel {
 
 	/**
         * @author Diego Morales <dlmorales096@gmail.com>
-        * @date(30-06-2019)
+        * @date(30-06-2020)
         * @description Metodo que se encarga de devolver todos los pasos del estado solicitado
         * @variables $state = Estado solicitado,$credit_id = id del credito
         * @return Filas del estado solicitado po identificador del credito

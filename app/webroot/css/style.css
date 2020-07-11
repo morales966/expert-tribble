@@ -322,3 +322,6 @@ ul li:hover a.activeNavS {
 /*--------------------------------------------------------------
 # Fin Comercios afiliados Crediventas
 --------------------------------------------------------------*/
+#notificaciones_leidas:hover {
+  color:black;
+}

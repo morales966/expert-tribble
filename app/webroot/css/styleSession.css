@@ -2442,3 +2442,18 @@ body.sidebar-collapse:not(.sidebar-mini-md):not(.sidebar-mini) .main-header::bef
   color: #007bff;
   font-weight: 600;
 }
+
+#count_notificaciones {
+    background: #ffd600;
+    padding: 0 5px;
+    border-radius: 50px;
+    font-weight: bold;
+    color: #004990;
+}
+
+.indicator {
+  position: absolute;
+  top: 8px;
+  left: 12px;
+  font-size: 10px;
+}
