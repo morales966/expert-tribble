@@ -8,14 +8,14 @@ function _getUserMedia() {
 
 $("body").on("click", ".btn_abrir_modalCD", function() {
 	loadBotones();
-	$('#modalTitleTomarFoto').text('Foto de la cédula frontal');
-	$('#modalTomarFoto').modal('show');
-	var $video 									= document.getElementById("video");
-	var $cerrar 								= document.getElementById("btn_cerrar_camara");
-	var $canvas 								= document.getElementById("canvas");
-	var $btn_tomar 								= document.getElementById("btn_tomar");
-	var $btn_guardar_foto 						= document.getElementById("btn_guardar_foto");
-	var $btn_cancelar_foto 						= document.getElementById("btn_cancelar_foto");
+	$('#modalTitleTomarFotoCD').text('Foto de la cédula frontal');
+	$('#modalTomarFotoCD').modal('show');
+	var $video 									= document.getElementById("videoCD");
+	var $cerrar 								= document.getElementById("btn_cerrar_camaraCD");
+	var $canvas 								= document.getElementById("canvasCD");
+	var $btn_tomar 								= document.getElementById("btn_tomarCD");
+	var $btn_guardar_foto 						= document.getElementById("btn_guardar_fotoCD");
+	var $btn_cancelar_foto 						= document.getElementById("btn_cancelar_fotoCD");
 	var $CreditFotoCedulaDelantera1 			= document.getElementById("CreditFotoCedulaDelantera1");
 	if (tieneSoporteUserMedia()) {
 		quitar_required_cuadro_adjuntar_foto();
@@ -25,6 +25,8 @@ $("body").on("click", ".btn_abrir_modalCD", function() {
 
 			$btn_tomar.addEventListener("click", function(){
 				$video.pause();
+				$('#btn_tomarCD').hide();
+				$('.cuadro_botones').show();
 			});
 
 			$btn_cancelar_foto.addEventListener("click", function(){
@@ -49,6 +51,7 @@ $("body").on("click", ".btn_abrir_modalCD", function() {
 				        stream.getTracks().forEach(function(track) {
 							track.stop();
 						});
+						$('#modalTomarFotoCD').modal('hide');
 				    }
 				}
 			});
@@ -59,8 +62,8 @@ $("body").on("click", ".btn_abrir_modalCD", function() {
 				});
 			});
         }, function (error) {
-			loadBotones();
-			$('#btn_tomar').hide();
+        	$('.cuadro_botones').hide();
+			$('.btn_tomar').hide();
 			$('.resultTomarFoto').empty();
 			$('.resultTomarFoto').html('<p>Revisa la configuración de tu navegador</p>');
         	message_alert("Has denegado el permiso para la camara","Error");
@@ -75,14 +78,14 @@ $("body").on("click", ".btn_abrir_modalCD", function() {
 
 $("body").on("click", ".btn_abrir_modalCT", function() {
 	loadBotones();
-	$('#modalTitleTomarFoto').text('Foto de la cédula trasera');
-	$('#modalTomarFoto').modal('show');
-	var $video 									= document.getElementById("video");
-	var $cerrar 								= document.getElementById("btn_cerrar_camara");
-	var $canvas 								= document.getElementById("canvas");
-	var $btn_tomar 								= document.getElementById("btn_tomar");
-	var $btn_guardar_foto 						= document.getElementById("btn_guardar_foto");
-	var $btn_cancelar_foto 						= document.getElementById("btn_cancelar_foto");
+	$('#modalTitleTomarFotoCT').text('Foto de la cédula trasera');
+	$('#modalTomarFotoCT').modal('show');
+	var $video 									= document.getElementById("videoCT");
+	var $cerrar 								= document.getElementById("btn_cerrar_camaraCT");
+	var $canvas 								= document.getElementById("canvasCT");
+	var $btn_tomar 								= document.getElementById("btn_tomarCT");
+	var $btn_guardar_foto 						= document.getElementById("btn_guardar_fotoCT");
+	var $btn_cancelar_foto 						= document.getElementById("btn_cancelar_fotoCT");
 	var $CreditFotoCedulaTrasera1 				= document.getElementById("CreditFotoCedulaTrasera1");
 	if (tieneSoporteUserMedia()) {
 		quitar_required_cuadro_adjuntar_foto();
@@ -92,6 +95,8 @@ $("body").on("click", ".btn_abrir_modalCT", function() {
 
 			$btn_tomar.addEventListener("click", function(){
 				$video.pause();
+				$('#btn_tomarCT').hide();
+				$('.cuadro_botones').show();
 			});
 
 			$btn_cancelar_foto.addEventListener("click", function(){
@@ -116,6 +121,7 @@ $("body").on("click", ".btn_abrir_modalCT", function() {
 				        stream.getTracks().forEach(function(track) {
 							track.stop();
 						});
+						$('#modalTomarFotoCT').modal('hide');
 				    }
 				}
 			});
@@ -126,8 +132,8 @@ $("body").on("click", ".btn_abrir_modalCT", function() {
 				});
 			});
         }, function (error) {
-        	loadBotones();
-			$('#btn_tomar').hide();
+        	$('.cuadro_botones').hide();
+			$('.btn_tomar').hide();
 			$('.resultTomarFoto').empty();
 			$('.resultTomarFoto').html('<p>Revisa la configuración de tu navegador</p>');
         	message_alert("Has denegado el permiso para la camara","Error");
@@ -142,14 +148,14 @@ $("body").on("click", ".btn_abrir_modalCT", function() {
 
 $("body").on("click", ".btn_abrir_modalFP", function() {
 	loadBotones();
-	$('#modalTitleTomarFoto').text('Foto de tu cara teniendo la cédula');
-	$('#modalTomarFoto').modal('show');
-	var $video 									= document.getElementById("video");
-	var $cerrar 								= document.getElementById("btn_cerrar_camara");
-	var $canvas 								= document.getElementById("canvas");
-	var $btn_tomar 								= document.getElementById("btn_tomar");
-	var $btn_guardar_foto 						= document.getElementById("btn_guardar_foto");
-	var $btn_cancelar_foto 						= document.getElementById("btn_cancelar_foto");
+	$('#modalTitleTomarFotoFP').text('Foto del cliente');
+	$('#modalTomarFotoFP').modal('show');
+	var $video 									= document.getElementById("videoFP");
+	var $cerrar 								= document.getElementById("btn_cerrar_camaraFP");
+	var $canvas 								= document.getElementById("canvasFP");
+	var $btn_tomar 								= document.getElementById("btn_tomarFP");
+	var $btn_guardar_foto 						= document.getElementById("btn_guardar_fotoFP");
+	var $btn_cancelar_foto 						= document.getElementById("btn_cancelar_fotoFP");
 	var $CreditFotoPerfil1 						= document.getElementById("CreditFotoPerfil1");
 	if (tieneSoporteUserMedia()) {
 		quitar_required_cuadro_adjuntar_foto();
@@ -159,6 +165,8 @@ $("body").on("click", ".btn_abrir_modalFP", function() {
 
 			$btn_tomar.addEventListener("click", function(){
 				$video.pause();
+				$('#btn_tomarFP').hide();
+				$('.cuadro_botones').show();
 			});
 
 			$btn_cancelar_foto.addEventListener("click", function(){
@@ -183,6 +191,7 @@ $("body").on("click", ".btn_abrir_modalFP", function() {
 				        stream.getTracks().forEach(function(track) {
 							track.stop();
 						});
+						$('#modalTomarFotoFP').modal('hide');
 				    }
 				}
 			});
@@ -193,8 +202,8 @@ $("body").on("click", ".btn_abrir_modalFP", function() {
 				});
 			});
         }, function (error) {
-        	loadBotones();
-			$('#btn_tomar').hide();
+        	$('.cuadro_botones').hide();
+			$('.btn_tomar').hide();
 			$('.resultTomarFoto').empty();
 			$('.resultTomarFoto').html('<p>Revisa la configuración de tu navegador</p>');
         	message_alert("Has denegado el permiso para la camara","Error");
@@ -207,12 +216,7 @@ $("body").on("click", ".btn_abrir_modalFP", function() {
 	}
 });
 
-$("body").on("click", "#btn_tomar", function() {
-	$('.cuadro_botones').show();
-	$('#btn_tomar').hide();
-});
-
-$("body").on("click", "#btn_cancelar_foto", function() {
+$("body").on("click", ".btn_cancelar_foto", function() {
 	loadBotones();
 });
 
@@ -222,7 +226,7 @@ $("body").on("click", "#btn_guardar_foto", function() {
 
 function loadBotones() {
 	$('.cuadro_botones').hide();
-	$('#btn_tomar').show();
+	$('.btn_tomar').show();
 }
 
 function quitar_required_cuadro_tomar_foto() {

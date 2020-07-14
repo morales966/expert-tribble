@@ -2395,7 +2395,7 @@ body.sidebar-collapse:not(.sidebar-mini-md):not(.sidebar-mini) .main-header::bef
   height: 500px;
 }
 
-#video {
+.video {
   width: 100%;
   height: 350px;
 }

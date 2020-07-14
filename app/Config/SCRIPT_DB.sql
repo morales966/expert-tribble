@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 11-07-2020 a las 06:50:17
+-- Tiempo de generación: 14-07-2020 a las 22:09:02
 -- Versión del servidor: 5.7.26
 -- Versión de PHP: 5.6.40
 
@@ -98,7 +98,7 @@ CREATE TABLE IF NOT EXISTS `clients` (
 --
 
 INSERT INTO `clients` (`id`, `user_id`, `nit`, `gremio`, `administrador`, `cedula`, `direccion`, `barrio`, `municipio`, `tel_usuario`, `banco`, `numero_cuenta`, `tipo_cuenta`, `nombre_propietario_cuenta`, `cedula_propietario_cuenta`, `ejecutivo`, `clase`, `como_paga`, `departamento`, `cantidad_comercios`, `cuanto_paga`, `productos_servicios`, `adjuntar_cedula_delantera`, `adjuntar_cedula_trasra`, `adjuntar_camara_comercio`, `adjuntar_rut`, `adjuntar_administrador`, `adjuntar_almacen`, `nombre_completo_r1`, `identificacion_r1`, `celular_r1`, `comercio_r1`, `nombre_completo_r2`, `identificacion_r2`, `celular_r2`, `comercio_r2`) VALUES
-(1, 1, '22222', 'Accesorios', 'qqqq', '111', 'qqq', 'www', 'www', '111', 'qqq', '2222', 'Ahorros', 'ddd ddd', '3333', 1, 'Clase B', 'Contado (efectivo-transferencia)', 'www', 2, '2', 'ddddddd', 'adjuntar_cedula_delantera_5f056572e1332.jpeg', 'adjuntar_cedula_trasera_5f056572e1f9b.jpeg', 'adjuntar_camara_comercio_5f056572e24ee.jpeg', 'adjuntar_rut_5f056572e29a6.jpeg', 'adjuntar_administrador_5f056572e2e4f.jpeg', 'adjuntar_almacen_5f056572e32db.jpeg', 'www', '2222', '4444', 'eeee', '2222', '3333', '444', 'dddd');
+(1, 1, '22222', 'Accesorios', 'qqqq', '111', 'qqq', 'www', 'www', '111', 'qqq', '2222', 'Ahorros', 'ddd ddd', '3333', 6, 'Clase B', 'Contado (efectivo-transferencia)', 'www', 2, '2', 'ddddddd', 'adjuntar_cedula_delantera_5f056572e1332.jpeg', 'adjuntar_cedula_trasera_5f056572e1f9b.jpeg', 'adjuntar_camara_comercio_5f056572e24ee.jpeg', 'adjuntar_rut_5f056572e29a6.jpeg', 'adjuntar_administrador_5f056572e2e4f.jpeg', 'adjuntar_almacen_5f056572e32db.jpeg', 'www', '2222', '4444', 'eeee', '2222', '3333', '444', 'dddd');
 
 -- --------------------------------------------------------
 
@@ -116,7 +116,7 @@ CREATE TABLE IF NOT EXISTS `credits` (
   `foto_perfil` varchar(150) COLLATE utf8_spanish_ci NOT NULL,
   `nombre_persona` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
   `apellido_persona` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
-  `cedula_persona` int(11) NOT NULL,
+  `cedula_persona` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
   `foto_cedula_delantera` varchar(150) COLLATE utf8_spanish_ci NOT NULL,
   `foto_cedula_trasera` varchar(150) COLLATE utf8_spanish_ci NOT NULL,
   `telefono_persona` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
@@ -125,15 +125,14 @@ CREATE TABLE IF NOT EXISTS `credits` (
   `state` int(11) NOT NULL DEFAULT '1',
   `created` date NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `credits`
 --
 
 INSERT INTO `credits` (`id`, `user_id`, `valor_credito`, `numero_meses`, `valor_cuota`, `foto_perfil`, `nombre_persona`, `apellido_persona`, `cedula_persona`, `foto_cedula_delantera`, `foto_cedula_trasera`, `telefono_persona`, `user_asesor`, `cupo_aprobado`, `state`, `created`) VALUES
-(1, 1, 500000, '4', '172872', 'perfil_5ef37b4d0d5cf.png', 'PRUEBA', 'APELLIDO', 4356789, 'foto_cedula_delantera_5ef37b4ccb16c.png', 'foto_cedula_trasera_5ef37b4ce3bbc.png', '3024634301', 2, 400000, 5, '2020-06-24'),
-(2, 1, 350000, '5', '97644', 'perfil_5ef600f36021e.png', 'qqq', 'qqq', 2222, 'foto_cedula_delantera_5ef600f340d39.png', 'foto_cedula_trasera_5ef600f356102.png', '2222222', 2, 0, 2, '2020-06-26');
+(1, 1, 450000, '8', '79538', 'perfil_5f0e28ab987fc.png', 'wwww', 'qqq', '222', 'foto_cedula_delantera_5f0e289c2ec98.png', 'foto_cedula_trasera_5f0e28a4e6ae1.png', '33333', 0, 0, 1, '2020-07-14');
 
 -- --------------------------------------------------------
 
@@ -150,7 +149,14 @@ CREATE TABLE IF NOT EXISTS `messages` (
   `state` int(11) NOT NULL,
   `created` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
+
+--
+-- Volcado de datos para la tabla `messages`
+--
+
+INSERT INTO `messages` (`id`, `user_id`, `description`, `url`, `state`, `created`) VALUES
+(1, 2, 'Han registrado un nuevo crédito', '/proyectoApp/Credits/index', 0, '2020-07-14 16:50:55');
 
 -- --------------------------------------------------------
 
@@ -169,24 +175,14 @@ CREATE TABLE IF NOT EXISTS `stages` (
   `description` varchar(200) COLLATE utf8mb4_spanish2_ci NOT NULL,
   `created` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
 
 --
 -- Volcado de datos para la tabla `stages`
 --
 
 INSERT INTO `stages` (`id`, `user_id`, `credit_id`, `state_credit`, `cupo_aprobado`, `description_denied`, `description`, `created`) VALUES
-(1, 2, 2, 'En estudio', 0, '', '', '2020-06-29 22:03:30'),
-(2, 2, 1, 'En estudio', 0, '', '', '2020-06-29 22:03:44'),
-(3, 2, 1, 'Aprobado, no retirado', 300000, '', '', '2020-06-29 22:04:15'),
-(4, 2, 1, 'Editar cupo aprobado', 350000, '', '', '2020-06-29 22:05:08'),
-(5, 2, 1, 'Aprobado, retirado', 350000, '', '', '2020-06-29 22:09:34'),
-(6, 2, 2, 'Aprobado, retirado', 0, '', '', '2020-06-29 22:11:05'),
-(7, 2, 1, 'Aprobado, no retirado', 400000, '', '', '2020-06-29 22:12:23'),
-(8, 2, 2, 'En estudio', 0, '', '', '2020-06-29 22:12:58'),
-(9, 2, 1, 'Aprobado, retirado', 400000, '', '', '2020-06-29 22:13:09'),
-(10, 2, 1, 'Registrar retiro del cupo', 200000, '', '', '2020-06-29 22:14:12'),
-(11, 2, 1, 'Registrar retiro del cupo', 150000, '', '', '2020-06-29 22:23:51');
+(1, 1, 1, 'Solicitud', 0, '', '', '2020-07-14 16:50:55');
 
 -- --------------------------------------------------------
 

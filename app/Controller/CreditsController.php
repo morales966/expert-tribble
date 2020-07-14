@@ -252,6 +252,8 @@ class CreditsController extends AppController {
         if ($this->request->is('ajax')) {
             $datosC['Credit']['state']              = Configure::read('variables.nombres_estados_creditos.Pagado');
             $datosC['Credit']['id']                 = $this->request->data['credit_id'];
+            $state_name                             = Configure::read('variables.estados_creditos.6');
+            $this->saveStage($state_name,AuthComponent::user('id'),$this->request->data['id'],'','',0);
             $this->Credit->save($datosC);
             return true;
         }

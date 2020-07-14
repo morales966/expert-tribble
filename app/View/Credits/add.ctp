@@ -54,7 +54,7 @@
 						</div>
 						<div class="form-group col-md-3">
 							<b>Cédula</b>
-							<?php echo $this->Form->input('cedula_persona',array('label' => false,'class' => 'form-control','placeholder' => 'Ingresar cédula','required' => true)); ?>
+							<?php echo $this->Form->input('cedula_persona',array('type' => 'number','label' => false,'class' => 'form-control','placeholder' => 'Ingresar cédula','required' => true)); ?>
 						</div>
 						<div class="form-group col-md-3">
 							<b>Telefono o celular</b>
@@ -145,26 +145,87 @@
 	</div>
 </div>
 
-<div class="modal fade" id="modalTomarFoto" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+
+
+
+
+
+<div class="modal fade" id="modalTomarFotoCD" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">
     <div class="modal-dialog" role="document">
 		<div class="modal-content cuadro_foto">
 			<div class="modal-header">
-          		<h2 class="modal-title" id="modalTitleTomarFoto"></h2>
-				<button type="button" id="btn_cerrar_camara" class="close" data-dismiss="modal" aria-label="Close">
+          		<h2 class="modal-title" id="modalTitleTomarFotoCD"></h2>
+				<button type="button" id="btn_cerrar_camaraCD" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
 			<div class="modal-body resultTomarFoto">
-				<video muted="muted" id="video"></video>
-				<button type="button" id="btn_tomar" class="btn btn-primary form-control">Tomar foto</button>
-			 	<canvas id="canvas" style="display: none;"></canvas>
+				<video muted="muted" id="videoCD" class="video"></video>
+				<button type="button" id="btn_tomarCD" class="btn btn-primary form-control btn_tomar">Tomar foto</button>
+			 	<canvas id="canvasCD" style="display: none;"></canvas>
 				<div class="cuadro_botones" style="display: none;">
 					<div class="row">
 						<div class="col-md-6">
-							<button type="button" id="btn_guardar_foto" class="btn btn-primary form-control">Guardar</button>
+							<button type="button" id="btn_guardar_fotoCD" class="btn btn-primary form-control">Guardar</button>
 						</div>
 						<div class="col-md-6">
-							<button type="button" id="btn_cancelar_foto" class="btn btn-primary form-control">Tomar otra foto</button>
+							<button type="button" id="btn_cancelar_fotoCD" class="btn btn-primary form-control btn_cancelar_foto">Tomar otra foto</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+    </div>
+</div>
+
+<div class="modal fade" id="modalTomarFotoCT" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog" role="document">
+		<div class="modal-content cuadro_foto">
+			<div class="modal-header">
+          		<h2 class="modal-title" id="modalTitleTomarFotoCT"></h2>
+				<button type="button" id="btn_cerrar_camaraCT" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body resultTomarFoto">
+				<video muted="muted" id="videoCT" class="video"></video>
+				<button type="button" id="btn_tomarCT" class="btn btn-primary form-control btn_tomar">Tomar foto</button>
+			 	<canvas id="canvasCT" style="display: none;"></canvas>
+				<div class="cuadro_botones" style="display: none;">
+					<div class="row">
+						<div class="col-md-6">
+							<button type="button" id="btn_guardar_fotoCT" class="btn btn-primary form-control">Guardar</button>
+						</div>
+						<div class="col-md-6">
+							<button type="button" id="btn_cancelar_fotoCT" class="btn btn-primary form-control btn_cancelar_foto">Tomar otra foto</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+    </div>
+</div>
+
+<div class="modal fade" id="modalTomarFotoFP" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog" role="document">
+		<div class="modal-content cuadro_foto">
+			<div class="modal-header">
+          		<h2 class="modal-title" id="modalTitleTomarFotoFP"></h2>
+				<button type="button" id="btn_cerrar_camaraFP" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body resultTomarFoto">
+				<video muted="muted" id="videoFP" class="video"></video>
+				<button type="button" id="btn_tomarFP" class="btn btn-primary form-control btn_tomar">Tomar foto</button>
+			 	<canvas id="canvasFP" style="display: none;"></canvas>
+				<div class="cuadro_botones" style="display: none;">
+					<div class="row">
+						<div class="col-md-6">
+							<button type="button" id="btn_guardar_fotoFP" class="btn btn-primary form-control">Guardar</button>
+						</div>
+						<div class="col-md-6">
+							<button type="button" id="btn_cancelar_fotoFP" class="btn btn-primary form-control btn_cancelar_foto">Tomar otra foto</button>
 						</div>
 					</div>
 				</div>
