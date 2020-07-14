@@ -250,6 +250,9 @@
                                                         </span>
                                                     </p>
                                                     <span>
+                                                        <a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Finalizado" class="finalizar_credito" data-uid="<?php echo $credit['Credit']['id']; ?>">
+                                                            <i class="fa fa-step-forward"></i>
+                                                        </a>
                                                         <a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Adjuntar plan pago" class="adjuntar_plan_pago" data-uid="<?php echo $credit['Credit']['id']; ?>">
                                                             <i class="fa fa-paperclip"></i>
                                                         </a>
@@ -267,9 +270,6 @@
                                                         </a>
                                                         <a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Añadir comentario" class="btn_comentario" data-uid="<?php echo $credit['Credit']['id']; ?>">
                                                             <i class="fa fa-comment-o"></i>
-                                                        </a>
-                                                        <a href="<?php echo 'https://api.whatsapp.com/send?phone=57'.$credit["Credit"]["telefono_persona"]?>" data-toggle="tooltip" data-placement="top" title="Conversar en whatsapp" target="_blank">
-                                                            <i class="fa fa-whatsapp"></i>
                                                         </a>
                                                     </span>
                                                 </div>

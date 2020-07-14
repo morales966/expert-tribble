@@ -37,6 +37,21 @@ class Stage extends AppModel {
 
 	/**
         * @author Diego Morales <dlmorales096@gmail.com>
+        * @date(14-07-2020)
+        * @description Metodo que se encargara de devolver la información de los planes de pagos
+        * @variables $credit_id = id del credito
+        * @return La información de los planes de pagos
+    */
+	public function archivos_credito_id($credit_id) {
+		$conditions 		= array(
+								'Stage.credit_id' => $credit_id,
+								'Stage.state_credit' => Configure::read('variables.estados_creditos.adjuntar_plan_pagos')
+							);
+		return $this->find('all',compact('conditions'));
+	}
+
+	/**
+        * @author Diego Morales <dlmorales096@gmail.com>
         * @date(30-06-2020)
         * @description Metodo que se encarga de devolver el total(cupo_aprobado) del estado solicitado
         * @variables $state = Estado solicitado,$credit_id = id del credito

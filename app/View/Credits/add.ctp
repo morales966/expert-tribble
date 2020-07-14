@@ -4,114 +4,122 @@
 		<p class="tittleEnlace">
 			<a href="<?php echo $this->Html->url(array('action'=>'index')) ?>">Listar créditos</a>
 		</p>
-		<?php echo $this->Form->create('Credit',array('data-parsley-validate','enctype'=>"multipart/form-data")); ?>
+		<?php echo $this->Form->create('Credit',array('data-parsley-validate','enctype'=>"multipart/form-data","id" => "register_form")); ?>
+			<div class="progress">
+				<div class="progress-bar progress-bar-striped active form-control" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+			</div>
 			<p class="txtDerecho">Crediventas te ofrece la opción de solicitar un crédito Tradicional.</p>
-			<div class="border_cuadro">
-				<div class="form-row">
-					<div class="form-group col-md-4">
-						<b>¿CUANTO NECESITAS?</b>
-						<?php echo $this->Form->input('valor_credito',array('label' => false,'class' => 'form-control','placeholder' => 'Ingresa un valor','min' => '50000','max' => '1500000')); ?>
-					</div>
-					<div class="form-group col-md-4">
-						<b>Tiempo en meses</b>
-						<div class="meses_credito">
-							<?php echo $this->Form->input('CreditNumeroMeses1',array('label' => false,'class' => 'form-control','default' => 'Introduce primero el valor que necesitas','options' => array('Introduce primero el valor que necesitas'))); ?>
-						</div>
-					</div>
-					<div class="form-group col-md-4">
-						<b>VALOR CUOTA APROXIMADO</b>
-						<?php echo $this->Form->input('valor_cuota',array('label' => false,'class' => 'form-control','placeholder' => 'VALOR DE CUOTA','readonly' => true,'required' => false)); ?>
-					</div>
-				</div>
-			</div>
-			<div class="chek">
-				<div>
-					<label> ¿Aceptas el valor de la cuota?</label>
-					<input id="checkbox1" type="checkbox" data-parsley-required="true" data-parsley-trigger="click">
-				</div>
-			</div>
 
-			<br>
-
-			<div class="border_cuadro">
-				<h4 class="txtCenter">Datos persona</h4>
-				<div class="form-row">
-					<div class="form-group col-md-3">
-						<b>Nombres</b>
-						<?php echo $this->Form->input('nombre_persona',array('label' => false,'class' => 'form-control','placeholder' => 'Ingresar nombres')); ?>
-					</div>
-					<div class="form-group col-md-3">
-						<b>Apellidos</b>
-						<?php echo $this->Form->input('apellido_persona',array('label' => false,'class' => 'form-control','placeholder' => 'Ingresar apellidos')); ?>
-					</div>
-					<div class="form-group col-md-3">
-						<b>Cédula</b>
-						<?php echo $this->Form->input('cedula_persona',array('label' => false,'class' => 'form-control','placeholder' => 'Ingresar cédula')); ?>
-					</div>
-					<div class="form-group col-md-3">
-						<b>Telefono o celular</b>
-						<?php echo $this->Form->input('telefono_persona',array('label' => false,'class' => 'form-control','placeholder' => 'Ingresar celular')); ?>
-					</div>
-				</div>
-			</div>
-			<div class="chek">
-				<div id="cuadro_tomar_foto">
-
+			<fieldset>
+				<span class="txtSpanPasos">Paso 1</span>
+				<div class="border_cuadro">
 					<div class="form-row">
 						<div class="form-group col-md-4">
-							<label class="txtLabelImagenes">Por favor tomale una foto a la parte delantera la cedula</label>
-							<button type="button" class="btn btn-primary form-control btn_abrir_modalCD">
-								Tomar foto
-							</button>
-							<?php echo $this->Form->input('foto_cedula_delantera1',array('class' => 'form-control','label' => false,'readonly' => true,'required' => true,)); ?>
+							<b>¿CUANTO NECESITAS?</b>
+							<?php echo $this->Form->input('valor_credito',array('label' => false,'class' => 'form-control','placeholder' => 'Ingresa un valor','min' => '50000','max' => '1500000')); ?>
 						</div>
 						<div class="form-group col-md-4">
-							<label class="txtLabelImagenes">Por favor tomale una foto a la parte trasera de la cedula</label>
-							<button type="button" class="btn btn-primary form-control btn_abrir_modalCT">
-								Tomar foto
-							</button>
-							<?php echo $this->Form->input('foto_cedula_trasera1',array('class' => 'form-control','label' => false,'readonly' => true,'required' => true)); ?>
+							<b>Tiempo en meses</b>
+							<div class="meses_credito">
+								<?php echo $this->Form->input('CreditNumeroMeses1',array('label' => false,'class' => 'form-control','default' => 'Introduce primero el valor que necesitas','options' => array('Introduce primero el valor que necesitas'))); ?>
+							</div>
 						</div>
 						<div class="form-group col-md-4">
-							<label class="txtLabelImagenes">Por favor tomale una foto de la persona</label> <br><br>
-							<button type="button" class="btn btn-primary form-control btn_abrir_modalFP">
-								Tomar foto
-							</button>
-							<?php echo $this->Form->input('foto_perfil1',array('class' => 'form-control','label' => false,'readonly' => true,'required' => true)); ?>
+							<b>VALOR CUOTA APROXIMADO</b>
+							<?php echo $this->Form->input('valor_cuota',array('label' => false,'class' => 'form-control','placeholder' => 'VALOR DE CUOTA','readonly' => true,'required' => false)); ?>
 						</div>
 					</div>
-
 				</div>
-				<div id="cuadro_adjuntar_foto" style="display: none;">
-					
+				<div class="chek">
+					<div>
+						<label>¿Aceptas el valor de la cuota?</label>
+						<input id="checkbox1" type="checkbox" data-parsley-required="true" data-parsley-trigger="click">
+					</div>
+				</div>
+				<br>
+				<input type="button" class="next-form btn btn-info form-control" value="SIGUIENTE" />
+			</fieldset>
+			<fieldset>
+				<span class="txtSpanPasos">Paso 2</span>
+				<div class="border_cuadro">
+					<h4 class="txtCenter">Datos persona</h4>
 					<div class="form-row">
-						<div class="form-group col-md-4">
-							<label class="txtLabelImagenes">Por favor adjunta una foto a la parte delantera la cedula</label>
-							<?php echo $this->Form->input('foto_cedula_delantera',array('type' => 'file','label' => false,'required' => true)); ?>
+						<div class="form-group col-md-3">
+							<b>Nombres</b>
+							<?php echo $this->Form->input('nombre_persona',array('label' => false,'class' => 'form-control','placeholder' => 'Ingresar nombres','required' => true)); ?>
 						</div>
-						<div class="form-group col-md-4">
-							<label class="txtLabelImagenes">Por favor adjunta una foto a la parte trasera de la cedula</label>
-							<?php echo $this->Form->input('foto_cedula_trasera',array('type' => 'file','label' => false,'required' => true)); ?>
+						<div class="form-group col-md-3">
+							<b>Apellidos</b>
+							<?php echo $this->Form->input('apellido_persona',array('label' => false,'class' => 'form-control','placeholder' => 'Ingresar apellidos','required' => true)); ?>
 						</div>
-						<div class="form-group col-md-4">
-							<label class="txtLabelImagenes">Por favor adjunta una foto de la persona</label> <br><br>
-							<?php echo $this->Form->input('foto_perfil',array('type' => 'file','label' => false,'required' => true)); ?>
+						<div class="form-group col-md-3">
+							<b>Cédula</b>
+							<?php echo $this->Form->input('cedula_persona',array('label' => false,'class' => 'form-control','placeholder' => 'Ingresar cédula','required' => true)); ?>
+						</div>
+						<div class="form-group col-md-3">
+							<b>Telefono o celular</b>
+							<?php echo $this->Form->input('telefono_persona',array('label' => false,'class' => 'form-control','placeholder' => 'Ingresar celular','required' => true)); ?>
 						</div>
 					</div>
-
 				</div>
-			</div>
+				<div class="chek">
+					<div id="cuadro_tomar_foto">
 
-			<br>
+						<div class="form-row">
+							<div class="form-group col-md-4">
+								<label class="txtLabelImagenes">Por favor tomale una foto a la parte delantera la cedula</label>
+								<button type="button" class="btn btn-primary form-control btn_abrir_modalCD">
+									Tomar foto
+								</button>
+								<?php echo $this->Form->input('foto_cedula_delantera1',array('class' => 'form-control','label' => false,'readonly' => true,'required' => true)); ?>
+							</div>
+							<div class="form-group col-md-4">
+								<label class="txtLabelImagenes">Por favor tomale una foto a la parte trasera de la cedula</label>
+								<button type="button" class="btn btn-primary form-control btn_abrir_modalCT">
+									Tomar foto
+								</button>
+								<?php echo $this->Form->input('foto_cedula_trasera1',array('class' => 'form-control','label' => false,'readonly' => true,'required' => true)); ?>
+							</div>
+							<div class="form-group col-md-4">
+								<label class="txtLabelImagenes">Por favor tomale una foto de la persona</label> <br><br>
+								<button type="button" class="btn btn-primary form-control btn_abrir_modalFP">
+									Tomar foto
+								</button>
+								<?php echo $this->Form->input('foto_perfil1',array('class' => 'form-control','label' => false,'readonly' => true,'required' => true)); ?>
+							</div>
+						</div>
 
-			<div class="chek">
-				<div>
-					<input id="checkbox2" type="checkbox" data-parsley-required="true" data-parsley-trigger="click">
-					<label> Acepta las <a id="TerminosCondiciones" href="javascript:void(0)">condiciones legales y la Politica de privacidad de crediventas.</a></label>
+					</div>
+					<div id="cuadro_adjuntar_foto" style="display: none;">
+						
+						<div class="form-row">
+							<div class="form-group col-md-4">
+								<label class="txtLabelImagenes">Por favor adjunta una foto a la parte delantera la cedula</label>
+								<?php echo $this->Form->input('foto_cedula_delantera',array('type' => 'file','label' => false,'required' => true)); ?>
+							</div>
+							<div class="form-group col-md-4">
+								<label class="txtLabelImagenes">Por favor adjunta una foto a la parte trasera de la cedula</label>
+								<?php echo $this->Form->input('foto_cedula_trasera',array('type' => 'file','label' => false,'required' => true)); ?>
+							</div>
+							<div class="form-group col-md-4">
+								<label class="txtLabelImagenes">Por favor adjunta una foto de la persona</label> <br><br>
+								<?php echo $this->Form->input('foto_perfil',array('type' => 'file','label' => false,'required' => true)); ?>
+							</div>
+						</div>
+
+					</div>
 				</div>
-			</div>
-			<br>
-		<?php echo $this->Form->button('SOLICITAR CRÉDITO',array("class" => "btn btn-primary form-control")); ?>
+				<br>
+				<div class="chek">
+					<div>
+						<input id="checkbox2" type="checkbox" data-parsley-required="true" data-parsley-trigger="click">
+						<label> Acepta las <a id="TerminosCondiciones" href="javascript:void(0)">condiciones legales y la Politica de privacidad de crediventas.</a></label>
+					</div>
+				</div>
+				<br>
+				<input type="button" name="previous" class="previous-form btn btn-info form-control" value="ANTERIOR" />
+				<?php echo $this->Form->button('SOLICITAR CRÉDITO',array("class" => "btn btn-primary form-control")); ?>
+			</fieldset>
 		</form>
 		<br>
 	</div>
@@ -165,7 +173,9 @@
     </div>
 </div>
 
-<?php 
+<?php
+	echo $this->Html->css("controller/credits/add.css?".rand(),							array('block' => 'AppCss'));
+	
 	echo $this->Html->script("controller/credits/add.js?".rand(),						array('block' => 'AppScript'));
 	echo $this->Html->script("controller/credits/foto.js?".rand(),						array('block' => 'AppScript'));
 ?>

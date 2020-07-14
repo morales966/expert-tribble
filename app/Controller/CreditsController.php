@@ -234,8 +234,9 @@ class CreditsController extends AppController {
 
     public function adjuntar_archivo() {
         $this->layout                           = false;
-        $credit_id = $this->request->data['credit_id'];
-        $this->set(compact('credit_id'));
+        $credit_id                              = $this->request->data['credit_id'];
+        $datas_credit                           = $this->Credit->Stage->archivos_credito_id($this->request->data['credit_id']);
+        $this->set(compact('credit_id','datas_credit'));
     }
 
     public function adjuntarPlanPago() {
@@ -244,6 +245,16 @@ class CreditsController extends AppController {
         $state_name                             = Configure::read('variables.estados_creditos.adjuntar_plan_pagos');
         $this->saveStage($state_name,AuthComponent::user('id'),$this->request->data['id'],$this->Session->read('documento_modelo'),'',0);
         return $documento;
+    }
+
+    public function finalizarCredito() {
+        $this->autoRender                       = false;
+        if ($this->request->is('ajax')) {
+            $datosC['Credit']['state']              = Configure::read('variables.nombres_estados_creditos.Pagado');
+            $datosC['Credit']['id']                 = $this->request->data['credit_id'];
+            $this->Credit->save($datosC);
+            return true;
+        }
     }
 
     public function sumTotalStateSolicitado() {

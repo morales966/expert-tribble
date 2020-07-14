@@ -1,0 +1,7 @@
+#register_form fieldset:not(:first-of-type) {
+	display: none;
+}
+
+.progress {
+    height: 40px;
+}

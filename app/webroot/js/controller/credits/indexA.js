@@ -80,6 +80,25 @@ $("body").on("click", "#btn_adjuntar_archivo", function() {
     }
 });
 
+$("body").on("click", ".finalizar_credito", function() {
+    var credit_id           = $(this).data('uid');
+    swal({
+        title: "¿Estas seguro de finalizar el crédito?",
+        text: "¿Deseas continuar con la acción?",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonClass: "btn-danger",
+        cancelButtonText:"Cancelar",
+        confirmButtonText: "Aceptar",
+        closeOnConfirm: false
+    },
+    function(){
+        $.post(copy_js.base_url+'Credits/finalizarCredito',{credit_id:credit_id}, function(result){
+            location.href =copy_js.base_url+copy_js.controller+'/'+copy_js.action;
+        });
+    });
+});
+
 $("body").on("click", ".registrar_cupo_aprobado", function() {
     var credit_id       = $(this).data('uid');
     $.post(copy_js.base_url+'Credits/add_retiro_cupo_aprobado',{credit_id:credit_id}, function(result){

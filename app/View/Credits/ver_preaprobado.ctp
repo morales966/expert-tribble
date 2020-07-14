@@ -22,6 +22,6 @@
 <br>
 <span>Valor retirado: <?php echo number_format($valor_retiro[0]['total'],0,",","."); ?></span>
 <br>
-<span>Cupo aprobado: <?php echo number_format($cupo_aprobado['Credit']['cupo_aprobado']) ?></span>
+<span>Cupo aprobado: <?php echo number_format($cupo_aprobado['Credit']['cupo_aprobado'],0,",",".") ?></span>
 <br>
-<span>Valor restante: <?php echo number_format($cupo_aprobado['Credit']['cupo_aprobado']-$valor_retiro[0]['total']) ?></span>
+<span>Valor restante: <?php echo number_format($cupo_aprobado['Credit']['cupo_aprobado']-$valor_retiro[0]['total'],0,",",".") ?></span>
