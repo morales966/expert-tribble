@@ -91,7 +91,7 @@
 				<?php echo $this->Form->input('ejecutivo',array('empty' => 'Selecciona el ejecutivo','options' => $ejecutivo,'label' => false,"class" => "form-control",'required' => true)); ?>
 			</div>
 			<div class="col-md-4 form-group">
-				<?php echo $this->Form->input('clase',array('empty' => 'Número el plan (clase)','options' => $clase,'label' => false,"class" => "form-control",'required' => true)); ?>
+				<?php echo $this->Form->input('clase',array('empty' => 'Número el plan (clase)','options' => $clase,'label' => false,"class" => "form-control",'required' => true,'id' => 'plan_cliente_val')); ?>
 			</div>
 			<div class="col-md-4 form-group">
 				<?php echo $this->Form->input('como_paga',array('empty' => 'Selecciona como paga','options' => $como_paga,'label' => false,"class" => "form-control",'required' => true)); ?>
@@ -101,12 +101,12 @@
 				<?php echo $this->Form->input('departamento',array('placeholder' => 'Departamento','label' => false,"class" => "form-control",'required' => true)); ?>
 			</div>
 			<div class="col-md-3 form-group">
-				<?php echo $this->Form->input('cantidad_comercios',array('empty' => 'Cantidad de comercios','options' => $cantidad_comercios,'label' => false,"class" => "form-control",'required' => true)); ?>
+				<?php echo $this->Form->input('cantidad_comercios',array('empty' => 'Cantidad de comercios','options' => $cantidad_comercios,'label' => false,"class" => "form-control",'required' => true,'id' => 'cantidad_comercios_val')); ?>
 			</div>
-			<!-- Opciones dependiendo del plan escogido y la cantidad de comercios -->
-			<div class="col-md-3 form-group">
-				<?php echo $this->Form->input('cuanto_paga',array('empty' => 'Selecciona como paga','options' => array('1' => '1','2' => '2'),'label' => false,"class" => "form-control",'required' => true)); ?>
+			<div class="col-md-3 form-group cuanto_paga">
+				<?php echo $this->Form->input('cuanto_paga',array('label' => false,"class" => "form-control",'default' => 'Selecciona cuanto paga','options' => array('Selecciona cuanto paga'))); ?>
 			</div>
+
 			<div class="col-md-4 form-group">
 				<?php echo $this->Form->input('productos_servicios',array('placeholder' => 'Producto o servicio que ofrece','label' => false,"class" => "form-control",'required' => true)); ?>
 			</div>

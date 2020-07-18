@@ -21,8 +21,8 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `proyectoapp`
 --
-CREATE DATABASE IF NOT EXISTS `proyectoapp` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish2_ci;
-USE `proyectoapp`;
+CREATE DATABASE IF NOT EXISTS `u864675752_democrediventa` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish2_ci;
+USE `u864675752_democrediventa`;
 
 -- --------------------------------------------------------
 

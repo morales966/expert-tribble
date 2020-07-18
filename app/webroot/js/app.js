@@ -88,12 +88,18 @@ $("body").on("click", "#btn_login_app", function() {
 	login();
 });
 
-$("body").on("click", "#btn_agregar_cliente", function() {
-    $.post(copy_js.base_url+'Users/add_client',{}, function(result){
-        $('#resultModalGrande').html(result);
-        $('#modalTitleGrande').text('Regístrate con nosotros');
-    	$('#modalGrande').modal('show');
-    });
+// $("body").on("click", "#btn_agregar_cliente", function() {
+//     $.post(copy_js.base_url+'Users/add_client',{}, function(result){
+//         $('#resultModalGrande').html(result);
+//         $('#modalTitleGrande').text('Regístrate con nosotros');
+//     	   $('#modalGrande').modal('show');
+//     });
+// });
+
+$("body").on("click", "#btn_dejar_datos", function() {
+    $('#resultModalGrande').html('<p>Estamos trabajando en la funcionalidad</p>');
+    $('#modalTitleGrande').text('Deja tus datos para comunicarnos contígo');
+    $('#modalGrande').modal('show');
 });
 
 $("body").on("click", "#btn_add_client_save", function() {

@@ -302,7 +302,6 @@ function opcionesSelect(valor) {
 			{val : 22, text: '22 meses'},
 			{val : 23, text: '23 meses'},
 			{val : 24, text: '24 meses'}
-
 		];
 		$(arr).each(function() {
 			sel.append($("<option>").attr('value',this.val).text(this.text));

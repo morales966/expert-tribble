@@ -124,8 +124,14 @@ $config = array(
 			'Corriente' 				=> 'Corriente'
 		),
 		'lista_planes'				=> array(
-			'Clase A' 					=> 'Clase A',
-			'Clase B'					=> 'Clase B'
+			'Clase A' 					=> array(
+												'nombre' 		=> 'Clase A',
+												'390800' 		=> '390800' // total
+											),
+			'Clase B'					=> array(
+												'nombre' 		=> 'Clase B',
+												'190400' 		=> '190400' // total
+											)
 		),
 		'lista_como_paga'			=> array(
 			'Contado (efectivo-transferencia)' 			=> 'Contado (efectivo-transferencia)',
@@ -161,7 +167,8 @@ $config = array(
 		),
 		'description_notificaciones' 	=> array(
 			'crear_credito' 			=> 	'Han registrado un nuevo crédito',
-			'crear_usuario_sistema' 	=> 	'Han registrado un nuevo usuario'
+			'crear_usuario_sistema' 	=> 	'Han registrado un nuevo usuario',
+			'crear_cliente' 			=> 	'Se ha registrado un cliente'
 		),
 
 	)

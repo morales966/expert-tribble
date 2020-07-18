@@ -38,8 +38,8 @@
 
 			<p class="txtDatosVista">
 				<b>Cedula:</b>
-				<img class="imagen-credit" dataimg="<?php echo $this->Html->url('/img/creditos/cedula/'.$credit['Credit']['foto_cedula_delantera']) ?>" src="<?php echo $this->Html->url('/img/creditos/cedula/'.$credit['Credit']['foto_cedula_delantera']) ?>" width="60px" height="40px" class="imgmin-product">
-				<img class="imagen-credit" dataimg="<?php echo $this->Html->url('/img/creditos/cedula/'.$credit['Credit']['foto_cedula_trasera']) ?>" src="<?php echo $this->Html->url('/img/creditos/cedula/'.$credit['Credit']['foto_cedula_trasera']) ?>" width="60px" height="40px" class="imgmin-product">
+				<img class="imagen-credit" dataimg="<?php echo $this->Html->url('/img/creditos/cedula/'.$credit['Credit']['foto_cedula_delantera']) ?>" src="<?php echo $this->Html->url('/img/creditos/cedula/'.$credit['Credit']['foto_cedula_delantera']) ?>" width="70px" height="55px" class="imgmin-product">
+				<img class="imagen-credit" dataimg="<?php echo $this->Html->url('/img/creditos/cedula/'.$credit['Credit']['foto_cedula_trasera']) ?>" src="<?php echo $this->Html->url('/img/creditos/cedula/'.$credit['Credit']['foto_cedula_trasera']) ?>" width="70x" height="55px" class="imgmin-product">
 			</p>
 		</div>
 	</div>
@@ -86,10 +86,10 @@
 							</span>
 						<?php endif ?>
 					</p>
-					
 				</div>
 			<?php endforeach; ?>
 		</div>
+		<br>
 	</div>
 	<br>
 	<button class="btn btn-secondary form-control" data-dismiss="modal">Cerrar</button>

@@ -89,7 +89,7 @@ class AppController extends Controller {
                     ->send();
             }
         } catch(Exception $e){
-            $this->log($e->getMessage(),"debug");
+            $this->log($e->getMessage(),"error");
         }
         return true;
     }
@@ -109,12 +109,12 @@ class AppController extends Controller {
         $this->Session->delete('archivo_foto_cedula_trasera');
         $this->Session->delete('archivo_perfil');
         $this->Session->delete('documento_modelo');
-        $this->Session->read('archivo_adjuntar_cedula_delantera');
-        $this->Session->read('archivo_adjuntar_cedula_trasera');
-        $this->Session->read('archivo_adjuntar_camara_comercio');
-        $this->Session->read('archivo_adjuntar_rut');
-        $this->Session->read('archivo_adjuntar_administrador');
-        $this->Session->read('archivo_adjuntar_almacen');
+        $this->Session->delete('archivo_adjuntar_cedula_delantera');
+        $this->Session->delete('archivo_adjuntar_cedula_trasera');
+        $this->Session->delete('archivo_adjuntar_camara_comercio');
+        $this->Session->delete('archivo_adjuntar_rut');
+        $this->Session->delete('archivo_adjuntar_administrador');
+        $this->Session->delete('archivo_adjuntar_almacen');
     }
 
     public function loadDocumentPdf($documento,$carpeta){

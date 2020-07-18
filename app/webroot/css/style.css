@@ -28,15 +28,8 @@ ul li:hover a.activeNavS {
   
 }
 
-#cuadroImagenNavbar {
-  height: 120px;
-  width: 300px;
-  background: black;
-}
-
 .tx {
   display: inline-block;
-  padding: 0 10px;
   font: normal normal normal 15px/1.4em atlas-aaa-500,sans-serif;
   color: #444444;
   transition: color 0.4s ease 0s;
@@ -47,11 +40,11 @@ ul li:hover a.activeNavS {
   color: #100c0c !important;
 }
 
-
 .txt-pbx {
-  text-align: right;
+  text-align: end;
   display: inline;
-  padding: 0rem 1rem;
+  padding: 5px;
+
 }
 
 .closess {
@@ -61,10 +54,15 @@ ul li:hover a.activeNavS {
 }
 
 @media screen and (max-width: 992px) {
-  #btn_login {
+   #btn_login {
     display: block;
-    content: “ “;
+    content: '';
   }
+  .img-logo {
+    height: 120px;
+    width: 350px;
+  }
+
 }
 /*--------------------------------------------------------------
 # Why Us

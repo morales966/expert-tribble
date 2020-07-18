@@ -42,3 +42,7 @@
     </div>
   </section>
 </main>
+
+<?php 
+  echo $this->Html->script("controller/users/add_client.js?".rand(),             array('block' => 'AppScript'));
+?>
