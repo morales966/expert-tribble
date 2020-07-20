@@ -10,11 +10,11 @@
         </div>
         <div class="d-flex justify-content-center justify-content-lg-start aos-init" data-aos="fade-up">
           <div class="d-flex mr-2">
-            <i class="fas fa-star fa-lg text-warning m-1"></i>
-            <i class="fas fa-star fa-lg text-warning m-1"></i>
-            <i class="fas fa-star fa-lg text-warning m-1"></i>
-            <i class="fas fa-star fa-lg text-warning m-1"></i>
-            <i class="fas fa-star fa-lg text-warning m-1"></i>
+            <i class="fa fa-star fa-lg text-warning m-1"></i>
+            <i class="fa fa-star fa-lg text-warning m-1"></i>
+            <i class="fa fa-star fa-lg text-warning m-1"></i>
+            <i class="fa fa-star fa-lg text-warning m-1"></i>
+            <i class="fa fa-star fa-lg text-warning m-1"></i>
           </div>
           <span class="text-white">Más de 12.500 créditos aprobados</span>
         </div>
@@ -22,28 +22,7 @@
       <div class="col">
         <div class="row justify-content-center">
           <div class=" col-md-10">
-            <form class="position-relative d-block aos-init aos-animate" data-aos="fade-up">
-              <div class="form-group">
-                <label class="text-white" for="course-name-1">Nombre Completo</label>
-                <input name="course-name" id="course-name-1" type="text" class="form-control form-control-lg" placeholder="Ingresa tu nombre">
-              </div>
-              <div class="form-group">
-                <label class="text-white" for="course-name-1">Número de Contacto</label>
-                <input name="course-name" id="course-name-1" type="text" class="form-control form-control-lg" placeholder="Ingresa tu número para contactarte">
-              </div>
-              <div class="form-group">
-                <label class="text-white" for="course-name-1">Correo electrónico</label>
-                <input name="course-name" id="course-name-1" type="email" class="form-control form-control-lg" placeholder="Ingresa tu correo">
-              </div>
-              <div class="form-group">
-                <label class="text-white" for="course-name-1">Establecimiento</label>
-                <input name="course-name" id="course-name-1" type="text" class="form-control form-control-lg" placeholder="Cómo se llama tu establecimiento">
-              </div>                
-              <div class="form-group text-center">
-                <button class="btn btn-lg btn-success btn-block mb-2" type="submit">Quiero conocer más beneficios</button>
-                <small class="text-white">Un asesor especializado te contactará para demostrarte cómo aumentar tus ventas</small>
-              </div>
-            </form>
+              <?php  echo $this->element('dejar-datos');  ?>
           </div>
         </div>
       </div>
@@ -78,7 +57,7 @@
                       <p class="lead font-weight-bold mt-2">1- Ventas virtuales a crédito y débito (vende tus productos online en tu ecommerce)</p>
                       <div class="mt-3 d-flex align-items-center pt-2 control-wp">
                         <div class="mr-3">
-                          <i class="fab fa-whatsapp fa-3x"></i>
+                          <i class="fa fa-whatsapp fa-3x"></i>
                         </div>
                         <a href="https://api.whatsapp.com/send?phone=573232880909&text=&source=&data=">
                           <div class="d-block">
@@ -104,7 +83,7 @@
                       <p class="lead font-weight-bold mt-2">2- Servicio de cobranza Prejurídico y jurídico (aplica para comercios que dan créditos independientes)</p>
                       <div class="mt-3 d-flex align-items-center pt-2 control-wp">
                         <div class="mr-3">
-                          <i class="fab fa-whatsapp fa-3x"></i>
+                          <i class="fa fa-whatsapp fa-3x"></i>
                         </div>
                         <a href="https://api.whatsapp.com/send?phone=573232880909&text=&source=&data=">
                           <div class="d-block">
@@ -130,7 +109,7 @@
                       <p class="lead font-weight-bold mt-2">3- Capacitaciones en Ventas Directas con seguimiento y acompañamiento en los resultados.</p>
                       <div class="mt-3 d-flex align-items-center pt-2 control-wp">
                         <div class="mr-3">
-                          <i class="fab fa-whatsapp fa-3x"></i>
+                          <i class="fa fa-whatsapp fa-3x"></i>
                         </div>
                         <a href="https://api.whatsapp.com/send?phone=573232880909&text=&source=&data=">
                           <div class="d-block">
@@ -212,9 +191,9 @@
           <div class="col-md-12 mt-2">
             <ul class="nav justify-content-center">
               <li class="mr-4">Conoce más en </li>
-              <li class="mr-4"><a href=""></a><i class="fab fa-facebook fa-2x"></i></li>
-              <li class="mr-4"><a href=""></a><i class="fab fa-instagram fa-2x"></i></li>
-              <li class="mr-4"><a href=""></a><i class="fab fa-whatsapp fa-2x"></i></li>
+              <li class="mr-4"><a href=""></a><i class="fa fa-facebook fa-2x"></i></li>
+              <li class="mr-4"><a href=""></a><i class="fa fa-instagram fa-2x"></i></li>
+              <li class="mr-4"><a href=""></a><i class="fa fa-whatsapp fa-2x"></i></li>
             </ul>
           </div>
         </div>            
@@ -266,6 +245,7 @@
     </div>
   </div>
 </section>
+
 
 <?php 
 echo $this->Html->script("controller/users/add_client.js?".rand(),             array('block' => 'AppScript'));
