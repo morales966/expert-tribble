@@ -303,6 +303,14 @@ input.bigcheck {
 .accesorioslist label{
     margin-left: 10px;
 }
+
+#container_creditos .panel-heading {
+    background: #cddbe8;
+    padding: 10px;
+}
+.table .thead-light th {
+    background-color: #e3ebf3 !important;
+}
 /*--------------------------------------------------------------
 # Mensaje(Alerta)
 --------------------------------------------------------------*/

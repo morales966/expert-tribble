@@ -1,17 +1,17 @@
 <div class="content-wrapper">
 	<div class="container-fluid cuadro_panding">
-	<div class="bg-white-content">
+	
 		<?php if (AuthComponent::user('role') != Configure::read('variables.rolCliente')) { ?>
-
-			<h2 class="titleView">Créditos</h2>
+			<div class="bg-white-content bg-primary text-white mb-2">
+				<h2 class="titleView">Panel de Créditos</h2>
+			</div>
 			<div class="container-fluid">
-				<div id="container_creditos" class="row">
+				<div id="container_creditos" class="row mb-5">
 
-					<div class="panel panel-primary kanban-col">
+					<div class="panel panel-primary kanban-col ml-0">
 						<div class="panel-heading">
-							<strong class="txt_titulo_etapa"><?php echo Configure::read('variables.estados_creditos.1') ?></strong>
+							<strong class="txt_titulo_etapa"><?php echo Configure::read('variables.estados_creditos.1') ?> <span class="pull-right" id="txt_cantidad_solicitud"></span></strong>
 						</div>
-						<span class="txt_cantidad_div" id="txt_cantidad_solicitud"></span>
 						<div class="container_state">
 							<div class="panel-body_solicitud">
 								<div id="DOING10" class="kanban-centered">
@@ -56,9 +56,8 @@
 
 					<div class="panel panel-primary kanban-col">
 						<div class="panel-heading">
-							<strong class="txt_titulo_etapa"><?php echo Configure::read('variables.estados_creditos.2') ?></strong>
+							<strong class="txt_titulo_etapa"><?php echo Configure::read('variables.estados_creditos.2') ?> <span class="pull-right" id="txt_cantidad_estudio"></span></strong>
 						</div>
-						<span class="txt_cantidad_div" id="txt_cantidad_estudio"></span>
 						<div class="container_state">
 							<div class="panel-body_estudio">
 								<div id="DOING20" class="kanban-centered">
@@ -118,7 +117,7 @@
 
 					<div class="panel panel-primary kanban-col">
 						<div class="panel-heading">
-							<strong class="txt_titulo_etapa"><?php echo Configure::read('variables.estados_creditos.3') ?></strong>
+							<strong class="txt_titulo_etapa"><?php echo Configure::read('variables.estados_creditos.3') ?> <span class="pull-right" id="txt_cantidad_detenido"></strong>
 						</div>
 						<span class="txt_cantidad_div" id="txt_cantidad_detenido"></span>
 						<div class="container_state">
@@ -171,9 +170,8 @@
 
 					<div class="panel panel-primary kanban-col">
 						<div class="panel-heading">
-							<strong class="txt_titulo_etapa"><?php echo Configure::read('variables.estados_creditos.4') ?></strong>
+							<strong class="txt_titulo_etapa"><?php echo Configure::read('variables.estados_creditos.4') ?> <span class="pull-right" id="txt_cantidad_aprobado_no_retirado"></strong>
 						</div>
-						<span class="txt_cantidad_div" id="txt_cantidad_aprobado_no_retirado"></span>
 						<div class="container_state">
 							<div class="panel-body_aprobado-no-retirado">
 								<div id="DOING40" class="kanban-centered">
@@ -230,9 +228,8 @@
 
 					<div class="panel panel-primary kanban-col">
 						<div class="panel-heading">
-							<strong class="txt_titulo_etapa"><?php echo Configure::read('variables.estados_creditos.5') ?></strong>
+							<strong class="txt_titulo_etapa"><?php echo Configure::read('variables.estados_creditos.5') ?> <span class="pull-right" id="txt_cantidad_aprobado_retirado"></strong>
 						</div>
-						<span class="txt_cantidad_div" id="txt_cantidad_aprobado_retirado"></span>
 						<div class="container_state">
 							<div class="panel-body_aprobado-retirado">
 								<div id="DOING50" class="kanban-centered">
@@ -259,25 +256,25 @@
 														</span>
 													</p>
 													<span>
-														<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Finalizado" class="finalizar_credito" data-uid="<?php echo $credit['Credit']['id']; ?>">
+														<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Finalizado" class="finalizar_credito btn btn-sm btn-outline-primary" data-uid="<?php echo $credit['Credit']['id']; ?>">
 															<i class="fa fa-step-forward"></i>
 														</a>
-														<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Adjuntar plan pago" class="adjuntar_plan_pago" data-uid="<?php echo $credit['Credit']['id']; ?>">
+														<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Adjuntar plan pago" class="adjuntar_plan_pago btn btn-sm btn-outline-primary" data-uid="<?php echo $credit['Credit']['id']; ?>">
 															<i class="fa fa-paperclip"></i>
 														</a>
-														<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Ver preaprobado" class="ver_preaprobado" data-uid="<?php echo $credit['Credit']['id']; ?>">
+														<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Ver preaprobado" class="ver_preaprobado btn btn-sm btn-outline-primary" data-uid="<?php echo $credit['Credit']['id']; ?>">
 															<i class="fa fa-sort-numeric-desc"></i>
 														</a>
-														<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Registrar cupo retirado" class="registrar_cupo_aprobado" data-uid="<?php echo $credit['Credit']['id']; ?>">
+														<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Registrar cupo retirado" class="registrar_cupo_aprobado btn btn-sm btn-outline-primary" data-uid="<?php echo $credit['Credit']['id']; ?>">
 															<i class="fa fa-edit"></i>
 														</a>
-														<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Ver cupo aprobado" class="ver_cupo_aprobado" data-uid="<?php echo $credit['Credit']['id']; ?>">
+														<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Ver cupo aprobado" class="ver_cupo_aprobado btn btn-sm btn-outline-primary" data-uid="<?php echo $credit['Credit']['id']; ?>">
 															<i class="fa fa-sort-numeric-asc"></i>
 														</a>
-														<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Ver datos del crédito" class="ver_credito" data-uid="<?php echo $credit['Credit']['id']; ?>">
+														<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Ver datos del crédito" class="ver_credito btn btn-sm btn-outline-primary" data-uid="<?php echo $credit['Credit']['id']; ?>">
 															<i class="fa fa-eye"></i>
 														</a>
-														<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Añadir comentario" class="btn_comentario" data-uid="<?php echo $credit['Credit']['id']; ?>">
+														<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Añadir comentario" class="btn_comentario btn btn-sm btn-outline-primary" data-uid="<?php echo $credit['Credit']['id']; ?>">
 															<i class="fa fa-comment-o"></i>
 														</a>
 													</span>
@@ -293,11 +290,10 @@
 						<p class="txt_total_estado">Total: <span id="total_aprobado_retirado"></span></p>
 					</div>
 
-					<div class="panel panel-primary kanban-col">
+					<div class="panel panel-primary kanban-col mr-0">
 						<div class="panel-heading">
-							<strong class="txt_titulo_etapa"><?php echo Configure::read('variables.estados_creditos.0') ?></strong>
+							<strong class="txt_titulo_etapa"><?php echo Configure::read('variables.estados_creditos.0') ?> <span class="pull-right" id="txt_cantidad_negado"></strong>
 						</div>
-						<span class="txt_cantidad_div" id="txt_cantidad_negado"></span>
 						<div class="container_state">
 							<div class="panel-body_negado">
 								<div id="DOING0" class="kanban-centered">
@@ -348,7 +344,7 @@
 
 				</div>
 			</div>
-
+		<div class="bg-white-content mb-5">
 			<h2 class="titleView">Créditos finalizados</h2>
 			<div class="table-responsive">
 				<table class="table">
@@ -402,10 +398,11 @@
 						<b><?php echo $this->Paginator->counter(array('format' => '{:count} registros en total')); ?></b>
 					</div>
 				</div>
+				</div>
 				
 			<?php } else { ?>
-
-				<div class="row">
+				<div class="bg-white-content mb-2">
+				<div class="row ">
 					<div class="col-md-3">
 						<h2 class="tittle">Panel de Créditos</h2>
 					</div>
@@ -465,6 +462,7 @@
 					</div>
 				</div>
 
+
 				<div class="table-responsive mt-3">
 					<table class="table table-hover">
 						<thead class="thead-light ">
@@ -513,9 +511,9 @@
 							<b><?php echo $this->Paginator->counter(array('format' => '{:count} registros en total')); ?></b>
 						</div>
 					</div>
+					</div>
 
 				<?php } ?>
-	</div>
 	</div>
 </div>
 

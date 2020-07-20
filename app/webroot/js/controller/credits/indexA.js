@@ -152,27 +152,27 @@ $("body").on("click", "#btn_comentary", function() {
 });
 
 function total_estados() {
-    $('#txt_cantidad_solicitud').text('Cantidad: '+$('#DOING10').find('article').length);
+    $('#txt_cantidad_solicitud').text($('#DOING10').find('article').length);
     $.post(copy_js.base_url+'Credits/sumTotalStateSolicitado',{}, function(result){
         $('#total_solicitud').text(result);
     });
-    $('#txt_cantidad_estudio').text('Cantidad: '+$('#DOING20').find('article').length);
+    $('#txt_cantidad_estudio').text($('#DOING20').find('article').length);
     $.post(copy_js.base_url+'Credits/sumTotalStateEstudio',{}, function(result){
         $('#total_estudio').text(result);
     });
-    $('#txt_cantidad_detenido').text('Cantidad: '+$('#DOING30').find('article').length);
+    $('#txt_cantidad_detenido').text($('#DOING30').find('article').length);
     $.post(copy_js.base_url+'Credits/sumTotalStateDetenido',{}, function(result){
         $('#total_detenido').text(result);
     });
-    $('#txt_cantidad_aprobado_no_retirado').text('Cantidad: '+$('#DOING40').find('article').length);
+    $('#txt_cantidad_aprobado_no_retirado').text($('#DOING40').find('article').length);
     $.post(copy_js.base_url+'Credits/sumTotalValorAprobadoStateAprobadoNoRetirado',{}, function(result){
         $('#total_aprobado_no_retirado').text(result);
     });
-    $('#txt_cantidad_aprobado_retirado').text('Cantidad: '+$('#DOING50').find('article').length);
+    $('#txt_cantidad_aprobado_retirado').text($('#DOING50').find('article').length);
     $.post(copy_js.base_url+'Credits/sumTotalValorAprobadoStateAprobadoRetirado',{}, function(result){
         $('#total_aprobado_retirado').text(result);
     });
-    $('#txt_cantidad_negado').text('Cantidad: '+$('#DOING0').find('article').length);
+    $('#txt_cantidad_negado').text($('#DOING0').find('article').length);
     $.post(copy_js.base_url+'Credits/sumTotalStateNegado',{}, function(result){
         $('#total_negado').text(result);
     });

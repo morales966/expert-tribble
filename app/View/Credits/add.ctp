@@ -24,10 +24,9 @@
 					<h3 class="upper mb-3 text-primary">Estás diligenciando el Paso 1</h3>
 					<div class="content-step">
 						<div class="form-row">
-							<div class="form-group col-md-4">
+							<div class="form-group col-md-4">z
 								<b>¿Cuánto necesitas?</b>
-								<?php echo $this->Form->input('vaPphsssss
-								lor_credito',array('label' => false,'class' => 'form-control','placeholder' => 'Ingresa un valor','min' => '50000','max' => '1500000')); ?>
+								<?php echo $this->Form->input('valor_credito',array('label' => false,'class' => 'form-control','placeholder' => 'Ingresa un valor','min' => '50000','max' => '1500000')); ?>
 							</div>
 							<div class="form-group col-md-4">
 								<b>Tiempo en meses</b>
