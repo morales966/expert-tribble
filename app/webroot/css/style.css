@@ -1,13 +1,20 @@
 #main {
   z-index: 3;
 }
-
+.bg-white-content{
+  background: white;
+  padding: 35px;
+}
 .navApp {
   background: white;
 }
 
 ul li:hover a {
   background: #007bff;
+}
+
+h2.tittle, h2.titleView{
+  font-size: 30px;
 }
 
 .activeNav {
@@ -232,15 +239,17 @@ ul li:hover a.activeNavS {
   height: 100%;
   width: 100%;
 }
+.upper{
+  text-transform: uppercase;
+}
 /*--------------------------------------------------------------
 # Fin footeer
 --------------------------------------------------------------*/
-.txtSpanPasos {
-  font-size: 12px;
-  color: orange;
-  position: inherit;
+input.bigcheck {
+    width: 22px;
+    height: 22px;
+    vertical-align: middle;
 }
-
 .txtSpanDescription {
   font-size: 12px;
   color: black;
@@ -313,7 +322,7 @@ ul li:hover a.activeNavS {
 
 .message.error {
     color: #ffffff;
-    background: #FF0505;
+    background: #c13a38;
 }
 /*--------------------------------------------------------------
 # Fin

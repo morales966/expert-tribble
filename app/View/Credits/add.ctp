@@ -1,48 +1,57 @@
 <div class="content-wrapper">
-	<div class="container cuadro_panding">
-		<h1 class="titleTable">Solicitar crédito</h1>
-		<p class="tittleEnlace">
-			<a href="<?php echo $this->Html->url(array('action'=>'index')) ?>">Listar créditos</a>
-		</p>
+	<div class="container-fluid cuadro_panding">
+		<div class="bg-white-content">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="row">
+						<div class="col-md-6">
+							<h2 class="titleView">Solicitar crédito</h2>
+						</div>
+						<div class="col-md-6 text-right">
+							<a class="btn btn-primary" href="<?php echo $this->Html->url(array('action'=>'index')) ?>">Ver todos los Créditos</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			</div>
+
 		<?php echo $this->Form->create('Credit',array('data-parsley-validate','enctype'=>"multipart/form-data","id" => "register_form")); ?>
 			<div class="progress">
 				<div class="progress-bar progress-bar-striped active form-control" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
 			</div>
-			<p class="txtDerecho">Crediventas te ofrece la opción de solicitar un crédito Tradicional.</p>
-
-			<fieldset>
-				<span class="txtSpanPasos">Paso 1</span>
-				<div class="border_cuadro">
-					<div class="form-row">
-						<div class="form-group col-md-4">
-							<b>¿CUANTO NECESITAS?</b>
-							<?php echo $this->Form->input('valor_credito',array('label' => false,'class' => 'form-control','placeholder' => 'Ingresa un valor','min' => '50000','max' => '1500000')); ?>
-						</div>
-						<div class="form-group col-md-4">
-							<b>Tiempo en meses</b>
-							<div class="meses_credito">
-								<?php echo $this->Form->input('CreditNumeroMeses1',array('label' => false,'class' => 'form-control','default' => 'Introduce primero el valor que necesitas','options' => array('Introduce primero el valor que necesitas'))); ?>
+			<hr>
+			<fieldset class="mt-4 bg-white-content">
+					<h3 class="upper mb-3 text-primary">Estás diligenciando el Paso 1</h3>
+					<div class="content-step">
+						<div class="form-row">
+							<div class="form-group col-md-4">
+								<b>¿Cuánto necesitas?</b>
+								<?php echo $this->Form->input('vaPphsssss
+								lor_credito',array('label' => false,'class' => 'form-control','placeholder' => 'Ingresa un valor','min' => '50000','max' => '1500000')); ?>
+							</div>
+							<div class="form-group col-md-4">
+								<b>Tiempo en meses</b>
+								<div class="meses_credito">
+									<?php echo $this->Form->input('CreditNumeroMeses1',array('label' => false,'class' => 'form-control','default' => 'Introduce primero el valor que necesitas','options' => array('Introduce primero el valor que necesitas'))); ?>
+								</div>
+							</div>
+							<div class="form-group col-md-4">
+								<b>Valor cuota aproximadamente</b>
+								<?php echo $this->Form->input('valor_cuota',array('label' => false,'class' => 'form-control','placeholder' => 'VALOR DE CUOTA','readonly' => true,'required' => false)); ?>
 							</div>
 						</div>
-						<div class="form-group col-md-4">
-							<b>VALOR CUOTA APROXIMADO</b>
-							<?php echo $this->Form->input('valor_cuota',array('label' => false,'class' => 'form-control','placeholder' => 'VALOR DE CUOTA','readonly' => true,'required' => false)); ?>
-						</div>
 					</div>
-				</div>
-				<div class="chek">
-					<div>
-						<label>¿Aceptas el valor de la cuota?</label>
-						<input id="checkbox1" type="checkbox" data-parsley-required="true" data-parsley-trigger="click">
+					<div class="chek">
+						<input id="checkbox1" class="bigcheck" type="checkbox" data-parsley-required="true" data-parsley-trigger="click">
+						<label class="text-primary"><b>¿Aceptas el valor de la cuota?</b></label>
 					</div>
-				</div>
-				<br>
-				<input type="button" class="next-form btn btn-info form-control" value="SIGUIENTE" />
+						<input type="button" class="next-form btn btn-success upper pull-right" value="siguiente" />
+
+
 			</fieldset>
-			<fieldset>
-				<span class="txtSpanPasos">Paso 2</span>
-				<div class="border_cuadro">
-					<h4 class="txtCenter">Datos persona</h4>
+			<fieldset class="mt-4 bg-white-content">
+				<h3 class="upper mb-3 text-primary">Estás diligenciando el Paso 2</h3>
+				<div class="content-step">
 					<div class="form-row">
 						<div class="form-group col-md-3">
 							<b>Nombres</b>
@@ -62,27 +71,28 @@
 						</div>
 					</div>
 				</div>
+				<hr>
 				<div class="chek">
 					<div id="cuadro_tomar_foto">
 
 						<div class="form-row">
 							<div class="form-group col-md-4">
-								<label class="txtLabelImagenes">Por favor tomale una foto a la parte delantera la cedula</label>
-								<button type="button" class="btn btn-primary form-control btn_abrir_modalCD">
+								<label class="txtLabelImagenes">Por favor tómale una foto a la parte delantera la cédula</label>
+								<button type="button" class="btn btn-outline-primary form-control btn_abrir_modalCD">
 									Tomar foto
 								</button>
 								<?php echo $this->Form->input('foto_cedula_delantera1',array('class' => 'form-control','label' => false,'readonly' => true,'required' => true)); ?>
 							</div>
 							<div class="form-group col-md-4">
-								<label class="txtLabelImagenes">Por favor tomale una foto a la parte trasera de la cedula</label>
-								<button type="button" class="btn btn-primary form-control btn_abrir_modalCT">
+								<label class="txtLabelImagenes">Por favor tómale una foto a la parte trasera de la cédula</label>
+								<button type="button" class="btn btn-outline-primary form-control btn_abrir_modalCT">
 									Tomar foto
 								</button>
 								<?php echo $this->Form->input('foto_cedula_trasera1',array('class' => 'form-control','label' => false,'readonly' => true,'required' => true)); ?>
 							</div>
 							<div class="form-group col-md-4">
-								<label class="txtLabelImagenes">Por favor tomale una foto de la persona</label> <br><br>
-								<button type="button" class="btn btn-primary form-control btn_abrir_modalFP">
+								<label class="txtLabelImagenes">Por favor tómale una foto de la persona</label>
+								<button type="button" class="btn btn-outline-primary form-control btn_abrir_modalFP">
 									Tomar foto
 								</button>
 								<?php echo $this->Form->input('foto_perfil1',array('class' => 'form-control','label' => false,'readonly' => true,'required' => true)); ?>
@@ -111,17 +121,13 @@
 				</div>
 				<br>
 				<div class="chek">
-					<div>
-						<input id="checkbox2" type="checkbox" data-parsley-required="true" data-parsley-trigger="click">
-						<label> Acepta las <a id="TerminosCondiciones" href="javascript:void(0)">condiciones legales y la Politica de privacidad de crediventas.</a></label>
-					</div>
+					<input id="checkbox2" type="checkbox" class="bigcheck" data-parsley-required="true" data-parsley-trigger="click">
+					<label> Acepta las <a id="TerminosCondiciones" href="javascript:void(0)">condiciones legales y la Politica de privacidad de crediventas.</a></label>
 				</div>
-				<br>
-				<input type="button" name="previous" class="previous-form btn btn-info form-control" value="ANTERIOR" />
-				<?php echo $this->Form->button('SOLICITAR CRÉDITO',array("class" => "btn btn-primary form-control")); ?>
+					<?php echo $this->Form->button('SOLICITAR CRÉDITO',array("class" => "btn btn-success pull-right upper ml-2")); ?>
+					<input type="button" name="previous" class="previous-form btn btn-primary pull-right upper" value="Regresar" />
 			</fieldset>
 		</form>
-		<br>
 	</div>
 </div>
 

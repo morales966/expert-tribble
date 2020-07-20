@@ -76,10 +76,25 @@ a.scroll-top i {
 .bg-gray {
     background-color: #f1f6fc!important;
 }
+#mas-info{
+	/*background-image: url("../img/backlast.png");*/
+}
+#carouselExampleTestimonials .carousel-control-next, #carouselExampleTestimonials .carousel-control-prev {
+    color: #000;
+}
+#carouselExampleTestimonials .carousel-control-next {
+    right: -70px;
+}
+#carouselExampleTestimonials .carousel-control-prev {
+    left: -70px;
+}
 #main-menu .nav-link {
     display: block;
     padding: .5rem 1rem;
     color: #c5d7ff;
+}
+#main-menu .nav-item:hover{
+	background-color: transparent !important;
 }
 h3.display-7 {
     font-size: 2.5rem;

@@ -2333,18 +2333,6 @@ body.sidebar-collapse:not(.sidebar-mini-md):not(.sidebar-mini) .main-header::bef
   padding: 25px;
 }
 
-.tittle {
-  font-size: 40px;
-  margin: 0px;
-  display: inline;
-}
-
-.titleTable {
-  text-align: center;
-  display: inline;
-  font-size: 40px;
-}
-
 .tittleEnlace {
   display: inline;
 }
@@ -2378,11 +2366,6 @@ body.sidebar-collapse:not(.sidebar-mini-md):not(.sidebar-mini) .main-header::bef
   padding: 5px;
 }
 
-.chek {
-  border: groove;
-  padding: 10px;
-  margin: -5px;
-}
 .cuadro_terminos {
   width: 100%;
   height: 500px;
@@ -2405,11 +2388,6 @@ body.sidebar-collapse:not(.sidebar-mini-md):not(.sidebar-mini) .main-header::bef
 /*--------------------------------------------------------------
 # View
 --------------------------------------------------------------*/
-.titleView {
-  text-align: center;
-  font-size: 45px;
-  margin: 10px;
-}
 
 .subTitle {
   text-align: center;

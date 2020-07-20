@@ -37,7 +37,7 @@
 		<?php if (AuthComponent::user('id')): ?>
 	    	</div>
 		<?php endif ?>
-		<?php echo $this->element('footer'); ?>
+		<!-- <?php echo $this->element('footer'); ?> -->
 
 		
 	    <?php

@@ -38,7 +38,7 @@
         <p class="lead mt-4 aos-init" data-aos="fade-up">Realizamos todo el proceso de credito desde tu negocio sin hacer desplazar tu cliente a otros lugares. Tu cliente tendrá múltiples medios de pago, tanto físicos como virtuales, estos son nuestros partners de recaudos.</p>
         <div class="row row-grid">
           <div class="col-xs-12 col-md-12 my-1 aos-init" data-aos="fade-up">
-            <img src="https://via.placeholder.com/150x45/ccc/ffffff&text=IMG LOGO" alt="" class="img-fluid">
+            <img src="http://0523aae09f0cadbd79f4-60bf0867add971908d4f26a64519c2aa.r62.cf5.rackcdn.com/btns/epayco/epayco_pago_seguro.png" alt="" class="img-fluid">
           </div>
         </div>
       </div>
@@ -124,6 +124,14 @@
               </div>
             </div>
           </div>
+          <a class="carousel-control-prev" href="#carouselExampleTestimonials" role="button" data-slide="prev">
+            <i class="fa fa-chevron-left" aria-hidden="true"></i>
+            <span class="sr-only">Previous</span>
+          </a>
+          <a class="carousel-control-next" href="#carouselExampleTestimonials" role="button" data-slide="next">
+            <i class="fa fa-chevron-right" aria-hidden="true"></i>
+            <span class="sr-only">Next</span>
+          </a>          
         </div>
       </div>
     </div>

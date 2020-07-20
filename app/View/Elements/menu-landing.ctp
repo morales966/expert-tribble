@@ -25,7 +25,7 @@
 	      </li>			      
 	    </ul>
 
-  		<a class="btn btn-success ml-md-3" id="btn_login">INICIAR SESIÓN</a>
+  		<a class="btn btn-success text-white ml-md-3" id="btn_login">INICIAR SESIÓN</a>
 
 	  </div>
 	</div>
