@@ -10,6 +10,7 @@ class PagesController extends AppController {
     }
 
     public function home(){
+        $this->layout = "landing";
     	if (AuthComponent::user('id')){
 			$this->redirect(array('action' => 'index'));
 		}

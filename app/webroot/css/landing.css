@@ -1,0 +1,117 @@
+html{
+	scroll-behavior: smooth;
+}
+.bg-overlay {
+    background: rgb(0 90 255 / 72%);
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 0;
+}
+
+.control-wp .fab{
+	margin-top: -5px;
+	color: #189d0e;
+}
+.control-wp , .control-wp a{
+	color: #189d0e;
+}
+a.scroll-top {
+	color: #fff;
+	display: none;
+	width: 30px;
+	height: 30px;
+	position: fixed;
+	z-index: 1000;
+	bottom: 50px;
+	right: 30px;
+	font-size: 20px;
+	background: #222;
+	border-radius: 3px !important;
+	text-align: center;
+	border: 1px solid hsla(0, 0%, 78%, 0.3)
+}
+a.scroll-top i {
+	position: relative;
+	top: -2px;
+}
+.evita {
+    font-size: 14px;
+    line-height: 16px;
+    margin-bottom: 0px;
+    padding-top: 10px;
+}
+.evita a{
+    color: white;
+    font-weight: bold;
+}
+.shadowt{
+	text-shadow: 2px 3px #002e50;
+}
+.slick-slide img {
+    display: block;
+    margin: 0 auto;
+}
+.bg-texture{
+	background: url("https://www.toptal.com/designers/subtlepatterns/patterns/dot-grid.png")
+}
+.bg-blue2 {
+    background-color:#001b50!important;}
+
+.bg-blue1 {
+    background: linear-gradient(to bottom, #05389c 0%, #0a2e71 100%);
+}
+.color2 {
+    color: #ffc107;
+}
+.bg-pc {
+    background: linear-gradient(to bottom, rgb(235 242 251) 0%, rgba(255,255,255,1) 60%, rgb(235 242 251) 60%, rgb(235 242 251) 60%, rgb(235 242 251) 100%);
+}
+.bg-white-shadow {
+    background-color: white;
+    box-shadow: 8px 2px 18px #020f2157;
+}
+.bg-gray {
+    background-color: #f1f6fc!important;
+}
+#main-menu .nav-link {
+    display: block;
+    padding: .5rem 1rem;
+    color: #c5d7ff;
+}
+h3.display-7 {
+    font-size: 2.5rem;
+}
+.bg-white-shadow #main-menu .nav-link {
+    color: #60667d !important;
+}
+.logowp{padding:13px 10px;width:88%}
+p.textwp {
+    position: relative;
+    left: 70px;
+    bottom: 56px;
+    font-weight: bold;
+    color: #00d42a;
+    line-height: 16px;
+    font-size: 18px;
+    display: -webkit-inline-box;
+}
+.pinkBg{background-color:#8BC34A!important;background-image:linear-gradient(90deg,#8BC34A,#01ac5c)}
+
+.intro-banner-vdo-play-btn{height:60px;width:60px;position:fixed;bottom:5%;left:5%;text-align:center;
+  margin:-30px 0 0 -30px;border-radius:100px;z-index:99999}
+
+.intro-banner-vdo-play-btn i{line-height:56px;font-size:30px}
+
+.intro-banner-vdo-play-btn .ripple{
+	position:absolute;width:160px;height:160px;z-index:-1;left:50%;top:50%;opacity:0;
+	margin:-80px 0 0 -80px;border-radius:100px;-webkit-animation:ripple 1.8s infinite;animation:ripple 1.8s infinite
+}
+@-webkit-keyframes ripple{0%{opacity:1;-webkit-transform:scale(0);transform:scale(0)}100%{opacity:0;-webkit-transform:scale(1);transform:scale(1)}}
+@keyframes ripple{0%{opacity:1;-webkit-transform:scale(0);transform:scale(0)}100%{opacity:0;-webkit-transform:scale(1);transform:scale(1)}}
+.intro-banner-vdo-play-btn .ripple:nth-child(2){animation-delay:.3s;-webkit-animation-delay:.3s}
+.intro-banner-vdo-play-btn .ripple:nth-child(3){animation-delay:.6s;-webkit-animation-delay:.6s}
+
+
