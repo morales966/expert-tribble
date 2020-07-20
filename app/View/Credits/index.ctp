@@ -359,7 +359,7 @@
 			<h2 class="titleView">Créditos finalizados</h2>
 			<div class="table-responsive">
 				<table class="table">
-					<thead class="thead-light">
+					<thead class="thead-dark">
 						<tr>
 							<th>Cliente</th>
 							<th>Nombre cliente</th>

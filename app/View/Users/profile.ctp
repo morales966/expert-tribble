@@ -1,6 +1,7 @@
 <div class="content-wrapper">
-	<div class="container">
-		<h1 class="txtDatosVista">Perfil de Usuario</h1>
+	<div class="container-fluid cuadro_panding">
+	<div class="bg-white-content">
+		<h2 class="tittle">Perfil de Usuario</h2>
 		<?php echo $this->Form->create('User',array('data-parsley-validate'=>true)); ?>
 			<div class="form-group row">
 				<label for="UserName" class="col-sm-2 col-form-label">Nombre</label>
@@ -35,10 +36,13 @@
 				</div>
 			</div>
 			<div class="form-group">
-	    		<?php echo $this->Form->button('Actualizar',array("class" => "btn btn-info form-control")); ?>
+	    		<?php echo $this->Form->button('Actualizar',array("class" => "btn btn-success pull-right")); ?>
 	        </div>
 	    </form>
-	    <a href="javascript:void(0)" data-toggle="modal" data-target="#cambiarContrasenaModal">Cambiar contraseña</a>
+	    <div class="mb-3 b-block pb-5">	
+	    	<a href="javascript:void(0)" data-toggle="modal" data-target="#cambiarContrasenaModal" class="btn-secondary btn pull-right mr-2">Cambiar contraseña</a>
+	    </div>
+	</div>
 	</div>
 </div>
 

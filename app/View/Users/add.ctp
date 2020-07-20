@@ -1,8 +1,7 @@
 <div class="content-wrapper">
-  <div class="container">
-    <h1 class="txtDatosVista">Registrar Usuario</h1>
-
-
+  <div class="container-fluid cuadro_panding">
+  <div class="bg-white-content">
+    <h2 class="tittle">Registrar Usuario</h2>
     <?php echo $this->Form->create('User',array('data-parsley-validate'=>true)); ?>
       <div class="form-group">
         <?php echo $this->Form->input('name',array('label' => 'Nombre','class' => 'form-control','placeholder' => 'Nombre')); ?>
@@ -20,11 +19,11 @@
       </div>
 
 
-      <div class="form-group">
-        <?php echo $this->Form->button('Actualizar',array("class" => "btn btn-info form-control")); ?>
+      <div class="form-group pb-5">
+        <?php echo $this->Form->button('Guardar Usuario',array("class" => "btn btn-success pull-right mb-3")); ?>
       </div>
   </form>
 
-
+  </div>
   </div>
 </div>

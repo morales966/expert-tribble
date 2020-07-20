@@ -1,9 +1,8 @@
 <div class="content-wrapper">
 	<div class="container-fluid cuadro_panding">
-
-		<hr>
-		<div class="row mb-4">
-			<div class="col-md-6">
+		<div class="bg-white-content mb-5">
+		<div class="row">
+			<div class="col-md-6 mb-2">
 				<h2 class="tittle">Usuarios</h2>
 			</div>	
 			<div class="col-md-6 pull-right">
@@ -28,9 +27,7 @@
 					</a>				
 				</div>				 
 			</div>
-				
 		</div>
-		
 
 		<div class="table-responsive">
 			<table class="table">
@@ -76,7 +73,8 @@
 				<b><?php echo $this->Paginator->counter(array('format' => '{:count} registros en total')); ?></b>
 			</div>
 		</div>
-
+		</div>
+		<div class="bg-white-content mb-5">
 		<?php if (!isset($this->request->query['q'])): ?>
 			<h2 class="tittle">Clientes</h2>
 			<div class="table-responsive">
@@ -106,6 +104,7 @@
 				</table>
 			</div>
 		<?php endif ?>
+	</div>
 	</div>
 </div>
 
