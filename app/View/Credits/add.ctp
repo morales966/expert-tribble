@@ -24,7 +24,7 @@
 					<h3 class="upper mb-3 text-primary">Estás diligenciando el Paso 1</h3>
 					<div class="content-step">
 						<div class="form-row">
-							<div class="form-group col-md-4">z
+							<div class="form-group col-md-4">
 								<b>¿Cuánto necesitas?</b>
 								<?php echo $this->Form->input('valor_credito',array('label' => false,'class' => 'form-control','placeholder' => 'Ingresa un valor','min' => '50000','max' => '1500000')); ?>
 							</div>

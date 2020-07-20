@@ -1,5 +1,5 @@
 .kanban-col {
-    width: 16.225%;
+    width: 16.275%;
     float: left;
     background: white;
     margin: 0px 4px;
@@ -32,7 +32,9 @@
     bottom: 20px;
     /*margin-left: 18px;*/
 }
-
+.panel-body_solicitud, .panel-body_estudio, .panel-body_aprobado-no-retirado, .panel-body_detenido, .panel-body_aprobado-retirado, .panel-body_negado{
+    height: 97%
+}
 .kanban-centered .kanban-entry {
     margin: 7px;
     border-radius: 0px;
@@ -98,7 +100,7 @@
 
 .kanban-centered .kanban-entry .kanban-entry-inner {
     position: relative;
-    /*margin-left: -24px;*/
+    font-size: 14px;
 }
 
 .kanban-centered .kanban-entry .kanban-entry-inner:before, .kanban-centered .kanban-entry .kanban-entry-inner:after {
@@ -193,37 +195,25 @@
 }
 .kanban-centered .kanban-entry .kanban-entry-inner .kanban-label {
     position: relative;
-    background: #f2f7fb;
+    border: 1px solid #cddbe8;
     padding: 8px 8px;
+    color: #464646;
 }
-
-.kanban-centered .kanban-entry .kanban-entry-inner .kanban-label h2, .kanban-centered .kanban-entry .kanban-entry-inner .kanban-label p {
-    color: #737881;
-    font-family: "Noto Sans",sans-serif;
-    font-size: 12px;
-    margin: 0;
-    line-height: 1.428571429;
+.kanban-label p {
+    margin-bottom: 5px;
+    color: #28a745;
+}
+.kanban-label h2{
+    font-size: 14px;
+}
+.kanban-label h2 span{
+    font-weight: 300;
+    font-size: 14px;
+    font-weight: normal;
 }
 
 .kanban-centered .kanban-entry .kanban-entry-inner .kanban-label p + p {
     margin-top: 15px;
-}
-
-.kanban-centered .kanban-entry .kanban-entry-inner .kanban-label h2 {
-    font-size: 16px;
-    margin-bottom: 10px;
-}
-
-.kanban-centered .kanban-entry .kanban-entry-inner .kanban-label h2 a {
-    color: #303641;
-}
-
-.kanban-centered .kanban-entry .kanban-entry-inner .kanban-label h2 span {
-    -webkit-opacity: .6;
-    -moz-opacity: .6;
-    opacity: .6;
-    -ms-filter: alpha(opacity=60);
-    filter: alpha(opacity=60);
 }
 
 .grab {
@@ -264,15 +254,13 @@
 }
 
 .txt_cuotas {
-    color: orange;
-    font-size: 10px;
-    position: absolute;
+    color: #28a745;
 }
-
 .container_state {
     width: 100%;
     height: 515px;
     overflow: auto;
+    margin-top: 2px;
 }
 .txt_total_estado {
     text-align: center;

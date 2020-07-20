@@ -2,7 +2,7 @@
 	<div class="container-fluid cuadro_panding">
 	
 		<?php if (AuthComponent::user('role') != Configure::read('variables.rolCliente')) { ?>
-			<div class="bg-white-content bg-primary text-white mb-2">
+			<div class="bg-white pt-4 pb-2 pr-3 pl-4">
 				<h2 class="titleView">Panel de Créditos</h2>
 			</div>
 			<div class="container-fluid">
@@ -31,14 +31,14 @@
 														</span>
 													</h2>
 													<p>
-														<strong><?php echo h(number_format($credit['Credit']['valor_credito'],0,",","."));?></strong>
+														<strong>$ <?php echo h(number_format($credit['Credit']['valor_credito'],0,",","."));?></strong>
 														<span class="txt_cuotas">
-															<?php echo h($credit['Credit']['numero_meses']).' cuotas:';?>
-															<?php echo h(number_format($credit['Credit']['valor_cuota'],0,",","."));?>
+															<?php echo h($credit['Credit']['numero_meses']).' cuotas de';?>
+															$<?php echo h(number_format($credit['Credit']['valor_cuota'],0,",","."));?>
 														</span>
 													</p>
 													<span>
-														<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Ver datos del crédito" class="ver_credito" data-uid="<?php echo $credit['Credit']['id']; ?>">
+														<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Ver datos del crédito" class="ver_credito btn btn-sm btn-outline-primary" data-uid="<?php echo $credit['Credit']['id']; ?>">
 															<i class="fa fa-eye"></i>
 														</a>
 													</span>
@@ -77,29 +77,40 @@
 														</span>
 													</h2>
 													<p>
-														<strong><?php echo h(number_format($credit['Credit']['valor_credito'],0,",","."));?></strong>
+														<strong>$ <?php echo h(number_format($credit['Credit']['valor_credito'],0,",","."));?></strong>
 														<span class="txt_cuotas">
-															<?php echo h($credit['Credit']['numero_meses']).' cuotas:';?>
-															<?php echo h(number_format($credit['Credit']['valor_cuota'],0,",","."));?>
+															<?php echo h($credit['Credit']['numero_meses']).' cuotas de';?>
+															$ <?php echo h(number_format($credit['Credit']['valor_cuota'],0,",","."));?>
 														</span>
 													</p>
 													<span>
-														<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Ver datos del crédito" class="ver_credito" data-uid="<?php echo $credit['Credit']['id']; ?>">
+														<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Ver datos del crédito" class="ver_credito btn btn-sm btn-outline-primary" data-uid="<?php echo $credit['Credit']['id']; ?>">
 															<i class="fa fa-eye"></i>
 														</a>
-														<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Ver asesor" class="ver_asesor" data-asesor="<?php echo $credit['Credit']['user_asesor']; ?>">
+														<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Ver asesor" class="btn btn-sm btn-outline-primary ver_asesor" data-asesor="<?php echo $credit['Credit']['user_asesor']; ?>">
 															<i class="fa fa-user"></i>
 														</a>
-														<a data-toggle="tooltip" title="Descargar foto de perfil" download href="<?php echo $this->Html->url('/img/creditos/perfil/'.$credit['Credit']['foto_perfil']) ?>" >
-															<i class="fa fa-file-image-o"></i>
-														</a>
-														<a data-toggle="tooltip" title="Descargar cedula delantera" download href="<?php echo $this->Html->url('/img/creditos/cedula/'.$credit['Credit']['foto_cedula_delantera']) ?>" >
-															<i class="fa fa-file-image-o"></i>
-														</a>
-														<a data-toggle="tooltip" title="Descargar cedula trasera" download href="<?php echo $this->Html->url('/img/creditos/cedula/'.$credit['Credit']['foto_cedula_trasera']) ?>" >
-															<i class="fa fa-file-image-o"></i>
-														</a>
-														<a href="<?php echo 'https://api.whatsapp.com/send?phone=57'.$credit["Credit"]["telefono_persona"]?>" data-toggle="tooltip" data-placement="top" title="Conversar en whatsapp" target="_blank">
+
+														<div class="dropdown d-inline">
+														  <button class="btn btn-outline-primary dropdown-toggle btn-sm" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+														    <i class="fa fa-file-image-o"></i>
+														  </button>
+															  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+															    <small><a class="dropdown-item" download href="<?php echo $this->Html->url('/img/creditos/perfil/'.$credit['Credit']['foto_perfil']) ?>" >
+																	Descargar foto de perfil
+																</a></small>
+																<small><a class="dropdown-item" download href="<?php echo $this->Html->url('/img/creditos/cedula/'.$credit['Credit']['foto_cedula_delantera']) ?>">
+																	Descargar cédula delantera
+																</a></small>
+																<small><a class="dropdown-item" download href="<?php echo $this->Html->url('/img/creditos/cedula/'.$credit['Credit']['foto_cedula_trasera']) ?>" >
+																	Descargar cédula trasera
+																</a></small>
+															</div>
+
+														 </div>
+
+
+														<a class="btn btn-sm btn-outline-primary" href="<?php echo 'https://api.whatsapp.com/send?phone=57'.$credit["Credit"]["telefono_persona"]?>" data-toggle="tooltip" data-placement="top" title="Conversar en whatsapp" target="_blank">
 															<i class="fa fa-whatsapp"></i>
 														</a>
 													</span>
@@ -139,20 +150,20 @@
 														</span>
 													</h2>
 													<p>
-														<strong><?php echo h(number_format($credit['Credit']['valor_credito'],0,",","."));?></strong>
+														<strong>$ <?php echo h(number_format($credit['Credit']['valor_credito'],0,",","."));?></strong>
 														<span class="txt_cuotas">
-															<?php echo h($credit['Credit']['numero_meses']).' cuotas:';?>
-															<?php echo h(number_format($credit['Credit']['valor_cuota'],0,",","."));?>
+															<?php echo h($credit['Credit']['numero_meses']).' cuotas de';?>  
+															$<?php echo h(number_format($credit['Credit']['valor_cuota'],0,",","."));?>
 														</span>
 													</p>
 													<span>
-														<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Ver datos del crédito" class="ver_credito" data-uid="<?php echo $credit['Credit']['id']; ?>">
+														<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Ver datos del crédito" class="ver_credito btn btn-sm btn-outline-primary" data-uid="<?php echo $credit['Credit']['id']; ?>">
 															<i class="fa fa-eye"></i>
 														</a>
-														<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Añadir comentario" class="btn_comentario" data-uid="<?php echo $credit['Credit']['id']; ?>">
+														<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Añadir comentario" class="btn_comentario btn btn-sm btn-outline-primary" data-uid="<?php echo $credit['Credit']['id']; ?>">
 															<i class="fa fa-comment-o"></i>
 														</a>
-														<a href="<?php echo 'https://api.whatsapp.com/send?phone=57'.$credit["Credit"]["telefono_persona"]?>" data-toggle="tooltip" data-placement="top" title="Conversar en whatsapp" target="_blank">
+														<a href="<?php echo 'https://api.whatsapp.com/send?phone=57'.$credit["Credit"]["telefono_persona"]?>" data-toggle="tooltip" data-placement="top" title="Conversar en whatsapp" class="btn btn-sm btn-outline-primary " target="_blank">
 															<i class="fa fa-whatsapp"></i>
 														</a>
 													</span>
@@ -191,26 +202,26 @@
 														</span>
 													</h2>
 													<p>
-														<strong><?php echo h(number_format($credit['Credit']['valor_credito'],0,",","."));?></strong>
+														<strong>$ <?php echo h(number_format($credit['Credit']['valor_credito'],0,",","."));?></strong>
 														<span class="txt_cuotas">
-															<?php echo h($credit['Credit']['numero_meses']).' cuotas:';?>
-															<?php echo h(number_format($credit['Credit']['valor_cuota'],0,",","."));?>
+															<?php echo h($credit['Credit']['numero_meses']).' cuotas de';?> 
+															$<?php echo h(number_format($credit['Credit']['valor_cuota'],0,",","."));?>
 														</span>
 													</p>
 													<span>
-														<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Ver cupo aprobado" class="ver_cupo_aprobado" data-uid="<?php echo $credit['Credit']['id']; ?>">
+														<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Ver cupo aprobado" class="ver_cupo_aprobado btn btn-sm btn-outline-primary" data-uid="<?php echo $credit['Credit']['id']; ?>">
 															<i class="fa fa-sort-numeric-asc"></i>
 														</a>
-														<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Ver datos del crédito" class="ver_credito" data-uid="<?php echo $credit['Credit']['id']; ?>">
+														<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Ver datos del crédito" class="ver_credito btn btn-sm btn-outline-primary" data-uid="<?php echo $credit['Credit']['id']; ?>">
 															<i class="fa fa-eye"></i>
 														</a>
-														<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Añadir comentario" class="btn_comentario" data-uid="<?php echo $credit['Credit']['id']; ?>">
+														<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Añadir comentario" class="btn_comentario btn btn-sm btn-outline-primary" data-uid="<?php echo $credit['Credit']['id']; ?>">
 															<i class="fa fa-comment-o"></i>
 														</a>
-														<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Enviar mensaje de texto" class="btn_mensaje_texto" data-uid="<?php echo $credit['Credit']['id']; ?>">
+														<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Enviar mensaje de texto" class="btn_mensaje_texto btn btn-sm btn-outline-primary" data-uid="<?php echo $credit['Credit']['id']; ?>">
 															<i class="fa fa-mobile"></i>
 														</a>
-														<a href="<?php echo 'https://api.whatsapp.com/send?phone=57'.$credit["Credit"]["telefono_persona"]?>" data-toggle="tooltip" data-placement="top" title="Conversar en whatsapp" target="_blank">
+														<a class="btn btn-sm btn-outline-primary" href="<?php echo 'https://api.whatsapp.com/send?phone=57'.$credit["Credit"]["telefono_persona"]?>" data-toggle="tooltip" data-placement="top" title="Conversar en whatsapp" target="_blank">
 															<i class="fa fa-whatsapp"></i>
 														</a>
 													</span>
@@ -249,10 +260,10 @@
 														</span>
 													</h2>
 													<p>
-														<strong><?php echo h(number_format($credit['Credit']['valor_credito'],0,",","."));?></strong>
+														<strong>$ <?php echo h(number_format($credit['Credit']['valor_credito'],0,",","."));?></strong>
 														<span class="txt_cuotas">
-															<?php echo h($credit['Credit']['numero_meses']).' cuotas:';?>
-															<?php echo h(number_format($credit['Credit']['valor_cuota'],0,",","."));?>
+															<?php echo h($credit['Credit']['numero_meses']).' cuotas de ';?>
+															$<?php echo h(number_format($credit['Credit']['valor_cuota'],0,",","."));?>
 														</span>
 													</p>
 													<span>
@@ -313,14 +324,14 @@
 														</span>
 													</h2>
 													<p>
-														<strong><?php echo h(number_format($credit['Credit']['valor_credito'],0,",","."));?></strong>
+														<strong>$ <?php echo h(number_format($credit['Credit']['valor_credito'],0,",","."));?></strong>
 														<span class="txt_cuotas">
-															<?php echo h($credit['Credit']['numero_meses']).' cuotas:';?>
-															<?php echo h(number_format($credit['Credit']['valor_cuota'],0,",","."));?>
+															<?php echo h($credit['Credit']['numero_meses']).' cuotas de';?>
+															$<?php echo h(number_format($credit['Credit']['valor_cuota'],0,",","."));?>
 														</span>
 													</p>
 													<span>
-														<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Ver datos del crédito" class="ver_credito" data-uid="<?php echo $credit['Credit']['id']; ?>">
+														<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Ver datos del crédito" class="ver_credito btn btn-outline-primary btn-sm" data-uid="<?php echo $credit['Credit']['id']; ?>">
 															<i class="fa fa-eye"></i>
 														</a>
 														<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Añadir comentario" class="btn_comentario" data-uid="<?php echo $credit['Credit']['id']; ?>">

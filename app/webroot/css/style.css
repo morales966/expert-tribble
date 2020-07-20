@@ -293,24 +293,44 @@ input.bigcheck {
     padding: 20px;
     margin-bottom: 15px;
 }
-
 .accesorioslist .checkbox {
   border-bottom: 1px solid #e8eef1;
   vertical-align: middle;
   display: inline;
 }
-
 .accesorioslist label{
     margin-left: 10px;
 }
-
 #container_creditos .panel-heading {
-    background: #cddbe8;
+    background: #007bff;
     padding: 10px;
+    color: white;
+    margin: 0px; 
 }
 .table .thead-light th {
     background-color: #e3ebf3 !important;
 }
+.modal-title {
+    margin-bottom: 0;
+    line-height: 1.5;
+    font-size: 17px;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+#container_creditos .container_state::-webkit-scrollbar {
+    width: 6px;
+}
+#container_creditos .container_state::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 0px;
+    border-radius: 0px;
+    background: #bfc9d4;
+}
+#container_creditos .container_state::-webkit-scrollbar-track {
+    background: #d9e2e6;
+    -webkit-border-radius: 0px;
+    border-radius: 0px;
+}
+
 /*--------------------------------------------------------------
 # Mensaje(Alerta)
 --------------------------------------------------------------*/

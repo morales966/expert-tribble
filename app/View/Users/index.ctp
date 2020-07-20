@@ -1,7 +1,12 @@
 <div class="content-wrapper">
-	<div class="container cuadro_panding">
-		<div class="row">
-			<div class="col-md-12">
+	<div class="container-fluid cuadro_panding">
+
+		<hr>
+		<div class="row mb-4">
+			<div class="col-md-6">
+				<h2 class="tittle">Usuarios</h2>
+			</div>	
+			<div class="col-md-6 pull-right">
 				<div class="input-group">
 					<?php if (isset($this->request->query['q'])){ ?>
 						<input type="text" class="form-control" value="<?php echo $this->request->query['q']; ?>" placeholder="Buscador por correo eléctronico"  disabled="disabled">
@@ -18,14 +23,15 @@
 							</button>
 					    </div>
 					<?php } ?>
-				 </div>
+					<a href="<?php echo $this->Html->url(array('action'=>'add')) ?>" class="crearEnlace btn btn-success ml-2">
+						<i class="fa fa-1x fa-plus-square"></i> Nuevo usuario
+					</a>				
+				</div>				 
 			</div>
+				
 		</div>
-		<hr>
-		<h2 class="tittle">Usuarios</h2>
-		<a href="<?php echo $this->Html->url(array('action'=>'add')) ?>" class="crearEnlace">
-			<i class="fa fa-1x fa-plus-square"></i> Nuevo usuario
-		</a>
+		
+
 		<div class="table-responsive">
 			<table class="table">
 	   			<thead class="thead-dark">

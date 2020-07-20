@@ -1,8 +1,8 @@
 <div class="form-group row">
-	<label for="nueva" class="col-sm-3 col-form-label">Descripción</label>
-	<div class="col-sm-9">
+	<label for="nueva" class="col-sm-12 col-form-label">Descripción</label>
+	<div class="col-sm-12">
 		<?php
-			echo $this->Form->input('descripcion',array('label' => false,'type' => 'number','placeholder'  => 'Ingresa la descripción','class' => 'form-control','id' => 'txt_descripcion','type' => 'textarea','rows'=>'5'));
+			echo $this->Form->input('descripcion',array('label' => false,'type' => 'number','placeholder'  => 'Ingresa la descripción','class' => 'form-control','id' => 'txt_descripcion','type' => 'textarea','rows'=>'4'));
 		?>
 	</div>
 </div>
