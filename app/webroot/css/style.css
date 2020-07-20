@@ -25,7 +25,7 @@ ul li:hover a.activeNav {
 }
 
 ul li:hover a.activeNavS {
-  
+  visibility: hidden !important;  
 }
 
 .tx {
@@ -44,7 +44,6 @@ ul li:hover a.activeNavS {
   text-align: end;
   display: inline;
   padding: 5px;
-
 }
 
 .closess {
@@ -53,14 +52,50 @@ ul li:hover a.activeNavS {
   position: absolute;
 }
 
+.contenedor-icono{
+  position:relative;
+}
+
+.mi-imagen-abajo-derecha{
+  position:absolute;
+  bottom:5px;
+  right:0px;
+}
+
+@media screen and (min-width: 992px) {
+  .modal-lg, .modal-xl {
+    max-width: 90% !important;
+  }
+
+}
+
 @media screen and (max-width: 992px) {
+  .modal-lg, .modal-xl {
+    max-width: 90% !important;
+  }
    #btn_login {
     display: block;
     content: '';
+    font-size: 12px;
+  }
+  #btn_dejar_datos {
+    font-size: 12px;
   }
   .img-logo {
     height: 120px;
     width: 350px;
+  }
+  .contenedor-icono {
+    display: contents;
+  }
+  .txt-pbx {
+    font-size: 20px;
+  }
+  .itemNegro {
+    font-size: 10px;
+  }
+  .activeNav {
+    font-size: 10px;
   }
 
 }
@@ -235,12 +270,6 @@ ul li:hover a.activeNavS {
 
 #validacion_texto {
   color: red;
-}
-
-@media screen and (min-width: 992px) {
-  .modal-lg, .modal-xl {
-    max-width: 1100px !important;
-  }
 }
 
 .txtEndSpan {

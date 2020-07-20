@@ -13,12 +13,21 @@
           <a class="nav-link itemNegro" id="home" href="<?php echo $this->Html->url(array('controller'=>'Pages','action'=>'home')) ?>">INICIO</a>
         </li>
         <li class="nav-item tx">
-          <a class="nav-link itemNegro" id="about" href="<?php echo $this->Html->url(array('controller'=>'Pages','action'=>'about')) ?>">QUIENES SOMOS</a>
+          <a class="nav-link itemNegro" id="about" href="<?php echo $this->Html->url(array('controller'=>'Pages','action'=>'about')) ?>">
+            QUIENES SOMOS
+          </a>
         </li>
         <li class="nav-item tx">
-          <a class="nav-link itemNegro" id="businnes" href="<?php echo $this->Html->url(array('controller'=>'Pages','action'=>'businnes')) ?>"">COMERCIOS AFILIADOS CREDIVENTAS</a>
+          <a class="nav-link itemNegro" id="businnes" href="<?php echo $this->Html->url(array('controller'=>'Pages','action'=>'businnes')) ?>">
+            COMERCIOS AFILIADOS CREDIVENTAS
+          </a>
         </li>
       </ul>
+      <div class="contenedor-icono">
+        <a href="https://api.whatsapp.com/send?phone=573232880909" data-toggle="tooltip" data-placement="left" title="Conversar en whatsapp" target="_blank">
+          <img height="45px" width="60px" src="<?php echo $this->Html->url('/img/redes/whatsapp.jpg') ?>" class="mi-imagen-abajo-derecha">
+        </a>
+      </div>
     </div>
   </div>
 </nav>
