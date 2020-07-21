@@ -16,18 +16,8 @@ class PagesController extends AppController {
 		}
     }
 
-    public function about(){
-    	if (AuthComponent::user('id')){
-			$this->redirect(array('action' => 'index'));
-		}
-    }
+	public function index(){
 
-    public function businnes(){
-    	if (AuthComponent::user('id')){
-			$this->redirect(array('action' => 'index'));
-		}
     }
-
-	public function index(){}
 
 }

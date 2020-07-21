@@ -7,7 +7,7 @@ class UsersController extends AppController {
 
 	public function beforeFilter() {
         parent::beforeFilter();
-        $this->Auth->allow('add','login','loginData','logout','remember_password','remember_password_step_2','add_client','addClientSave');
+        $this->Auth->allow('add','login','loginData','logout','remember_password','remember_password_step_2','add_client','addClientSave','saveContact');
     }
 
 	public function index() {
@@ -369,6 +369,12 @@ class UsersController extends AppController {
 			}
 		}
 		$this->set(compact('hash'));
+	}
+
+	public function saveContact() {
+		$this->loadModel('Contact');
+        $this->autoRender               = false;
+		$this->Contact->save($this->request->data['Contact']);
 	}
 
 }

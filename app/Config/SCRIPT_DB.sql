@@ -1,10 +1,10 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.5
+-- version 4.9.2
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 14-07-2020 a las 22:09:02
--- Versión del servidor: 5.7.26
+-- Tiempo de generación: 21-07-2020 a las 05:00:53
+-- Versión del servidor: 10.4.10-MariaDB
 -- Versión de PHP: 5.6.40
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -21,8 +21,6 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `proyectoapp`
 --
-CREATE DATABASE IF NOT EXISTS `u864675752_democrediventa` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish2_ci;
-USE `u864675752_democrediventa`;
 
 -- --------------------------------------------------------
 
@@ -103,6 +101,31 @@ INSERT INTO `clients` (`id`, `user_id`, `nit`, `gremio`, `administrador`, `cedul
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `contacts`
+--
+
+DROP TABLE IF EXISTS `contacts`;
+CREATE TABLE IF NOT EXISTS `contacts` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) COLLATE utf8mb4_spanish2_ci NOT NULL,
+  `telephone` varchar(50) COLLATE utf8mb4_spanish2_ci NOT NULL,
+  `email` varchar(100) COLLATE utf8mb4_spanish2_ci NOT NULL,
+  `establishment` varchar(100) COLLATE utf8mb4_spanish2_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
+
+--
+-- Volcado de datos para la tabla `contacts`
+--
+
+INSERT INTO `contacts` (`id`, `name`, `telephone`, `email`, `establishment`) VALUES
+(1, 'sss', '3024634301', 'dlmorales096@gmail.com', 'ss'),
+(2, 'sss', '3024634301', 'dlmorales0960@gmail.com', 'www'),
+(3, 'sss', '3024634301', 'dlmorales0961@gmail.com', 'qqq');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `credits`
 --
 
@@ -120,9 +143,9 @@ CREATE TABLE IF NOT EXISTS `credits` (
   `foto_cedula_delantera` varchar(150) COLLATE utf8_spanish_ci NOT NULL,
   `foto_cedula_trasera` varchar(150) COLLATE utf8_spanish_ci NOT NULL,
   `telefono_persona` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
-  `user_asesor` int(11) NOT NULL DEFAULT '0',
-  `cupo_aprobado` int(11) NOT NULL DEFAULT '0',
-  `state` int(11) NOT NULL DEFAULT '1',
+  `user_asesor` int(11) NOT NULL DEFAULT 0,
+  `cupo_aprobado` int(11) NOT NULL DEFAULT 0,
+  `state` int(11) NOT NULL DEFAULT 1,
   `created` date NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
@@ -199,7 +222,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `password` varchar(200) CHARACTER SET utf8 NOT NULL,
   `hash_change_password` varchar(200) CHARACTER SET utf8 NOT NULL,
   `role` varchar(50) COLLATE utf8mb4_spanish2_ci NOT NULL,
-  `state` int(11) NOT NULL DEFAULT '0',
+  `state` int(11) NOT NULL DEFAULT 0,
   `created` date NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;

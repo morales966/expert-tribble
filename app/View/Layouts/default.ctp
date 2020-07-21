@@ -7,9 +7,7 @@
 		</title>
 		<?php
 			echo $this->Html->css(array('style.css?'.rand(),'lib/font-awesome/css/font-awesome.css','lib/font/flaticon.css','lib/bootstrap.css','lib/parsley.css','lib/sweetalert.css'));
-			if (AuthComponent::user('id')) {
-				echo $this->Html->css(array('styleSession.css?'.rand()));
-			}
+			echo $this->Html->css(array('styleSession.css?'.rand()));
 			echo $this->fetch('AppCss');
 			echo $this->Html->meta('favicon.ico','img/favicon.png',array('type' => 'icon'));
 	    ?>
@@ -26,26 +24,14 @@
 			<?php echo $this->Flash->render(); ?>
 		</div>
 
-  		<?php if (!AuthComponent::user('id')) {
-	    	echo $this->element('nav');
-		} else { ?>
-			<div class="wrapper">
-		    	<?php echo $this->element('navSession');
-		} ?>
-		<?php echo $this->fetch('content'); ?>
-
-		<?php if (AuthComponent::user('id')): ?>
-	    	</div>
-		<?php endif ?>
-		<!-- <?php echo $this->element('footer'); ?> -->
-
+		<div class="wrapper">
+	    	<?php echo $this->element('navSession'); ?>
+			<?php echo $this->fetch('content'); ?>
+	    </div>
 		
 	    <?php
     		echo $this->Html->script(array('lib/popper.min.js','lib/bootstrap.js','lib/parsley/parsley.js','lib/parsley/es.js','lib/sweetalert.js'));
-			echo $this->Html->script(array('app.js?'.rand()));
-    		if (AuthComponent::user('id')) {
-				echo $this->Html->script(array('appSession.js?'.rand()));
-			}
+			echo $this->Html->script(array('app.js?'.rand(),'appSession.js?'.rand()));
 	    	echo $this->fetch('AppScript');
 	    ?>
 	</body>

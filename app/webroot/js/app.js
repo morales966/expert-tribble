@@ -88,38 +88,26 @@ $("body").on("click", "#btn_login_app", function() {
 	login();
 });
 
-// $("body").on("click", "#btn_agregar_cliente", function() {
-//     $.post(copy_js.base_url+'Users/add_client',{}, function(result){
-//         $('#resultModalGrande').html(result);
-//         $('#modalTitleGrande').text('Regístrate con nosotros');
-//     	   $('#modalGrande').modal('show');
-//     });
-// });
-
-$("body").on("click", "#btn_dejar_datos", function() {
-    $('#resultModalGrande').html('<p>Estamos trabajando en la funcionalidad</p>');
-    $('#modalTitleGrande').text('Deja tus datos para comunicarnos contígo');
-    $('#modalGrande').modal('show');
-});
-
-$("body").on("click", "#btn_add_client_save", function() {
-	var instance 		= $('#formAddCliemt').parsley();
+$("body").on( "click", "#btn_guardar_form_datos", function() {
+	var instance 		   		 = $('#form_datos_id').parsley();
 	if (instance.isValid() == true) {
-		$('#validacion_texto').empty();
-		var formData               = new FormData($('#formAddCliemt')[0]);
+		var formData             	= new FormData($('#form_datos_id')[0]);
         $.ajax({
             type: 'POST',
-            url: copy_js.base_url+'Users/addClientSave',
+            url: copy_js.base_url+'Users/saveContact',
             data: formData,
             contentType: false,
             cache: false,
             processData:false,
             success: function(result){
-				location.reload();
+				$('#ContactName').val('');
+				$('#ContactTelephone').val('');
+				$('#ContactEmail').val('');
+				$('#ContactEstablishment').val('');
+        		message_alert("Registro satisfactorio, un asesor especializado te contactará para demostrarte cómo aumentar tus ventas","Bien");
             }
         });
 	} else {
-		validarcampos();
         message_alert("Algo esta mal, por ejemplo todos los campos son requeridos","Error");
 	}
 });
