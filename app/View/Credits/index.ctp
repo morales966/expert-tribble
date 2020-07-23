@@ -8,7 +8,7 @@
 			<div class="container-fluid">
 				<div id="container_creditos" class="row mb-5">
 
-					<div class="panel panel-primary kanban-col ml-0">
+					<div class="panel panel-primary kanban-col ">
 						<div class="panel-heading">
 							<strong class="txt_titulo_etapa"><?php echo Configure::read('variables.estados_creditos.1') ?> <span class="pull-right" id="txt_cantidad_solicitud"></span></strong>
 						</div>

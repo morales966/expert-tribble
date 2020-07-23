@@ -130,3 +130,66 @@ p.textwp {
 .intro-banner-vdo-play-btn .ripple:nth-child(3){animation-delay:.6s;-webkit-animation-delay:.6s}
 
 
+
+@media screen and (max-width: 1255px){
+  #carouselExampleTestimonials .carousel-control-next {
+      right: -42px;
+  }
+      #carouselExampleTestimonials .carousel-control-prev {
+        left: -42px;
+    }
+
+   .control-wp p.mb-0{
+    font-size: 17px;
+   }
+.container.pb-5.pt-5 {
+    padding: 0px 30px !important;
+    width: 100% !important;
+    max-width: 100%;
+}   
+.d-flex.flex-column.flex-md-row.align-items-center.p-2.pl-5.pr-5.shadow-sm.nav-custom.fixed-top {
+    padding-left: 10px !important;
+    padding-right: 20px !important;
+}
+.display-4 {
+    font-size: 2.5rem !important;
+}
+h3.display-7 {
+    font-size: 1.5rem !important;
+    margin-top: 4rem !important;
+}
+.intro-banner-vdo-play-btn{
+    display: none !important;
+}
+}
+
+
+@media screen and (max-width: 700px){
+    .d-flex.flex-column.flex-md-row.align-items-center.p-2.pl-5.pr-5.shadow-sm.nav-custom.fixed-top{
+      position: relative!important;  
+    }
+  #carouselExampleTestimonials .carousel-control-next {
+      right: -22px;
+  }
+      #carouselExampleTestimonials .carousel-control-prev {
+        left: -22px;
+    } 
+     img#logo {
+    max-width: 200px;
+}   
+}
+
+@media screen and (max-width: 500px){
+    .container.pb-5.pt-5 {
+        padding: 0px 10px !important;
+        width: 100% !important;
+        max-width: 100%;
+        margin-top: 0px !important;
+    }
+    h3.display-7 {
+        font-size: 1.5rem !important;
+    }
+    .container.p-5 {
+    padding: 10px !important;
+}
+}

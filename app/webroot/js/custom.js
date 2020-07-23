@@ -54,3 +54,7 @@ $('a.scroll-top').click(function(event) {
     event.preventDefault();
     $('html, body').animate({scrollTop: 0}, 100);
 });
+
+if ($(window).width() < 960) {
+   $("#logo").attr('src',"img/logo-crediventas.png");
+}

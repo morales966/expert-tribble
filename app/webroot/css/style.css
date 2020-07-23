@@ -385,3 +385,13 @@ input.bigcheck {
 #notificaciones_leidas:hover {
   color:black;
 }
+
+
+
+@media screen and (max-width: 1120px){
+
+    .bg-white-content {
+        padding: 15px;
+    }
+
+}

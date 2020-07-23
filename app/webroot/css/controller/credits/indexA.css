@@ -1,8 +1,9 @@
 .kanban-col {
-    width: 16.275%;
+    width: 16%;
     float: left;
     background: white;
-    margin: 0px 4px;
+    margin: 0px 6px;
+    display: table;
 }
 .kanban-centered:before, .kanban-centered:after {
     content: " ";
@@ -276,4 +277,57 @@
 .btn_accion_estado {
     background-color: orange;
     font-size: 10px;
+}
+
+@media screen and (max-width: 1848px) {
+    .kanban-col {
+        margin: 0px 5px;
+    }
+}
+
+@media screen and (max-width: 1573px) {
+    .kanban-col {
+        width: 15.65%;
+    }
+}
+@media screen and (max-width: 1366px) {
+    .kanban-col {
+        width: 16.3%;
+        margin: 0px 2px;
+    }
+    .kanban-centered .kanban-entry .kanban-entry-inner .kanban-label {
+        padding: 5px;
+    }
+    .txt_titulo_etapa {
+        font-size: 14px;
+    }    
+}
+
+@media screen and (max-width: 1260px){
+    .kanban-col {
+        width: 32.95%;
+        margin: 0px 2px;
+    }
+}
+@media screen and (max-width: 1240px){
+    .kanban-col {
+        width: 32.9%;
+    }
+}
+@media screen and (max-width: 1120px){
+    .kanban-col {
+        width: 32.8%;
+    }
+    .container_state {
+        height: 290px;
+    }
+    .bg-white-content {
+        padding: 15px;
+    }
+
+}
+@media screen and (max-width: 800px){
+    .kanban-col {
+        width: 100%;
+    }
 }
