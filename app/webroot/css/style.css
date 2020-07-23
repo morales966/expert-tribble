@@ -1,6 +1,9 @@
 #main {
   z-index: 3;
 }
+.data-commerce p{
+  margin-bottom: 5px;
+}
 .bg-white-content{
   background: white;
   padding: 35px;
@@ -8,7 +11,9 @@
 .navApp {
   background: white;
 }
-
+img#logo {
+    max-width: 280px;
+}
 ul li:hover a {
   background: #007bff;
 }
@@ -69,17 +74,10 @@ ul li:hover a.activeNavS {
   right:0px;
 }
 
-@media screen and (min-width: 992px) {
-  .modal-lg, .modal-xl {
-    max-width: 90% !important;
-  }
 
-}
 
 @media screen and (max-width: 992px) {
-  .modal-lg, .modal-xl {
-    max-width: 90% !important;
-  }
+
    #btn_login {
     display: block;
     content: '';
@@ -268,11 +266,6 @@ input.bigcheck {
   position: inherit;
 }
 
-.asesor_fecha {
-  margin: 0px;
-  display:inline-flex;
-}
-
 .titleRecordar {
   text-align: center;
 }
@@ -287,7 +280,9 @@ input.bigcheck {
   position: relative;
   text-align: end !important;
 }
-
+.modal-header {
+    background: #0257b3;
+}
 .accesorioslist {
     background: #f4f9fb;
     padding: 20px;
@@ -302,7 +297,7 @@ input.bigcheck {
     margin-left: 10px;
 }
 #container_creditos .panel-heading {
-    background: #007bff;
+    background: #0257b3;
     padding: 10px;
     color: white;
     margin: 0px; 
@@ -313,9 +308,10 @@ input.bigcheck {
 .modal-title {
     margin-bottom: 0;
     line-height: 1.5;
-    font-size: 17px;
+    font-size: 20px;
     text-transform: uppercase;
     font-weight: bold;
+    color: white;
 }
 #container_creditos .container_state::-webkit-scrollbar {
     width: 6px;

@@ -270,9 +270,9 @@
 }
 
 .txt_titulo_etapa {
-    font-size: 15px;
+    font-size: 16px;
+    font-weight: 300;
 }
-
 .btn_accion_estado {
     background-color: orange;
     font-size: 10px;

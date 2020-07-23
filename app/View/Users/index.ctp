@@ -76,7 +76,7 @@
 		</div>
 		<div class="bg-white-content mb-5">
 		<?php if (!isset($this->request->query['q'])): ?>
-			<h2 class="tittle">Clientes</h2>
+			<h2 class="tittle">Comercios</h2>
 			<div class="table-responsive">
 				<table class="table">
 		   			<thead class="thead-dark">

@@ -33,7 +33,7 @@
 </nav>
 
 
-Footer version 1
+<!-- Footer version 1
 <div class="lineFooter"></div>
 <div class="footer">
   <div class="container">
@@ -83,4 +83,4 @@ Footer version 1
 </div>
 <div class="copyRight">
   <h1>Copyright © 2017-2020 - Crediventas.com</h1>
-</div>
+</div> -->
