@@ -29,8 +29,9 @@ class UsersController extends AppController {
                                                     'conditions'    => $conditions
                                               	);
         $users                              	= $this->paginate('User');
-        $users_clientes 						= $this->User->all_role_cliente();
-		$this->set(compact('users','users_clientes'));
+        $users_clientes_habilitados 			= $this->User->all_role_cliente_habilitados();
+        $users_clientes_revision				= $this->User->all_role_cliente_revisar();
+		$this->set(compact('users','users_clientes_habilitados','users_clientes_revision'));
 	}
 
 	public function view($id = null) {
@@ -92,87 +93,129 @@ class UsersController extends AppController {
 		$this->set(compact('roles'));
 	}
 
+	public function comercios() {
+		$get                        = $this->request->query;
+        if (!empty($get)) {
+        	if (AuthComponent::user('role') == Configure::read('variables.roles.Ejecutivo')) {
+        		$conditions             = array(
+	                                            'Client.ejecutivo' => AuthComponent::user('id'),
+	                                            'User.state' 	=> Configure::read('variables.habilitado'),
+	                                            'OR' => array(
+	                                                'User.email LIKE'            => '%'.mb_strtolower($get['q']).'%'
+	                                            )
+                                    		);
+        	} else {
+        		$conditions             = array(
+        										'User.state' 	=> Configure::read('variables.habilitado'),
+        										'OR' => array(
+                                            		'User.email LIKE'            => '%'.mb_strtolower($get['q']).'%'
+                                        		)
+                                   	 		);
+        	}
+            
+        } else {
+            if (AuthComponent::user('role') == Configure::read('variables.roles.Ejecutivo')) {
+           		$conditions             = array(
+           									'Client.ejecutivo' => AuthComponent::user('id'),
+           									'User.state' 	=> Configure::read('variables.habilitado')
+           								);
+            } else {
+            	$conditions         	= array('User.state' 	=> Configure::read('variables.habilitado'));
+            }
+        }
+        $order                      = array('Client.id' => 'desc');
+        $this->paginate             = array(
+                                        'order'         => $order,
+                                        'limit'         => 10,
+                                        'conditions'    => $conditions
+                                    );
+        $clients                    = $this->paginate('Client');
+		$this->set(compact('clients'));
+	}
+
 	public function add_client() {
-		$this->layout 					= false;
 		$gremio 						= Configure::read('variables.lista_gremios');
 		$tipo_cuenta 					= Configure::read('variables.tipos_cuenta');
-		$ejecutivo 						= $this->User->list_all_role_ejecutivos();
 		$clase 							= Configure::read('variables.lista_planes');
 		$como_paga 						= Configure::read('variables.lista_como_paga');
 		$cantidad_comercios 			= Configure::read('variables.lista_cantidad_comercios');
 		$cuenta_con 					= Configure::read('variables.lista_cuenta_con');
-		$this->set(compact('gremio','tipo_cuenta','ejecutivo','clase','como_paga','cantidad_comercios','cuenta_con'));
+		if ($this->request->is('post')) {
+			$this->addClientSave();
+			$this->redirect(array('controller' => 'Ussers','action' => 'comercios'));
+		}
+		$this->set(compact('gremio','tipo_cuenta','clase','como_paga','cantidad_comercios','cuenta_con'));
 	}
 
 	public function addClientSave() {
-		$this->autoRender 				= false;
-		if ($this->request->is('ajax')) {
-			$datos['User']['name'] 							= $this->request->data['User']['razon_social'];
-			$datos['User']['email'] 						= $this->request->data['User']['email'];
-			$datos['User']['telephone'] 					= $this->request->data['User']['telephone'];
-			$datos['User']['role'] 							= Configure::read('variables.rolCliente');
-			$datos['User']['password'] 						= Configure::read('variables.password');
-			$datos['User']['hash_change_password'] 			= '';
-			$datos['User']['state']				 			= Configure::read('variables.revision');
-			$this->User->create();
-			if ($this->User->save($datos['User'])) {
-				$user_id 										= $this->User->id;
-				$datos['Client']['user_id'] 					= $user_id;
-				$datos['Client']['nit']							= $this->request->data['User']['nit'];
-		        $datos['Client']['gremio'] 						= $this->request->data['User']['gremio'];
-		        $datos['Client']['administrador'] 				= $this->request->data['User']['administrador'];
-	            $datos['Client']['cedula'] 						= $this->request->data['User']['cedula'];
-	            $datos['Client']['direccion'] 					= $this->request->data['User']['direccion'];
-	            $datos['Client']['barrio'] 						= $this->request->data['User']['barrio'];
-	            $datos['Client']['municipio'] 					= $this->request->data['User']['municipio'];
-	            $datos['Client']['tel_usuario'] 				= $this->request->data['User']['tel_usuario'];
-	            $datos['Client']['banco'] 						= $this->request->data['User']['banco'];
-	            $datos['Client']['numero_cuenta'] 				= $this->request->data['User']['numero_cuenta'];
-	            $datos['Client']['tipo_cuenta'] 				= $this->request->data['User']['tipo_cuenta'];
-	            $datos['Client']['nombre_propietario_cuenta'] 	= $this->request->data['User']['nombre_propietario_cuenta'];
-	            $datos['Client']['cedula_propietario_cuenta'] 	= $this->request->data['User']['cedula_propietario_cuenta'];
-	            $datos['Client']['ejecutivo'] 					= $this->request->data['User']['ejecutivo'];
-	            if ($this->request->data['User']['clase'] == '390800') {
-	            	$datos['Client']['clase'] 						= 'Clase A';
-	            } else {
-	            	$datos['Client']['clase'] 						= 'Clase B';
-	            }
-	            $datos['Client']['como_paga'] 					= $this->request->data['User']['como_paga'];
-	            $datos['Client']['departamento'] 				= $this->request->data['User']['departamento'];
-	            $datos['Client']['cantidad_comercios'] 			= $this->request->data['User']['cantidad_comercios'];
-	            $datos['Client']['cuanto_paga'] 				= $this->request->data['User']['cuanto_paga'];
-	            $datos['Client']['productos_servicios'] 		= $this->request->data['User']['productos_servicios'];
-	            $datos['Client']['nombre_completo_r1'] 			= $this->request->data['User']['nombre_completo_r1'];
-	            $datos['Client']['identificacion_r1'] 			= $this->request->data['User']['identificacion_r1'];
-	            $datos['Client']['celular_r1'] 					= $this->request->data['User']['celular_r1'];
-	            $datos['Client']['comercio_r1'] 				= $this->request->data['User']['comercio_r1'];
-	            $datos['Client']['nombre_completo_r2'] 			= $this->request->data['User']['nombre_completo_r2'];
-	            $datos['Client']['identificacion_r2'] 			= $this->request->data['User']['identificacion_r2'];
-	            $datos['Client']['celular_r2'] 					= $this->request->data['User']['celular_r2'];
-		        $datos['Client']['comercio_r2'] 				= $this->request->data['User']['comercio_r2'];
-		        $get_data 										= array(
-		        	'cuenta_con' 									=> $this->request->data['User']['accessories'],
-		        	'adjuntar_cedula_delantera' 					=> $this->request->data['User']['adjuntar_cedula_delantera'],
-		        	'adjuntar_cedula_trasera' 						=> $this->request->data['User']['adjuntar_cedula_trasera'],
-		        	'adjuntar_camara_comercio' 						=> $this->request->data['User']['adjuntar_camara_comercio'],
-		        	'adjuntar_rut' 									=> $this->request->data['User']['adjuntar_rut'],
-		        	'adjuntar_administrador' 						=> $this->request->data['User']['adjuntar_administrador'],
-		        	'adjuntar_almacen' 								=> $this->request->data['User']['adjuntar_almacen']
-		        );
-		        $this->get_archives($datos,$get_data,$user_id);
-			} else {
-				$this->Session->setFlash('Algo salio mal, los datos no se ha guardado, por favor inténtalo mas tarde','Flash/error');
-			}
-			return true;
+		$datos['User']['name'] 							= $this->request->data['User']['razon_social'];
+		$datos['User']['email'] 						= $this->request->data['User']['email'];
+		$datos['User']['telephone'] 					= $this->request->data['User']['telephone'];
+		$datos['User']['role'] 							= Configure::read('variables.rolCliente');
+		$datos['User']['password'] 						= Configure::read('variables.password');
+		$datos['User']['hash_change_password'] 			= '';
+		$datos['User']['state']				 			= Configure::read('variables.revision');
+		$this->User->create();
+		if ($this->User->save($datos['User'])) {
+			$user_id 										= $this->User->id;
+			$datos['Client']['user_id'] 					= $user_id;
+			$datos['Client']['nit']							= $this->request->data['User']['nit'];
+	        $datos['Client']['gremio'] 						= $this->request->data['User']['gremio'];
+	        $datos['Client']['administrador'] 				= $this->request->data['User']['administrador'];
+            $datos['Client']['cedula'] 						= $this->request->data['User']['cedula'];
+            $datos['Client']['direccion'] 					= $this->request->data['User']['direccion'];
+            $datos['Client']['barrio'] 						= $this->request->data['User']['barrio'];
+            $datos['Client']['municipio'] 					= $this->request->data['User']['municipio'];
+            $datos['Client']['tel_usuario'] 				= $this->request->data['User']['tel_usuario'];
+            $datos['Client']['banco'] 						= $this->request->data['User']['banco'];
+            $datos['Client']['numero_cuenta'] 				= $this->request->data['User']['numero_cuenta'];
+            $datos['Client']['tipo_cuenta'] 				= $this->request->data['User']['tipo_cuenta'];
+            $datos['Client']['nombre_propietario_cuenta'] 	= $this->request->data['User']['nombre_propietario_cuenta'];
+            $datos['Client']['cedula_propietario_cuenta'] 	= $this->request->data['User']['cedula_propietario_cuenta'];
+            $datos['Client']['ejecutivo'] 					= AuthComponent::user('id');
+            if ($this->request->data['User']['clase'] == '390800') {
+            	$datos['Client']['clase'] 						= 'Clase A';
+            } else {
+            	$datos['Client']['clase'] 						= 'Clase B';
+            }
+            $datos['Client']['como_paga'] 					= $this->request->data['User']['como_paga'];
+            $datos['Client']['departamento'] 				= $this->request->data['User']['departamento'];
+            $datos['Client']['cantidad_comercios'] 			= $this->request->data['User']['cantidad_comercios'];
+            $datos['Client']['cuanto_paga'] 				= $this->request->data['cuanto_paga'];
+            $datos['Client']['productos_servicios'] 		= $this->request->data['User']['productos_servicios'];
+            $datos['Client']['nombre_completo_r1'] 			= $this->request->data['User']['nombre_completo_r1'];
+            $datos['Client']['identificacion_r1'] 			= $this->request->data['User']['identificacion_r1'];
+            $datos['Client']['celular_r1'] 					= $this->request->data['User']['celular_r1'];
+            $datos['Client']['comercio_r1'] 				= $this->request->data['User']['comercio_r1'];
+            $datos['Client']['nombre_completo_r2'] 			= $this->request->data['User']['nombre_completo_r2'];
+            $datos['Client']['identificacion_r2'] 			= $this->request->data['User']['identificacion_r2'];
+            $datos['Client']['celular_r2'] 					= $this->request->data['User']['celular_r2'];
+	        $datos['Client']['comercio_r2'] 				= $this->request->data['User']['comercio_r2'];
+	        $get_data 										= array(
+	        	'cuenta_con' 									=> $this->request->data['User']['accessories'],
+	        	'adjuntar_cedula_delantera' 					=> $this->request->data['User']['adjuntar_cedula_delantera'],
+	        	'adjuntar_cedula_trasera' 						=> $this->request->data['User']['adjuntar_cedula_trasera'],
+	        	'adjuntar_camara_comercio' 						=> $this->request->data['User']['adjuntar_camara_comercio'],
+	        	'adjuntar_rut' 									=> $this->request->data['User']['adjuntar_rut'],
+	        	'adjuntar_administrador' 						=> $this->request->data['User']['adjuntar_administrador'],
+	        	'adjuntar_almacen' 								=> $this->request->data['User']['adjuntar_almacen']
+	        );
+	        $this->get_archives($datos,$get_data,$user_id);
+		} else {
+			$this->Session->setFlash('Algo salio mal, los datos no se ha guardado, por favor inténtalo mas tarde','Flash/error');
 		}
+		return true;
+		
 	}
 
 	public function get_archives($datosClient,$data,$user_id) {
-		$j 											= 0;
-		foreach ($data['cuenta_con'] as $valueAcces) {
-			$datosClient['cuenta'][$j]['cuenta_con'] 							= $valueAcces;
-			$datosClient['cuenta'][$j]['user_id']				 				= $user_id;
-			$j++;
+		$j 									= 0;
+		if (isset($datosClient['cuenta'][$j])) {
+			foreach ($data['cuenta_con'] as $valueAcces) {
+				$datosClient['cuenta'][$j]['cuenta_con'] 							= $valueAcces;
+				$datosClient['cuenta'][$j]['user_id']				 				= $user_id;
+				$j++;
+			}
 		}
 		$this->loadArchives($data['adjuntar_cedula_delantera'],'data_clients','adjuntar_cedula_delantera','adjuntar_cedula_delantera');
 		$this->loadArchives($data['adjuntar_cedula_trasera'],'data_clients','adjuntar_cedula_trasera','adjuntar_cedula_trasera');
@@ -189,7 +232,9 @@ class UsersController extends AppController {
 		$this->User->Client->create();
 		if ($this->User->Client->save($datosClient)) {
 			$this->User->Accessory->create();
-			$this->User->Accessory->saveAll($datosClient['cuenta']);
+			if (isset($datosClient['cuenta'])) {
+				$this->User->Accessory->saveAll($datosClient['cuenta']);
+			}
 			$description                                               = Configure::read('variables.description_notificaciones.crear_cliente');
             $url                                                       = $this->webroot.'Users/index';
             $usuarios                                                  = $this->User->all_role_administradores();
@@ -369,6 +414,17 @@ class UsersController extends AppController {
 			}
 		}
 		$this->set(compact('hash'));
+	}
+
+	public function changestate(){
+		$this->autoRender 	= false;
+		if ($this->request->is('ajax')) {
+			$datosA 								= $this->User->get_data('User',$this->request->data['user_id']);
+			$datosN['User']['state']				= $this->request->data['state'];
+			$datosN['User']['id']					= $this->request->data['user_id'];
+			$this->User->save($datosN);
+			return true;
+		}
 	}
 
 	public function saveContact() {

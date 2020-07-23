@@ -2,6 +2,9 @@
   <div class="container-fluid cuadro_panding">
   <div class="bg-white-content">
     <h2 class="tittle">Registrar Usuario</h2>
+    <div class="form-group">
+      <?php echo $this->Html->link("Atras", array('controller' => 'Users','action'=> 'index'), array( 'class' => 'btn btn-success pull-right')) ?>
+    </div>
     <?php echo $this->Form->create('User',array('data-parsley-validate'=>true)); ?>
       <div class="form-group">
         <?php echo $this->Form->input('name',array('label' => 'Nombre','class' => 'form-control','placeholder' => 'Nombre')); ?>

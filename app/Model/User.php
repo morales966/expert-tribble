@@ -82,7 +82,7 @@ class User extends AppModel {
 		$this->recursive 	= -1;
 		$conditions 		= array(
 								'User.role != ' => Configure::read('variables.rolCliente'),
-								'User.state ' => Configure::read('variables.habilitado')
+								'User.state' 	=> Configure::read('variables.habilitado')
 							);
 		return $this->find('list',compact('conditions'));
 	}
@@ -101,7 +101,7 @@ class User extends AppModel {
 													Configure::read('variables.roles.Administrador_secundario'),
 													Configure::read('variables.roles.Coordinador_analista'),
 												),
-								'User.state ' => Configure::read('variables.habilitado')
+								'User.state'=> Configure::read('variables.habilitado')
 							);
 		return $this->find('all',compact('conditions'));
 	}
@@ -119,7 +119,7 @@ class User extends AppModel {
 													Configure::read('variables.roles.Administrador'),
 													Configure::read('variables.roles.Administrador_secundario'),
 												),
-								'User.state ' => Configure::read('variables.habilitado')
+								'User.state'=> Configure::read('variables.habilitado')
 							);
 		return $this->find('all',compact('conditions'));
 	}
@@ -133,12 +133,39 @@ class User extends AppModel {
 	public function list_all_role_ejecutivos() {
 		$this->recursive 	= -1;
 		$conditions 		= array(
-								'User.role' => Configure::read('variables.roles.Ejecutivo'),
-								'User.state ' => Configure::read('variables.habilitado')
+								'User.role' 	=> Configure::read('variables.roles.Ejecutivo'),
+								'User.state' 	=> Configure::read('variables.habilitado')
 							);
 		return $this->find('list',compact('conditions'));
 	}
+
+	/**
+        * @author Diego Morales <dlmorales096@gmail.com>
+        * @date(01-07-2020)
+        * @description Metodo que se encarga de devolver los registros de los usuarios con rol Comercios habilitados
+        * @return Los registros de los usuarios con rol Comercios habilitados
+    */
+	public function all_role_cliente_habilitados() {
+        $conditions 			= array(
+        							'User.role' 	=> Configure::read('variables.rolCliente'),
+									'User.state' 	=> Configure::read('variables.habilitado')
+        						);
+		return $this->find('all',compact('conditions'));
+	}
 	
+	/**
+        * @author Diego Morales <dlmorales096@gmail.com>
+        * @date(23-07-2020)
+        * @description Metodo que se encarga de devolver los registros de los usuarios con rol Comercios por revisar
+        * @return Los registros de los usuarios con rol Comercios por revisar
+    */
+	public function all_role_cliente_revisar() {
+        $conditions 			= array(
+        							'User.role' 	=> Configure::read('variables.rolCliente'),
+									'User.state' 	=> Configure::read('variables.revision')
+        						);
+		return $this->find('all',compact('conditions'));
+	}
 	/**
         * @author Diego Morales <dlmorales096@gmail.com>
         * @date(07-06-2020)
@@ -176,20 +203,6 @@ class User extends AppModel {
 		$conditions 		= array('User.id' => $user_id);
 		$datos 				= $this->find('first',compact('fields','conditions'));
 		return $datos['User']['name'];
-	}
-
-	/**
-        * @author Diego Morales <dlmorales096@gmail.com>
-        * @date(01-07-2020)
-        * @description Metodo que se encarga de devolver los registros de los usuarios con rol Comercios
-        * @return Los registros de los usuarios con rol Comercios
-    */
-	public function all_role_cliente() {
-        $conditions 			= array(
-        							'User.role' => Configure::read('variables.rolCliente'),
-									'User.state ' => Configure::read('variables.habilitado')
-        						);
-		return $this->find('all',compact('conditions'));
 	}
 
 	

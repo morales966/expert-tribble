@@ -14,6 +14,22 @@ class UtilitiesHelper extends HtmlHelper {
 		$this->__Message 		= new Message();
 	}
 
+	public function estado_usuario($state) {
+		$texto = '';
+		switch ($state) {
+			case '0':
+				$texto = 'Inhabilitado';
+				break;
+			case '1':
+				$texto = 'Habilitado';
+				break;
+			case '2':
+				$texto = 'Por revisar';
+				break;
+		}
+		return $texto;
+	}
+
 	public function estados_creditos($state) {
 		$texto = '';
 		switch ($state) {

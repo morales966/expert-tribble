@@ -1,24 +1,22 @@
 $(document).ready(function () {
 	$('[data-toggle="tooltip"]').tooltip();
+	var value = window.location.href.substring(window.location.href.lastIndexOf('/') + 1);
+	$accionesEjecutivo 		= ['comercios','view'+value,'add_client'];
+	if(!isNaN(value)) {
+		copy_js.action = 'view'+value;
+	}
 	switch (copy_js.controller_menu) {
 		case 'PAGES':
-		    if (copy_js.action == 'home') {
-	            $("#home").removeClass('itemNegro');
-				$('#home').addClass("activeNav");
-		    } else if(copy_js.action == 'about') {
-	            $("#about").removeClass('itemNegro');
-		        $('#about').addClass("activeNav");
-		    } else if (copy_js.action == 'businnes') {
-	            $("#businnes").removeClass('itemNegro');
-		        $('#businnes').addClass("activeNav");
-		    } else {
-		        $('#homeS').addClass("activeNavS");
-		    }
+		    $('#homeS').addClass("activeNavS");
 		break;
 		case 'USERS':
 			if (copy_js.action == 'profile') {
 				$('#profile').addClass("activeNavS");
+			} else if($accionesEjecutivo.indexOf(copy_js.action) != '-1') {
+				$('#usuarios').removeClass("activeNavS");
+				$('#comercios').addClass("activeNavS");
 			} else {
+				$('#comercios').removeClass("activeNavS");
 				$('#usuarios').addClass("activeNavS");
 			}
 		break;
@@ -71,6 +69,22 @@ $("body").on( "click", ".stateNotificacion", function() {
     });
 });
 
+$("body").on( "click", ".stateUserHabilitar", function() {
+    var user_id                 = $(this).data('uid');
+    var state                   = $(this).data('state');
+    $.post(copy_js.base_url+'Users/changestate',{user_id:user_id,state:state}, function(result){
+        location.reload();
+    });
+});
+
+$("body").on( "click", ".stateUserInhabilitado", function() {
+    var user_id                 = $(this).data('uid');
+    var state                   = $(this).data('state');
+    $.post(copy_js.base_url+'Users/changestate',{user_id:user_id,state:state}, function(result){
+        location.reload();
+    });
+});
+
 $("body").on("click", ".closess", function() {
   $("#message_alert").hide();
   $("#flashMessage").hide();
@@ -116,37 +130,6 @@ function cargar_notificaciones(){
     $.post(copy_js.base_url+'Messages/notificaciones',{}, function(result){
         $('#paint_notificaciones').html(result);
     });
-}
-
-function validarcampos(){
-	var email 						= $('#UserEmail').val();
-	var validacion_number 			= validarEmail(email);
-	switch (validacion_number) {
-		case 1:
-			$('#validacion_texto').text("Todos los campos son requeridos");
-		break;
-		case 2:
-			$('#validacion_texto').text("El correo eléctronico es incorrecto");
-		break;
-		default:
-			$('#validacion_texto').text("Todos los campos son requeridos");
-		break;
-	}
-}
-
-function validarEmail(valor) {
-	var validacion 			= '';
-	if (valor == '') {
-		validacion 				= 1;
-	} else {
-		var emailRegex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
-	    if (emailRegex.test(valor)) {
-			validacion 			= 1;
-	    } else {
-	    	validacion 			= 2;
-	    }
-	}
-    return validacion
 }
 
 function message_alert(mensaje,type){

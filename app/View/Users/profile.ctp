@@ -1,48 +1,48 @@
 <div class="content-wrapper">
 	<div class="container-fluid cuadro_panding">
-	<div class="bg-white-content">
-		<h2 class="tittle">Perfil de Usuario</h2>
-		<?php echo $this->Form->create('User',array('data-parsley-validate'=>true)); ?>
-			<div class="form-group row">
-				<label for="UserName" class="col-sm-2 col-form-label">Nombre</label>
-				<div class="col-sm-10">
-					<?php
-						echo $this->Form->input('name',array('label' => false,'value' => AuthComponent::user('name'),'class' => 'form-control'));
-					?>
+		<div class="bg-white-content">
+			<h2 class="tittle">Perfil de Usuario</h2>
+			<?php echo $this->Form->create('User',array('data-parsley-validate'=>true)); ?>
+				<div class="form-group row">
+					<label for="UserName" class="col-sm-2 col-form-label">Nombre</label>
+					<div class="col-sm-10">
+						<?php
+							echo $this->Form->input('name',array('label' => false,'value' => $user['User']['name'],'class' => 'form-control'));
+						?>
+					</div>
 				</div>
-			</div>
-			<div class="form-group row">
-				<label for="UserTelephone" class="col-sm-2 col-form-label">Teléfono</label>
-				<div class="col-sm-10">
-					<?php
-						echo $this->Form->input('telephone',array('label' => false,'value' => AuthComponent::user('telephone'),'class' => 'form-control'));
-					?>
+				<div class="form-group row">
+					<label for="UserTelephone" class="col-sm-2 col-form-label">Teléfono</label>
+					<div class="col-sm-10">
+						<?php
+							echo $this->Form->input('telephone',array('label' => false,'value' => $user['User']['telephone'],'class' => 'form-control'));
+						?>
+					</div>
 				</div>
-			</div>
-			<div class="form-group row">
-				<label for="UserRole" class="col-sm-2 col-form-label">Rol</label>
-				<div class="col-sm-10">
-					<?php
-						echo $this->Form->input('role',array('label' => false,'value' => AuthComponent::user('role'),'class' => 'form-control','disabled' => true));
-					?>
+				<div class="form-group row">
+					<label for="UserRole" class="col-sm-2 col-form-label">Rol</label>
+					<div class="col-sm-10">
+						<?php
+							echo $this->Form->input('role',array('label' => false,'value' => $user['User']['role'],'class' => 'form-control','disabled' => true));
+						?>
+					</div>
 				</div>
-			</div>
-			<div class="form-group row">
-				<label for="UserEmail" class="col-sm-2 col-form-label">Correo electrónico</label>
-				<div class="col-sm-10">
-					<?php
-						echo $this->Form->input('email',array('label' => false,'value' => AuthComponent::user('email'),'class' => 'form-control','disabled' => true));
-					?>
+				<div class="form-group row">
+					<label for="UserEmail" class="col-sm-2 col-form-label">Correo electrónico</label>
+					<div class="col-sm-10">
+						<?php
+							echo $this->Form->input('email',array('label' => false,'value' => $user['User']['email'],'class' => 'form-control','disabled' => true));
+						?>
+					</div>
 				</div>
-			</div>
-			<div class="form-group">
-	    		<?php echo $this->Form->button('Actualizar',array("class" => "btn btn-success pull-right")); ?>
-	        </div>
-	    </form>
-	    <div class="mb-3 b-block pb-5">	
-	    	<a href="javascript:void(0)" data-toggle="modal" data-target="#cambiarContrasenaModal" class="btn-secondary btn pull-right mr-2">Cambiar contraseña</a>
-	    </div>
-	</div>
+				<div class="form-group">
+		    		<?php echo $this->Form->button('Actualizar',array("class" => "btn btn-success pull-right")); ?>
+		        </div>
+		    </form>
+		    <div class="mb-3 b-block pb-5">	
+		    	<a href="javascript:void(0)" data-toggle="modal" data-target="#cambiarContrasenaModal" class="btn-secondary btn pull-right mr-2">Cambiar contraseña</a>
+		    </div>
+		</div>
 	</div>
 </div>
 

@@ -162,8 +162,7 @@ $config = array(
 			'3' 						=> 'Software administración',
 			'4' 						=> 'Página web',
 			'5' 						=> 'Ventas en redes sociales',
-			'6' 						=> 'Manejo de seguros',
-			'0' 						=> 'Ninguno'
+			'6' 						=> 'Manejo de seguros'
 		),
 		'description_notificaciones' 	=> array(
 			'crear_credito' 			=> 	'Han registrado un nuevo crédito',

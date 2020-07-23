@@ -393,23 +393,23 @@
 					</tbody>
 				</table>
 				<p>
+				<?php
+				echo $this->Paginator->counter(array(
+					'format' => __('Página {:page} de {:pages}, mostrando {:current} resultados en {:count} total')));
+					?>
+				</p>
+				<div class="row numberpages">
 					<?php
-					echo $this->Paginator->counter(array(
-						'format' => __('Página {:page} de {:pages}, mostrando {:current} resultados en {:count} total')));
-						?>
-					</p>
-					<div class="row numberpages">
-						<?php
-						echo $this->Paginator->first('<< ', array('class' => 'prev'), null);
-						echo $this->Paginator->prev('< ', array(), null, array('class' => 'prev disabled'));
-						echo $this->Paginator->counter(array('format' => '{:page} de {:pages}'));
-						echo $this->Paginator->next(' >', array(), null, array('class' => 'next disabled'));
-						echo $this->Paginator->last(' >>', array('class' => 'next'), null);
-						?>
-						<b><?php echo $this->Paginator->counter(array('format' => '{:count} registros en total')); ?></b>
-					</div>
+					echo $this->Paginator->first('<< ', array('class' => 'prev'), null);
+					echo $this->Paginator->prev('< ', array(), null, array('class' => 'prev disabled'));
+					echo $this->Paginator->counter(array('format' => '{:page} de {:pages}'));
+					echo $this->Paginator->next(' >', array(), null, array('class' => 'next disabled'));
+					echo $this->Paginator->last(' >>', array('class' => 'next'), null);
+					?>
+					<b><?php echo $this->Paginator->counter(array('format' => '{:count} registros en total')); ?></b>
 				</div>
-				</div>
+			</div>
+		</div>
 				
 			<?php } else { ?>
 				<div class="bg-white-content mb-2">
@@ -478,7 +478,7 @@
 					<table class="table table-hover">
 						<thead class="thead-light ">
 							<tr>
-								<th>NNombre cliente</th>
+								<th>Nombre cliente</th>
 								<th>Identificación</th>
 								<th>Celular</th>
 								<th>Valor crédito</th>

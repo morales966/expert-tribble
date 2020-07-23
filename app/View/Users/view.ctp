@@ -2,6 +2,13 @@
 	<div class="container cuadro_panding">
 		<div class="border_cuadro">
 			<h2 class="txtDatosVista" id="tittle_user_id" data-uid="<?php echo $id ?>">Usuario</h2>
+			<?php $rolPermisosAdmin           = array(
+			                                    Configure::read('variables.roles.Administrador'),
+			                                    Configure::read('variables.roles.Administrador_secundario')
+			                                  ); ?>
+        	<?php if (in_array(AuthComponent::user('role'), $rolPermisosAdmin)): ?>
+				<?php echo $this->Html->link("Usuarios", array('controller' => 'Users','action'=> 'index'), array( 'class' => 'btn btn-success pull-right')) ?>
+			<?php endif ?>
 			<p><b>Nombre: </b><?php echo h($user['User']['name']); ?>&nbsp;</p>
 			<p><b>Teléfono: </b><?php echo h($user['User']['telephone']); ?>&nbsp;</p>
 			<p><b>Rol: </b><?php echo h($user['User']['role']); ?>&nbsp;</p>
@@ -11,6 +18,9 @@
 			<hr>
 			<div class="border_cuadro">
 				<h2 class="txtDatosVista">Creditos</h2>
+				<div class="form-group">
+				<?php echo $this->Html->link("Comercios", array('controller' => 'Users','action'=> 'comercios'), array( 'class' => 'btn btn-success pull-right')) ?>
+		        </div>
 				<div class="row">
 					<div class="col-md-12">
 						<div class="input-group">
