@@ -19,7 +19,7 @@ ul li:hover a {
 }
 
 h2.tittle, h2.titleView{
-  font-size: 30px;
+  font-size: 22px;
 }
 
 .activeNav {
@@ -36,9 +36,9 @@ ul li:hover a.activeNav {
   color: #007bff !important;
 }
 
-ul li:hover a.activeNavS {
+/*ul li:hover a.activeNavS {
   visibility: hidden !important;  
-}
+}*/
 
 .tx {
   display: inline-block;
