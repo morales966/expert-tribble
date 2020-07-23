@@ -44,7 +44,7 @@ $("body").on("click", ".ver_preaprobado", function() {
     var credit_id           = $(this).data('uid');
     $.post(copy_js.base_url+'Credits/ver_preaprobado',{credit_id:credit_id}, function(result){
         $('#resultModal').html(result);
-        $('#modalTitle').text('Preaprobaco');
+        $('#modalTitle').text('Pre Aprobado');
         $('#modalSession').modal('show');
     }); 
 });

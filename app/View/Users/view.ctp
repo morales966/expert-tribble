@@ -1,4 +1,5 @@
 <div class="content-wrapper">
+<!-- <<<<<<< HEAD -->
 	<div class="container cuadro_panding">
 		<div class="border_cuadro">
 			<h2 class="txtDatosVista" id="tittle_user_id" data-uid="<?php echo $id ?>">Usuario</h2>
@@ -10,19 +11,29 @@
 				<?php echo $this->Html->link("Usuarios", array('controller' => 'Users','action'=> 'index'), array( 'class' => 'btn btn-success pull-right')) ?>
 			<?php endif ?>
 			<p><b>Nombre: </b><?php echo h($user['User']['name']); ?>&nbsp;</p>
+<!-- ======= -->
+	<div class="container-fluid cuadro_panding">
+		<div class="bg-white-content data-commerce mb-4">
+			<h2 class="tittle" id="tittle_user_id" data-uid="<?php echo $id ?>">Estás viendo el comercio <b> <?php echo h($user['User']['name']); ?></b></h2>
+<!-- >>>>>>> bd0b3c20c06f2abdb12f382f94468724f7a3d96d -->
 			<p><b>Teléfono: </b><?php echo h($user['User']['telephone']); ?>&nbsp;</p>
 			<p><b>Rol: </b><?php echo h($user['User']['role']); ?>&nbsp;</p>
 			<p><b>Correo eléctronico: </b><?php echo h($user['User']['email']); ?>&nbsp;</p>
 		</div>
         <?php if ($user['User']['role'] == Configure::read('variables.rolCliente')): ?>
+<!-- <<<<<<< HEAD -->
 			<hr>
 			<div class="border_cuadro">
 				<h2 class="txtDatosVista">Creditos</h2>
 				<div class="form-group">
 				<?php echo $this->Html->link("Comercios", array('controller' => 'Users','action'=> 'comercios'), array( 'class' => 'btn btn-success pull-right')) ?>
 		        </div>
+<!-- ======= -->
+			<div class="bg-white-content">
+				<h2 class="tittle">Créditos en este comercio</h2>
+<!-- >>>>>>> bd0b3c20c06f2abdb12f382f94468724f7a3d96d -->
 				<div class="row">
-					<div class="col-md-12">
+					<div class="col-md-12 mb-1">
 						<div class="input-group">
 							<?php if (isset($this->request->query['q'])){ ?>
 								<input type="text" class="form-control" value="<?php echo $this->request->query['q']; ?>" placeholder="Buscador por cedula"  disabled="disabled">
