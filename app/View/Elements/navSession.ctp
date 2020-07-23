@@ -1,6 +1,4 @@
-<!-- Menu horizontal -->
 <nav class="main-header navbar navbar-expand navbar-white navbar-light">
-<!-- <<<<<<< HEAD -->
   <ul class="navbar-nav">
     <li class="nav-item">
       <a class="nav-link" data-widget="pushmenu" href="javascript:void(0)" role="button">
@@ -8,41 +6,7 @@
       </a>
     </li>
   </ul>
-
-<!--   BUSCADOR FORMULARIO
-  <form class="form-inline ml-3">
-    <div class="input-group input-group-sm">
-      <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
-      <div class="input-group-append">
-        <button class="btn btn-navbar" type="submit">
-          <i class="fas fa-search"></i>
-        </button> -->
-
-<!-- ======= -->
-
-<!--     <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link" data-widget="pushmenu" href="javascript:void(0)" role="button">
-        	<i class="fa fa-align-center"></i>
-        </a>
-      </li>
-    </ul>
-CREDIVENTAS -->
-<!--     BUSCADOR FORMULARIO
-    <form class="form-inline ml-3">
-      <div class="input-group input-group-sm">
-        <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
-        <div class="input-group-append">
-          <button class="btn btn-navbar" type="submit">
-            <i class="fas fa-search"></i>
-          </button>
-        </div> -->
-        
-<!-- >>>>>>> bd0b3c20c06f2abdb12f382f94468724f7a3d96d -->
-<!--       </div>
-    </div>
-  </form> -->
-
+CREDIVENTAS
   <ul class="navbar-nav ml-auto">
     <li class="nav-item dropdown ">
       <a class="nav-link dropdown-toggle mr-lg-2" id="alertsDropdown" href="javascript:void(0)" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -66,9 +30,7 @@ CREDIVENTAS -->
 		</li>
   </ul>
 </nav>
-<!-- Fin menu horizontal
 
-<!-- Menu vertical -->
 <?php $rolPermisosAdmin           = array(
                                     Configure::read('variables.roles.Administrador'),
                                     Configure::read('variables.roles.Administrador_secundario')
@@ -78,6 +40,7 @@ CREDIVENTAS -->
                                     Configure::read('variables.roles.Administrador'),
                                     Configure::read('variables.roles.Administrador_secundario')
                                   ); ?>
+
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
   <div class="sidebar">
 		<nav class="mt-2">
@@ -131,4 +94,3 @@ CREDIVENTAS -->
 		</nav>
   </div>
 </aside>
-<!-- Fin menu horizontal
