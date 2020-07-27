@@ -130,13 +130,17 @@ class User extends AppModel {
         * @description Metodo que devuelve la lista de usuarios con el rol Ejecutivo
         * @return Lista de usuarios con el rol Ejecutivo
     */
-	public function list_all_role_ejecutivos() {
+	public function all_role_ejecutivos() {
 		$this->recursive 	= -1;
 		$conditions 		= array(
-								'User.role' 	=> Configure::read('variables.roles.Ejecutivo'),
+								'User.role' => array(
+													Configure::read('variables.roles.Ejecutivo'),
+													Configure::read('variables.roles.Administrador'),
+													Configure::read('variables.roles.Administrador_secundario'),
+												),
 								'User.state' 	=> Configure::read('variables.habilitado')
 							);
-		return $this->find('list',compact('conditions'));
+		return $this->find('all',compact('conditions'));
 	}
 
 	/**

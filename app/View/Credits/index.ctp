@@ -546,10 +546,10 @@
 	<?php
 	if (AuthComponent::user('role') != Configure::read('variables.rolCliente')) {
 		echo $this->Html->css("controller/credits/indexA.css?".rand(),							array('block' => 'AppCss'));
-
 		echo $this->Html->script("controller/credits/indexA.js?".rand(),						array('block' => 'AppScript'));
-	} 
+	} else {
+		echo $this->Html->script("controller/credits/index.js?".rand(),							array('block' => 'AppScript'));
+	}
 	echo $this->Html->css("controller/credits/view.css?".rand(),							array('block' => 'AppCss'));
-	echo $this->Html->script("controller/credits/index.js?".rand(),							array('block' => 'AppScript'));
 	echo $this->Html->script("controller/credits/view.js?".rand(),							array('block' => 'AppScript'));
 	?>

@@ -94,7 +94,7 @@ $("body").on("click", ".finalizar_credito", function() {
     },
     function(){
         $.post(copy_js.base_url+'Credits/finalizarCredito',{credit_id:credit_id}, function(result){
-            location.href =copy_js.base_url+copy_js.controller+'/'+copy_js.action;
+            location.reload();
         });
     });
 });
@@ -298,11 +298,15 @@ function draggableInit() {
             });
             $("body").on("click", "#btn_cupo", function() {
                 var cupo_aprobado       = $('#cupo_aprobado').val();
-                $('#modalSessionCancelar').modal('hide');
-                $('#resultModalCancelar').empty();
-                $('#processing-modal').modal('toggle');
-                var txt_descripcion    = '';
-                progreso(credit_id,cupo_aprobado,txt_descripcion,copy_js.state_credito_id_aprobadoNoRetirado);
+                if (parseInt(cupo_aprobado) > 1500000 || parseInt(cupo_aprobado) < 50000) {
+                    message_alert("Por favor valida el valor del cupo aprobado","Error");
+                } else {
+                    $('#modalSessionCancelar').modal('hide');
+                    $('#resultModalCancelar').empty();
+                    $('#processing-modal').modal('toggle');
+                    var txt_descripcion    = '';
+                    progreso(credit_id,cupo_aprobado,txt_descripcion,copy_js.state_credito_id_aprobadoNoRetirado);
+                }
             });
         }
         event.preventDefault();
@@ -355,6 +359,20 @@ function draggableInit() {
     return true;
 }
 
+$("body").on("click", ".ver_credito", function() {
+    var credit_id       = $(this).data('uid');
+    $.post(copy_js.base_url+'Credits/view_modal',{credit_id:credit_id}, function(result){
+        $('#resultModalGrande').html(result);
+        $('#modalGrande').modal('show');
+    }); 
+});
+
+$('body').bind('keypress', function(e) {
+    if(e.keyCode == 13){
+        e.preventDefault();
+    }
+});
+
 function progreso(credit_id,cupo_aprobado,descripcion,state) {
     setTimeout(function () {
         $.post(copy_js.base_url+'Credits/updateState',{credit_id:credit_id,cupo_aprobado:cupo_aprobado,descripcion:descripcion,state:state}, function(result){
@@ -369,10 +387,11 @@ function progreso(credit_id,cupo_aprobado,descripcion,state) {
     }, 1000);
 
     setTimeout(function () {
-        total_estados();
-        validar_articulos();
-        $('[data-toggle="tooltip"]').tooltip();
-        draggableInit(); 
-        $('#processing-modal').modal('toggle');
-    }, 8000);
+        // total_estados();
+        // validar_articulos();
+        // $('[data-toggle="tooltip"]').tooltip();
+        // draggableInit(); 
+        // $('#processing-modal').modal('toggle');
+        location.reload();
+    }, 5000);
 }

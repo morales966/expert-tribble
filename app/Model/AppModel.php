@@ -18,11 +18,24 @@ class AppModel extends Model {
         * @date(07-06-2020)
         * @description Metodo que se encarga de devolver los datos del registro
         * @variables $model = nombre de la tabla(modelo), $model_id = id de la fila a devolver
-        * @return Ddatos del registro
+        * @return Datos del registro
     */
     public function get_data($model,$model_id) {
 		$this->recursive 	= -1;
 		$conditions 		= array($model.'.id' => $model_id);
 		return $this->find('first',compact('conditions')); 
 	}
+
+     /**
+        * @author Diego Morales <dlmorales096@gmail.com>
+        * @date(07-06-2020)
+        * @description Metodo que se encarga de devolver los datos del registro con los modelos asociados
+        * @variables $model = nombre de la tabla(modelo), $model_id = id de la fila a devolver
+        * @return Datos del registro con los modelos asociados
+    */
+    public function get_data_model($model,$model_id) {
+        $this->recursive    = 1;  
+        $conditions         = array($model.'.id' => $model_id);
+        return $this->find('first',compact('conditions')); 
+    }
 }

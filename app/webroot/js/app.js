@@ -1,7 +1,7 @@
 $(document).ready(function () {
 	$('[data-toggle="tooltip"]').tooltip();
 	var value = window.location.href.substring(window.location.href.lastIndexOf('/') + 1);
-	$accionesEjecutivo 		= ['comercios','view'+value,'add_client'];
+	$accionesEjecutivo 		= ['comercios','view'+value,'add_client','messages_data'];
 	if(!isNaN(value)) {
 		copy_js.action = 'view'+value;
 	}
@@ -13,18 +13,29 @@ $(document).ready(function () {
 			if (copy_js.action == 'profile') {
 				$('#profile').addClass("activeNavS");
 			} else if($accionesEjecutivo.indexOf(copy_js.action) != '-1') {
-				$('#usuarios').removeClass("activeNavS");
-				$('#comercios').addClass("activeNavS");
+                if (copy_js.action == 'messages_data') {
+                    $('#usuarios').removeClass("activeNavS");
+                    $('#comercios').removeClass("activeNavS");
+                    $('#datosDejados').addClass("activeNavS");
+                } else {
+                    $('#usuarios').removeClass("activeNavS");
+                    $('#datosDejados').removeClass("activeNavS");
+                    $('#comercios').addClass("activeNavS");
+                }
 			} else {
 				$('#comercios').removeClass("activeNavS");
+                $('#datosDejados').removeClass("activeNavS");
 				$('#usuarios').addClass("activeNavS");
 			}
 		break;
 		case 'CREDITS':
-			$('#creditos').addClass("activeNavS");
-		break;
-		case 'XXX':
-			$('#pagos').addClass("activeNavS");
+            if (copy_js.action == 'payments_available') {
+                $('#pagos').addClass("activeNavS");
+            } else if (copy_js.action == 'paid_customers') {
+                $('#pagos').addClass("activeNavS");
+            } else {
+                $('#creditos').addClass("activeNavS");
+            }
 		break;
 	}
 
@@ -66,6 +77,14 @@ $("body").on( "click", ".stateNotificacion", function() {
     var state                   = $(this).data('state');
     $.post(copy_js.base_url+'Messages/changestate',{notificacion_id:notificacion_id,state:state}, function(result){
         location.href = result;
+    });
+});
+
+$("body").on( "click", ".stateContact", function() {
+    var contact_id              = $(this).data('uid');
+    var state                   = $(this).data('state');
+    $.post(copy_js.base_url+'Users/changestateContact',{contact_id:contact_id,state:state}, function(result){
+        location.reload();
     });
 });
 

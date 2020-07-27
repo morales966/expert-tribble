@@ -165,11 +165,11 @@ $config = array(
 			'6' 						=> 'Manejo de seguros'
 		),
 		'description_notificaciones' 	=> array(
-			'crear_credito' 			=> 	'Han registrado un nuevo crédito',
-			'crear_usuario_sistema' 	=> 	'Han registrado un nuevo usuario',
-			'crear_cliente' 			=> 	'Se ha registrado un cliente'
+			'crear_credito' 				=> 'Han registrado un nuevo crédito',
+			'crear_usuario_sistema' 		=> 'Han registrado un nuevo usuario',
+			'crear_cliente' 				=> 'Se ha registrado un cliente',
+			'dejar_datos' 					=> 'Han dejado unos datos para que te comuniques con ellos'
 		),
-
 	)
 );
 

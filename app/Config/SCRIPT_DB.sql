@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 21-07-2020 a las 05:00:53
+-- Tiempo de generación: 27-07-2020 a las 07:57:15
 -- Versión del servidor: 10.4.10-MariaDB
 -- Versión de PHP: 5.6.40
 
@@ -36,14 +36,6 @@ CREATE TABLE IF NOT EXISTS `accessories` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
 
---
--- Volcado de datos para la tabla `accessories`
---
-
-INSERT INTO `accessories` (`id`, `user_id`, `cuenta_con`) VALUES
-(1, 1, 1),
-(2, 1, 3);
-
 -- --------------------------------------------------------
 
 --
@@ -75,7 +67,7 @@ CREATE TABLE IF NOT EXISTS `clients` (
   `cuanto_paga` varchar(50) COLLATE utf8mb4_spanish2_ci NOT NULL,
   `productos_servicios` varchar(100) COLLATE utf8mb4_spanish2_ci NOT NULL,
   `adjuntar_cedula_delantera` varchar(200) COLLATE utf8mb4_spanish2_ci NOT NULL,
-  `adjuntar_cedula_trasra` varchar(200) COLLATE utf8mb4_spanish2_ci NOT NULL,
+  `adjuntar_cedula_trasera` varchar(200) COLLATE utf8mb4_spanish2_ci NOT NULL,
   `adjuntar_camara_comercio` varchar(200) COLLATE utf8mb4_spanish2_ci NOT NULL,
   `adjuntar_rut` varchar(200) COLLATE utf8mb4_spanish2_ci NOT NULL,
   `adjuntar_administrador` varchar(200) COLLATE utf8mb4_spanish2_ci NOT NULL,
@@ -89,14 +81,7 @@ CREATE TABLE IF NOT EXISTS `clients` (
   `celular_r2` varchar(50) COLLATE utf8mb4_spanish2_ci NOT NULL,
   `comercio_r2` varchar(150) COLLATE utf8mb4_spanish2_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
-
---
--- Volcado de datos para la tabla `clients`
---
-
-INSERT INTO `clients` (`id`, `user_id`, `nit`, `gremio`, `administrador`, `cedula`, `direccion`, `barrio`, `municipio`, `tel_usuario`, `banco`, `numero_cuenta`, `tipo_cuenta`, `nombre_propietario_cuenta`, `cedula_propietario_cuenta`, `ejecutivo`, `clase`, `como_paga`, `departamento`, `cantidad_comercios`, `cuanto_paga`, `productos_servicios`, `adjuntar_cedula_delantera`, `adjuntar_cedula_trasra`, `adjuntar_camara_comercio`, `adjuntar_rut`, `adjuntar_administrador`, `adjuntar_almacen`, `nombre_completo_r1`, `identificacion_r1`, `celular_r1`, `comercio_r1`, `nombre_completo_r2`, `identificacion_r2`, `celular_r2`, `comercio_r2`) VALUES
-(1, 1, '22222', 'Accesorios', 'qqqq', '111', 'qqq', 'www', 'www', '111', 'qqq', '2222', 'Ahorros', 'ddd ddd', '3333', 6, 'Clase B', 'Contado (efectivo-transferencia)', 'www', 2, '2', 'ddddddd', 'adjuntar_cedula_delantera_5f056572e1332.jpeg', 'adjuntar_cedula_trasera_5f056572e1f9b.jpeg', 'adjuntar_camara_comercio_5f056572e24ee.jpeg', 'adjuntar_rut_5f056572e29a6.jpeg', 'adjuntar_administrador_5f056572e2e4f.jpeg', 'adjuntar_almacen_5f056572e32db.jpeg', 'www', '2222', '4444', 'eeee', '2222', '3333', '444', 'dddd');
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
 
 -- --------------------------------------------------------
 
@@ -111,17 +96,11 @@ CREATE TABLE IF NOT EXISTS `contacts` (
   `telephone` varchar(50) COLLATE utf8mb4_spanish2_ci NOT NULL,
   `email` varchar(100) COLLATE utf8mb4_spanish2_ci NOT NULL,
   `establishment` varchar(100) COLLATE utf8mb4_spanish2_ci NOT NULL,
+  `state` int(11) NOT NULL,
+  `created` datetime NOT NULL,
+  `modified` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
-
---
--- Volcado de datos para la tabla `contacts`
---
-
-INSERT INTO `contacts` (`id`, `name`, `telephone`, `email`, `establishment`) VALUES
-(1, 'sss', '3024634301', 'dlmorales096@gmail.com', 'ss'),
-(2, 'sss', '3024634301', 'dlmorales0960@gmail.com', 'www'),
-(3, 'sss', '3024634301', 'dlmorales0961@gmail.com', 'qqq');
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
 
 -- --------------------------------------------------------
 
@@ -148,14 +127,7 @@ CREATE TABLE IF NOT EXISTS `credits` (
   `state` int(11) NOT NULL DEFAULT 1,
   `created` date NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
-
---
--- Volcado de datos para la tabla `credits`
---
-
-INSERT INTO `credits` (`id`, `user_id`, `valor_credito`, `numero_meses`, `valor_cuota`, `foto_perfil`, `nombre_persona`, `apellido_persona`, `cedula_persona`, `foto_cedula_delantera`, `foto_cedula_trasera`, `telefono_persona`, `user_asesor`, `cupo_aprobado`, `state`, `created`) VALUES
-(1, 1, 450000, '8', '79538', 'perfil_5f0e28ab987fc.png', 'wwww', 'qqq', '222', 'foto_cedula_delantera_5f0e289c2ec98.png', 'foto_cedula_trasera_5f0e28a4e6ae1.png', '33333', 0, 0, 1, '2020-07-14');
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 -- --------------------------------------------------------
 
@@ -172,14 +144,7 @@ CREATE TABLE IF NOT EXISTS `messages` (
   `state` int(11) NOT NULL,
   `created` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
-
---
--- Volcado de datos para la tabla `messages`
---
-
-INSERT INTO `messages` (`id`, `user_id`, `description`, `url`, `state`, `created`) VALUES
-(1, 2, 'Han registrado un nuevo crédito', '/proyectoApp/Credits/index', 0, '2020-07-14 16:50:55');
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
 
 -- --------------------------------------------------------
 
@@ -198,14 +163,7 @@ CREATE TABLE IF NOT EXISTS `stages` (
   `description` varchar(200) COLLATE utf8mb4_spanish2_ci NOT NULL,
   `created` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
-
---
--- Volcado de datos para la tabla `stages`
---
-
-INSERT INTO `stages` (`id`, `user_id`, `credit_id`, `state_credit`, `cupo_aprobado`, `description_denied`, `description`, `created`) VALUES
-(1, 1, 1, 'Solicitud', 0, '', '', '2020-07-14 16:50:55');
+) ENGINE=MyISAM AUTO_INCREMENT=132 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
 
 -- --------------------------------------------------------
 
@@ -225,7 +183,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `state` int(11) NOT NULL DEFAULT 0,
   `created` date NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
 
 --
 -- Volcado de datos para la tabla `users`
@@ -233,12 +191,15 @@ CREATE TABLE IF NOT EXISTS `users` (
 
 INSERT INTO `users` (`id`, `name`, `telephone`, `email`, `password`, `hash_change_password`, `role`, `state`, `created`) VALUES
 (1, 'Cliente a', '0000000', 'dlmorales096@gmail.com', '6cf4806722799b7e0fa0c79622157939d06287fd', '', 'Comercios', 1, '2020-06-16'),
-(2, 'Admin', '11111110', 'dlmorales096@gmail.us', '6cf4806722799b7e0fa0c79622157939d06287fd', '', 'Administrador', 1, '2020-06-16'),
+(2, 'Admina', '11111110', 'dlmorales096@gmail.us', '6cf4806722799b7e0fa0c79622157939d06287fd', '', 'Administrador', 1, '2020-06-16'),
 (3, 'Administrador secundario', '1111111', 'Administrador_secundario@gmail.com', '6cf4806722799b7e0fa0c79622157939d06287fd', '', 'Administrador_secundario', 1, '2020-07-03'),
 (4, 'Coordinador analista', '1111', 'Coordinador_analista@gmail.com', '6cf4806722799b7e0fa0c79622157939d06287fd', '', 'Coordinador_analista', 1, '2020-07-08'),
 (5, 'Finanzas', '3024634301', 'Finanzas6@gmail.com', '6cf4806722799b7e0fa0c79622157939d06287fd', '', 'Finanzas', 1, '2020-07-08'),
 (6, 'Ejecutivo', '3024634301', 'Ejecutivo@gmail.com', '6cf4806722799b7e0fa0c79622157939d06287fd', '', 'Ejecutivo', 1, '2020-07-08'),
-(7, 'Analista credito', '3024634301', 'Analista_credito@gmail.com', '6cf4806722799b7e0fa0c79622157939d06287fd', '', 'Analista_credito', 1, '2020-07-08');
+(7, 'Analista credito', '3024634301', 'Analista_credito@gmail.com', '6cf4806722799b7e0fa0c79622157939d06287fd', '', 'Analista_credito', 1, '2020-07-08'),
+(8, 'qqqqq', '222', 'dlmorales096@gmail.com5', '6cf4806722799b7e0fa0c79622157939d06287fd', '', 'Comercios', 1, '2020-07-23'),
+(9, '22222222', '22222', 'dlmorales096@gmail.com', 'feef5bd197c162ba946064f7b3095fccf4e23efb', '', 'Comercios', 2, '2020-07-27'),
+(10, '22222222', '2222', 'dlmorales096@gmail.com', 'feef5bd197c162ba946064f7b3095fccf4e23efb', '', 'Comercios', 2, '2020-07-27');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

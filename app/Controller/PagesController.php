@@ -6,13 +6,13 @@ class PagesController extends AppController {
 
 	public function beforeFilter() {
         parent::beforeFilter();
-        $this->Auth->allow('home','about','businnes');
+        $this->Auth->allow('home');
     }
 
     public function home(){
         $this->layout = "landing";
     	if (AuthComponent::user('id')){
-			$this->redirect(array('action' => 'index'));
+			$this->redirect(array('controller' => 'Credits','action' => 'index'));
 		}
     }
 

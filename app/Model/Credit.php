@@ -111,5 +111,21 @@ class Credit extends AppModel {
 		$conditions 		= array('Credit.id' => $credit_id);
 		return $this->find('first',compact('fields','conditions'));
 	}
+
+	/**
+        * @author Diego Morales <dlmorales096@gmail.com>
+        * @date(27-06-2020)
+        * @description Metodo que se encargara de devolver el o los creditos del usuario en el estado solicitado
+        * @variables $user_id = id del usuario, $state = estado solicitado
+        * @return Los creditos del usuario en el estado solicitado
+    */
+	public function find_credits_usuario_state($user_id,$state) {
+		$this->recursive 	= -1;
+		$conditions         = array(
+									'Credit.user_id' => $user_id,
+                                    'Credit.state' => $state
+                                );
+		return $this->find('all',compact('conditions'));
+	}
 	
 }

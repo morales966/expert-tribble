@@ -40,6 +40,12 @@ CREDIVENTAS
                                     Configure::read('variables.roles.Administrador'),
                                     Configure::read('variables.roles.Administrador_secundario')
                                   ); ?>
+<?php $rolesPermisoClientes       = array(
+                                    Configure::read('variables.rolCliente'),
+                                    Configure::read('variables.roles.Ejecutivo'),
+                                    Configure::read('variables.roles.Administrador'),
+                                    Configure::read('variables.roles.Administrador_secundario')
+                                  ); ?>
 
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
   <div class="sidebar">
@@ -73,6 +79,16 @@ CREDIVENTAS
 
         <?php if (in_array(AuthComponent::user('role'), $rolesPermisoEcutivos)): ?>
           <li class="nav-item">
+            <a href="<?php echo $this->Html->url(array('controller'=>'Users','action'=>'messages_data')) ?>" class="nav-link" id="datosDejados">
+              <p>
+                Datos dejados
+              </p>
+            </a>
+          </li>
+        <?php endif ?>
+
+        <?php if (in_array(AuthComponent::user('role'), $rolesPermisoEcutivos)): ?>
+          <li class="nav-item">
             <a href="<?php echo $this->Html->url(array('controller'=>'Users','action'=>'comercios')) ?>" class="nav-link" id="comercios">
               <p>
                 Comercios
@@ -81,13 +97,21 @@ CREDIVENTAS
           </li>
         <?php endif ?>
 
-        <?php if (in_array(AuthComponent::user('role'), $rolPermisosAdmin)): ?>
+        <?php if (in_array(AuthComponent::user('role'), $rolesPermisoClientes)): ?>
           <li class="nav-item">
-            <a href="<?php echo $this->Html->url(array('controller'=>'xxx','action'=>'index')) ?>" class="nav-link" id="pagos">
-              <p>
-                Pagos
-              </p>
-            </a>
+            <?php if (AuthComponent::user('role') == Configure::read('variables.rolCliente')) { ?>
+              <a href="<?php echo $this->Html->url(array('controller'=>'Credits','action'=>'payments_available')) ?>" class="nav-link" id="pagos">
+                <p>
+                  Pagos
+                </p>
+              </a>
+            <?php } else { ?>
+              <a href="<?php echo $this->Html->url(array('controller'=>'Credits','action'=>'paid_customers')) ?>" class="nav-link" id="pagos">
+                <p>
+                  Pagos
+                </p>
+              </a>
+            <?php } ?>
           </li>
         <?php endif ?>
 			</ul>

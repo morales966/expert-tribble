@@ -410,4 +410,13 @@ class CreditsController extends AppController {
     public function foto_guardaname_foto($name_archivo) {
         return $name_archivo.'_'.uniqid().".png";;
     }
+
+    public function payments_available() {
+        $payments                   = $this->Credit->find_credits_usuario_state(AuthComponent::user('id'),Configure::read('variables.nombres_estados_creditos.Aprobado_retirado'));
+        $this->set(compact('payments'));
+    }
+
+    public function paid_customers() {
+        
+    }
 }

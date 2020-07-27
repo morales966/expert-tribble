@@ -36,18 +36,19 @@ class UsersController extends AppController {
 
 	public function view($id = null) {
 		if (!$this->User->exists($id)) {
-			throw new NotFoundException(__('Invalid user'));
+            $this->Session->setFlash('No se encuentran datos de usuario','Flash/error');
+            $this->redirect(array('controller' => 'Pages','action' => 'profile'));
 		}
-		$user 						= $this->User->get_data('User',$id);
+		$user 						= $this->User->get_data_model('User',$id);
 		$get                        = $this->request->query;
         if (!empty($get)) {
             if (isset($get['q'])) {
-		        $conditions         	    	= array(
-	        										'Credit.user_id' => $id,
-	                								'OR' => array(
-	                                                	'Credit.cedula_persona LIKE'            => '%'.mb_strtolower($get['q']).'%'
-	                                            	)
-		                                        );
+	        	$conditions         	    = array(
+        										'Credit.user_id' => $id,
+                								'OR' => array(
+                                                	'Credit.cedula_persona LIKE'            => '%'.mb_strtolower($get['q']).'%'
+                                            	)
+	                                        );
             }
         } else {
             $conditions         		= array('Credit.user_id' => $id);
@@ -201,6 +202,7 @@ class UsersController extends AppController {
 	        	'adjuntar_almacen' 								=> $this->request->data['User']['adjuntar_almacen']
 	        );
 	        $this->get_archives($datos,$get_data,$user_id);
+	        $this->redirect(array('action' => 'comercios'));
 		} else {
 			$this->Session->setFlash('Algo salio mal, los datos no se ha guardado, por favor inténtalo mas tarde','Flash/error');
 		}
@@ -224,7 +226,7 @@ class UsersController extends AppController {
 		$this->loadArchives($data['adjuntar_administrador'],'data_clients','adjuntar_administrador','adjuntar_administrador');
 		$this->loadArchives($data['adjuntar_almacen'],'data_clients','adjuntar_almacen','adjuntar_almacen');
 		$datosClient['Client']['adjuntar_cedula_delantera'] 					= $this->Session->read('archivo_adjuntar_cedula_delantera');
-		$datosClient['Client']['adjuntar_cedula_trasra'] 						= $this->Session->read('archivo_adjuntar_cedula_trasera');
+		$datosClient['Client']['adjuntar_cedula_trasera'] 						= $this->Session->read('archivo_adjuntar_cedula_trasera');
 		$datosClient['Client']['adjuntar_camara_comercio'] 						= $this->Session->read('archivo_adjuntar_camara_comercio');
 		$datosClient['Client']['adjuntar_rut'] 									= $this->Session->read('archivo_adjuntar_rut');
 		$datosClient['Client']['adjuntar_administrador'] 						= $this->Session->read('archivo_adjuntar_administrador');
@@ -360,6 +362,7 @@ class UsersController extends AppController {
 			echo AuthComponent::user('id');
 			return $this->redirect($this->Auth->logout());
 		} else {
+            $this->Session->setFlash('La sesión se ha perdido, por favor vuélvete a iniciar sesión','Flash/error');
 			$this->redirect(array('controller' => 'Pages','action' => 'home'));
 		}
 	}
@@ -417,20 +420,46 @@ class UsersController extends AppController {
 	}
 
 	public function changestate(){
-		$this->autoRender 	= false;
+		$this->autoRender 						= false;
 		if ($this->request->is('ajax')) {
 			$datosA 								= $this->User->get_data('User',$this->request->data['user_id']);
 			$datosN['User']['state']				= $this->request->data['state'];
 			$datosN['User']['id']					= $this->request->data['user_id'];
 			$this->User->save($datosN);
-			return true;
 		}
+		return true;
 	}
 
 	public function saveContact() {
+		$this->autoRender 							= false;
 		$this->loadModel('Contact');
-        $this->autoRender               = false;
+        $this->autoRender          					= false;
+        $description                                = Configure::read('variables.description_notificaciones.dejar_datos');
+        $url                                        = $this->webroot.'Users/messages_data';
+        $usuarios                                   = $this->User->all_role_ejecutivos();
+        foreach ($usuarios as $user) {
+            $this->saveManagesUser($description,$user['User']['id'],$url);
+        }
+        $this->request->data['Contact']['state']    = Configure::read('variables.noti_por_leer');
 		$this->Contact->save($this->request->data['Contact']);
+	}
+
+	public function changestateContact(){
+		$this->autoRender 						= false;
+		$this->loadModel('Contact');
+		if ($this->request->is('ajax')) {
+			$datosA 								= $this->Contact->get_data('Contact',$this->request->data['contact_id']);
+			$datosN['Contact']['state']				= $this->request->data['state'];
+			$datosN['Contact']['id']				= $this->request->data['contact_id'];
+			$this->Contact->save($datosN);
+		}
+		return true;
+	}
+
+	public function messages_data() {
+		$this->loadModel('Contact');
+		$contacs 									= $this->Contact->all_datos();
+		$this->set(compact('contacs'));
 	}
 
 }
