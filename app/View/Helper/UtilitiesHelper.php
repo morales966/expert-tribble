@@ -58,6 +58,9 @@ class UtilitiesHelper extends HtmlHelper {
 			case '6':
 				$texto = 'Pagado';
 				break;
+			case '7':
+				$texto = 'Solicitud de desembolso';
+				break;
 		}
 		return $texto;
 	}
@@ -72,7 +75,7 @@ class UtilitiesHelper extends HtmlHelper {
 				$texto = 'Procesando';
 				break;
 			case '7':
-				$texto = 'Solicittud de desembolso';
+				$texto = 'Solicitud de desembolso';
 				break;
 		}
 		return $texto;

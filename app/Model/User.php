@@ -145,6 +145,25 @@ class User extends AppModel {
 
 	/**
         * @author Diego Morales <dlmorales096@gmail.com>
+        * @date(10-07-2020)
+        * @description Metodo que devuelve la lista de usuarios con el rol Finanzas
+        * @return Lista de usuarios con el rol Finanzas
+    */
+	public function all_role_finanzas() {
+		$this->recursive 	= -1;
+		$conditions 		= array(
+								'User.role' => array(
+													Configure::read('variables.roles.Finanzas'),
+													Configure::read('variables.roles.Administrador'),
+													Configure::read('variables.roles.Administrador_secundario'),
+												),
+								'User.state' 	=> Configure::read('variables.habilitado')
+							);
+		return $this->find('all',compact('conditions'));
+	}
+
+	/**
+        * @author Diego Morales <dlmorales096@gmail.com>
         * @date(01-07-2020)
         * @description Metodo que se encarga de devolver los registros de los usuarios con rol Comercios habilitados
         * @return Los registros de los usuarios con rol Comercios habilitados

@@ -23,7 +23,7 @@ class CreditsController extends AppController {
             $creditos_estudio                     = $this->Credit->all_data_state(Configure::read('variables.nombres_estados_creditos.En_estudio'));
             $creditos_detenido                    = $this->Credit->all_data_state(Configure::read('variables.nombres_estados_creditos.Detenido'));
             $creditos_aprobado_no_retirado        = $this->Credit->all_data_state(Configure::read('variables.nombres_estados_creditos.Aprobado_no_retirado'));
-            $creditos_aprobado_retirado           = $this->Credit->all_data_state(Configure::read('variables.nombres_estados_creditos.Aprobado_retirado'));
+            $creditos_aprobado_retirado           = $this->Credit->all_data_state(array(Configure::read('variables.nombres_estados_creditos.Aprobado_retirado'),Configure::read('variables.nombres_estados_creditos.Solicitud_de_desembolso')));
             $creditos_negado                      = $this->Credit->all_data_state(Configure::read('variables.nombres_estados_creditos.Negado'));
 
         } else {
@@ -193,7 +193,7 @@ class CreditsController extends AppController {
             $creditos_estudio                     = $this->Credit->all_data_state(Configure::read('variables.nombres_estados_creditos.En_estudio'));
             $creditos_detenido                    = $this->Credit->all_data_state(Configure::read('variables.nombres_estados_creditos.Detenido'));
             $creditos_aprobado_no_retirado        = $this->Credit->all_data_state(Configure::read('variables.nombres_estados_creditos.Aprobado_no_retirado'));
-            $creditos_aprobado_retirado           = $this->Credit->all_data_state(Configure::read('variables.nombres_estados_creditos.Aprobado_retirado'));
+            $creditos_aprobado_retirado           = $this->Credit->all_data_state(array(Configure::read('variables.nombres_estados_creditos.Aprobado_retirado'),Configure::read('variables.nombres_estados_creditos.Solicitud_de_desembolso')));;
             $creditos_negado                      = $this->Credit->all_data_state(Configure::read('variables.nombres_estados_creditos.Negado'));
         }
         $this->set(compact('creditos_solicitud','creditos_estudio','creditos_detenido','creditos_aprobado_no_retirado','creditos_aprobado_retirado','creditos_negado'));
@@ -259,6 +259,12 @@ class CreditsController extends AppController {
             $datosC['Credit']['state']              = Configure::read('variables.nombres_estados_creditos.Solicitud_de_desembolso');
             $datosC['Credit']['id']                 = $this->request->data['credit_id'];
             $state_name                             = Configure::read('variables.estados_creditos.7');
+            $description                                               = Configure::read('variables.description_notificaciones.desenbolsar_dinero');
+            $url                                                       = $this->webroot.'Credits/paid_customers';
+            $usuarios                                                  = $this->User->all_role_finanzas();
+            foreach ($usuarios as $user) {
+                $this->saveManagesUser($description,$user['User']['id'],$url);
+            }
             $this->saveStage($state_name,AuthComponent::user('id'),$this->request->data['credit_id'],'','',0);
             $this->Credit->save($datosC);
             return true;
@@ -466,6 +472,28 @@ class CreditsController extends AppController {
     }
 
     public function paid_customers() {
-        
+        $get                            = $this->request->query;
+        if (!empty($get)) {
+            if (isset($get['q'])) {
+                $conditions                 = array(
+                                                'Credit.state'   => Configure::read('variables.nombres_estados_creditos.Solicitud_de_desembolso'),
+                                                'OR' => array(
+                                                    'Credit.cedula_persona LIKE'            => '%'.mb_strtolower($get['q']).'%'
+                                                )
+                                            );
+            }
+        } else {
+            $conditions                         = array(
+                                                    'Credit.state'   => Configure::read('variables.nombres_estados_creditos.Solicitud_de_desembolso'),
+                                                );
+        }
+        $order                                  = array('Credit.id' => 'desc');
+        $this->paginate                         = array(
+                                                    'order'         => $order,
+                                                    'limit'         => 10,
+                                                    'conditions'    => $conditions
+                                                );
+        $credits                                = $this->paginate('Credit');
+        $this->set(compact('credits'));
     }
 }

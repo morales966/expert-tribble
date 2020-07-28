@@ -170,7 +170,8 @@ $config = array(
 			'crear_credito' 				=> 'Han registrado un nuevo crédito',
 			'crear_usuario_sistema' 		=> 'Han registrado un nuevo usuario',
 			'crear_cliente' 				=> 'Se ha registrado un cliente',
-			'dejar_datos' 					=> 'Han dejado unos datos para que te comuniques con ellos'
+			'dejar_datos' 					=> 'Han dejado unos datos para que te comuniques con ellos',
+			'desenbolsar_dinero' 			=> 'Han solicitado el desenbolso de un crédito'
 		),
 	)
 );

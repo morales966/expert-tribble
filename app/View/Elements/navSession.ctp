@@ -36,21 +36,21 @@ CREDIVENTAS
   </ul>
 </nav>
 
-<?php $rolPermisosAdmin           = array(
-                                    Configure::read('variables.roles.Administrador'),
-                                    Configure::read('variables.roles.Administrador_secundario')
-                                  ); ?>
-<?php $rolesPermisoEcutivos       = array(
-                                    Configure::read('variables.roles.Ejecutivo'),
-                                    Configure::read('variables.roles.Administrador'),
-                                    Configure::read('variables.roles.Administrador_secundario')
-                                  ); ?>
-<?php $rolesPermisoClientes       = array(
-                                    Configure::read('variables.rolCliente'),
-                                    Configure::read('variables.roles.Ejecutivo'),
-                                    Configure::read('variables.roles.Administrador'),
-                                    Configure::read('variables.roles.Administrador_secundario')
-                                  ); ?>
+<?php $rolPermisosAdmin                   = array(
+                                            Configure::read('variables.roles.Administrador'),
+                                            Configure::read('variables.roles.Administrador_secundario')
+                                          ); ?>
+<?php $rolesPermisoEcutivos               = array(
+                                            Configure::read('variables.roles.Ejecutivo'),
+                                            Configure::read('variables.roles.Administrador'),
+                                            Configure::read('variables.roles.Administrador_secundario')
+                                          ); ?>
+<?php $rolesPermisoClientesFinanzas       = array(
+                                            Configure::read('variables.rolCliente'),
+                                            Configure::read('variables.roles.Finanzas'),
+                                            Configure::read('variables.roles.Administrador'),
+                                            Configure::read('variables.roles.Administrador_secundario')
+                                          ); ?>
 
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
   <div class="sidebar">
@@ -102,7 +102,7 @@ CREDIVENTAS
           </li>
         <?php endif ?>
 
-        <?php if (in_array(AuthComponent::user('role'), $rolesPermisoClientes)): ?>
+        <?php if (in_array(AuthComponent::user('role'), $rolesPermisoClientesFinanzas)): ?>
           <li class="nav-item">
             <?php if (AuthComponent::user('role') == Configure::read('variables.rolCliente')) { ?>
               <a href="<?php echo $this->Html->url(array('controller'=>'Credits','action'=>'payments_available')) ?>" class="nav-link" id="pagos">

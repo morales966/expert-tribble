@@ -242,13 +242,19 @@
                                                             <?php echo h($credit['Credit']['nombre_persona']).' '.h($credit['Credit']['apellido_persona']).' - '.h($credit['Credit']['cedula_persona']).' - '.h($credit['Credit']['telefono_persona'])?>
                                                         </span>
                                                     </h2>
-                                                    <p>
-                                                        <strong><?php echo h(number_format($credit['Credit']['valor_credito'],0,",","."));?></strong>
-                                                        <span class="txt_cuotas">
-                                                            <?php echo h($credit['Credit']['numero_meses']).' cuotas:';?>
-                                                            <?php echo h(number_format($credit['Credit']['valor_cuota'],0,",","."));?>
-                                                        </span>
-                                                    </p>
+                                                    <?php if ($credit['Credit']['state'] == Configure::read('variables.nombres_estados_creditos.Solicitud_de_desembolso')) { ?>
+                                                        <p>
+                                                            <?php echo Configure::read('variables.estados_creditos.7'); ?>
+                                                        </p>
+                                                    <?php } else { ?>
+                                                        <p>
+                                                            <strong>$ <?php echo h(number_format($credit['Credit']['valor_credito'],0,",","."));?></strong>
+                                                            <span class="txt_cuotas">
+                                                                <?php echo h($credit['Credit']['numero_meses']).' cuotas de ';?>
+                                                                $<?php echo h(number_format($credit['Credit']['valor_cuota'],0,",","."));?>
+                                                            </span>
+                                                        </p>
+                                                    <?php } ?>
                                                     <span>
                                                         <a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Adjuntar plan pago" class="adjuntar_plan_pago" data-uid="<?php echo $credit['Credit']['id']; ?>">
                                                             <i class="fa fa-paperclip"></i>
