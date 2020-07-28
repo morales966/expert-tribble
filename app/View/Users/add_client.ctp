@@ -103,15 +103,17 @@
 					<div class="col-md-2 form-group">
 						<?php echo $this->Form->input('departamento',array('placeholder' => 'Departamento','label' => false,"class" => "form-control",'required' => true)); ?>
 					</div>
-					<div class="col-md-3 form-group">
+					<div class="col-md-2 form-group">
 						<?php echo $this->Form->input('cantidad_comercios',array('empty' => 'Cantidad de comercios','options' => $cantidad_comercios,'label' => false,"class" => "form-control",'required' => true,'id' => 'cantidad_comercios_val')); ?>
 					</div>
 					<div class="col-md-3 form-group cuanto_paga">
 						<?php echo $this->Form->input('cuanto_paga',array('label' => false,"class" => "form-control",'default' => 'Selecciona cuanto paga','options' => array('Selecciona cuanto paga'))); ?>
 					</div>
-
-					<div class="col-md-4 form-group">
+					<div class="col-md-3 form-group">
 						<?php echo $this->Form->input('productos_servicios',array('placeholder' => 'Producto o servicio que ofrece','label' => false,"class" => "form-control",'required' => true)); ?>
+					</div>
+					<div class="col-md-2 form-group">
+						<?php echo $this->Form->input('codigo',array('placeholder' => 'Código','label' => false,"class" => "form-control",'required' => true)); ?>
 					</div>
 
 					<div class="col-md-3 form-group">

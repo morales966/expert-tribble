@@ -74,4 +74,27 @@ class Stage extends AppModel {
 		$conditions 		= array('Stage.state_credit' => $state,'Stage.credit_id' => $credit_id);
 		return $this->find('all',compact('conditions'));
 	}
+
+	/**
+        * @author Diego Morales <dlmorales096@gmail.com>
+        * @date(28-06-2020)
+        * @description Metodo que se encargara de devolver el cupo aprobado para el crédito
+        * @variables $credit_id = id del credito
+        * @return Cupo aprobado
+    */
+	public function find_cupo_aprobado_credito($credit_id) {
+		$this->recursive 	= -1;
+		$fields 			= array('Stage.cupo_aprobado');
+		$conditions 		= array(
+								'Stage.credit_id' => $credit_id,
+								'Stage.state_credit !=' => array(
+																Configure::read('variables.estados_creditos.description'),
+																Configure::read('variables.estados_creditos.adjuntar_plan_pagos'),
+																Configure::read('variables.estados_creditos.7')
+								)
+							);
+		$order				= array('Stage.id' => 'desc');
+		$dato 				= $this->find('first',compact('conditions','fields','order'));
+		return $dato['Stage']['cupo_aprobado'];
+	}
 }

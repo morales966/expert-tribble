@@ -7,7 +7,7 @@ class UsersController extends AppController {
 
 	public function beforeFilter() {
         parent::beforeFilter();
-        $this->Auth->allow('add','login','loginData','logout','remember_password','remember_password_step_2','add_client','addClientSave','saveContact');
+        $this->Auth->allow('add','login','loginData','logout','remember_password','remember_password_step_2','saveContact');
     }
 
 	public function index() {
@@ -171,6 +171,7 @@ class UsersController extends AppController {
             $datos['Client']['banco'] 						= $this->request->data['User']['banco'];
             $datos['Client']['numero_cuenta'] 				= $this->request->data['User']['numero_cuenta'];
             $datos['Client']['tipo_cuenta'] 				= $this->request->data['User']['tipo_cuenta'];
+            $datos['Client']['codigo'] 						= $this->request->data['User']['codigo'];
             $datos['Client']['nombre_propietario_cuenta'] 	= $this->request->data['User']['nombre_propietario_cuenta'];
             $datos['Client']['cedula_propietario_cuenta'] 	= $this->request->data['User']['cedula_propietario_cuenta'];
             $datos['Client']['ejecutivo'] 					= AuthComponent::user('id');

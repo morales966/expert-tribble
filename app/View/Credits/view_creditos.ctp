@@ -250,9 +250,6 @@
                                                         </span>
                                                     </p>
                                                     <span>
-                                                        <a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Finalizado" class="finalizar_credito" data-uid="<?php echo $credit['Credit']['id']; ?>">
-                                                            <i class="fa fa-step-forward"></i>
-                                                        </a>
                                                         <a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Adjuntar plan pago" class="adjuntar_plan_pago" data-uid="<?php echo $credit['Credit']['id']; ?>">
                                                             <i class="fa fa-paperclip"></i>
                                                         </a>

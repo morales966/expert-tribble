@@ -61,6 +61,7 @@ $config = array(
 			'4'							=> 'Aprobado, no retirado',
 			'5'							=> 'Aprobado, retirado',
 			'6' 						=> 'Pagado',
+			'7' 						=> 'Solicitud de desembolso',
 			'description' 				=> 'Descripción',
 			'editar_cupo_aprobado'		=> 'Editar cupo aprobado',
 			'registrar_retiro_cupo' 	=> 'Registrar retiro del cupo',
@@ -73,7 +74,8 @@ $config = array(
 			'Detenido'					=> '3',
 			'Aprobado_no_retirado'		=> '4',
 			'Aprobado_retirado'			=> '5',
-			'Pagado'					=> '6'
+			'Pagado'					=> '6',
+			'Solicitud_de_desembolso' 	=> '7'
 		),
 		'pasos_estados' 			=> array(
 			'razones_negado' 			=> array(

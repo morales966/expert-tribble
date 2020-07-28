@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 27-07-2020 a las 07:57:15
+-- Tiempo de generación: 28-07-2020 a las 07:19:28
 -- Versión del servidor: 10.4.10-MariaDB
 -- Versión de PHP: 5.6.40
 
@@ -21,6 +21,8 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `proyectoapp`
 --
+CREATE DATABASE IF NOT EXISTS `proyectoapp` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish2_ci;
+USE `proyectoapp`;
 
 -- --------------------------------------------------------
 
@@ -46,6 +48,7 @@ DROP TABLE IF EXISTS `clients`;
 CREATE TABLE IF NOT EXISTS `clients` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
+  `codigo` varchar(30) COLLATE utf8mb4_spanish2_ci NOT NULL,
   `nit` varchar(50) COLLATE utf8mb4_spanish2_ci NOT NULL,
   `gremio` varchar(100) COLLATE utf8mb4_spanish2_ci NOT NULL,
   `administrador` varchar(100) COLLATE utf8mb4_spanish2_ci NOT NULL,
@@ -82,6 +85,16 @@ CREATE TABLE IF NOT EXISTS `clients` (
   `comercio_r2` varchar(150) COLLATE utf8mb4_spanish2_ci NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
+
+--
+-- Volcado de datos para la tabla `clients`
+--
+
+INSERT INTO `clients` (`id`, `user_id`, `codigo`, `nit`, `gremio`, `administrador`, `cedula`, `direccion`, `barrio`, `municipio`, `tel_usuario`, `banco`, `numero_cuenta`, `tipo_cuenta`, `nombre_propietario_cuenta`, `cedula_propietario_cuenta`, `ejecutivo`, `clase`, `como_paga`, `departamento`, `cantidad_comercios`, `cuanto_paga`, `productos_servicios`, `adjuntar_cedula_delantera`, `adjuntar_cedula_trasera`, `adjuntar_camara_comercio`, `adjuntar_rut`, `adjuntar_administrador`, `adjuntar_almacen`, `nombre_completo_r1`, `identificacion_r1`, `celular_r1`, `comercio_r1`, `nombre_completo_r2`, `identificacion_r2`, `celular_r2`, `comercio_r2`) VALUES
+(1, 1, '333', '22222', 'Accesorios', 'qqqq', '111', 'qqq', 'www', 'www', '111', 'qqq', '2222', 'Ahorros', 'ddd ddd', '3333', 1, 'Clase B', 'Contado (efectivo-transferencia)', 'www', 2, '2', 'ddddddd', 'adjuntar_cedula_delantera_5f056572e1332.jpeg', 'adjuntar_cedula_trasera_5f056572e1f9b.jpeg', 'adjuntar_camara_comercio_5f056572e24ee.jpeg', 'adjuntar_rut_5f056572e29a6.jpeg', 'adjuntar_administrador_5f056572e2e4f.jpeg', 'adjuntar_almacen_5f056572e32db.jpeg', 'www', '2222', '4444', 'eeee', '2222', '3333', '444', 'dddd'),
+(2, 8, '3e3', 'qq', 'Asesorias', 'qq', '222', 'qqq', 'qqq', 'qqq', '222', 'www', '222', 'Corriente', 'wwww', '222', 6, 'Clase A', 'Contado (efectivo-transferencia)', 'qq', 2, '781600', 'qqqq', 'adjuntar_cedula_delantera_5f1928885f758.jpeg', 'adjuntar_cedula_trasera_5f1928885fc7f.jpeg', 'adjuntar_camara_comercio_5f1928886022e.jpeg', 'adjuntar_rut_5f192888606de.jpeg', 'adjuntar_administrador_5f19288860b8a.jpeg', 'adjuntar_almacen_5f19288861025.jpeg', 'qqq', '222', '222', 'qq', 'www', '222', '2222', 'www'),
+(3, 9, '2222', '11111111', 'Accesorios Militares', 'wwww', '2222', 'sss', 'www', 'www', '33333', 'eee', '33333', 'Ahorros', 'fff', '333', 6, 'Clase A', 'Contado (efectivo-transferencia)', 'ddd', 2, '781600', 'dddd', 'adjuntar_cedula_delantera_5f1e6845bbc54.jpeg', 'adjuntar_cedula_trasera_5f1e6845bc823.jpeg', 'adjuntar_camara_comercio_5f1e6845bd00c.jpeg', 'adjuntar_rut_5f1e6845bd4d8.jpeg', 'adjuntar_administrador_5f1e6845bd96a.jpeg', 'adjuntar_almacen_5f1e6845bddeb.jpeg', 'ss', 'www', '222', 'www', 'dd', 'eeee', '2222', '3333'),
+(4, 10, '111', '111111', 'Asesorias', 'www', '22222222', 'www', 'www', 'qqq', '2222', 'eeee', 'dddd', 'Corriente', '222', '222', 6, 'Clase B', 'Contado (efectivo-transferencia)', 'ddd', 2, '380800', 'dddd', 'adjuntar_cedula_delantera_5f1e6afe8ed9e.jpeg', 'adjuntar_cedula_trasera_5f1e6afe8f54b.jpeg', 'adjuntar_camara_comercio_5f1e6afe8fa40.jpeg', 'adjuntar_rut_5f1e6afe8ff18.jpeg', 'adjuntar_administrador_5f1e6afe903d4.jpeg', 'adjuntar_almacen_5f1e6afe9090a.jpeg', 'qqq', 'qqqq', 'qqq', 'qqq', 'www', 'www', 'www', 'www');
 
 -- --------------------------------------------------------
 
@@ -163,7 +176,7 @@ CREATE TABLE IF NOT EXISTS `stages` (
   `description` varchar(200) COLLATE utf8mb4_spanish2_ci NOT NULL,
   `created` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=132 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
 
 -- --------------------------------------------------------
 

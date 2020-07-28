@@ -36,6 +36,7 @@ $("body").on("click", "#btn_cupo_edit", function() {
     $.post(copy_js.base_url+'Credits/editCupoAprobado',{credit_id:credit_id,cupo_aprobado:cupo_aprobado}, function(result){
         $('#btn_cupo_edit').hide();
         $('#modalSession').modal('hide');
+        total_estados();
         message_alert("Se actualizó el cupo del crédito correctamente","Bien");
     });
 });
@@ -78,25 +79,6 @@ $("body").on("click", "#btn_adjuntar_archivo", function() {
     } else {
         message_alert("Por favor adjunta el plan de pagos","Error");
     }
-});
-
-$("body").on("click", ".finalizar_credito", function() {
-    var credit_id           = $(this).data('uid');
-    swal({
-        title: "¿Estas seguro de finalizar el crédito?",
-        text: "¿Deseas continuar con la acción?",
-        type: "warning",
-        showCancelButton: true,
-        confirmButtonClass: "btn-danger",
-        cancelButtonText:"Cancelar",
-        confirmButtonText: "Aceptar",
-        closeOnConfirm: false
-    },
-    function(){
-        $.post(copy_js.base_url+'Credits/finalizarCredito',{credit_id:credit_id}, function(result){
-            location.reload();
-        });
-    });
 });
 
 $("body").on("click", ".registrar_cupo_aprobado", function() {

@@ -8,7 +8,12 @@
   </ul>
 CREDIVENTAS
   <ul class="navbar-nav ml-auto">
-    <li class="nav-item dropdown ">
+    <?php if (AuthComponent::user('role') == Configure::read('variables.rolCliente')): ?>
+      <a href="javascript:void(0)" class="nav-link" data-toggle="tooltip" data-placement="top" title="Código">
+        <?php echo $this->Utilities->find_codigo_cliente(AuthComponent::user('id')); ?>
+      </a>
+    <?php endif ?>
+    <li class="nav-item dropdown">
       <a class="nav-link dropdown-toggle mr-lg-2" id="alertsDropdown" href="javascript:void(0)" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         <i class="fa fa-bell"></i>
         <span class="indicator" id="count_notificaciones">

@@ -36,6 +36,7 @@
 					<b>Dirección:</b><?php echo $user['Client'][0]['direccion'] ?> <br>
 					<b>Barrio:</b><?php echo $user['Client'][0]['barrio'] ?> <br>
 					<b>Teléfono:</b><?php echo $user['Client'][0]['tel_usuario'] ?> <br>
+					<b>Código:</b><?php echo $user['Client'][0]['codigo'] ?> <br>
 				</div>
 
 				<div class="form-group">

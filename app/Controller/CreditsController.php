@@ -206,6 +206,12 @@ class CreditsController extends AppController {
         $this->set(compact('credit','datas_credit'));
     }
 
+    public function view_user_client() {
+        $this->layout                           = false;
+        $credit                                 = $this->Credit->all_data_credit($this->request->data['credit_id']);
+        $this->set(compact('credit'));
+    }
+
     public function add_comentary() {
         $this->layout                           = false;
         $credit_id = $this->request->data['credit_id'];
@@ -247,13 +253,25 @@ class CreditsController extends AppController {
         return $documento;
     }
 
+    public function solicitudDesenvolver() {
+        $this->autoRender                       = false;
+        if ($this->request->is('ajax')) {
+            $datosC['Credit']['state']              = Configure::read('variables.nombres_estados_creditos.Solicitud_de_desembolso');
+            $datosC['Credit']['id']                 = $this->request->data['credit_id'];
+            $state_name                             = Configure::read('variables.estados_creditos.7');
+            $this->saveStage($state_name,AuthComponent::user('id'),$this->request->data['credit_id'],'','',0);
+            $this->Credit->save($datosC);
+            return true;
+        }
+    }
+
     public function finalizarCredito() {
         $this->autoRender                       = false;
         if ($this->request->is('ajax')) {
             $datosC['Credit']['state']              = Configure::read('variables.nombres_estados_creditos.Pagado');
             $datosC['Credit']['id']                 = $this->request->data['credit_id'];
             $state_name                             = Configure::read('variables.estados_creditos.6');
-            $this->saveStage($state_name,AuthComponent::user('id'),$this->request->data['id'],'','',0);
+            $this->saveStage($state_name,AuthComponent::user('id'),$this->request->data['credit_id'],'','',0);
             $this->Credit->save($datosC);
             return true;
         }
@@ -412,8 +430,39 @@ class CreditsController extends AppController {
     }
 
     public function payments_available() {
-        $payments                   = $this->Credit->find_credits_usuario_state(AuthComponent::user('id'),Configure::read('variables.nombres_estados_creditos.Aprobado_retirado'));
-        $this->set(compact('payments'));
+        $get                            = $this->request->query;
+        if (!empty($get)) {
+            if (isset($get['q'])) {
+                $conditions                 = array(
+                                                'Credit.user_id' => AuthComponent::user('id'),
+                                                'Credit.state'   => array(
+                                                                        Configure::read('variables.nombres_estados_creditos.Aprobado_retirado'),
+                                                                        Configure::read('variables.nombres_estados_creditos.Solicitud_de_desembolso'),
+                                                                        Configure::read('variables.nombres_estados_creditos.Pagado')
+                                                ),
+                                                'OR' => array(
+                                                    'Credit.cedula_persona LIKE'            => '%'.mb_strtolower($get['q']).'%'
+                                                )
+                                            );
+            }
+        } else {
+            $conditions                         = array(
+                                                    'Credit.user_id' => AuthComponent::user('id'),
+                                                    'Credit.state' => array(
+                                                                        Configure::read('variables.nombres_estados_creditos.Aprobado_retirado'),
+                                                                        Configure::read('variables.nombres_estados_creditos.Solicitud_de_desembolso'),
+                                                                        Configure::read('variables.nombres_estados_creditos.Pagado')
+                                                                    )
+                                                );
+        }
+        $order                                  = array('Credit.id' => 'desc');
+        $this->paginate                         = array(
+                                                    'order'         => $order,
+                                                    'limit'         => 10,
+                                                    'conditions'    => $conditions
+                                                );
+        $credits                                = $this->paginate('Credit');
+        $this->set(compact('credits'));
     }
 
     public function paid_customers() {
