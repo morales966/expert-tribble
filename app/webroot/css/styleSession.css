@@ -2,7 +2,7 @@
     background: #f1f4f7;
     margin-bottom: 0;
     display: inline-table;
-    padding: 7px 24px;
+    padding: 7px 22px;
     border: 1px solid #d3d5d8;
     border-radius: 5px;
     line-height: normal;
@@ -2470,4 +2470,33 @@ body.sidebar-collapse:not(.sidebar-mini-md):not(.sidebar-mini) .main-header::bef
   top: 8px;
   left: 12px;
   font-size: 10px;
+}
+
+
+@media screen and (max-width: 1255px){
+  .cuadro_panding {
+    padding: 15px 5px;
+    }
+  .txt_titulo_etapa {
+      font-size: 18px;
+  }
+  .sweet-alert h2{
+    font-size: 1rem;
+  }
+}
+
+@media screen and (max-width: 900px){
+  .btn{
+    display: block;
+    margin: 0px !important;
+    width: 100%
+  }
+  .info-request p {
+      width: 49%;
+      margin-bottom: 5px;
+  }
+  .container_progreso h5 , .container_progreso .text-muted{
+    width: 100%;
+    display: block;
+  }
 }

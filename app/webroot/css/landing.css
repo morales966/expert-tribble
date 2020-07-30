@@ -10,7 +10,12 @@ html{
     right: 0;
     z-index: 0;
 }
-
+.bg-white-shadow .mainlanding a {
+    color: #29416d;
+}
+.mainlanding a {
+    color: #bbcbec;
+}
 .control-wp .fab{
 	margin-top: -5px;
 	color: #189d0e;
@@ -76,8 +81,11 @@ a.scroll-top i {
 .bg-gray {
     background-color: #f1f6fc!important;
 }
-#mas-info{
-	/*background-image: url("../img/backlast.png");*/
+#mas-info {
+    background-image: url(../img/backlast.png);
+    background-position: center right;
+    background-size: contain;
+    background-repeat: no-repeat;
 }
 #carouselExampleTestimonials .carousel-control-next, #carouselExampleTestimonials .carousel-control-prev {
     color: #000;
@@ -132,11 +140,24 @@ p.textwp {
 
 
 @media screen and (max-width: 1255px){
+   body {
+     padding-right: 0px !important; 
+     width: 100% !important;
+     margin: 0px;
+     padding: 0px;
+}
+html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+    #mas-info {
+        background-image: none !important;
+    }
   #carouselExampleTestimonials .carousel-control-next {
-      right: -42px;
+      right: -22px;
   }
       #carouselExampleTestimonials .carousel-control-prev {
-        left: -42px;
+        left: -22px;
     }
 
    .control-wp p.mb-0{
@@ -146,10 +167,6 @@ p.textwp {
     padding: 0px 30px !important;
     width: 100% !important;
     max-width: 100%;
-}   
-.d-flex.flex-column.flex-md-row.align-items-center.p-2.pl-5.pr-5.shadow-sm.nav-custom.fixed-top {
-    padding-left: 10px !important;
-    padding-right: 20px !important;
 }
 .display-4 {
     font-size: 2.5rem !important;
@@ -165,18 +182,31 @@ h3.display-7 {
 
 
 @media screen and (max-width: 700px){
+    .row {
+       margin-right: 0px !important; 
+       margin-left: 0px !important; 
+    }
+    .btn{
+        width: 100%;
+        display: block;
+        margin: 0 !important;
+    }
     .d-flex.flex-column.flex-md-row.align-items-center.p-2.pl-5.pr-5.shadow-sm.nav-custom.fixed-top{
       position: relative!important;  
     }
   #carouselExampleTestimonials .carousel-control-next {
-      right: -22px;
+      right: -4px;
   }
       #carouselExampleTestimonials .carousel-control-prev {
-        left: -22px;
+        left: -4px;
     } 
      img#logo {
     max-width: 200px;
 }   
+.slick-next, .slick-prev {
+    display: none;
+
+}
 }
 
 @media screen and (max-width: 500px){

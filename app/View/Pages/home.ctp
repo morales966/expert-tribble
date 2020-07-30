@@ -1,7 +1,8 @@
  <section class="pt-5 pb-5 bg-dark position-relative" style="min-height:70vh; background-image: url(img/backlanding.jpg); background-size: cover;">
   <div class="bg-overlay"></div>
-  <div class="container pt-5 pb-5 mt-5 position-relative">
-    <div class="row d-flex justify-content-between pt-lg-5 align-items-center">
+  <div class="container pt-5 pb-5 mt-5">
+    <div class="justify-content-between align-items-center">
+      <div class="row">
       <div class="col-lg-6 col-md-7 text-center text-lg-left mb-5">
         <h1 class="display-4 font-weight-bold text-white aos-init aos-animate shadowt" data-aos="fade-up">
         Aprobación de crédito inmediato para comercios afiliados</h1>
@@ -19,9 +20,9 @@
           <span class="text-white">Más de 12.500 créditos aprobados</span>
         </div>
       </div>
-      <div class="col">
+      <div class="col-lg-6 ">
         <div class="row justify-content-center">
-          <div class=" col-md-10">
+          <div class="col-md-10">
             <?php echo $this->Form->create('Contact',array('id' => 'form_datos_id','data-parsley-validate','class'=>"position-relative d-block aos-init aos-animate")); ?>
               <?php  echo $this->element('dejar-datos');  ?>
               <div class="form-group text-center">
@@ -31,6 +32,7 @@
             </form>
           </div>
         </div>
+      </div>
       </div>
     </div>
   </div>
@@ -44,7 +46,7 @@
         <p class="lead mt-4 aos-init" data-aos="fade-up">Realizamos todo el proceso de credito desde tu negocio sin hacer desplazar tu cliente a otros lugares. Tu cliente tendrá múltiples medios de pago, tanto físicos como virtuales, estos son nuestros partners de recaudos.</p>
         <div class="row row-grid">
           <div class="col-xs-12 col-md-12 my-1 aos-init" data-aos="fade-up">
-            <img src="http://0523aae09f0cadbd79f4-60bf0867add971908d4f26a64519c2aa.r62.cf5.rackcdn.com/btns/epayco/epayco_pago_seguro.png" alt="" class="img-fluid">
+            <img src="img/epayco_pago_seguro.png" alt="" class="img-fluid">
           </div>
         </div>
       </div>
