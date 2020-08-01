@@ -1,13 +1,15 @@
 <div class="content-wrapper">
 	<div class="container-fluid cuadro_panding">
-
-
-
-
         <div class="bg-white-content mb-2">
             <div class="row ">
                 <div class="col-md-7">
-                    <h2 class="tittle">Créditos por pagar</h2>
+                <div class="content-tittles">
+                    <div class="line-tittles">|</div>
+                    <div>  
+                        <h1>Créditos  </h1>
+                        <h2>por pagar</h2>
+                    </div>
+                </div>
                 </div>
                 <div class="col-md-5 text-right">
                     <div class="input-group">

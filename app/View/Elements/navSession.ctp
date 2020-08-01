@@ -1,4 +1,4 @@
-<nav class="main-header navbar navbar-expand navbar-white navbar-light">
+<nav class="main-header navbar navbar-expand navbar-white navbar-dark">
   <ul class="navbar-nav">
     <li class="nav-item">
       <a class="nav-link" data-widget="pushmenu" href="javascript:void(0)" role="button">
@@ -6,7 +6,7 @@
       </a>
     </li>
   </ul>
-CREDIVENTAS
+ <img src="../img/crediventas-white.png" class="sizebrand">
   <ul class="navbar-nav ml-auto">
     <?php if (AuthComponent::user('role') == Configure::read('variables.rolCliente')): ?>
       <a href="javascript:void(0)" class="nav-link" data-toggle="tooltip" data-placement="top" title="Código">

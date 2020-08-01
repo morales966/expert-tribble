@@ -4,6 +4,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<head>
+		<link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@1,300;1,700&display=swap" rel="stylesheet">
 		<?php echo $this->Html->charset(); ?>
 		<title>
 	    	<?php echo Configure::read('Application.name') ?>

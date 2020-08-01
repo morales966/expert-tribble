@@ -1,7 +1,13 @@
 <div class="content-wrapper">
 	<div class="container-fluid cuadro_panding">
 		<div class="bg-white-content">
-			<h2 class="tittle">Perfil de Usuario</h2>
+			<div class="content-tittles ">
+	            <div class="line-tittles">|</div>
+	            <div>  
+	              <h1>Perfil</h1>
+	              <h2>de Usuario</h2>
+	            </div>
+	          </div>
 			<?php echo $this->Form->create('User',array('data-parsley-validate'=>true)); ?>
 				<div class="form-group row">
 					<label for="UserName" class="col-sm-2 col-form-label">Nombre</label>

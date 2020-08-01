@@ -5,7 +5,13 @@
 				<div class="col-md-12">
 					<div class="row">
 						<div class="col-md-6">
-							<h2 class="titleView">Solicitar crédito</h2>
+							<div class="content-tittles ">
+                <div class="line-tittles">|</div>
+                <div>  
+                  <h1>Solicitar</h1>
+                  <h2>CRÉDITO AHORA</h2>
+                </div>
+              </div>
 						</div>
 						<div class="col-md-6 text-right">
 							<a class="btn btn-primary" href="<?php echo $this->Html->url(array('action'=>'index')) ?>">Ver todos los Créditos</a>
@@ -24,17 +30,17 @@
 					<h3 class="upper mb-3 text-primary">Estás diligenciando el Paso 1</h3>
 					<div class="content-step">
 						<div class="form-row">
-							<div class="form-group col-md-4">
+							<div class="form-group col-md-12">
 								<b>¿Cuánto necesitas?</b>
 								<?php echo $this->Form->input('valor_credito',array('label' => false,'class' => 'form-control','placeholder' => 'Ingresa un valor','min' => '50000','max' => '1500000')); ?>
 							</div>
-							<div class="form-group col-md-4">
+							<div class="form-group col-md-12">
 								<b>Tiempo en meses</b>
 								<div class="meses_credito">
 									<?php echo $this->Form->input('CreditNumeroMeses1',array('label' => false,'class' => 'form-control','default' => 'Introduce primero el valor que necesitas','options' => array('Introduce primero el valor que necesitas'))); ?>
 								</div>
 							</div>
-							<div class="form-group col-md-4">
+							<div class="form-group col-md-12">
 								<b>Valor cuota aproximadamente</b>
 								<?php echo $this->Form->input('valor_cuota',array('label' => false,'class' => 'form-control','placeholder' => 'VALOR DE CUOTA','readonly' => true,'required' => false)); ?>
 							</div>

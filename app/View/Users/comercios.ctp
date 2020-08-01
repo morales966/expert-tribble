@@ -4,7 +4,13 @@
 		<div class="bg-white-content mb-2">
 			<div class="row ">
 				<div class="col-md-7">
-					<h2 class="tittle">Comercios afiliados</h2>
+					<div class="content-tittles">
+					<div class="line-tittles">|</div>
+					<div>  
+						<h1>Comercios  </h1>
+						<h2>Afiliados</h2>
+					</div>
+				</div>
 				</div>
 				<div class="col-md-5 text-right">
 					<div class="input-group">
@@ -53,7 +59,7 @@
 								<td><?php echo h($client['User']['email']); ?>&nbsp;</td>
 								<td><?php echo h($client['User']['created']); ?>&nbsp;</td>
 								<td class="actions">
-									<a href="<?php echo $this->Html->url(array('controller'=>'Users','action'=>'view',$client['User']['id'])) ?>" data-toggle="tooltip" data-placement="top" title="Ver detalle">
+									<a class="btn btn-outline-primary" href="<?php echo $this->Html->url(array('controller'=>'Users','action'=>'view',$client['User']['id'])) ?>" data-toggle="tooltip" data-placement="top" title="Ver detalle">
 										<i class="fa fa-eye"></i>
 									</a>
 								</td>

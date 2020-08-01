@@ -9,9 +9,22 @@ $rolPermisosAdmin           = array(
 		<div class="bg-white-content data-commerce mb-4">
 			<h2 class="tittle" id="tittle_user_id" data-uid="<?php echo $id ?>">
 				<?php if ($user['User']['role'] == Configure::read('variables.rolCliente')){ ?>
-					Estás viendo el comercio <b> <?php echo h($user['User']['name']); ?></b>
+					<div class="content-tittles">
+						<div class="line-tittles">|</div>
+						<div>  
+							<h1>Detalles del</h1>
+							<h2>comercio <?php echo h($user['User']['name']); ?></h2>
+						</div>
+					</div> 
+
 				<?php } else { ?>
-					<b><?php echo h($user['User']['name']); ?></b>
+					<div class="content-tittles">
+						<div class="line-tittles">|</div>
+						<div>  
+							<h1>Detalles del</h1>
+							<h2>Usuario <?php echo h($user['User']['name']); ?></h2>
+						</div>
+					</div> 					
 				<?php } ?>
 			</h2>
 			<?php if (in_array(AuthComponent::user('role'), $rolPermisosAdmin)): ?>
@@ -23,115 +36,139 @@ $rolPermisosAdmin           = array(
 		</div>
 		<?php if ($user['User']['role'] == Configure::read('variables.rolCliente')): ?>
 			<hr>
-			<div class="bg-white-content">
+			<div class="bg-white-content mb-4">
 				<div class="form-group">
 					<?php echo $this->Html->link("Comercios", array('controller' => 'Users','action'=> 'comercios'), array( 'class' => 'btn btn-success pull-right')) ?>
 				</div>
-				<h2 class="tittle">Información registrada por el Comercio</h2>
-				<div class="form-group">
-					<b>Nit:</b><?php echo $user['Client'][0]['nit'] ?> <br>
-					<b>Gremio:</b><?php echo $user['Client'][0]['gremio'] ?> <br>
-					<b>Administrador:</b><?php echo $user['Client'][0]['administrador'] ?> <br>
-					<b>Cedula:</b><?php echo $user['Client'][0]['cedula'] ?> <br>
-					<b>Dirección:</b><?php echo $user['Client'][0]['direccion'] ?> <br>
-					<b>Barrio:</b><?php echo $user['Client'][0]['barrio'] ?> <br>
-					<b>Teléfono:</b><?php echo $user['Client'][0]['tel_usuario'] ?> <br>
-					<b>Código:</b><?php echo $user['Client'][0]['codigo'] ?> <br>
+				<div class="content-tittles">
+					<div class="line-tittles">|</div>
+					<div>  
+						<h1>Información </h1>
+						<h2>Registrada</h2>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="form-group col-md-6">
+					<div class="bg-white-content">
+						<b>Nit:</b><?php echo $user['Client'][0]['nit'] ?> <br>
+						<b>Gremio:</b><?php echo $user['Client'][0]['gremio'] ?> <br>
+						<b>Administrador:</b><?php echo $user['Client'][0]['administrador'] ?> - <?php echo $user['Client'][0]['cedula'] ?>  <br>
+						<b>Dirección:</b><?php echo $user['Client'][0]['direccion'] ?> - <?php echo $user['Client'][0]['barrio'] ?><br>
+						<b>Teléfono:</b><?php echo $user['Client'][0]['tel_usuario'] ?> <br>
+						<b>Código:</b><?php echo $user['Client'][0]['codigo'] ?> <br>
+					</div>
 				</div>
 
-				<div class="form-group">
-					<b>Banco:</b><?php echo $user['Client'][0]['banco'] ?> <br>
-					<b>Número de cuenta:</b><?php echo $user['Client'][0]['numero_cuenta'] ?> <br>
-					<b>Tipo de cuenta:</b><?php echo $user['Client'][0]['tipo_cuenta'] ?> <br>
-					<b>Nombre propietario de la cuenta:</b><?php echo $user['Client'][0]['nombre_propietario_cuenta'] ?> <br>
-					<b>Cédula propietario de la cuenta:</b><?php echo $user['Client'][0]['cedula_propietario_cuenta'] ?> <br>
+				<div class="form-group col-md-6">
+					<div class="bg-white-content">
+						<b>Plan:</b><?php echo $user['Client'][0]['clase'] ?><br>
+						<b>Como paga:</b><?php echo $user['Client'][0]['como_paga'] ?><br>
+						<b>Departamento:</b><?php echo $user['Client'][0]['departamento'] ?><br>
+						<b>Cantidad comercios:</b><?php echo $user['Client'][0]['cantidad_comercios'] ?><br>
+						<b>Cuanto paga:</b><?php echo $user['Client'][0]['cuanto_paga'] ?><br>
+						<b>Servicio:</b><?php echo $user['Client'][0]['productos_servicios'] ?><br>
+					</div>
+				</div>
+				<div class="form-group col-md-6">
+					<div class="bg-white-content">
+						<b>Banco:</b><?php echo $user['Client'][0]['banco'] ?> <br>
+						<b>Número de cuenta:</b><?php echo $user['Client'][0]['numero_cuenta'] ?> <br>
+						<b>Tipo de cuenta:</b><?php echo $user['Client'][0]['tipo_cuenta'] ?> <br>
+						<b>Propietario de la cuenta:</b><?php echo $user['Client'][0]['nombre_propietario_cuenta'] ?> - <?php echo $user['Client'][0]['cedula_propietario_cuenta'] ?> <br>
+					</div>
+				</div>
+				<div class="form-group col-md-3">
+					<div class="bg-white-content">
+						<b>Referido 1:</b><?php echo $user['Client'][0]['nombre_completo_r1'] ?><br>
+						<b>Identificación 1:</b><?php echo $user['Client'][0]['identificacion_r1'] ?><br>
+						<b>Teléfono o celular referido 1:</b><?php echo $user['Client'][0]['celular_r1'] ?><br>
+						<b>Comercio referido 1:</b><?php echo $user['Client'][0]['comercio_r1'] ?><br>
+					</div>
 				</div>
 
-				<div class="form-group">
-					<b>Plan:</b><?php echo $user['Client'][0]['clase'] ?><br>
-					<b>Como paga:</b><?php echo $user['Client'][0]['como_paga'] ?><br>
-					<b>Departamento:</b><?php echo $user['Client'][0]['departamento'] ?><br>
-					<b>Cantidad comercios:</b><?php echo $user['Client'][0]['cantidad_comercios'] ?><br>
-					<b>Cuanto paga:</b><?php echo $user['Client'][0]['cuanto_paga'] ?><br>
-					<b>Servicio:</b><?php echo $user['Client'][0]['productos_servicios'] ?><br>
-				</div>
+				<div class="form-group col-md-3">
+					<div class="bg-white-content">
+						<b>Referido 2:</b><?php echo $user['Client'][0]['nombre_completo_r2'] ?><br>
+						<b>Identificación 2:</b><?php echo $user['Client'][0]['identificacion_r2'] ?><br>
+						<b>Teléfono o celular referido 2:</b><?php echo $user['Client'][0]['celular_r2'] ?><br>
+						<b>Comercio referido 2:</b><?php echo $user['Client'][0]['comercio_r2'] ?><br>
+					</div>				
+				</div>				
+			</div>
 
-				<div class="form-group">
-						<div class="row">	
-					<div class="col-md-12">
-						<div class="row">	
-							<div class="col-md-2">
+			<div class="row">	
+				<div class="col-md-12">
+					<div class="row">	
+						<div class="col-md-2">
 							<div class="card">
-								<img class="card-img-top img_data" src="<?php echo $this->Html->url('/files/data_clients/'.$user['Client'][0]['adjuntar_cedula_delantera']) ?>" alt="Card image cap">
+								<div class="card-img-top sizeimg" style="background-image: url(<?php echo $this->Html->url('/files/data_clients/'.$user['Client'][0]['adjuntar_cedula_delantera']) ?>)">
+								</div>
 								<div class="card-body">
 									<p class="card-text">Cédula delantera</p>
 								</div>
 							</div>
-							</div>
-							<div class="col-md-2">
+						</div>
+						<div class="col-md-2">
 							<div class="card">
-								<img class="card-img-top img_data" src="<?php echo $this->Html->url('/files/data_clients/'.$user['Client'][0]['adjuntar_cedula_trasera']) ?>" alt="Card image cap">
+								<div class="card-img-top sizeimg" style="background-image: url(<?php echo $this->Html->url('/files/data_clients/'.$user['Client'][0]['adjuntar_cedula_trasera']) ?>)">
+								</div>										
 								<div class="card-body">
 									<p class="card-text">Cédula trasera</p>
 								</div>
 							</div>
-							</div>
-							<div class="col-md-2">
+						</div>
+						<div class="col-md-2">
 							<div class="card">
-								<img class="card-img-top img_data" src="<?php echo $this->Html->url('/files/data_clients/'.$user['Client'][0]['adjuntar_camara_comercio']) ?>" alt="Card image cap">
+								<div class="card-img-top sizeimg" style="background-image: url(<?php echo $this->Html->url('/files/data_clients/'.$user['Client'][0]['adjuntar_camara_comercio']) ?>)">	
+								</div>									
 								<div class="card-body">
 									<p class="card-text">Cámara de comercio</p>
 								</div>
 							</div>
-							</div>
-							<div class="col-md-2">
+						</div>
+						<div class="col-md-2">
 							<div class="card">
-								<img class="card-img-top img_data" src="<?php echo $this->Html->url('/files/data_clients/'.$user['Client'][0]['adjuntar_rut']) ?>" alt="Card image cap">
+								<div class="card-img-top sizeimg" style="background-image: url(<?php echo $this->Html->url('/files/data_clients/'.$user['Client'][0]['adjuntar_rut']) ?>)">	
+								</div>											
 								<div class="card-body">
 									<p class="card-text">Rut</p>
 								</div>
 							</div>
-							</div>
-							<div class="col-md-2">
+						</div>
+						<div class="col-md-2">
 							<div class="card">
-								<img class="card-img-top img_data" src="<?php echo $this->Html->url('/files/data_clients/'.$user['Client'][0]['adjuntar_administrador']) ?>" alt="Card image cap">
+								<div class="card-img-top sizeimg" style="background-image: url(<?php echo $this->Html->url('/files/data_clients/'.$user['Client'][0]['adjuntar_administrador']) ?>)">	
+								</div>											
 								<div class="card-body">
 									<p class="card-text">Administrador</p>
 								</div>
 							</div>
-							</div>
-							<div class="col-md-2">
+						</div>
+						<div class="col-md-2">
 							<div class="card">
-								<img class="card-img-top img_data" src="<?php echo $this->Html->url('/files/data_clients/'.$user['Client'][0]['adjuntar_almacen']) ?>" alt="Card image cap">
+								<div class="card-img-top sizeimg" style="background-image: url(<?php echo $this->Html->url('/files/data_clients/'.$user['Client'][0]['adjuntar_almacen']) ?>)">	
+								</div>											
 								<div class="card-body">
 									<p class="card-text">Almacén</p>
 								</div>
 							</div>
-							</div>																																			
 						</div>
 					</div>
-					</div>
 				</div>
-
-				<div class="form-group">
-					<b>Nombre del referido 1:</b><?php echo $user['Client'][0]['nombre_completo_r1'] ?><br>
-					<b>Identificación 1:</b><?php echo $user['Client'][0]['identificacion_r1'] ?><br>
-					<b>Teléfono o celular referido 1:</b><?php echo $user['Client'][0]['celular_r1'] ?><br>
-					<b>Comercio referido 1:</b><?php echo $user['Client'][0]['comercio_r1'] ?><br>
-				</div>
-
-				<div class="form-group">
-					<b>Nombre completo referido 2:</b><?php echo $user['Client'][0]['nombre_completo_r2'] ?><br>
-					<b>Identificación referido 2:</b><?php echo $user['Client'][0]['identificacion_r2'] ?><br>
-					<b>Teléfono o celular referido 2:</b><?php echo $user['Client'][0]['celular_r2'] ?><br>
-					<b>Comercio referido 2:</b><?php echo $user['Client'][0]['comercio_r2'] ?><br>
-				</div>
-
-
 			</div>
+
+
+			
 			<hr>
 			<div class="bg-white-content">
-				<h2 class="tittle">Créditos asociados a este comercio</h2>
+				<div class="content-tittles">
+					<div class="line-tittles">|</div>
+					<div>  
+						<h1>Créditos </h1>
+						<h2>Asociados</h2>
+					</div>
+				</div>
 				<div class="row">
 					<div class="col-md-12 mb-1">
 						<div class="input-group">
@@ -155,7 +192,7 @@ $rolPermisosAdmin           = array(
 				</div>
 				<div class="table-responsive">
 					<table class="table">
-						<thead class="thead-dark">
+						<thead class="thead-light">
 							<tr>
 								<th>Nombre cliente</th>
 								<th>Identificación</th>
@@ -176,7 +213,7 @@ $rolPermisosAdmin           = array(
 									<td><?php echo $this->Utilities->estados_creditos($credit['Credit']['state']); ?>&nbsp;</td>
 									<td><?php echo h($credit['Credit']['created']); ?>&nbsp;</td>
 									<td class="actions">
-										<a class="ver_credito" data-uid="<?php echo $credit['Credit']['id']; ?>" href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Ver crédito">
+										<a class="ver_credito btn btn-outline-primary" data-uid="<?php echo $credit['Credit']['id']; ?>" href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Ver crédito">
 											<i class="fa fa-fw fa-eye"></i>
 										</a>
 									</td>
