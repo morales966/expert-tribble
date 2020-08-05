@@ -3,7 +3,7 @@
     <div class="bg-blue1 pt-5">
       <div class="container pb-5 pt-5">
         <div class="row">
-          <div class="col-xs-12 col-md-4">
+          <div class="col-xs-6 col-sm-4">
             <a href="#" class="">
               <img src="img/crediventas-white.png" alt="" class="img-fluid pr-5">
             </a>
@@ -18,7 +18,7 @@
           </div>
         </div>            
           </div>
-          <div class="col-xs-12 col-md-3">
+          <div class="col-xs-6 col-sm-3">
             <h4 class="my-2 color2">Ubicación</h4>
             <ul class="list-unstyled list-light">
               <li>Medellin, Antioquia</li>
@@ -26,14 +26,14 @@
             </ul>
           </div>
           <br style="clear:both" class="hidden-sm-up">
-          <div class="col-xs-12 col-md-3">
+          <div class="col-xs-6 col-sm-3">
             <h4 class="my-2 color2">Contáctanos</h4>
             <ul class="list-unstyled list-light">
               <li>Atención al Cliente 590 4603 </li>
               <li>Crédito Whatsapp 323 288 0909</li>
             </ul>
           </div>
-          <div class="col-xs-12 col-md-2">
+          <div class="col-xs-6 col-sm-2">
             <h4 class="my-2 color2">Horario</h4>
             <ul class="list-unstyled list-light">
               <li>

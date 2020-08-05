@@ -49,7 +49,11 @@
                                     <?php echo number_format($this->Utilities->find_cupo_aprobado_credito($credit['Credit']['id'],0,",","."));?>&nbsp;
                                 </td>
 
-                                <td></td>
+                                <td>
+                                    <a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Ver datos de la cuenta" class="datos_banco_cliente" data-uid="<?php echo $credit['Credit']['id']; ?>">
+                                        <i class="fa fa-user"></i>
+                                    </a>
+                                </td>
                                 <td><?php echo $this->Utilities->estados_pago($credit['Credit']['state']); ?>&nbsp;</td>
                                 <td class="actions">
                                     <a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Ver datos del crédito" class="ver_credito" data-uid="<?php echo $credit['Credit']['id']; ?>">

@@ -28,6 +28,14 @@ $("body").on("click", ".ver_credito", function() {
     }); 
 });
 
+$("body").on("click", ".datos_banco_cliente", function() {
+    var credit_id       = $(this).data('uid');
+    $.post(copy_js.base_url+'Credits/ver_datos_banco_cliente',{credit_id:credit_id}, function(result){
+        $('#resultModalGrande').html(result);
+        $('#modalGrande').modal('show');
+    }); 
+});
+
 function buscadorFiltro() {
 	var texto 							= $('#txt_buscador').val();
 	if (texto != '') {

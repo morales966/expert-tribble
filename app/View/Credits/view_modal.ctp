@@ -9,10 +9,10 @@
 			<b>Cuotas </b> <?php echo h($credit['Credit']['numero_meses']); ?>&nbsp;
 		</p>
 		<p class="">
-			<b>Valor </b> <?php echo h($credit['Credit']['valor_cuota']); ?>&nbsp;
+			<b>Valor cuota </b> <?php echo h($credit['Credit']['valor_cuota']); ?>&nbsp;
 		</p>
 		<p class="">
-			<b>Fecha</b> <?php echo h($credit['Credit']['created']); ?>&nbsp;
+			<b>Fecha de registro</b> <?php echo h($credit['Credit']['created']); ?>&nbsp;
 		</p>
 
 		<p class="">

@@ -1,8 +1,8 @@
 <?php 
-$rolPermisosAdmin           = array(
-	Configure::read('variables.roles.Administrador'),
-	Configure::read('variables.roles.Administrador_secundario')
-); 
+	$rolPermisosAdmin           = array(
+                                    Configure::read('variables.roles.Administrador'),
+                                    Configure::read('variables.roles.Administrador_secundario')
+                                  ); 
 ?>
 <div class="content-wrapper">
 	<div class="container-fluid cuadro_panding">
@@ -14,20 +14,20 @@ $rolPermisosAdmin           = array(
 					<b><?php echo h($user['User']['name']); ?></b>
 				<?php } ?>
 			</h2>
-			<?php if (in_array(AuthComponent::user('role'), $rolPermisosAdmin)): ?>
+        	<?php if (in_array(AuthComponent::user('role'), $rolPermisosAdmin)): ?>
 				<?php echo $this->Html->link("Usuarios", array('controller' => 'Users','action'=> 'index'), array( 'class' => 'btn btn-success pull-right')) ?>
 			<?php endif ?>
 			<p><b>Teléfono: </b><?php echo h($user['User']['telephone']); ?>&nbsp;</p>
 			<p><b>Rol: </b><?php echo h($user['User']['role']); ?>&nbsp;</p>
 			<p><b>Correo eléctronico: </b><?php echo h($user['User']['email']); ?>&nbsp;</p>
 		</div>
-		<?php if ($user['User']['role'] == Configure::read('variables.rolCliente')): ?>
+        <?php if ($user['User']['role'] == Configure::read('variables.rolCliente')): ?>
 			<hr>
-			<div class="bg-white-content">
+			<div class="border_cuadro">
 				<div class="form-group">
 					<?php echo $this->Html->link("Comercios", array('controller' => 'Users','action'=> 'comercios'), array( 'class' => 'btn btn-success pull-right')) ?>
-				</div>
-				<h2 class="tittle">Información registrada por el Comercio</h2>
+		        </div>
+				<h2 class="txtDatosVista">Datos</h2>
 				<div class="form-group">
 					<b>Nit:</b><?php echo $user['Client'][0]['nit'] ?> <br>
 					<b>Gremio:</b><?php echo $user['Client'][0]['gremio'] ?> <br>
@@ -48,7 +48,7 @@ $rolPermisosAdmin           = array(
 				</div>
 
 				<div class="form-group">
-					<b>Plan:</b><?php echo $user['Client'][0]['clase'] ?><br>
+					<b>Plán:</b><?php echo $user['Client'][0]['clase'] ?><br>
 					<b>Como paga:</b><?php echo $user['Client'][0]['como_paga'] ?><br>
 					<b>Departamento:</b><?php echo $user['Client'][0]['departamento'] ?><br>
 					<b>Cantidad comercios:</b><?php echo $user['Client'][0]['cantidad_comercios'] ?><br>
@@ -57,60 +57,12 @@ $rolPermisosAdmin           = array(
 				</div>
 
 				<div class="form-group">
-						<div class="row">	
-					<div class="col-md-12">
-						<div class="row">	
-							<div class="col-md-2">
-							<div class="card">
-								<img class="card-img-top img_data" src="<?php echo $this->Html->url('/files/data_clients/'.$user['Client'][0]['adjuntar_cedula_delantera']) ?>" alt="Card image cap">
-								<div class="card-body">
-									<p class="card-text">Cédula delantera</p>
-								</div>
-							</div>
-							</div>
-							<div class="col-md-2">
-							<div class="card">
-								<img class="card-img-top img_data" src="<?php echo $this->Html->url('/files/data_clients/'.$user['Client'][0]['adjuntar_cedula_trasera']) ?>" alt="Card image cap">
-								<div class="card-body">
-									<p class="card-text">Cédula trasera</p>
-								</div>
-							</div>
-							</div>
-							<div class="col-md-2">
-							<div class="card">
-								<img class="card-img-top img_data" src="<?php echo $this->Html->url('/files/data_clients/'.$user['Client'][0]['adjuntar_camara_comercio']) ?>" alt="Card image cap">
-								<div class="card-body">
-									<p class="card-text">Cámara de comercio</p>
-								</div>
-							</div>
-							</div>
-							<div class="col-md-2">
-							<div class="card">
-								<img class="card-img-top img_data" src="<?php echo $this->Html->url('/files/data_clients/'.$user['Client'][0]['adjuntar_rut']) ?>" alt="Card image cap">
-								<div class="card-body">
-									<p class="card-text">Rut</p>
-								</div>
-							</div>
-							</div>
-							<div class="col-md-2">
-							<div class="card">
-								<img class="card-img-top img_data" src="<?php echo $this->Html->url('/files/data_clients/'.$user['Client'][0]['adjuntar_administrador']) ?>" alt="Card image cap">
-								<div class="card-body">
-									<p class="card-text">Administrador</p>
-								</div>
-							</div>
-							</div>
-							<div class="col-md-2">
-							<div class="card">
-								<img class="card-img-top img_data" src="<?php echo $this->Html->url('/files/data_clients/'.$user['Client'][0]['adjuntar_almacen']) ?>" alt="Card image cap">
-								<div class="card-body">
-									<p class="card-text">Almacén</p>
-								</div>
-							</div>
-							</div>																																			
-						</div>
-					</div>
-					</div>
+					<b>Cédula delantera:</b><img class="img_data" src="<?php echo $this->Html->url('/files/data_clients/'.$user['Client'][0]['adjuntar_cedula_delantera']) ?>"><br>
+					<b>Cédula trasera:</b><img class="img_data" src="<?php echo $this->Html->url('/files/data_clients/'.$user['Client'][0]['adjuntar_cedula_trasera']) ?>"><br>
+					<b>Camara comercio:</b><img class="img_data" src="<?php echo $this->Html->url('/files/data_clients/'.$user['Client'][0]['adjuntar_camara_comercio']) ?>"><br>
+					<b>Rut:</b><img class="img_data" src="<?php echo $this->Html->url('/files/data_clients/'.$user['Client'][0]['adjuntar_rut']) ?>"><br>
+					<b>Administrador:</b><img class="img_data" src="<?php echo $this->Html->url('/files/data_clients/'.$user['Client'][0]['adjuntar_administrador']) ?>"><br>
+					<b>Almacen:</b><img class="img_data" src="<?php echo $this->Html->url('/files/data_clients/'.$user['Client'][0]['adjuntar_almacen']) ?>"><br>
 				</div>
 
 				<div class="form-group">
@@ -127,46 +79,45 @@ $rolPermisosAdmin           = array(
 					<b>Comercio referido 2:</b><?php echo $user['Client'][0]['comercio_r2'] ?><br>
 				</div>
 
-
-			</div>
-			<hr>
-			<div class="bg-white-content">
-				<h2 class="tittle">Créditos asociados a este comercio</h2>
-				<div class="row">
-					<div class="col-md-12 mb-1">
-						<div class="input-group">
-							<?php if (isset($this->request->query['q'])){ ?>
-								<input type="text" class="form-control" value="<?php echo $this->request->query['q']; ?>" placeholder="Buscador por cedula"  disabled="disabled">
-								<div class="input-group-append">
-									<button class="btn btn-secondary" type="button" id="texto_busqueda" data-toggle="tooltip" data-placement="top" title="Borrar">
-										<i class="fa fa-trash"></i>
-									</button>
-								</div>
-							<?php } else { ?>
-								<input type="text" class="form-control" placeholder="Buscador por cedula" id="txt_buscador">
-								<div class="input-group-append">
-									<button class="btn btn-secondary btn_buscar" type="button" data-toggle="tooltip" data-placement="top" title="Buscador">
-										<i class="fa fa-search"></i>
-									</button>
-								</div>
-							<?php } ?>
+		       	<hr>
+		        <h2 class="txtDatosVista">Creditos</h2>
+				<div class="bg-white-content">
+					<h2 class="tittle">Créditos en este comercio</h2>
+					<div class="row">
+						<div class="col-md-12 mb-1">
+							<div class="input-group">
+								<?php if (isset($this->request->query['q'])){ ?>
+									<input type="text" class="form-control" value="<?php echo $this->request->query['q']; ?>" placeholder="Buscador por cedula"  disabled="disabled">
+								    <div class="input-group-append">
+										<button class="btn btn-secondary" type="button" id="texto_busqueda" data-toggle="tooltip" data-placement="top" title="Borrar">
+						        			<i class="fa fa-trash"></i>
+										</button>
+								    </div>
+								<?php } else { ?>
+								    <input type="text" class="form-control" placeholder="Buscador por cedula" id="txt_buscador">
+								    <div class="input-group-append">
+										<button class="btn btn-secondary btn_buscar" type="button" data-toggle="tooltip" data-placement="top" title="Buscador">
+											<i class="fa fa-search"></i>
+										</button>
+								    </div>
+								<?php } ?>
+							 </div>
 						</div>
 					</div>
-				</div>
-				<div class="table-responsive">
-					<table class="table">
-						<thead class="thead-dark">
-							<tr>
-								<th>Nombre cliente</th>
-								<th>Identificación</th>
-								<th>Celular</th>
-								<th>Valor credito</th>
-								<th>Estado</th>
-								<th>Fecha registro</th>
-								<th class="actions">Acciones</th>
-							</tr>
-						</thead>
-						<tbody>
+					<div class="table-responsive">
+						<table class="table">
+				   			<thead class="thead-dark">
+								<tr>
+									<th>Nombre cliente</th>
+									<th>Identificación</th>
+									<th>Celular</th>
+									<th>Valor credito</th>
+									<th>Estado</th>
+									<th>Fecha registro</th>
+									<th class="actions">Acciones</th>
+								</tr>
+							</thead>
+							<tbody>
 							<?php foreach ($credits as $credit): ?>
 								<tr>
 									<td><?php echo h($credit['Credit']['nombre_persona']).' '.h($credit['Credit']['apellido_persona']); ?>&nbsp;</td>
@@ -182,35 +133,35 @@ $rolPermisosAdmin           = array(
 									</td>
 								</tr>
 							<?php endforeach; ?>
-						</tbody>
-					</table>
-					<p>
-						<?php
-						echo $this->Paginator->counter(array(
-							'format' => __('Página {:page} de {:pages}, mostrando {:current} resultados en {:count} total')));
+							</tbody>
+						</table>
+						<p>
+							<?php
+								echo $this->Paginator->counter(array(
+								'format' => __('Página {:page} de {:pages}, mostrando {:current} resultados en {:count} total')));
 							?>
 						</p>
 						<div class="row numberpages">
 							<?php
-							echo $this->Paginator->first('<< ', array('class' => 'prev'), null);
-							echo $this->Paginator->prev('< ', array(), null, array('class' => 'prev disabled'));
-							echo $this->Paginator->counter(array('format' => '{:page} de {:pages}'));
-							echo $this->Paginator->next(' >', array(), null, array('class' => 'next disabled'));
-							echo $this->Paginator->last(' >>', array('class' => 'next'), null);
+								echo $this->Paginator->first('<< ', array('class' => 'prev'), null);
+								echo $this->Paginator->prev('< ', array(), null, array('class' => 'prev disabled'));
+								echo $this->Paginator->counter(array('format' => '{:page} de {:pages}'));
+								echo $this->Paginator->next(' >', array(), null, array('class' => 'next disabled'));
+								echo $this->Paginator->last(' >>', array('class' => 'next'), null);
 							?>
 							<b><?php echo $this->Paginator->counter(array('format' => '{:count} registros en total')); ?></b>
 						</div>
 					</div>
 				</div>
-
-			<?php endif ?>
-		</div>
+			</div>
+		<?php endif ?>
 	</div>
+</div>
 
-	<?php
+<?php
 	echo $this->Html->css("controller/credits/view.css?".rand(),							array('block' => 'AppCss'));
 
 	echo $this->Html->script("controller/credits/index.js?".rand(),							array('block' => 'AppScript'));
 	echo $this->Html->script("controller/credits/view.js?".rand(),							array('block' => 'AppScript'));
 	echo $this->Html->script("controller/users/view.js?".rand(),							array('block' => 'AppScript'));
-	?>
+?>

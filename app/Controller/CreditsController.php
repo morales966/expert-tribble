@@ -206,6 +206,15 @@ class CreditsController extends AppController {
         $this->set(compact('credit','datas_credit'));
     }
 
+    public function ver_datos_banco_cliente() {
+        $this->layout                           = false;
+        $credit                                 = $this->Credit->all_data_credit($this->request->data['credit_id']);
+        
+        // $userDataBanco                          = $this->Credit->User->Client->
+        $userDataBanco = array();
+        $this->set(compact('userDataBanco'));
+    }
+
     public function view_user_client() {
         $this->layout                           = false;
         $credit                                 = $this->Credit->all_data_credit($this->request->data['credit_id']);
@@ -261,7 +270,7 @@ class CreditsController extends AppController {
             $state_name                             = Configure::read('variables.estados_creditos.7');
             $description                                               = Configure::read('variables.description_notificaciones.desenbolsar_dinero');
             $url                                                       = $this->webroot.'Credits/paid_customers';
-            $usuarios                                                  = $this->User->all_role_finanzas();
+            $usuarios                                                  = $this->Credit->User->all_role_finanzas();
             foreach ($usuarios as $user) {
                 $this->saveManagesUser($description,$user['User']['id'],$url);
             }
