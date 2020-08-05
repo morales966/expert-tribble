@@ -9,7 +9,11 @@
     content: " ";
     display: table;
 }
-
+.kanban-label .btn{
+    box-shadow: none !important;
+    padding: .25rem .5rem;
+    border-radius: 3px;
+}
 .kanban-centered:after {
     clear: both;
 }
@@ -272,7 +276,7 @@
 
 .txt_titulo_etapa {
     font-size: 16px;
-    font-weight: 300;
+    font-weight: 600;
 }
 .btn_accion_estado {
     background-color: orange;

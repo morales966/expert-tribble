@@ -2,9 +2,15 @@
 	<div class="container-fluid cuadro_panding">
 	
 		<?php if (AuthComponent::user('role') != Configure::read('variables.rolCliente')) { ?>
-			<div class="bg-white pt-4 pb-2 pr-3 pl-4">
-				<h2 class="titleView">Panel de Créditos</h2>
-			</div>
+			<div class="col-md-12">
+			<div class="content-tittles">
+                <div class="line-tittles">|</div>
+                <div>  
+                  <h1>Panel</h1>
+                  <h2>de Créditos</h2>
+                </div>
+             </div>
+             </div>
 			<div class="container-fluid">
 				<div id="container_creditos" class="row mb-5">
 
@@ -359,10 +365,16 @@
 				</div>
 			</div>
 		<div class="bg-white-content mb-5">
-			<h2 class="titleView">Créditos finalizados</h2>
+			<div class="content-tittles">
+                <div class="line-tittles">|</div>
+                <div>  
+                  <h1>Créditos</h1>
+                  <h2>Finalizados</h2>
+                </div>
+             </div>
 			<div class="table-responsive">
 				<table class="table">
-					<thead class="thead-dark">
+					<thead class="thead-light">
 						<tr>
 							<th>Cliente</th>
 							<th>Nombre cliente</th>
@@ -418,12 +430,18 @@
 				<div class="bg-white-content mb-2">
 				<div class="row ">
 					<div class="col-md-3">
-						<h2 class="tittle">Panel de Créditos</h2>
+						<div class="content-tittles ">
+			                <div class="line-tittles">|</div>
+			                <div>  
+			                  <h1>Panel</h1>
+			                  <h2>DE CRÉDITO</h2>
+			                </div>
+			              </div>
 					</div>
 					<div class="col-md-4">
 						<div class="dropdown text-right">
 							<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-								Filtros por estados de los créditos
+								Filtros por estados créditos
 							</button>
 							<div class="dropdown-menu">
 								<?php
@@ -500,7 +518,7 @@
 									<td><?php echo $this->Utilities->estados_creditos($credit['Credit']['state']); ?>&nbsp;</td>
 									<td><?php echo h($credit['Credit']['created']); ?>&nbsp;</td>
 									<td class="actions">
-										<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Ver datos del crédito" class="ver_credito" data-uid="<?php echo $credit['Credit']['id']; ?>">
+										<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Ver datos del crédito" class="btn btn-outline-primary ver_credito" data-uid="<?php echo $credit['Credit']['id']; ?>">
 											<i class="fa fa-eye"></i>
 										</a>
 									</td>

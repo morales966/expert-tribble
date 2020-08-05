@@ -3,7 +3,13 @@
 		<div class="bg-white-content mb-2">
 			<div class="row ">
 				<div class="col-md-7">
-					<h2 class="tittle">Créditos por pagar</h2>
+					<div class="content-tittles ">
+		                <div class="line-tittles">|</div>
+		                <div>  
+		                  <h1>Créditos</h1>
+		                  <h2>por pagar</h2>
+		                </div>
+		             </div>
 				</div>
 				<div class="col-md-5 text-right">
 					<div class="input-group">
@@ -46,10 +52,6 @@
 							<tr>
 								<td>
 									<?php echo h($credit['Credit']['cedula_persona']); ?>
-									<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Ver datos del cliente" class="ver_datos_cliente" data-uid="<?php echo $credit['Credit']['id']; ?>">
-										<i class="fa fa-user"></i>
-									</a>
-									&nbsp;
 								</td>
 								<td>
 									<?php echo number_format($this->Utilities->find_cupo_aprobado_credito($credit['Credit']['id'],0,",","."));?>&nbsp;
@@ -62,11 +64,14 @@
 								<td></td>
 								<td></td>
 								<td class="actions">
-									<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Ver datos del crédito" class="ver_credito" data-uid="<?php echo $credit['Credit']['id']; ?>">
+									<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Ver datos del crédito" class="btn btn-outline-primary ver_credito" data-uid="<?php echo $credit['Credit']['id']; ?>">
 										<i class="fa fa-eye"></i>
 									</a>
+									<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Ver datos del cliente" class="ver_datos_cliente btn btn-outline-secondary" data-uid="<?php echo $credit['Credit']['id']; ?>">
+										<i class="fa fa-user"></i>
+									</a>
 									<?php if ($credit['Credit']['state'] == Configure::read('variables.nombres_estados_creditos.Aprobado_retirado')): ?>
-										<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Desenbolsar" class="solicitud_desenbolsar" data-uid="<?php echo $credit['Credit']['id']; ?>">
+										<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Desenbolsar" class="btn btn-outline-success solicitud_desenbolsar" data-uid="<?php echo $credit['Credit']['id']; ?>">
 											<i class="fa fa-money"></i>
 										</a>
 									<?php endif ?>
