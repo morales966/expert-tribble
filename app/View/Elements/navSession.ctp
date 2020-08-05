@@ -65,6 +65,13 @@
           </a>
         </li>
         <li class="nav-item">
+          <a href="<?php echo $this->Html->url(array('controller'=>'Users','action' => 'view_data')) ?>" class="nav-link" id="datos">
+            <p>
+              Datos
+            </p>
+          </a>
+        </li>
+        <li class="nav-item">
           <a href="<?php echo $this->Html->url(array('controller'=>'Credits','action'=>'index')) ?>" class="nav-link" id="creditos">
             <p>
               Créditos

@@ -64,6 +64,12 @@ class UsersController extends AppController {
 		$this->set(compact('user','id','credits'));
 	}
 
+	public function view_data() {
+		$user_id 					= AuthComponent::user('id');
+		$user 						= $this->User->get_data_model('User',$user_id);
+		$this->set(compact('user','user_id'));
+	}
+
 	public function add() {
 		$roles 						=  Configure::read('variables.roles');
 		if ($this->request->is('post')) {
