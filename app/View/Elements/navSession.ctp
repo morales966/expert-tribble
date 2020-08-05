@@ -74,6 +74,13 @@
 
         <?php if (in_array(AuthComponent::user('role'), $rolPermisosAdmin)): ?>
           <li class="nav-item">
+            <a href="<?php echo $this->Html->url(array('controller'=>'Users','action'=>'client_mail')) ?>" class="nav-link" id="clientes">
+              <p>
+                Registrar cliente
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
             <a href="<?php echo $this->Html->url(array('controller'=>'Users','action'=>'index')) ?>" class="nav-link" id="usuarios">
               <p>
                 Usuarios

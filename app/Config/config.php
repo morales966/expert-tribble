@@ -97,6 +97,7 @@ $config = array(
 		),
 		'rolCliente' 				=> 'Comercios',
 		'password'					=> 'crediventas2020',
+		'Actualizar'				=> 'Actualizar',
 		'lista_gremios' 			=> array(
 			'Accesorios' 				=> 'Accesorios',
 			'Accesorios Militares' 		=> 'Accesorios Militares',

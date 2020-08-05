@@ -12,7 +12,11 @@ $(document).ready(function () {
 		case 'USERS':
 			if (copy_js.action == 'profile') {
 				$('#profile').addClass("activeNavS");
-			} else if($accionesEjecutivo.indexOf(copy_js.action) != '-1') {
+                $('#clientes').removeClass("activeNavS");
+			} else if (copy_js.action == 'client_mail') {
+                $('#clientes').addClass("activeNavS");
+                $('#profile').removeClass("activeNavS");
+            } else if($accionesEjecutivo.indexOf(copy_js.action) != '-1') {
                 if (copy_js.action == 'messages_data') {
                     $('#usuarios').removeClass("activeNavS");
                     $('#comercios').removeClass("activeNavS");

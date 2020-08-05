@@ -143,9 +143,84 @@ class UsersController extends AppController {
 		$cuenta_con 					= Configure::read('variables.lista_cuenta_con');
 		if ($this->request->is('post')) {
 			$this->addClientSave();
-			$this->redirect(array('controller' => 'Ussers','action' => 'comercios'));
+			$this->redirect(array('controller' => 'Users','action' => 'comercios'));
 		}
 		$this->set(compact('gremio','tipo_cuenta','clase','como_paga','cantidad_comercios','cuenta_con'));
+	}
+
+	public function client_mail() {
+		if ($this->request->is('post')) {
+			$datos['User']['email'] 						= $this->request->data['User']['email'];
+			$datos['User']['password'] 						= Configure::read('variables.password');
+			$datos['User']['hash_change_password'] 			= '';
+			$datos['User']['state']				 			= Configure::read('variables.habilitado');
+			$datos['User']['role'] 							= Configure::read('variables.rolCliente');
+			$datos['User']['name'] 							= Configure::read('variables.Actualizar');
+			$datos['User']['telephone'] 					= Configure::read('variables.Actualizar');
+			$this->User->create();
+			if ($this->User->save($datos['User'])) {
+				$user_id 											= $this->User->id;
+				$datos['Client']['user_id'] 						= $user_id;
+				$datos['Client']['nit']								= Configure::read('variables.Actualizar');
+		        $datos['Client']['gremio'] 							= Configure::read('variables.Actualizar');
+		        $datos['Client']['administrador'] 					= Configure::read('variables.Actualizar');
+	            $datos['Client']['cedula'] 							= Configure::read('variables.Actualizar');
+	            $datos['Client']['direccion'] 						= Configure::read('variables.Actualizar');
+	            $datos['Client']['barrio'] 							= Configure::read('variables.Actualizar');
+	            $datos['Client']['municipio'] 						= Configure::read('variables.Actualizar');
+	            $datos['Client']['tel_usuario'] 					= Configure::read('variables.Actualizar');
+	            $datos['Client']['banco'] 							= Configure::read('variables.Actualizar');
+	            $datos['Client']['numero_cuenta'] 					= Configure::read('variables.Actualizar');
+	            $datos['Client']['tipo_cuenta'] 					= Configure::read('variables.Actualizar');
+	            $datos['Client']['codigo'] 							= Configure::read('variables.Actualizar');
+	            $datos['Client']['nombre_propietario_cuenta'] 		= Configure::read('variables.Actualizar');
+	            $datos['Client']['cedula_propietario_cuenta'] 		= Configure::read('variables.Actualizar');
+	            $datos['Client']['ejecutivo'] 						= AuthComponent::user('id');
+	            $datos['Client']['clase'] 							= Configure::read('variables.Actualizar');
+	            $datos['Client']['como_paga'] 						= Configure::read('variables.Actualizar');
+	            $datos['Client']['departamento'] 					= Configure::read('variables.Actualizar');
+	            $datos['Client']['cantidad_comercios'] 				= '0';
+	            $datos['Client']['cuanto_paga'] 					= Configure::read('variables.Actualizar');
+	            $datos['Client']['productos_servicios'] 			= Configure::read('variables.Actualizar');
+	            $datos['Client']['nombre_completo_r1'] 				= Configure::read('variables.Actualizar');
+	            $datos['Client']['identificacion_r1'] 				= Configure::read('variables.Actualizar');
+	            $datos['Client']['celular_r1'] 						= Configure::read('variables.Actualizar');
+	            $datos['Client']['comercio_r1'] 					= Configure::read('variables.Actualizar');
+	            $datos['Client']['nombre_completo_r2'] 				= Configure::read('variables.Actualizar');
+	            $datos['Client']['identificacion_r2'] 				= Configure::read('variables.Actualizar');
+	            $datos['Client']['celular_r2'] 						= Configure::read('variables.Actualizar');
+		        $datos['Client']['comercio_r2'] 					= Configure::read('variables.Actualizar');
+				$datos['Client']['adjuntar_cedula_delantera'] 		= Configure::read('variables.Actualizar');
+				$datos['Client']['adjuntar_cedula_trasera'] 		= Configure::read('variables.Actualizar');
+				$datos['Client']['adjuntar_camara_comercio'] 		= Configure::read('variables.Actualizar');
+				$datos['Client']['adjuntar_rut'] 					= Configure::read('variables.Actualizar');
+				$datos['Client']['adjuntar_administrador'] 			= Configure::read('variables.Actualizar');
+				$datos['Client']['adjuntar_almacen'] 				= Configure::read('variables.Actualizar');
+				$this->User->Client->create();
+				if ($this->User->Client->save($datos['Client'])) {
+					$correo = $this->enviarCorreoBienvenidaClientExist($datos['User']['email'],Configure::read('variables.password'),$datos['User']['name']);
+					if ($correo) {
+						$this->Session->setFlash('Registro correctamente, el correo electrónico fue enviado correctamente', 'Flash/success');
+						$this->redirect(array('controller' => 'Users','action' => 'index'));
+					} else {
+						$this->Session->setFlash('Registro correctamente, pero algo a fallado al momento de enviarte el correo electrónico, comunícate con el administrador del sistema', 'Flash/success');
+					}
+				}
+			} else {
+				$this->Session->setFlash('Algo salio mal, los datos no se ha guardado, por favor inténtalo mas tarde','Flash/error');
+			}
+		}
+	}
+
+	public function enviarCorreoBienvenidaClientExist($correo,$password,$nombreUsuario) {
+		$options = array(
+			'to'		=> $correo,
+			'template'	=> 'bienvenido_usuario',
+			'subject'	=> 'Bienvenido',
+			'vars'		=> array('name' => $nombreUsuario,'password' => $password),
+		);
+		$r = $this->sendMail($options);
+		return $r;
 	}
 
 	public function addClientSave() {
