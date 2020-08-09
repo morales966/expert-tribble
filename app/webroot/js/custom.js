@@ -33,28 +33,28 @@ $(document).ready(function(){
 	  ]
 	});
 });
-if ($(window).width() > 960) {
-	$(window).scroll(function() {
-	    if ($(this).scrollTop() > 100) {
-	        $('a.scroll-top').fadeIn('fast');
-	        $('.nav-custom').addClass('bg-white-shadow');
+// if ($(window).width() > 960) {
+// 	$(window).scroll(function() {
+// 	    if ($(this).scrollTop() > 100) {
+// 	        $('a.scroll-top').fadeIn('fast');
+// 	        $('.nav-custom').addClass('bg-white-shadow');
 
-	    	$imgchange = $("#logo").attr("dataattr");
-	    	$("#logo").attr('src',$imgchange);
+// 	    	$imgchange = $("#logo").attr("dataattr");
+// 	    	$("#logo").attr('src',$imgchange);
 
-	    } else {
-	        $('a.scroll-top').fadeOut('fast');
-	        $('.nav-custom').removeClass('bg-white-shadow');
+// 	    } else {
+// 	        $('a.scroll-top').fadeOut('fast');
+// 	        $('.nav-custom').removeClass('bg-white-shadow');
 
-	        $("#logo").attr('src',"img/crediventas-white.png");
-	    }
-	});
+// 	        $("#logo").attr('src',"img/crediventas-white.png");
+// 	    }
+// 	});
 
-	$('a.scroll-top').click(function(event) {
-	    event.preventDefault();
-	    $('html, body').animate({scrollTop: 0}, 100);
-	});
-}
+// 	$('a.scroll-top').click(function(event) {
+// 	    event.preventDefault();
+// 	    $('html, body').animate({scrollTop: 0}, 100);
+// 	});
+// }
 
 if ($(window).width() < 960) {
    $("#logo").attr('src',"img/logo-crediventas.png");
