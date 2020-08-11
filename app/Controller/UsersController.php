@@ -220,10 +220,15 @@ class UsersController extends AppController {
 
 	public function enviarCorreoBienvenidaClientExist($correo,$password,$nombreUsuario) {
 		$options = array(
-			'to'		=> $correo,
-			'template'	=> 'bienvenido_usuario',
-			'subject'	=> 'Bienvenido',
-			'vars'		=> array('name' => $nombreUsuario,'password' => $password),
+			'to'					=> $correo,
+			// 'template'				=> 'bienvenido_usuario',
+			'subject'				=> 'Bienvenido',
+
+			'vName' 				=> $nombreUsuario,
+			'vPassword' 			=> $password,
+			'vclienteNuevo' 		=> true,
+			'vUsuario' 				=> false,
+			'vCliente' 				=> false
 		);
 		$r = $this->sendMail($options);
 		return $r;

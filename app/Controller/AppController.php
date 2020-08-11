@@ -1,17 +1,17 @@
 <?php
 
-App::uses('Controller', 'Controller');
+App::uses('Controller', 'Controller'); 
 
 class AppController extends Controller {
 
     public $helpers           = array('Utilities');
-    public $components        = array(	
+    public $components        = array(  
                                     'Auth' => array(
                                        'authenticate' => array(
-                            	            'Form' => array(
-                            	                'fields' => array('username' => 'email')
-                            	            )
-                            			),
+                                            'Form' => array(
+                                                'fields' => array('username' => 'email')
+                                            )
+                                        ),
                                         'loginAction' => array(
                                             'controller' => 'Pages','action' => 'home'
                                         ),
@@ -22,12 +22,12 @@ class AppController extends Controller {
                                     'Session'
                                  );
 
-	public function beforeRender() {
+    public function beforeRender() {
 
-	}
+    }
 
-	public function beforeFilter(){
-        //$this->forgeSSL();
+    public function beforeFilter(){
+        $this->forgeSSL();
         $this->validateSessionActive();
     }
 
@@ -65,33 +65,356 @@ class AppController extends Controller {
         return true;
     }
 
-	public function sendMail($options = array()) {
-        try {
-            $email                      = new CakeEmail();
-            if (isset($options['file'])) {
-                $email->template($options['template'], 'default')
-                    ->config('default')
-                    ->emailFormat('html')
-                    ->subject($options['subject'])
-                    ->to($options['to'])
-                    ->from(Configure::read('Email.contact_mail'))
-                    ->attachments($options['file'])
-                    ->viewVars($options['vars'])
-                    ->send();
-            } else {
-                $email->template($options['template'], 'default')
-                    ->config('default')
-                    ->emailFormat('html')
-                    ->subject($options['subject'])
-                    ->to($options['to'])
-                    ->from(Configure::read('Email.contact_mail'))
-                    ->viewVars($options['vars'])
-                    ->send();
-            }
-        } catch(Exception $e){
-            $this->log($e->getMessage(),"error");
+    // public function sendMailCake() {
+        // try {
+        //     $email                      = new CakeEmail();
+        //     if (isset($options['file'])) {
+        //         $email->template($options['template'], 'default')
+        //             ->config('default')
+        //             ->emailFormat('html')
+        //             ->subject($options['subject'])
+        //             ->to($options['to'])
+        //             ->from(Configure::read('Email.contact_mail'))
+        //             ->attachments($options['file'])
+        //             ->viewVars($options['vars'])
+        //             ->send();
+        //     } else {
+        //         $email->template($options['template'], 'default')
+        //             ->config('default')
+        //             ->emailFormat('html')
+        //             ->subject($options['subject'])
+        //             ->to($options['to'])
+        //             ->from(Configure::read('Email.contact_mail'))
+        //             ->viewVars($options['vars'])
+        //             ->send();
+        //     }
+        // } catch(Exception $e){
+        //     $this->log($e->getMessage(),"error"); 
+        // } 
+    // }
+
+    public function sendMail($options = array()) {
+        ini_set ('display_errors', 1);
+        error_reporting (E_ALL);
+        $from = "dlmorales096@gmail.com";
+        $to = $options['to'];
+        $subject = $options['subject'];
+        if ($options['vCliente'] == true) {
+            $message = $this->mailSend_BienvenidoCliente($options['vName'],$options['vPassword']);
+        } else if($options['vUsuario'] == true) {
+            $message = $this->mailSend_BienvenidoUsuario($options['vName'],$options['vPassword']);
+        } else if($options['vclienteNuevo'] == true) {
+            $message = $this->mailSend_BienvenidoCliente($options['vName'],$options['vPassword']);
+        } else {
+            $message = $this->mailSend_RememberPassword($options['vHash'],$options['vName']);
         }
+        $cabeceras  = 'MIME-Version: 1.0' . "\r\n";
+        $cabeceras .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+        $cabeceras .= "De:". $from;
+        mail ($to, $subject, $message, $cabeceras);
         return true;
+    }
+
+    public function mailSend_BienvenidoUsuario($name,$password) {
+        $message = '
+        <!DOCTYPE html>
+        <html lang="es">
+            <head>
+                <title>Bienvenido</title>
+                <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+                <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+                <meta charset="utf-8" />
+            </head>
+            <body style="background-color:#f8f8f8;">
+                <table align="center" style="width: 600px; display:block; margin: 0 auto; border-collapse: collapse; font-family: Helvetica, Arial, Sans-Serif;background-color:#ffffff;">
+                    <tr>
+                        <td>
+                            <table style="width: 600px; background-color:#ffffff; color:#111E2D; display:block; margin: 0 auto; border-collapse: collapse; font-family: Helvetica, Arial, Sans-Serif;">
+                                <tr align="center">
+                                    <td style="width:50px;"></td>
+                                    <td style="width:500px;">
+                                        <br>
+                                        <h1>
+                                            <b style="color:#031730; text-transform: capitalize;">
+                                                CREDIVENTAS
+                                            </b>
+                                        </h2>
+                                    </td>
+                                    <td style="width:50px;"></td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <table style="width: 600px; background-color:#ffffff; color:#111E2D; display:block; margin: 0 auto; border-collapse: collapse; font-family: Helvetica, Arial, Sans-Serif;">
+                                <tr align="center">
+                                    <td style="width:50px;"></td>
+                                    <td style="width:500px;">
+                                        <h2><b style="color:#031730; text-transform: capitalize;">
+                                            Bienvenido '.$name.'
+                                        </b></h2>
+                                        <p style="color:#6f6f6f;">
+                                          Ya haces parte del equipo de crediventa
+                                        </p>
+                                    </td>
+                                    <td style="width:50px;"></td>
+                                </tr>
+                            </table>
+                            <br>
+                            <table style="width: 600px; background-color:#ffffff; color:#111E2D; display:block; margin: 0 auto; border-collapse: collapse; font-family: Helvetica, Arial, Sans-Serif;">
+                                <tr align="center">
+                                    <td style="width:600px;">
+                                        <p style="color: #031730;">
+                                          Tu contraseña es: '.$password.'
+                                        </p>
+                                    </td>
+                                </tr>  
+                            </table>
+                            <br>
+                            <table style="width: 600px; background-color:#ffffff; color:#111E2D; display:block; margin: 0 auto; border-collapse: collapse; font-family: Helvetica, Arial, Sans-Serif;">
+                                <tr align="center">
+                                    <td style="width:50px;"></td>
+                                    <td style="width:500px;">
+
+                                        <p style="color:#6f6f6f;">
+                                          Por motivos de seguridad recuerda cambiarla cuando inicies sesión
+                                      </p>
+                                    </td>
+                                    <td style="width:50px;"></td>
+                                </tr>
+                            </table>
+                            <br>
+                            <table border="0" align="center" cellpadding="0" cellspacing="0" class="mbtn20 mtop10" cellmargin="0">
+                                <tr>
+                                    <td width="225"></td>
+                                    <td width="150" height="30" bgcolor="#031730" align="center">
+                                    <a href="'.Router::url("/", true).'Pages/home'.'" style="color:#ffffff; text-decoration:none;">
+                                        <span style="font-family:arial; font-size:14px;color:#ffffff;">IR A CREDIVENTAS.COM</span></a>
+                                    </td>
+                                    <td width="225"></td>
+
+                                </tr>
+                            </table>
+                            <br>
+                            <table style="width: 600px; background-color:#ffffff; color:#111E2D; display:block; margin: 0 auto; border-collapse: collapse; font-family: Helvetica, Arial, Sans-Serif;">
+                                <tr align="center">
+                                    <td style="width:50px;"></td>
+                                    <td style="width:500px;">
+                                        <hr>
+                                        <p style="color:#6f6f6f;"><span> Crediventas.com </span></p><br>
+                                    </td>
+                                    <td style="width:50px;"></td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </body>
+        </html>';
+        return $message;
+    }
+
+    public function mailSend_BienvenidoCliente($name_cliente,$password) {
+        $message = '
+        <!DOCTYPE html>
+        <html lang="es">
+            <head>
+                <title>Bienvenido</title>
+                <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+                <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+                <meta charset="utf-8" />
+            </head>
+
+            <body style="background-color:#f8f8f8;">
+                <table align="center" style="width: 600px; display:block; margin: 0 auto; border-collapse: collapse; font-family: Helvetica, Arial, Sans-Serif;background-color:#ffffff;">
+                    <tr>
+                        <td>
+                            <table style="width: 600px; background-color:#ffffff; color:#111E2D; display:block; margin: 0 auto; border-collapse: collapse; font-family: Helvetica, Arial, Sans-Serif;">
+                                <tr align="center">
+                                    <td style="width:50px;"></td>
+                                    <td style="width:500px;">
+                                        <br>
+                                        <h1>
+                                            <b style="color:#031730; text-transform: capitalize;">
+                                                CREDIVENTAS
+                                            </b>
+                                        </h2>
+                                    </td>
+                                    <td style="width:50px;"></td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <table style="width: 600px; background-color:#ffffff; color:#111E2D; display:block; margin: 0 auto; border-collapse: collapse; font-family: Helvetica, Arial, Sans-Serif;">
+                                <tr align="center">
+                                    <td style="width:50px;"></td>
+                                    <td style="width:500px;">
+                                        <h2><b style="color:#031730; text-transform: capitalize;">
+                                            Bienvenido '.$name_cliente.'
+                                        </b></h2>
+                                        <p style="color:#6f6f6f;">
+                                          Ya haces parte del equipo de crediventas
+                                        </p>
+                                    </td>
+                                    <td style="width:50px;"></td>
+                                </tr>
+                            </table>
+                            <br>
+                            <table style="width: 600px; background-color:#ffffff; color:#111E2D; display:block; margin: 0 auto; border-collapse: collapse; font-family: Helvetica, Arial, Sans-Serif;">
+                                <tr align="center">
+                                    <td style="width:600px;">
+                                        <p style="color: #031730;">
+                                          Tu contraseña es: '.$password.'
+                                        </p>
+                                    </td>
+                                </tr>  
+                            </table>
+                            <br>
+                            <table style="width: 600px; background-color:#ffffff; color:#111E2D; display:block; margin: 0 auto; border-collapse: collapse; font-family: Helvetica, Arial, Sans-Serif;">
+                                <tr align="center">
+                                    <td style="width:50px;"></td>
+                                    <td style="width:500px;">
+
+                                        <p style="color:#6f6f6f;">
+                                          Por motivos de seguridad recuerda cambiarla cuando inicies sesión
+                                      </p>
+                                    </td>
+                                    <td style="width:50px;"></td>
+                                </tr>
+                            </table>
+                            <br>
+                            <table border="0" align="center" cellpadding="0" cellspacing="0" class="mbtn20 mtop10" cellmargin="0">
+                                <tr>
+                                    <td width="225"></td>
+                                    <td width="150" height="30" bgcolor="#031730" align="center">
+                                        <a href="'.Router::url("/", true).'Pages/home'.'" style="color:#ffffff; text-decoration:none;">
+                                            <span style="font-family:arial; font-size:14px;color:#ffffff;">IR A CREDIVENTAS.COM</span>
+                                        </a>
+                                    </td>
+                                    <td width="225"></td>
+
+                                </tr>
+                            </table>
+                            <br>
+                            <table style="width: 600px; background-color:#ffffff; color:#111E2D; display:block; margin: 0 auto; border-collapse: collapse; font-family: Helvetica, Arial, Sans-Serif;">
+                                <tr align="center">
+                                    <td style="width:50px;"></td>
+                                    <td style="width:500px;">
+                                        <hr>
+                                        <p style="color:#6f6f6f;"><span> Crediventas.com </span></p><br>
+                                    </td>
+                                    <td style="width:50px;"></td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </body>
+        </html>';
+        return $message;
+    }
+
+    public function mailSend_RememberPassword($hash,$name) {
+        $message = '
+        <!DOCTYPE html>
+        <html lang="es">
+            <head>
+                <title>Restablecer contraseña</title>
+                <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+                <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+                <meta charset="utf-8" />
+            </head>
+            <body style="background-color:#f8f8f8;">
+                <table align="center" style="width: 600px; display:block; margin: 0 auto; border-collapse: collapse; font-family: Helvetica, Arial, Sans-Serif;background-color:#ffffff;">
+                    <tr>
+                        <td>
+                            <table style="width: 600px; background-color:#ffffff; color:#111E2D; display:block; margin: 0 auto; border-collapse: collapse; font-family: Helvetica, Arial, Sans-Serif;">
+                                <tr align="center">
+                                    <td style="width:50px;"></td>
+                                    <td style="width:500px;">
+                                        <br>
+                                        <h1>
+                                            <b style="color:#031730; text-transform: capitalize;">
+                                                CREDIVENTAS
+                                            </b>
+                                        </h2>
+                                    </td>
+                                    <td style="width:50px;"></td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <table style="width: 600px; background-color:#ffffff; color:#111E2D; display:block; margin: 0 auto; border-collapse: collapse; font-family: Helvetica, Arial, Sans-Serif;">
+                                <tr align="center">
+                                    <td style="width:50px;"></td>
+                                    <td style="width:500px;">
+                                        <h2><b style="color:#031730; text-transform: capitalize;">
+                                            Hola '.$name.'
+                                        </b></h2>
+                                        <p style="color:#6f6f6f;">Has solicitado restablecer tu contraseña para ingresar a CREDIVENTAS.com</p>
+                                    </td>
+                                    <td style="width:50px;"></td>
+                                </tr>
+                            </table>
+                            <br>
+                            <table style="width: 600px; background-color:#ffffff; color:#111E2D; display:block; margin: 0 auto; border-collapse: collapse; font-family: Helvetica, Arial, Sans-Serif;">
+                                <tr align="center">
+                                    <td style="width:600px;">
+                                        <p style="color: #031730;">
+                                            Por favor haz clic en el siguiente enlace y continúa el proceso de restablecimiento
+                                        </p>
+                                        <a href="'.Router::url("/", true).'Users/remember_password_step_2/'.$hash.'">
+                                            <b>Restablecer la contraseña</b>
+                                        </a>
+                                    </td>
+                                </tr>  
+                            </table>
+                            <br>
+                            <table style="width: 600px; background-color:#ffffff; color:#111E2D; display:block; margin: 0 auto; border-collapse: collapse; font-family: Helvetica, Arial, Sans-Serif;">
+                                <tr align="center">
+                                    <td style="width:50px;"></td>
+                                    <td style="width:500px;">
+
+                                        <p style="color:#6f6f6f;">Si no fuiste tu o no necesitas realizar este procedimiento por favor ignora este mensaje y accede normalmente a tu cuenta.</p>
+                                    </td>
+                                    <td style="width:50px;"></td>
+                                </tr>
+                            </table>
+                            <br>
+                            <table border="0" align="center" cellpadding="0" cellspacing="0" class="mbtn20 mtop10" cellmargin="0">
+                                <tr>
+                                    <td width="225"></td>
+                                    <td width="150" height="30" bgcolor="#031730" align="center">
+                                        <a href="'.Router::url("", true).'Pages/home'.'" style="color:#ffffff; text-decoration:none;">
+                                            <span style="font-family:arial; font-size:14px;color:#ffffff;">IR A CREDIVENTAS.COM</span>
+                                        </a>
+                                    </td>
+                                    <td width="225"></td>
+
+                                </tr>
+                            </table>
+                            <br>
+                            <table style="width: 600px; background-color:#ffffff; color:#111E2D; display:block; margin: 0 auto; border-collapse: collapse; font-family: Helvetica, Arial, Sans-Serif;">
+                                <tr align="center">
+                                    <td style="width:50px;"></td>
+                                    <td style="width:500px;">
+                                        <hr>
+                                        <p style="color:#6f6f6f;"><span> Crediventas.com </span></p><br>
+                                    </td>
+                                    <td style="width:50px;"></td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </body>
+        </html>';
+        return $message;
     }
 
     public function validateSessionTrue() {
@@ -202,5 +525,5 @@ class AppController extends Controller {
         return true;
     }
 
-	
+    
 }
