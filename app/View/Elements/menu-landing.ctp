@@ -33,10 +33,10 @@
 
 
 
-<div class="d-flex flex-column flex-md-row align-items-center p-2 pl-5 pr-5 shadow-sm nav-custom fixed-top">
+<div class="d-flex flex-column flex-md-row align-items-center p-2 pl-5 pr-5 shadow-sm nav-custom fixed-top bg-white-shadow">
   <h5 class="my-0 mr-md-auto font-weight-normal">
   	  <a class="navbar-brand" href="#">
-	    <img src="img/crediventas-white.png" id="logo" dataattr="img/logo-crediventas.png" alt="">
+	    <img src="img/logo-crediventas.png" id="logo" alt="">
 	  </a>
   </h5>
   <nav class="my-2 my-md-0 mr-md-3">

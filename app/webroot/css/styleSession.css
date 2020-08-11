@@ -1,18 +1,18 @@
 .info-request p {
     background: #f1f4f7;
-    margin-bottom: 0;
-    display: inline-table;
-    padding: 7px 24px;
+    margin-bottom: 5px;
+    padding: 5px 8px;
     border: 1px solid #d3d5d8;
     border-radius: 5px;
     line-height: normal;
     font-size: 14px;
-    max-width: 230px;
 }
 #txt_buscador.form-control {
     height: calc(1.5em + .75rem + 9px);
 }
-
+aside.main-sidebar.sidebar-dark-primary.elevation-4 .nav-link {
+    padding: .5rem .6rem;
+}
 .sizebrand{
   width: 180px;
   margin-left: 15px;

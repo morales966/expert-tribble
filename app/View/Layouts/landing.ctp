@@ -32,14 +32,47 @@
 		<div id="message_alert">
 			<?php echo $this->Flash->render(); ?>
 		</div>	
+		<div id="social-net">		
+		    <ul>
+		        <li class="mb-4">
+		        	<a href="https://wa.me/573226679719" target="_blank" class="network relative wplink">
+			 			<i class="fa fa-whatsapp text-white"></i>
+			            <!-- <p class="textwp abrio-wp-landing-rpb">Asesoría desde Whatsapp</p>  -->
+			            <span class="ripple network"></span> 
+			            <span class="ripple network"></span> 
+			            <span class="ripple network"></span>
+		        	</a>
+		        </li>
+		        <li class="mb-4">
+					<a href="https://www.facebook.com/Crediventascom-258985361636869/" target="_blank" class="network relative wpfb">
+			 			<i class="fa fa-facebook-f text-white"></i>
+			            <!-- <p class="textwp abrio-wp-landing-rpb">Asesoría desde Whatsapp</p>  -->
+			            <span class="ripple network"></span> 
+			            <span class="ripple network"></span> 
+			            <span class="ripple network"></span>
+		        	</a>		        	
+		        </li>
+		        <li class="mb-4">
+					<a href="https://www.youtube.com/channel/UCCtFL010qDJRIQ4_TESXD-Q" target="_blank" class="network relative wpyou">
+			 			<i class="fa fa-youtube text-white"></i>
+			            <!-- <p class="textwp abrio-wp-landing-rpb">Asesoría desde Whatsapp</p>  -->
+			            <span class="ripple network"></span> 
+			            <span class="ripple network"></span> 
+			            <span class="ripple network"></span>
+		        	</a>		        	
+		        </li>
+		        <li class="mb-4">
+					<a href="https://www.instagram.com/crediventas1510/" target="_blank" class="network relative wpins">
+			 			<i class="fa fa-instagram text-white"></i>
+			            <!-- <p class="textwp abrio-wp-landing-rpb">Asesoría desde Whatsapp</p>  -->
+			            <span class="ripple network"></span> 
+			            <span class="ripple network"></span> 
+			            <span class="ripple network"></span>
+		        	</a>		        	
+		        </li>		        
+		    </ul>
+		</div>
 
-		<a href="https://wa.me/573232880909" class="intro-banner-vdo-play-btn pinkBg " target="_blank"> 
-            <i class="fa fa-whatsapp text-white"></i>
-            <p class="textwp abrio-wp-landing-rpb">Asesoría desde Whatsapp</p> 
-            <span class="ripple pinkBg"></span> 
-            <span class="ripple pinkBg"></span> 
-            <span class="ripple pinkBg"></span> 
-        </a>
 		<a href="#" class="scroll-top" title="Ir arriba"><i class="fa fa-angle-up"></i></a>        		
 		<?php echo $this->fetch('content'); ?>
 	    <?php echo $this->element('footer'); ?>

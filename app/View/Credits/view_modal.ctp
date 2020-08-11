@@ -2,6 +2,17 @@
 		<h4 class="mb-3 ">
 			Crédito solicitado en <b><?php echo $this->Html->link($credit['User']['name'], array('controller' => 'users', 'action' => 'view', $credit['User']['id'])); ?></b>
 		</h4>
+		<h5>INFORMACIÓN PERSONAL</h5>
+		<p class="">
+			<b>Nombre</b> <?php echo h($credit['Credit']['nombre_persona'].' '.$credit['Credit']['apellido_persona']); ?>&nbsp;
+		</p>		
+		<p class="">
+			<b>Cédula</b> <?php echo h($credit['Credit']['cedula_persona']); ?>&nbsp;
+		</p>
+		<p class="">
+			<b>Telefono</b> <?php echo h($credit['Credit']['telefono_persona']); ?>&nbsp;
+		</p>
+		<h5>INFORMACIÓN DEL CRÉDITO</h5>
 		<p class="">
 			<b>Valor crédito</b> <?php echo h(number_format($credit['Credit']['valor_credito'],0,",","."));?>&nbsp;
 		</p>
@@ -14,16 +25,7 @@
 		<p class="">
 			<b>Fecha de registro</b> <?php echo h($credit['Credit']['created']); ?>&nbsp;
 		</p>
-
-		<p class="">
-			<b>Nombre</b> <?php echo h($credit['Credit']['nombre_persona'].' '.$credit['Credit']['apellido_persona']); ?>&nbsp;
-		</p>		
-		<p class="">
-			<b>Cédula</b> <?php echo h($credit['Credit']['cedula_persona']); ?>&nbsp;
-		</p>
-		<p class="">
-			<b>Telefono</b> <?php echo h($credit['Credit']['telefono_persona']); ?>&nbsp;
-		</p>
+		
 	</div>
 	<div class="row photos-request mt-4">
 		<div class="col-md-4">

@@ -10,7 +10,16 @@ html{
     right: 0;
     z-index: 0;
 }
-
+#social-net {
+    position: fixed;
+    z-index: 999999
+}
+#social-net ul{
+    position: fixed;
+    left: 10px;
+    bottom: 15px;
+    list-style: none;
+}
 .control-wp .fab{
 	margin-top: -5px;
 	color: #189d0e;
@@ -113,21 +122,56 @@ p.textwp {
     font-size: 18px;
     display: -webkit-inline-box;
 }
-.pinkBg{background-color:#8BC34A!important;background-image:linear-gradient(90deg,#8BC34A,#01ac5c)}
-
-.intro-banner-vdo-play-btn{height:60px;width:60px;position:fixed;bottom:5%;left:5%;text-align:center;
-  margin:-30px 0 0 -30px;border-radius:100px;z-index:99999}
-
-.intro-banner-vdo-play-btn i{line-height:56px;font-size:30px}
-
-.intro-banner-vdo-play-btn .ripple{
-	position:absolute;width:160px;height:160px;z-index:-1;left:50%;top:50%;opacity:0;
-	margin:-80px 0 0 -80px;border-radius:100px;-webkit-animation:ripple 1.8s infinite;animation:ripple 1.8s infinite
+.relative{
+    position: relative;
 }
-@-webkit-keyframes ripple{0%{opacity:1;-webkit-transform:scale(0);transform:scale(0)}100%{opacity:0;-webkit-transform:scale(1);transform:scale(1)}}
-@keyframes ripple{0%{opacity:1;-webkit-transform:scale(0);transform:scale(0)}100%{opacity:0;-webkit-transform:scale(1);transform:scale(1)}}
-.intro-banner-vdo-play-btn .ripple:nth-child(2){animation-delay:.3s;-webkit-animation-delay:.3s}
-.intro-banner-vdo-play-btn .ripple:nth-child(3){animation-delay:.6s;-webkit-animation-delay:.6s}
+.network{ height:45px;width:45px;text-align:center;border-radius:100px;z-index:99999;}
+
+.wplink {
+    padding: 12px 8px 8px 10px;background-color:#8BC34A!important;background-image:linear-gradient(90deg,#8BC34A,#01ac5c);
+}
+.wpfb {
+    padding: 12px 12px 5px 12px;background:linear-gradient(120deg, #3b5998, #2c4c90);;
+}
+.wpins {
+    padding: 12px 8px 6px 7px;background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%); 
+}
+.wpyou {
+    padding: 12px 8px 6px 7px;  background: rgb(255,17,17);
+background: linear-gradient(106deg, rgba(255,17,17,1) 0%, rgba(215,0,26,1) 35%);
+}
+.wplink .network{
+    background-color:#8BC34A!important;background-image:linear-gradient(90deg,#8BC34A,#01ac5c);
+}
+.wpfb .network{
+    background:linear-gradient(120deg, #3b5998, #2c4c90);
+}
+.wpins .network{
+    background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%); 
+}
+.wpyou .network{
+  background: rgb(255,17,17);
+background: linear-gradient(106deg, rgba(255,17,17,1) 0%, rgba(215,0,26,1) 35%);
+}
+.network i {
+    font-size: 27px;
+}
+.network .ripple {
+    position: absolute;
+    width: 160px;
+    height: 160px;
+    z-index: -1;
+    left: -59px;
+    top: -60px;
+    opacity: 0;
+    border-radius: 100px;
+    -webkit-animation: ripple 1.8s infinite;
+    animation: ripple 1.8s infinite;
+}
+@-webkit-keyframes ripple{0%{opacity:1;-webkit-transform:scale(0);transform:scale(0)}100%{opacity:0;-webkit-transform:scale(0.4);transform:scale(0.4)}}
+@keyframes ripple{0%{opacity:1;-webkit-transform:scale(0);transform:scale(0)}100%{opacity:0;-webkit-transform:scale(0.4);transform:scale(0.4)}}
+.network .ripple:nth-child(2){animation-delay:.3s;-webkit-animation-delay:.3s}
+.network .ripple:nth-child(3){animation-delay:.6s;-webkit-animation-delay:.6s}
 
 
 
@@ -158,15 +202,40 @@ h3.display-7 {
     font-size: 1.5rem !important;
     margin-top: 4rem !important;
 }
-.intro-banner-vdo-play-btn{
-    display: none !important;
+
+#social-net ul {
+    position: fixed;
+    left: initial;
+    bottom: -25px;
+    list-style: none;
+    right: 10px;
 }
 }
 
+@media screen and (max-width: 1255px){
+.row.d-flex.justify-content-between.pt-lg-5.align-items-center{
+    margin-top: 100px;
+}
 
+}
+@media screen and (max-width: 750px){
+
+    .row.d-flex.justify-content-between.pt-lg-5.align-items-center {
+    margin-top:160px;
+}
+}
 @media screen and (max-width: 700px){
+
+    .row.d-flex.justify-content-between.pt-lg-5.align-items-center {
+    margin-top:0px;
+}
+    .col-md-3.text-right {
+        text-align: initial !important;
+    }
     .d-flex.flex-column.flex-md-row.align-items-center.p-2.pl-5.pr-5.shadow-sm.nav-custom.fixed-top{
-      position: relative!important;  
+      position: relative!important; 
+      padding-left: 2px !important;
+    padding-right: 2px !important; 
     }
   #carouselExampleTestimonials .carousel-control-next {
       right: -22px;

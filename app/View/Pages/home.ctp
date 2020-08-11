@@ -146,12 +146,12 @@
 <section class="bg-pc">
     <div class="container pb-5 pt-5">
         <div class="row justify-content-center">
-            <div class="col-md-4 mt-4 section-heading aos-init" data-aos="fade-up">
+            <div class="col-lg-5 col-md-4 mt-4 section-heading aos-init" data-aos="fade-up">
                 <h5 class="text-voilet mt-5">¡ESPECIAL AFILIADOS!</h5>
                 <h2 class="aos-init mb-3" data-aos="fade-up">Tu sitio web con el 40% de descuento</h2>
                 <p class="lead">Llevamos tu negocio a otro nivel, por eso tenemos un super descuento del 40% para que crees tu sitio web y aumentes tus ventas, exclusivo para afiliados</p>
             </div>
-            <div class="col-md-8 section-heading text-center aos-init" data-aos="fade-up">
+            <div class="col-lg-7 col-md-8 section-heading text-center aos-init" data-aos="fade-up">
                 <img src="img/web.png" class="img-fluid">
             </div>            
         </div>
