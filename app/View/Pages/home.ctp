@@ -164,17 +164,16 @@
     <p class="text-h3 lead" data-aos="fade-up">A continuación te presentamos nuestros aliados estratégicos que fortalecen nuestra operación brindando seguridad y agilidad en cada procedimiento.</p>
   </div>
   <div class="container pb-5">
-      <div class="col-md-12 aliados aos-init" data-aos="fade-up">
-        <div class=""><img src="img/camara-de-comercio.png"></div>
-        <div class=""><img src="img/procredito.png"></div>
-        <div class=""><img src="img/transunion.png"></div>
-        <div class=""><img src="img/epayco.png"></div>
-        <div class=""><img src="img/sic.png"></div>
-        <div class=""><img src="img/experian.png"></div>
-      </div>
+    <div class="col-md-12 aliados aos-init" data-aos="fade-up">
+      <div class=""><img src="img/camara-de-comercio.png"></div>
+      <div class=""><img src="img/procredito.png"></div>
+      <div class=""><img src="img/transunion.png"></div>
+      <div class=""><img src="img/epayco.png"></div>
+      <div class=""><img src="img/sic.png"></div>
+      <div class=""><img src="img/experian.png"></div>
+    </div>
   </div>
 </section>
-
 <section class="pt-5 pb-5 bg-gray" id="mas-info">
   <div class="container-fluid">
     <div class="container p-5">
@@ -186,11 +185,28 @@
                 <p class="text-h3 lead">Lo estés o no, puedes solicitar una asesoría sin costo donde un experto te mostrará una a una las ventajas de tener tu comercio afiliado a CREDIVENTAS y ofrecer sistema de crédito totalmente seguro.</p>
               </div>
             </div>
-
         </div>
       </div>
     </div>
   </div>
+</section>
+<section class="pt-5 pb-2 bg-texture" id="solicitar-credito">
+  <div class="col-12 pt-5 text-center">
+    <h3 class="mb-0 display-5 font-weight-bold aos-init">
+      Ingresa el código del negocio afiliado donde solicitara el crédito
+    </h3>
+    <div class="col-md-12">
+      <?php echo $this->Form->create('User',array('data-parsley-validate'=>true,'class'=>'form-inline')); ?>
+        <div class="form-group">
+          <?php echo $this->Form->input('name',array('label' => false,'class' => 'form-control','placeholder' => 'Nombre')); ?>
+        </div>
+        <div class="form-group">
+          <?php echo $this->Form->button('Buscar negocio',array("class" => "btn btn-success")); ?>
+        </div>
+      </form>
+    </div>
+  </div>
+  <br>
 </section>
 
 <?php 

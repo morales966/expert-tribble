@@ -40,10 +40,12 @@
 	  </a>
   </h5>
   <nav class="my-2 my-md-0 mr-md-3">
-    <a class="p-2" href="">Inicio <span class="sr-only">(current)</span></a>
+    <a class="p-2" href="<?php echo $this->Html->url(array('controller'=>'Pages','action'=>'home')) ?>">Inicio <span class="sr-only">(current)</span></a>
     <a class="p-2" href="#beneficios">Beneficios</a>
+    <a class="p-2" href="#aliados">Aliados</a>
     <a class="p-2" href="#mas-info">Más información</a>
-    <a class="p-2" href="#"> Afiliados</a>
+    <a class="p-2" href="javascript:void(0)" id="comercios_afiliados_ver">Comercios afiliados</a>
+    <a class="p-2" href="#solicitar-credito">Solicitar un crédito</a>
   </nav>
   <a class="btn btn-success text-white ml-md-3" id="btn_login">INICIAR SESIÓN</a>
 </div>

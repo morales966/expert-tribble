@@ -1,12 +1,113 @@
-function tieneSoporteUserMedia() {
-    return (navigator.getUserMedia || (navigator.mozGetUserMedia || navigator.mediaDevices.getUserMedia) || navigator.webkitGetUserMedia || navigator.msGetUserMedia)
+const tieneSoporteUserMedia = () =>
+    !!(navigator.getUserMedia || (navigator.mozGetUserMedia || navigator.mediaDevices.getUserMedia) || navigator.webkitGetUserMedia || navigator.msGetUserMedia)
+const _getUserMedia = (...arguments) =>
+    (navigator.getUserMedia || (navigator.mozGetUserMedia || navigator.mediaDevices.getUserMedia) || navigator.webkitGetUserMedia || navigator.msGetUserMedia).apply(navigator, arguments);
+
+// Declaramos elementos del DOM (select)
+const $listaDeDispositivosCD = document.querySelector("#listaDeDispositivosCD");
+const $listaDeDispositivosCT = document.querySelector("#listaDeDispositivosCT");
+const $listaDeDispositivosFP = document.querySelector("#listaDeDispositivosFP");
+
+const obtenerDispositivos = () => navigator
+    .mediaDevices
+    .enumerateDevices();
+
+const limpiarSelectCD = () => {
+    for (let x = $listaDeDispositivosCD.options.length - 1; x >= 0; x--)
+        $listaDeDispositivosCD.remove(x);
+};
+
+const limpiarSelectCT = () => {
+    for (let x = $listaDeDispositivosCT.options.length - 1; x >= 0; x--)
+        $listaDeDispositivosCT.remove(x);
+};
+
+const limpiarSelectFP = () => {
+    for (let x = $listaDeDispositivosFP.options.length - 1; x >= 0; x--)
+        $listaDeDispositivosFP.remove(x);
+};
+// La función que es llamada después de que ya se dieron los permisos
+// Lo que hace es llenar el select con los dispositivos obtenidos
+const llenarSelectConDispositivosDisponiblesCD = () => {
+    limpiarSelectCD();
+    obtenerDispositivos().then(dispositivos => {
+        const dispositivosDeVideo = [];
+        dispositivos.forEach(dispositivo => {
+            const tipo = dispositivo.kind;
+            if (tipo === "videoinput") {
+                dispositivosDeVideo.push(dispositivo);
+            }
+        });
+
+        // Vemos si encontramos algún dispositivo, y en caso de que si, entonces llamamos a la función
+        if (dispositivosDeVideo.length > 0) {
+            // Llenar el select
+            dispositivosDeVideo.forEach(dispositivo => {
+                const option = document.createElement('option');
+                option.value = dispositivo.deviceId;
+                option.text = dispositivo.label;
+                $listaDeDispositivosCD.appendChild(option);
+            });
+        }
+    });
 }
 
-function _getUserMedia() {
-    return (navigator.getUserMedia || (navigator.mozGetUserMedia || navigator.mediaDevices.getUserMedia) || navigator.webkitGetUserMedia || navigator.msGetUserMedia).apply(navigator, arguments);
+const llenarSelectConDispositivosDisponiblesCT = () => {
+    limpiarSelectCT();
+    obtenerDispositivos().then(dispositivos => {
+        const dispositivosDeVideo = [];
+        dispositivos.forEach(dispositivo => {
+            const tipo = dispositivo.kind;
+            if (tipo === "videoinput") {
+                dispositivosDeVideo.push(dispositivo);
+            }
+        });
+
+        // Vemos si encontramos algún dispositivo, y en caso de que si, entonces llamamos a la función
+        if (dispositivosDeVideo.length > 0) {
+            // Llenar el select
+            dispositivosDeVideo.forEach(dispositivo => {
+                const option = document.createElement('option');
+                option.value = dispositivo.deviceId;
+                option.text = dispositivo.label;
+                $listaDeDispositivosCT.appendChild(option);
+            });
+        }
+    });
+}
+
+const llenarSelectConDispositivosDisponiblesFP = () => {
+    limpiarSelectFP();
+    obtenerDispositivos().then(dispositivos => {
+        const dispositivosDeVideo = [];
+        dispositivos.forEach(dispositivo => {
+            const tipo = dispositivo.kind;
+            if (tipo === "videoinput") {
+                dispositivosDeVideo.push(dispositivo);
+            }
+        });
+
+        // Vemos si encontramos algún dispositivo, y en caso de que si, entonces llamamos a la función
+        if (dispositivosDeVideo.length > 0) {
+            // Llenar el select
+            dispositivosDeVideo.forEach(dispositivo => {
+                const option = document.createElement('option');
+                option.value = dispositivo.deviceId;
+                option.text = dispositivo.label;
+                $listaDeDispositivosFP.appendChild(option);
+            });
+        }
+    });
 }
 
 $("body").on("click", ".btn_abrir_modalCD", function() {
+	// Comenzamos viendo si tiene soporte, si no, nos detenemos
+    if (!tieneSoporteUserMedia()) {
+        message_alert("Lo siento. Tu navegador no soporta esta característica","Error");
+	    $('.cuadro_tomar_foto').hide();
+	    quitar_required_cuadro_tomar_foto();
+	    $('.cuadro_adjuntar_foto').show();
+    }
 	loadBotones();
 	$('#modalTitleTomarFotoCD').text('Foto de la cédula frontal');
 	$('#modalTomarFotoCD').modal('show');
@@ -17,13 +118,65 @@ $("body").on("click", ".btn_abrir_modalCD", function() {
 	var $btn_guardar_foto 						= document.getElementById("btn_guardar_fotoCD");
 	var $btn_cancelar_foto 						= document.getElementById("btn_cancelar_fotoCD");
 	var $CreditFotoCedulaDelantera1 			= document.getElementById("CreditFotoCedulaDelantera1");
-	if (tieneSoporteUserMedia()) {
-		quitar_required_cuadro_adjuntar_foto();
-    	_getUserMedia({video: true},function (stream) {
-			$video.srcObject = stream;
-			$video.play();
+	quitar_required_cuadro_adjuntar_foto();
 
-			$btn_tomar.addEventListener("click", function(){
+    //Aquí guardaremos el stream globalmente
+    let stream;
+
+    // Comenzamos pidiendo los dispositivos
+    obtenerDispositivos()
+        .then(dispositivos => {
+            // Vamos a filtrarlos y guardar aquí los de vídeo
+            const dispositivosDeVideo = [];
+
+            // Recorrer y filtrar
+            dispositivos.forEach(function(dispositivo) {
+                const tipo = dispositivo.kind;
+                if (tipo === "videoinput") {
+                    dispositivosDeVideo.push(dispositivo);
+                }
+            });
+
+            // Vemos si encontramos algún dispositivo, y en caso de que si, entonces llamamos a la función
+            // y le pasamos el id de dispositivo
+            if (dispositivosDeVideo.length > 0) {
+                // Mostrar stream con el ID del primer dispositivo, luego el usuario puede cambiar
+                mostrarStream(dispositivosDeVideo[0].deviceId);
+            }
+        });
+
+    const mostrarStream = idDeDispositivo => {
+        _getUserMedia({
+            video: {
+                // Justo aquí indicamos cuál dispositivo usar
+                deviceId: idDeDispositivo,
+            }
+        },
+        (streamObtenido) => {
+            // Aquí ya tenemos permisos, ahora sí llenamos el select,
+            // pues si no, no nos daría el nombre de los dispositivos
+            llenarSelectConDispositivosDisponiblesCD();
+
+            // Escuchar cuando seleccionen otra opción y entonces llamar a esta función
+            $listaDeDispositivosCD.onchange = () => {
+                // Detener el stream
+                if (stream) {
+                    stream.getTracks().forEach(function(track) {
+                        track.stop();
+                    });
+                }
+                // Mostrar el nuevo stream con el dispositivo seleccionado
+                mostrarStream($listaDeDispositivosCD.value);
+            }
+
+            // Simple asignación
+            stream = streamObtenido;
+
+            // Mandamos el stream de la cámara al elemento de vídeo
+            $video.srcObject = stream;
+            $video.play();
+
+            $btn_tomar.addEventListener("click", function(){
 				$video.pause();
 				$('#btn_tomarCD').hide();
 				$('.cuadro_botones').show();
@@ -61,22 +214,25 @@ $("body").on("click", ".btn_abrir_modalCD", function() {
 					track.stop();
 				});
 			});
-        }, function (error) {
+
+        }, (error) => {
         	$('.cuadro_botones').hide();
 			$('.btn_tomar').hide();
 			$('.resultTomarFoto').empty();
 			$('.resultTomarFoto').html('<p>Revisa la configuración de tu navegador</p>');
         	message_alert("Has denegado el permiso para la camara","Error");
         });
-	} else {
+    }
+});
+
+$("body").on("click", ".btn_abrir_modalCT", function() {
+	// Comenzamos viendo si tiene soporte, si no, nos detenemos
+    if (!tieneSoporteUserMedia()) {
         message_alert("Lo siento. Tu navegador no soporta esta característica","Error");
 	    $('.cuadro_tomar_foto').hide();
 	    quitar_required_cuadro_tomar_foto();
 	    $('.cuadro_adjuntar_foto').show();
-	}
-});
-
-$("body").on("click", ".btn_abrir_modalCT", function() {
+    }
 	loadBotones();
 	$('#modalTitleTomarFotoCT').text('Foto de la cédula trasera');
 	$('#modalTomarFotoCT').modal('show');
@@ -87,13 +243,65 @@ $("body").on("click", ".btn_abrir_modalCT", function() {
 	var $btn_guardar_foto 						= document.getElementById("btn_guardar_fotoCT");
 	var $btn_cancelar_foto 						= document.getElementById("btn_cancelar_fotoCT");
 	var $CreditFotoCedulaTrasera1 				= document.getElementById("CreditFotoCedulaTrasera1");
-	if (tieneSoporteUserMedia()) {
-		quitar_required_cuadro_adjuntar_foto();
-    	_getUserMedia({video: true},function (stream) {
-			$video.srcObject = stream;
-			$video.play();
+	quitar_required_cuadro_adjuntar_foto();
 
-			$btn_tomar.addEventListener("click", function(){
+    //Aquí guardaremos el stream globalmente
+    let stream;
+
+    // Comenzamos pidiendo los dispositivos
+    obtenerDispositivos()
+        .then(dispositivos => {
+            // Vamos a filtrarlos y guardar aquí los de vídeo
+            const dispositivosDeVideo = [];
+
+            // Recorrer y filtrar
+            dispositivos.forEach(function(dispositivo) {
+                const tipo = dispositivo.kind;
+                if (tipo === "videoinput") {
+                    dispositivosDeVideo.push(dispositivo);
+                }
+            });
+
+            // Vemos si encontramos algún dispositivo, y en caso de que si, entonces llamamos a la función
+            // y le pasamos el id de dispositivo
+            if (dispositivosDeVideo.length > 0) {
+                // Mostrar stream con el ID del primer dispositivo, luego el usuario puede cambiar
+                mostrarStream(dispositivosDeVideo[0].deviceId);
+            }
+        });
+
+    const mostrarStream = idDeDispositivo => {
+        _getUserMedia({
+            video: {
+                // Justo aquí indicamos cuál dispositivo usar
+                deviceId: idDeDispositivo,
+            }
+        },
+        (streamObtenido) => {
+            // Aquí ya tenemos permisos, ahora sí llenamos el select,
+            // pues si no, no nos daría el nombre de los dispositivos
+            llenarSelectConDispositivosDisponiblesCT();
+
+            // Escuchar cuando seleccionen otra opción y entonces llamar a esta función
+            $listaDeDispositivosCT.onchange = () => {
+                // Detener el stream
+                if (stream) {
+                    stream.getTracks().forEach(function(track) {
+                        track.stop();
+                    });
+                }
+                // Mostrar el nuevo stream con el dispositivo seleccionado
+                mostrarStream($listaDeDispositivosCT.value);
+            }
+
+            // Simple asignación
+            stream = streamObtenido;
+
+            // Mandamos el stream de la cámara al elemento de vídeo
+            $video.srcObject = stream;
+            $video.play();
+
+            $btn_tomar.addEventListener("click", function(){
 				$video.pause();
 				$('#btn_tomarCT').hide();
 				$('.cuadro_botones').show();
@@ -131,22 +339,25 @@ $("body").on("click", ".btn_abrir_modalCT", function() {
 					track.stop();
 				});
 			});
-        }, function (error) {
+
+        }, (error) => {
         	$('.cuadro_botones').hide();
 			$('.btn_tomar').hide();
 			$('.resultTomarFoto').empty();
 			$('.resultTomarFoto').html('<p>Revisa la configuración de tu navegador</p>');
         	message_alert("Has denegado el permiso para la camara","Error");
         });
-	} else {
-	    alert("Lo siento. Tu navegador no soporta esta característica");
-	    $('.cuadro_tomar_foto').hide();
-	    quitar_required_cuadro_tomar_foto();
-	    $('.cuadro_adjuntar_foto').show();
-	}
+    }
 });
 
 $("body").on("click", ".btn_abrir_modalFP", function() {
+	// Comenzamos viendo si tiene soporte, si no, nos detenemos
+    if (!tieneSoporteUserMedia()) {
+        message_alert("Lo siento. Tu navegador no soporta esta característica","Error");
+	    $('.cuadro_tomar_foto').hide();
+	    quitar_required_cuadro_tomar_foto();
+	    $('.cuadro_adjuntar_foto').show();
+    }
 	loadBotones();
 	$('#modalTitleTomarFotoFP').text('Foto del cliente');
 	$('#modalTomarFotoFP').modal('show');
@@ -157,13 +368,65 @@ $("body").on("click", ".btn_abrir_modalFP", function() {
 	var $btn_guardar_foto 						= document.getElementById("btn_guardar_fotoFP");
 	var $btn_cancelar_foto 						= document.getElementById("btn_cancelar_fotoFP");
 	var $CreditFotoPerfil1 						= document.getElementById("CreditFotoPerfil1");
-	if (tieneSoporteUserMedia()) {
-		quitar_required_cuadro_adjuntar_foto();
-    	_getUserMedia({video: true},function (stream) {
-			$video.srcObject = stream;
-			$video.play();
+	quitar_required_cuadro_adjuntar_foto();
 
-			$btn_tomar.addEventListener("click", function(){
+    //Aquí guardaremos el stream globalmente
+    let stream;
+
+    // Comenzamos pidiendo los dispositivos
+    obtenerDispositivos()
+        .then(dispositivos => {
+            // Vamos a filtrarlos y guardar aquí los de vídeo
+            const dispositivosDeVideo = [];
+
+            // Recorrer y filtrar
+            dispositivos.forEach(function(dispositivo) {
+                const tipo = dispositivo.kind;
+                if (tipo === "videoinput") {
+                    dispositivosDeVideo.push(dispositivo);
+                }
+            });
+
+            // Vemos si encontramos algún dispositivo, y en caso de que si, entonces llamamos a la función
+            // y le pasamos el id de dispositivo
+            if (dispositivosDeVideo.length > 0) {
+                // Mostrar stream con el ID del primer dispositivo, luego el usuario puede cambiar
+                mostrarStream(dispositivosDeVideo[0].deviceId);
+            }
+        });
+
+    const mostrarStream = idDeDispositivo => {
+        _getUserMedia({
+            video: {
+                // Justo aquí indicamos cuál dispositivo usar
+                deviceId: idDeDispositivo,
+            }
+        },
+        (streamObtenido) => {
+            // Aquí ya tenemos permisos, ahora sí llenamos el select,
+            // pues si no, no nos daría el nombre de los dispositivos
+            llenarSelectConDispositivosDisponiblesCT();
+
+            // Escuchar cuando seleccionen otra opción y entonces llamar a esta función
+            $listaDeDispositivosCT.onchange = () => {
+                // Detener el stream
+                if (stream) {
+                    stream.getTracks().forEach(function(track) {
+                        track.stop();
+                    });
+                }
+                // Mostrar el nuevo stream con el dispositivo seleccionado
+                mostrarStream($listaDeDispositivosCT.value);
+            }
+
+            // Simple asignación
+            stream = streamObtenido;
+
+            // Mandamos el stream de la cámara al elemento de vídeo
+            $video.srcObject = stream;
+            $video.play();
+
+            $btn_tomar.addEventListener("click", function(){
 				$video.pause();
 				$('#btn_tomarFP').hide();
 				$('.cuadro_botones').show();
@@ -201,19 +464,15 @@ $("body").on("click", ".btn_abrir_modalFP", function() {
 					track.stop();
 				});
 			});
-        }, function (error) {
+
+        }, (error) => {
         	$('.cuadro_botones').hide();
 			$('.btn_tomar').hide();
 			$('.resultTomarFoto').empty();
 			$('.resultTomarFoto').html('<p>Revisa la configuración de tu navegador</p>');
         	message_alert("Has denegado el permiso para la camara","Error");
         });
-	} else {
-	    alert("Lo siento. Tu navegador no soporta esta característica");
-	    $('.cuadro_tomar_foto').hide();
-	    quitar_required_cuadro_tomar_foto();
-	    $('.cuadro_adjuntar_foto').show();
-	}
+    }
 });
 
 $("body").on("click", ".btn_cancelar_foto", function() {

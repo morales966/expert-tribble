@@ -155,6 +155,15 @@ $("body").on( "click", "#btn_guardar_form_datos", function() {
 	}
 });
 
+
+$("body").on("click", "#comercios_afiliados_ver", function() {
+    var credit_id       = $(this).data('uid');
+    $('#resultModal').html('<p>Estamos trabajando en la funcionalidad</p>');
+    $('#modalTitle').text('Mensaje de texto');
+    $('#modalLogin').modal('show');
+});
+
+
 function cargar_notificaciones(){
     $.post(copy_js.base_url+'Messages/notificaciones',{}, function(result){
         $('#paint_notificaciones').html(result);

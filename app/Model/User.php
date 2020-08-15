@@ -17,11 +17,10 @@ class User extends AppModel {
 			),
 		),
 		'email' => array(
-			'email' 	=> array(
-				'rule' 		=> array('email'),
-				'on' 		=> 'create',
-			),
-		),
+            'rule'    => array('email','isUnique'),
+            'message' => 'El correo electrónico ya existe en nuestra base de datos',
+            'on' => 'create',
+        ),
 		'password' => array(
 			'notBlank' 	=> array(
 				'rule' 		=> array('notBlank'),

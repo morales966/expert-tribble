@@ -171,6 +171,7 @@
 				</button>
 			</div>
 			<div class="modal-body resultTomarFoto">
+ 				<select name="listaDeDispositivosCD" id="listaDeDispositivosCD"></select>
 				<video muted="muted" id="videoCD" class="video"></video>
 				<button type="button" id="btn_tomarCD" class="btn btn-primary form-control btn_tomar">Tomar foto</button>
 			 	<canvas id="canvasCD" style="display: none;"></canvas>
@@ -199,6 +200,7 @@
 				</button>
 			</div>
 			<div class="modal-body resultTomarFoto">
+				<select name="listaDeDispositivosCT" id="listaDeDispositivosCT"></select>
 				<video muted="muted" id="videoCT" class="video"></video>
 				<button type="button" id="btn_tomarCT" class="btn btn-primary form-control btn_tomar">Tomar foto</button>
 			 	<canvas id="canvasCT" style="display: none;"></canvas>
@@ -227,6 +229,7 @@
 				</button>
 			</div>
 			<div class="modal-body resultTomarFoto">
+				<select name="listaDeDispositivosFP" id="listaDeDispositivosFP"></select>
 				<video muted="muted" id="videoFP" class="video"></video>
 				<button type="button" id="btn_tomarFP" class="btn btn-primary form-control btn_tomar">Tomar foto</button>
 			 	<canvas id="canvasFP" style="display: none;"></canvas>

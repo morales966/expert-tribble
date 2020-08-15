@@ -27,7 +27,7 @@ class AppController extends Controller {
     }
 
     public function beforeFilter(){
-        $this->forgeSSL();
+        // $this->forgeSSL();
         $this->validateSessionActive();
     }
 

@@ -1,4 +1,12 @@
 $(document).ready(function(){
+	$(".next-form").hide();
+	$('#checkbox1').click(function() {
+	    if (!$(this).is(':checked')) {
+			$(".next-form").hide();
+	    } else {
+			$(".next-form").show();
+	    }
+	});
 	var form_count = 1, previous_form, next_form, total_forms;
 
 	total_forms = $("fieldset").length;
