@@ -16,6 +16,7 @@ $("body").on("click", ".ver_credito", function() {
     var credit_id       = $(this).data('uid');
     $.post(copy_js.base_url+'Credits/view_modal',{credit_id:credit_id}, function(result){
         $('#resultModalGrande').html(result);
+        $('#modalTitleGrande').text('Información del Crédito');
     	$('#modalGrande').modal('show');
     }); 
 });

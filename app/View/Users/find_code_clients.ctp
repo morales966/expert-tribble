@@ -1,27 +1,23 @@
 <div class="content-wrapper">
 	<div class="container-fluid cuadro_panding">
 		<div class="bg-white-content">
-			<div class="row">
-				<div class="col-md-12">
-					<div class="row">
-						<div class="col-md-6">
-							<div class="content-tittles ">
-                <div class="line-tittles">|</div>
-                <div>  
-                  <h1>Solicitar</h1>
-                  <h2>CRÉDITO AHORA</h2>
-                </div>
-              </div>
-						</div>
-						<div class="col-md-6 text-right">
-							<a class="btn btn-primary" href="<?php echo $this->Html->url(array('action'=>'index')) ?>">Ver todos los Créditos</a>
+				<div class="row">
+					<div class="col-md-12">
+						<div class="row">
+							<div class="col-md-6">
+								<div class="content-tittles ">
+					                <div>  
+										<h1>Solicitar, <b>CRÉDITO AHORA</b></h1>
+					                </div>
+					            </div>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-			</div>
 
 		<?php echo $this->Form->create('Credit',array('data-parsley-validate','enctype'=>"multipart/form-data","id" => "register_form")); ?>
+			<?php echo $this->Form->hidden('user_id',array('class' => 'form-control','value' => $user_id)); ?>
 			<div class="progress">
 				<div class="progress-bar progress-bar-striped active form-control" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
 			</div>
@@ -129,7 +125,7 @@
 					<input id="checkbox2" type="checkbox" class="bigcheck" data-parsley-required="true" data-parsley-trigger="click">
 					<label> Acepta las <a id="TerminosCondiciones" href="javascript:void(0)">condiciones legales y la Politica de privacidad de crediventas.</a></label>
 				</div>
-					<?php echo $this->Form->button('SOLICITAR CRÉDITO',array("class" => "btn btn-success pull-right upper ml-2")); ?>
+					<?php echo $this->Form->button('SOLICITAR CRÉDITO',array("type" => "button","id" => "btn_solicitar_credito","class" => "btn btn-success pull-right upper ml-2")); ?>
 					<input type="button" name="previous" class="previous-form btn btn-primary pull-right upper" value="Regresar" />
 			</fieldset>
 		</form>
@@ -242,10 +238,3 @@
 		</div>
     </div>
 </div>
-
-<?php
-	echo $this->Html->css("controller/credits/add.css?".rand(),							array('block' => 'AppCss'));
-	
-	echo $this->Html->script("controller/credits/add.js?".rand(),						array('block' => 'AppScript'));
-	echo $this->Html->script("controller/credits/foto.js?".rand(),						array('block' => 'AppScript'));
-?>

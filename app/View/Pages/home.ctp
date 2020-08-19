@@ -198,10 +198,10 @@
     <div class="col-md-12">
       <?php echo $this->Form->create('User',array('data-parsley-validate'=>true,'class'=>'form-inline')); ?>
         <div class="form-group">
-          <?php echo $this->Form->input('name',array('label' => false,'class' => 'form-control','placeholder' => 'Nombre')); ?>
+          <?php echo $this->Form->input('name',array('label' => false,'class' => 'form-control','placeholder' => 'código del negocio','id' => 'txt_codigo')); ?>
         </div>
         <div class="form-group">
-          <?php echo $this->Form->button('Buscar negocio',array("class" => "btn btn-success")); ?>
+          <?php echo $this->Form->button('Buscar negocio',array("type" => "button","class" => "btn btn-success","id" => "btn_buscar_negocio")); ?>
         </div>
       </form>
     </div>
@@ -209,6 +209,9 @@
   <br>
 </section>
 
-<?php 
-  echo $this->Html->script("controller/users/add_client.js?".rand(),             array('block' => 'AppScript'));
+<?php
+  echo $this->Html->css("controller/credits/add.css?".rand(),             array('block' => 'AppCss'));
+  
+  echo $this->Html->script("controller/credits/add.js?".rand(),           array('block' => 'AppScript'));
+  echo $this->Html->script("controller/credits/foto.js?".rand(),          array('block' => 'AppScript'));
 ?>

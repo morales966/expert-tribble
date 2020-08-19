@@ -7,11 +7,9 @@
 		<title><?php echo Configure::read('Application.name') ?></title>
 
 		<?php
-			echo $this->Html->css(array('style.css?'.rand(),'lib/font-awesome/css/font-awesome.css','lib/font/flaticon.css','lib/parsley.css','lib/sweetalert.css'));
+			echo $this->Html->css(array('style.css?'.rand(),'lib/font-awesome/css/font-awesome.css','lib/font/flaticon.css','lib/bootstrap.css','lib/parsley.css','lib/sweetalert.css'));
 			echo $this->fetch('AppCss');
 			echo $this->Html->meta('favicon.ico','img/favicon.png',array('type' => 'icon'));
-	    ?>	    
-	    <?php
 			echo $this->Html->css('landing.css');
 	    ?>
       	<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">

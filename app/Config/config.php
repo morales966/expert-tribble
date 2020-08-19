@@ -169,6 +169,7 @@ $config = array(
 		),
 		'description_notificaciones' 	=> array(
 			'crear_credito' 				=> 'Han registrado un nuevo crédito',
+			'crear_credito_cliente' 		=> 'Han registrado un crédito para tu negocio',
 			'crear_usuario_sistema' 		=> 'Han registrado un nuevo usuario',
 			'crear_cliente' 				=> 'Se ha registrado un cliente',
 			'dejar_datos' 					=> 'Han dejado unos datos para que te comuniques con ellos',

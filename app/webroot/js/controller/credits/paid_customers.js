@@ -16,6 +16,7 @@ $("body").on("click", ".ver_datos_cliente", function() {
     var credit_id       = $(this).data('uid');
     $.post(copy_js.base_url+'Credits/view_user_client',{credit_id:credit_id}, function(result){
         $('#resultModalGrande').html(result);
+        $('#modalTitleGrande').text('Datos cliente');
     	$('#modalGrande').modal('show');
     }); 
 });
@@ -24,6 +25,7 @@ $("body").on("click", ".ver_credito", function() {
     var credit_id       = $(this).data('uid');
     $.post(copy_js.base_url+'Credits/view_modal',{credit_id:credit_id}, function(result){
         $('#resultModalGrande').html(result);
+        $('#modalTitleGrande').text('Información del Crédito');
     	$('#modalGrande').modal('show');
     }); 
 });
@@ -32,6 +34,7 @@ $("body").on("click", ".datos_banco_cliente", function() {
     var credit_id       = $(this).data('uid');
     $.post(copy_js.base_url+'Credits/ver_datos_banco_cliente',{credit_id:credit_id}, function(result){
         $('#resultModalGrande').html(result);
+        $('#modalTitleGrande').text('Información del banco del cliente');
         $('#modalGrande').modal('show');
     }); 
 });

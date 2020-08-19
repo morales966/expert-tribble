@@ -7,7 +7,7 @@ class UsersController extends AppController {
 
 	public function beforeFilter() {
         parent::beforeFilter();
-        $this->Auth->allow('add','login','loginData','logout','remember_password','remember_password_step_2','saveContact');
+        $this->Auth->allow('add','login','loginData','logout','remember_password','remember_password_step_2','saveContact','find_code_clients','addSolicitudCreditoUsuario');
     }
 
 	public function index() {
@@ -564,4 +564,48 @@ class UsersController extends AppController {
 		$this->set(compact('contacs'));
 	}
 
+	public function find_code_clients() {
+		$this->layout 					= false;
+        if ($this->request->is('ajax')) {
+            $txt_codigo                     = $this->request->data['txt_codigo'];
+            $user_id 						= $this->User->Client->find_code_client_solicitud_credito($txt_codigo);
+            if ($user_id > 0) {
+				$this->set(compact('user_id'));
+            } else {
+				$this->autoRender 				= false;
+            	return $user_id;
+            }
+        }
+    }
+
+    public function addSolicitudCreditoUsuario() {
+		$this->autoRender 				= false;
+        if ($this->request->is('ajax')) {
+        	$this->log($this->request->data,'error');
+            $this->request->data['Credit']['numero_meses']                  = $this->request->data['select_dias'];
+            unset($this->request->data['select_dias']);
+			$this->request->data['Credit']['valor_cuota'] 					= $this->replaceText($this->request->data['Credit']['valor_cuota'],".","");
+			$this->request->data['Credit']['foto_cedula_delantera'] 		= $this->request->data['Credit']['foto_cedula_delantera1'];
+			$this->request->data['Credit']['foto_cedula_trasera'] 			= $this->request->data['Credit']['foto_cedula_trasera1'];
+			$this->request->data['Credit']['foto_perfil'] 					= $this->request->data['Credit']['foto_perfil1'];
+			$this->Credit->create();
+			if ($this->Credit->save($this->request->data['Credit'])) {
+                $state_name                                                 = Configure::read('variables.estados_creditos.1');
+                $this->saveStage($state_name,AuthComponent::user('id'),$this->Credit->id,'','',0);
+                $description                                                = Configure::read('variables.description_notificaciones.crear_credito');
+                $url                                                        = $this->webroot.'Credits/index';
+                $usuarios                                                   = $this->Credit->User->all_role_coordinador_analista();
+                $description_cliente                                        = Configure::read('variables.description_notificaciones.crear_credito');
+                foreach ($usuarios as $user) {
+                    $this->saveManagesUser($description,$user['User']['id'],$url);
+                }
+                $this->saveManagesUser($description_cliente,$this->request->data['Credit']['user_id'],$url);
+				$this->Session->setFlash('El crédito se ha guardado satisfactoriamente','Flash/success');
+				return $this->redirect(array('controller' => 'Pages' 'action' => 'home'));
+			} else {
+				$this->Session->setFlash('El crédito no se ha guardado, por favor inténtalo más tarde','Flash/error');
+				return $this->redirect(array('controller' => 'Pages' 'action' => 'home'))
+			}
+		}
+    }
 }

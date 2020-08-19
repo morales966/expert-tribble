@@ -1,12 +1,16 @@
+var $listaDeDispositivosCD;
+var $listaDeDispositivosCT;
+var $listaDeDispositivosFP;
+
 const tieneSoporteUserMedia = () =>
     !!(navigator.getUserMedia || (navigator.mozGetUserMedia || navigator.mediaDevices.getUserMedia) || navigator.webkitGetUserMedia || navigator.msGetUserMedia)
 const _getUserMedia = (...arguments) =>
     (navigator.getUserMedia || (navigator.mozGetUserMedia || navigator.mediaDevices.getUserMedia) || navigator.webkitGetUserMedia || navigator.msGetUserMedia).apply(navigator, arguments);
 
 // Declaramos elementos del DOM (select)
-const $listaDeDispositivosCD = document.querySelector("#listaDeDispositivosCD");
-const $listaDeDispositivosCT = document.querySelector("#listaDeDispositivosCT");
-const $listaDeDispositivosFP = document.querySelector("#listaDeDispositivosFP");
+$listaDeDispositivosCD = document.querySelector("#listaDeDispositivosCD");
+$listaDeDispositivosCT = document.querySelector("#listaDeDispositivosCT");
+$listaDeDispositivosFP = document.querySelector("#listaDeDispositivosFP");
 
 const obtenerDispositivos = () => navigator
     .mediaDevices
@@ -84,6 +88,7 @@ const llenarSelectConDispositivosDisponiblesFP = () => {
             const tipo = dispositivo.kind;
             if (tipo === "videoinput") {
                 dispositivosDeVideo.push(dispositivo);
+
             }
         });
 
@@ -224,6 +229,9 @@ $("body").on("click", ".btn_abrir_modalCD", function() {
         });
     }
 });
+$("body").on("click", "#btn_cerrar_camaraCD", function() {
+    $('#modalTomarFotoCD').modal('hide');
+});
 
 $("body").on("click", ".btn_abrir_modalCT", function() {
 	// Comenzamos viendo si tiene soporte, si no, nos detenemos
@@ -349,6 +357,9 @@ $("body").on("click", ".btn_abrir_modalCT", function() {
         });
     }
 });
+$("body").on("click", "#btn_cerrar_camaraCT", function() {
+    $('#modalTomarFotoCT').modal('hide');
+});
 
 $("body").on("click", ".btn_abrir_modalFP", function() {
 	// Comenzamos viendo si tiene soporte, si no, nos detenemos
@@ -405,7 +416,7 @@ $("body").on("click", ".btn_abrir_modalFP", function() {
         (streamObtenido) => {
             // Aquí ya tenemos permisos, ahora sí llenamos el select,
             // pues si no, no nos daría el nombre de los dispositivos
-            llenarSelectConDispositivosDisponiblesCT();
+            llenarSelectConDispositivosDisponiblesFP();
 
             // Escuchar cuando seleccionen otra opción y entonces llamar a esta función
             $listaDeDispositivosCT.onchange = () => {
@@ -416,7 +427,7 @@ $("body").on("click", ".btn_abrir_modalFP", function() {
                     });
                 }
                 // Mostrar el nuevo stream con el dispositivo seleccionado
-                mostrarStream($listaDeDispositivosCT.value);
+                mostrarStream($listaDeDispositivosFP.value);
             }
 
             // Simple asignación
@@ -473,6 +484,9 @@ $("body").on("click", ".btn_abrir_modalFP", function() {
         	message_alert("Has denegado el permiso para la camara","Error");
         });
     }
+});
+$("body").on("click", "#btn_cerrar_camaraFP", function() {
+    $('#modalTomarFotoFP').modal('hide');
 });
 
 $("body").on("click", ".btn_cancelar_foto", function() {

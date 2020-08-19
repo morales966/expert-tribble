@@ -1,32 +1,37 @@
 $(document).ready(function(){
 	$(".next-form").hide();
-	$('#checkbox1').click(function() {
-	    if (!$(this).is(':checked')) {
-			$(".next-form").hide();
-	    } else {
+	var form_count 			= 1, previous_form, next_form, total_forms;
+	total_forms		 		= $("fieldset").length;
+    setProgressBarValue(1,2);
+	// setProgressBarValue(form_count,total_forms);
+});
+
+$("body").on("click", ".next-form", function() {
+	previous_form = $(this).parent();
+	next_form = $(this).parent().next();
+	next_form.show();
+	previous_form.hide();
+	setProgressBarValue(2,2);
+	// setProgressBarValue(++form_count,total_forms);
+});
+
+$("body").on("click", ".previous-form", function() {
+	previous_form = $(this).parent();
+	next_form = $(this).parent().prev();
+	next_form.show();
+	previous_form.hide();
+	setProgressBarValue(1,2);
+	// setProgressBarValue(--form_count,total_forms);
+});
+
+$("body").on("click", "#checkbox1", function() {
+    if (!$(this).is(':checked')) {
+		$(".next-form").hide();
+    } else {
+    	if ($('#CreditValorCuota').val() != '' || $('#CreditValorCuota').val() != 0) {
 			$(".next-form").show();
-	    }
-	});
-	var form_count = 1, previous_form, next_form, total_forms;
-
-	total_forms = $("fieldset").length;
-	setProgressBarValue(form_count,total_forms);
-
-	$(".next-form").click(function(){
-		previous_form = $(this).parent();
-		next_form = $(this).parent().next();
-		next_form.show();
-		previous_form.hide();
-		setProgressBarValue(++form_count,total_forms);
-	});
-
-	$(".previous-form").click(function(){
-		previous_form = $(this).parent();
-		next_form = $(this).parent().prev();
-		next_form.show();
-		previous_form.hide();
-		setProgressBarValue(--form_count,total_forms);
-	});
+		}
+    }
 });
 
 $( "#register_form" ).submit(function(event) {
@@ -36,6 +41,29 @@ $( "#register_form" ).submit(function(event) {
     	message_alert("Algo esta mal, todos los campos son requeridos","Error");
 	}
 });
+
+$("body").on("click", "#btn_solicitar_credito", function() {
+    var instance 		= $('#register_form').parsley();
+	if (!instance.isValid()) {
+		event.preventDefault();
+    	message_alert("Algo esta mal, todos los campos son requeridos","Error");
+	} else {
+		var formData               = new FormData($('#register_form')[0]);
+        $.ajax({
+            type: 'POST',
+            url: copy_js.base_url+'Users/addSolicitudCreditoUsuario',
+            data: formData,
+            contentType: false,
+            cache: false,
+            processData:false,
+            success: function(result){
+                $('#modalGrande').modal('hide');
+    			message_alert("Se ha registrado tu solicitud a nombre del cliente del código ingresado","Bien");
+            }
+        });
+	}
+});
+
 
 $("body").on("change", "#CreditNumeroMeses", function() {
 	var meses 				= $('#CreditNumeroMeses').val();
@@ -54,11 +82,12 @@ $("body").on("keyup", "#CreditValorCredito", function() {
 		} else {
 			$('.meses_credito').empty();
 			$('#CreditValorCuota').val('0');
-
+    		message_alert("El valor del crédito debe ser mayor o igual a 50.000","Error");
 		}
 	} else {
 		$('.meses_credito').empty();
 		$('#CreditValorCuota').val('0');
+    	message_alert("El valor del crédito debe ser menor o igual a 1.500.000","Error");
 	}
 });
 

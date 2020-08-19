@@ -2,7 +2,7 @@
 App::uses('AppController', 'Controller');
 
 class CreditsController extends AppController {
-
+    
 	public $components = array('Paginator');
 
 	public function index() {
@@ -365,7 +365,7 @@ class CreditsController extends AppController {
             unset($this->request->data['select_dias']);
 			$this->request->data['Credit']['user_id'] 						= AuthComponent::user('id');
 			$this->request->data['Credit']['valor_cuota'] 					= $this->replaceText($this->request->data['Credit']['valor_cuota'],".","");
-			if ($this->request->data['Credit']['foto_cedula_delantera']['name'] == '') {
+			if ($this->request->data['Credit']['foto_cedula_delantera']['name'] != '') {
 				$this->request->data['Credit']['foto_cedula_delantera'] 		= $this->request->data['Credit']['foto_cedula_delantera1'];
 				$this->request->data['Credit']['foto_cedula_trasera'] 			= $this->request->data['Credit']['foto_cedula_trasera1'];
 				$this->request->data['Credit']['foto_perfil'] 					= $this->request->data['Credit']['foto_perfil1'];

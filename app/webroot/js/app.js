@@ -82,6 +82,32 @@ $("body").on("click", "#notificaciones_leidas", function() {
     });
 });
 
+$("body").on("click", ".btn_cerrar_tc", function() {
+    $('#modalTerminosCondiciones').modal('hide');
+});
+
+$("body").on( "click", "#btn_buscar_negocio", function() {
+    var txt_codigo                 = $('#txt_codigo').val();
+    if (txt_codigo == "") {
+        message_alert("Por favor ingresa el código del cliente","Error");
+    } else {
+        $.post(copy_js.base_url+'Users/find_code_clients',{txt_codigo:txt_codigo}, function(result){
+            if (result == 0) {
+                message_alert("Por favor valida el código ya que no se encuentra un cliente asociado","Error");
+            } else {
+                $('#resultModalGrande').html(result);
+                $(".next-form").hide();
+                setProgressBarValue(1,2);
+                $listaDeDispositivosCD = document.querySelector("#listaDeDispositivosCD");
+                $listaDeDispositivosCT = document.querySelector("#listaDeDispositivosCT");
+                $listaDeDispositivosFP = document.querySelector("#listaDeDispositivosFP");
+                $('#modalTitleGrande').text('Solicitar un crédito');
+                $('#modalGrande').modal('show');
+            }
+        });
+    }
+});
+
 $("body").on( "click", ".stateNotificacion", function() {
     var notificacion_id         = $(this).data('uid');
     var state                   = $(this).data('state');
