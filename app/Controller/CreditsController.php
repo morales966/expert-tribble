@@ -268,9 +268,9 @@ class CreditsController extends AppController {
             $datosC['Credit']['state']              = Configure::read('variables.nombres_estados_creditos.Solicitud_de_desembolso');
             $datosC['Credit']['id']                 = $this->request->data['credit_id'];
             $state_name                             = Configure::read('variables.estados_creditos.7');
-            $description                                               = Configure::read('variables.description_notificaciones.desenbolsar_dinero');
-            $url                                                       = $this->webroot.'Credits/paid_customers';
-            $usuarios                                                  = $this->Credit->User->all_role_finanzas();
+            $description                            = Configure::read('variables.description_notificaciones.desenbolsar_dinero');
+            $url                                    = $this->webroot.'Credits/paid_customers';
+            $usuarios                               = $this->Credit->User->all_role_finanzas();
             foreach ($usuarios as $user) {
                 $this->saveManagesUser($description,$user['User']['id'],$url);
             }

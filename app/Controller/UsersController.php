@@ -595,16 +595,16 @@ class UsersController extends AppController {
                 $description                                                = Configure::read('variables.description_notificaciones.crear_credito');
                 $url                                                        = $this->webroot.'Credits/index';
                 $usuarios                                                   = $this->Credit->User->all_role_coordinador_analista();
-                $description_cliente                                        = Configure::read('variables.description_notificaciones.crear_credito');
+                $description_cliente                                        = Configure::read('variables.description_notificaciones.crear_credito_cliente');
                 foreach ($usuarios as $user) {
                     $this->saveManagesUser($description,$user['User']['id'],$url);
                 }
                 $this->saveManagesUser($description_cliente,$this->request->data['Credit']['user_id'],$url);
 				$this->Session->setFlash('El crédito se ha guardado satisfactoriamente','Flash/success');
-				return $this->redirect(array('controller' => 'Pages' 'action' => 'home'));
+				return $this->redirect(array('controller' => 'Pages','action' => 'home'));
 			} else {
 				$this->Session->setFlash('El crédito no se ha guardado, por favor inténtalo más tarde','Flash/error');
-				return $this->redirect(array('controller' => 'Pages' 'action' => 'home'))
+				return $this->redirect(array('controller' => 'Pages','action' => 'home'));
 			}
 		}
     }
