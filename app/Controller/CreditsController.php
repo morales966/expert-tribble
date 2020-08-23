@@ -124,16 +124,6 @@ class CreditsController extends AppController {
         }
     }
 
-    public function saveStage($state_name,$asesor_id,$credit_id,$description,$description_denied,$cupo_aprobado) {
-        $datosS['Stage']['user_id']                 = $asesor_id;
-        $datosS['Stage']['credit_id']               = $credit_id;
-        $datosS['Stage']['state_credit']            = $state_name;
-        $datosS['Stage']['description']             = $description;
-        $datosS['Stage']['description_denied']      = $description_denied;
-        $datosS['Stage']['cupo_aprobado']           = $cupo_aprobado;
-        $this->Credit->Stage->save($datosS['Stage']);
-    }
-
     public function ver_preaprobado() {
         $this->layout                           = false;
         $cupo_aprobado                          = $this->Credit->find_cupo_aprobado($this->request->data['credit_id']);
@@ -365,7 +355,7 @@ class CreditsController extends AppController {
             unset($this->request->data['select_dias']);
 			$this->request->data['Credit']['user_id'] 						= AuthComponent::user('id');
 			$this->request->data['Credit']['valor_cuota'] 					= $this->replaceText($this->request->data['Credit']['valor_cuota'],".","");
-			if ($this->request->data['Credit']['foto_cedula_delantera']['name'] != '') {
+			if ($this->request->data['Credit']['foto_cedula_delantera']['name'] == '') {
 				$this->request->data['Credit']['foto_cedula_delantera'] 		= $this->request->data['Credit']['foto_cedula_delantera1'];
 				$this->request->data['Credit']['foto_cedula_trasera'] 			= $this->request->data['Credit']['foto_cedula_trasera1'];
 				$this->request->data['Credit']['foto_perfil'] 					= $this->request->data['Credit']['foto_perfil1'];

@@ -65,6 +65,17 @@ class AppController extends Controller {
         return true;
     }
 
+    public function saveStage($state_name,$asesor_id,$credit_id,$description,$description_denied,$cupo_aprobado) {
+        $this->loadModel('Stage');
+        $datosS['Stage']['user_id']                 = $asesor_id;
+        $datosS['Stage']['credit_id']               = $credit_id;
+        $datosS['Stage']['state_credit']            = $state_name;
+        $datosS['Stage']['description']             = $description;
+        $datosS['Stage']['description_denied']      = $description_denied;
+        $datosS['Stage']['cupo_aprobado']           = $cupo_aprobado;
+        $this->Stage->save($datosS['Stage']);
+    }
+
     // public function sendMailCake() {
         // try {
         //     $email                      = new CakeEmail();

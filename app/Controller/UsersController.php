@@ -223,7 +223,6 @@ class UsersController extends AppController {
 			'to'					=> $correo,
 			// 'template'				=> 'bienvenido_usuario',
 			'subject'				=> 'Bienvenido',
-
 			'vName' 				=> $nombreUsuario,
 			'vPassword' 			=> $password,
 			'vclienteNuevo' 		=> true,
@@ -342,30 +341,15 @@ class UsersController extends AppController {
 	}
 
 	public function enviarCorreoBienvenida($correo,$password,$nombreUsuario,$rol) {
-		if ($rol == Configure::read('variables.rolCliente')) {
-			$options = array(
-				'to'		=> $correo,
-				// 'template'	=> 'bienvenido_cliente',
-				'subject'	=> 'Bienvenido',
-
-				'vName' 	=> $nombreUsuario,
-				'vPassword' => $password,
-				'vCliente' 	=> true,
-				'uUsuario' 	=> false,
-				'VFile'		=> 'files/terminos.pdf'
-			);
-		} else {
-			$options = array(
-				'to'		=> $correo,
-				// 'template'	=> 'bienvenido_usuario',
-				'subject'	=> 'Bienvenido',
-
-				'vName' 	=> $nombreUsuario,
-				'vPassword' => $password,
-				'vUsuario' 	=> true,
-				'vCliente' 	=> false
-			);
-		}
+		$options = array(
+			'to'		=> $correo,
+			// 'template'	=> 'bienvenido_usuario',
+			'subject'	=> 'Bienvenido',
+			'vName' 	=> $nombreUsuario,
+			'vPassword' => $password,
+			'vUsuario' 	=> true,
+			'vCliente' 	=> false
+		);
 		$r = $this->sendMail($options);
 		return $r;
 	}
@@ -581,20 +565,19 @@ class UsersController extends AppController {
     public function addSolicitudCreditoUsuario() {
 		$this->autoRender 				= false;
         if ($this->request->is('ajax')) {
-        	$this->log($this->request->data,'error');
             $this->request->data['Credit']['numero_meses']                  = $this->request->data['select_dias'];
             unset($this->request->data['select_dias']);
 			$this->request->data['Credit']['valor_cuota'] 					= $this->replaceText($this->request->data['Credit']['valor_cuota'],".","");
 			$this->request->data['Credit']['foto_cedula_delantera'] 		= $this->request->data['Credit']['foto_cedula_delantera1'];
 			$this->request->data['Credit']['foto_cedula_trasera'] 			= $this->request->data['Credit']['foto_cedula_trasera1'];
 			$this->request->data['Credit']['foto_perfil'] 					= $this->request->data['Credit']['foto_perfil1'];
-			$this->Credit->create();
-			if ($this->Credit->save($this->request->data['Credit'])) {
+			$this->User->Credit->create();
+			if ($this->User->Credit->save($this->request->data['Credit'])) {
                 $state_name                                                 = Configure::read('variables.estados_creditos.1');
                 $this->saveStage($state_name,AuthComponent::user('id'),$this->Credit->id,'','',0);
                 $description                                                = Configure::read('variables.description_notificaciones.crear_credito');
                 $url                                                        = $this->webroot.'Credits/index';
-                $usuarios                                                   = $this->Credit->User->all_role_coordinador_analista();
+                $usuarios                                                   = $this->User->all_role_coordinador_analista();
                 $description_cliente                                        = Configure::read('variables.description_notificaciones.crear_credito_cliente');
                 foreach ($usuarios as $user) {
                     $this->saveManagesUser($description,$user['User']['id'],$url);
