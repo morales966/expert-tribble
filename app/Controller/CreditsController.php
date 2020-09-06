@@ -134,8 +134,8 @@ class CreditsController extends AppController {
 
     public function add_cupo_aprobado() {
         $this->layout                           = false;
-        $variable                               = null;
-        $this->set(compact('variable'));
+        $credit_id                              = $this->request->data['credit_id'];
+        $this->set(compact('credit_id'));
     }
 
     public function ver_cupo_aprobado() {
@@ -308,7 +308,8 @@ class CreditsController extends AppController {
 
     public function sumTotalValorAprobadoStateAprobadoRetirado() {
         $this->autoRender               = false;
-        $suma                           = $this->Credit->sum_cupo_aprobado_state(Configure::read('variables.nombres_estados_creditos.Aprobado_retirado'));
+        $stateArray                     = array(Configure::read('variables.nombres_estados_creditos.Aprobado_retirado'),Configure::read('variables.nombres_estados_creditos.Solicitud_de_desembolso'));
+        $suma                           = $this->Credit->sum_cupo_aprobado_state($stateArray);
         return number_format($suma[0]['total'],0,",",".");
     }
 

@@ -4,5 +4,5 @@
 	?>
 </div>
 <div class="form-group">
-   <?php echo $this->Form->button('Guardar',array("class" => "btn btn-info form-control","id" => "btn_cupo","type" => "button")); ?>
+   <?php echo $this->Form->button('Guardar',array("class" => "btn btn-info form-control",'data-uid'=>$credit_id,"id" => "btn_cupo","type" => "button")); ?>
 </div>

@@ -6,12 +6,12 @@
 	</li>
 	<li class="nav-item">
 	    <a class="nav-link" id="cotizaciones-tab" data-toggle="tab" href="#proceso" role="tab" aria-controls="proceso" aria-selected="false">
-	    	Proceso
+	    	Proceso (Seguimiento)
 		</a>
 	</li>
 	<li class="nav-item">
 	    <a class="nav-link" id="cotizaciones-tab" data-toggle="tab" href="#descripciones" role="tab" aria-controls="descripciones" aria-selected="false">
-	    	Descripciones
+	    	Descripciones (Usuarios)
 		</a>
 	</li>
 	<li class="nav-item">

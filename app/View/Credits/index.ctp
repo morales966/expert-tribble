@@ -3,14 +3,14 @@
 	
 		<?php if (AuthComponent::user('role') != Configure::read('variables.rolCliente')) { ?>
 			<div class="col-md-12">
-			<div class="content-tittles">
-                <div class="line-tittles">|</div>
-                <div>  
-                  <h1>Panel</h1>
-                  <h2>de Créditos</h2>
-                </div>
-             </div>
-             </div>
+				<div class="content-tittles">
+	                <div class="line-tittles">|</div>
+	                <div>  
+	                  <h1>Panel</h1>
+	                  <h2>de Créditos</h2>
+	                </div>
+	             </div>
+            </div>
 			<div class="container-fluid">
 				<div id="container_creditos" class="row mb-5">
 
@@ -364,70 +364,70 @@
 
 				</div>
 			</div>
-		<div class="bg-white-content mb-5">
-			<div class="content-tittles">
-                <div class="line-tittles">|</div>
-                <div>  
-                  <h1>Créditos</h1>
-                  <h2>Finalizados</h2>
-                </div>
-             </div>
-			<div class="table-responsive">
-				<table class="table">
-					<thead class="thead-light">
-						<tr>
-							<th>Cliente</th>
-							<th>Nombre cliente</th>
-							<th>Identificación</th>
-							<th>Celular</th>
-							<th>Valor credito</th>
-							<th><?php echo $this->Paginator->sort('Credit.state', 'Estado'); ?></th>
-							<th>Fecha registro</th>
-							<th class="actions">Acciones</th>
-						</tr>
-					</thead>
-					<tbody>
-						<?php foreach ($credits as $credit): ?>
+			<div class="bg-white-content mb-5">
+				<div class="content-tittles">
+	                <div class="line-tittles">|</div>
+	                <div>  
+	                  <h1>Créditos</h1>
+	                  <h2>Finalizados</h2>
+	                </div>
+	             </div>
+				<div class="table-responsive">
+					<table class="table">
+						<thead class="thead-light">
 							<tr>
-								<td>
-									<?php echo $this->Html->link($credit['User']['name'], array('controller' => 'users', 'action' => 'view', $credit['User']['id'])); ?>
-								</td>
-								<td><?php echo h($credit['Credit']['nombre_persona']).' '.h($credit['Credit']['apellido_persona']); ?>&nbsp;</td>
-								<td><?php echo h($credit['Credit']['cedula_persona']); ?>&nbsp;</td>
-								<td><?php echo h($credit['Credit']['telefono_persona']); ?>&nbsp;</td>
-								<td><?php echo h(number_format($credit['Credit']['valor_credito'],0,",","."));?>&nbsp;</td>
-								<td><?php echo $this->Utilities->estados_creditos($credit['Credit']['state']); ?>&nbsp;</td>
-								<td><?php echo h($credit['Credit']['created']); ?>&nbsp;</td>
-								<td class="actions">
-									<a class="ver_credito" data-uid="<?php echo $credit['Credit']['id']; ?>" href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Ver crédito">
-										<i class="fa fa-fw fa-eye"></i>
-									</a>
-								</td>
+								<th>Cliente</th>
+								<th>Nombre cliente</th>
+								<th>Identificación</th>
+								<th>Celular</th>
+								<th>Valor credito</th>
+								<th><?php echo $this->Paginator->sort('Credit.state', 'Estado'); ?></th>
+								<th>Fecha registro</th>
+								<th class="actions">Acciones</th>
 							</tr>
-						<?php endforeach; ?>
-					</tbody>
-				</table>
-				<p>
-				<?php
-				echo $this->Paginator->counter(array(
-					'format' => __('Página {:page} de {:pages}, mostrando {:current} resultados en {:count} total')));
-					?>
-				</p>
-				<div class="row numberpages">
+						</thead>
+						<tbody>
+							<?php foreach ($credits as $credit): ?>
+								<tr>
+									<td>
+										<?php echo $this->Html->link($credit['User']['name'], array('controller' => 'users', 'action' => 'view', $credit['User']['id'])); ?>
+									</td>
+									<td><?php echo h($credit['Credit']['nombre_persona']).' '.h($credit['Credit']['apellido_persona']); ?>&nbsp;</td>
+									<td><?php echo h($credit['Credit']['cedula_persona']); ?>&nbsp;</td>
+									<td><?php echo h($credit['Credit']['telefono_persona']); ?>&nbsp;</td>
+									<td><?php echo h(number_format($credit['Credit']['valor_credito'],0,",","."));?>&nbsp;</td>
+									<td><?php echo $this->Utilities->estados_creditos($credit['Credit']['state']); ?>&nbsp;</td>
+									<td><?php echo h($credit['Credit']['created']); ?>&nbsp;</td>
+									<td class="actions">
+										<a class="ver_credito" data-uid="<?php echo $credit['Credit']['id']; ?>" href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Ver crédito">
+											<i class="fa fa-fw fa-eye"></i>
+										</a>
+									</td>
+								</tr>
+							<?php endforeach; ?>
+						</tbody>
+					</table>
+					<p>
 					<?php
-					echo $this->Paginator->first('<< ', array('class' => 'prev'), null);
-					echo $this->Paginator->prev('< ', array(), null, array('class' => 'prev disabled'));
-					echo $this->Paginator->counter(array('format' => '{:page} de {:pages}'));
-					echo $this->Paginator->next(' >', array(), null, array('class' => 'next disabled'));
-					echo $this->Paginator->last(' >>', array('class' => 'next'), null);
-					?>
-					<b><?php echo $this->Paginator->counter(array('format' => '{:count} registros en total')); ?></b>
+					echo $this->Paginator->counter(array(
+						'format' => __('Página {:page} de {:pages}, mostrando {:current} resultados en {:count} total')));
+						?>
+					</p>
+					<div class="row numberpages">
+						<?php
+						echo $this->Paginator->first('<< ', array('class' => 'prev'), null);
+						echo $this->Paginator->prev('< ', array(), null, array('class' => 'prev disabled'));
+						echo $this->Paginator->counter(array('format' => '{:page} de {:pages}'));
+						echo $this->Paginator->next(' >', array(), null, array('class' => 'next disabled'));
+						echo $this->Paginator->last(' >>', array('class' => 'next'), null);
+						?>
+						<b><?php echo $this->Paginator->counter(array('format' => '{:count} registros en total')); ?></b>
+					</div>
 				</div>
 			</div>
-		</div>
 				
-			<?php } else { ?>
-				<div class="bg-white-content mb-2">
+		<?php } else { ?>
+			<div class="bg-white-content mb-2">
 				<div class="row ">
 					<div class="col-md-3">
 						<div class="content-tittles ">
@@ -531,40 +531,44 @@
 						echo $this->Paginator->counter(array(
 							'format' => __('Página {:page} de {:pages}, mostrando {:current} resultados en {:count} total')));
 							?>
-						</p>
-						<div class="row numberpages">
-							<?php
-							echo $this->Paginator->first('<< ', array('class' => 'prev'), null);
-							echo $this->Paginator->prev('< ', array(), null, array('class' => 'prev disabled'));
-							echo $this->Paginator->counter(array('format' => '{:page} de {:pages}'));
-							echo $this->Paginator->next(' >', array(), null, array('class' => 'next disabled'));
-							echo $this->Paginator->last(' >>', array('class' => 'next'), null);
-							?>
-							<b><?php echo $this->Paginator->counter(array('format' => '{:count} registros en total')); ?></b>
-						</div>
+					</p>
+					<div class="row numberpages">
+						<?php
+						echo $this->Paginator->first('<< ', array('class' => 'prev'), null);
+						echo $this->Paginator->prev('< ', array(), null, array('class' => 'prev disabled'));
+						echo $this->Paginator->counter(array('format' => '{:page} de {:pages}'));
+						echo $this->Paginator->next(' >', array(), null, array('class' => 'next disabled'));
+						echo $this->Paginator->last(' >>', array('class' => 'next'), null);
+						?>
+						<b><?php echo $this->Paginator->counter(array('format' => '{:count} registros en total')); ?></b>
 					</div>
-					</div>
-
-				<?php } ?>
+					<p class="txtIzquierdo">
+						Cupo aprobado:
+						<br>
+						Cupo preaprobado:
+					</p>
+				</div>
+			</div>
+		<?php } ?>
 	</div>
 </div>
 
-		<?php if (AuthComponent::user('role') != Configure::read('variables.rolCliente')): ?>
-		<div class="modal modal-static fade" id="processing-modal" role="dialog" aria-hidden="true">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-body">
-						<div class="text-center">
-							<i class="fa fa-refresh fa-5x fa-spin"></i>
-							<h4>Procesando</h4>
-						</div>
+<?php if (AuthComponent::user('role') != Configure::read('variables.rolCliente')): ?>
+	<div class="modal modal-static fade" id="processing-modal" role="dialog" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-body">
+					<div class="text-center">
+						<i class="fa fa-refresh fa-5x fa-spin"></i>
+						<h4>Procesando</h4>
 					</div>
 				</div>
 			</div>
 		</div>
-	<?php endif ?>
+	</div>
+<?php endif ?>
 
-	<?php
+<?php
 	if (AuthComponent::user('role') != Configure::read('variables.rolCliente')) {
 		echo $this->Html->css("controller/credits/indexA.css?".rand(),							array('block' => 'AppCss'));
 		echo $this->Html->script("controller/credits/indexA.js?".rand(),						array('block' => 'AppScript'));
@@ -573,4 +577,4 @@
 	}
 	echo $this->Html->css("controller/credits/view.css?".rand(),							array('block' => 'AppCss'));
 	echo $this->Html->script("controller/credits/view.js?".rand(),							array('block' => 'AppScript'));
-	?>
+?>
