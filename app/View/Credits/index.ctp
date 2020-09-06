@@ -11,6 +11,40 @@
 	                </div>
 	             </div>
             </div>
+            <div class="row">
+				<div class="col-md-4">
+					<div class="dropdown text-right">
+						<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+							Filtros por estados créditos
+						</button>
+						<div class="dropdown-menu">
+							<?php
+							$todo 			= 'Todos los créditos ';
+							echo $this->Html->link($todo, array(),array('class' => 'dropdown-item'));
+
+							$cancelado = Configure::read('variables.estados_creditos.1').' ';
+							echo $this->Html->link($cancelado, array('action'=>'index','?' => array('filterState' => Configure::read('variables.nombres_estados_creditos.Solicitud'))),array('class' => 'dropdown-item'));
+							$estudio = Configure::read('variables.estados_creditos.2').' ';
+							echo $this->Html->link($estudio, array('action'=>'index','?' => array('filterState' => Configure::read('variables.nombres_estados_creditos.En_estudio'))),array('class' => 'dropdown-item'));
+							$detenido = Configure::read('variables.estados_creditos.3').' ';
+							echo $this->Html->link($detenido, array('action'=>'index','?' => array('filterState' => Configure::read('variables.nombres_estados_creditos.Detenido'))),array('class' => 'dropdown-item'));
+							$aprobado_no_retirado = Configure::read('variables.estados_creditos.4').' ';
+							echo $this->Html->link($aprobado_no_retirado, array('action'=>'index','?' => array('filterState' => Configure::read('variables.nombres_estados_creditos.Aprobado_no_retirado'))),array('class' => 'dropdown-item'));
+							$aprobado_retirado = Configure::read('variables.estados_creditos.5').' ';
+							echo $this->Html->link($aprobado_retirado, array('action'=>'index','?' => array('filterState' => Configure::read('variables.nombres_estados_creditos.Aprobado_retirado'))),array('class' => 'dropdown-item'));
+
+							?>
+							<div class="dropdown-divider"></div>
+							<?php
+							$rechazado = Configure::read('variables.estados_creditos.0').' ';
+							echo $this->Html->link($rechazado, array('action'=>'index','?' => array('filterState' => Configure::read('variables.nombres_estados_creditos.Negado'))),array('class' => 'dropdown-item'));
+							$terminado = Configure::read('variables.estados_creditos.6').' ';
+							echo $this->Html->link($terminado, array('action'=>'index','?' => array('filterState' => Configure::read('variables.nombres_estados_creditos.Pagado'))),array('class' => 'dropdown-item'));
+							?>
+						</div>
+					</div>
+				</div>
+			</div>
 			<div class="container-fluid">
 				<div id="container_creditos" class="row mb-5">
 
@@ -504,6 +538,7 @@
 								<th>Celular</th>
 								<th>Valor crédito</th>
 								<th>Estado</th>
+								<th>Cupo aprobado</th>
 								<th>Fecha registro</th>
 								<th class="actions">Acción</th>
 							</tr>
@@ -516,6 +551,7 @@
 									<td><?php echo h($credit['Credit']['telefono_persona']); ?>&nbsp;</td>
 									<td><?php echo h(number_format($credit['Credit']['valor_credito'],0,",","."));?>&nbsp;</td>
 									<td><?php echo $this->Utilities->estados_creditos($credit['Credit']['state']); ?>&nbsp;</td>
+									<td><?php echo $credit['Credit']['cupo_aprobado'] ?></td>
 									<td><?php echo h($credit['Credit']['created']); ?>&nbsp;</td>
 									<td class="actions">
 										<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Ver datos del crédito" class="btn btn-outline-primary ver_credito" data-uid="<?php echo $credit['Credit']['id']; ?>">

@@ -5,30 +5,80 @@ class CreditsController extends AppController {
     
 	public $components = array('Paginator');
 
+    public function filterStateGet($state){
+        switch ($state) {
+            case 0:
+                $conditions    = array('Credit.state' => Configure::read('variables.nombres_estados_creditos.Negado'));
+                break;
+            case 1:
+                $conditions    = array('Credit.state' => Configure::read('variables.nombres_estados_creditos.Solicitud'));
+                break;
+            case 2:
+                $conditions    = array('Credit.state' => Configure::read('variables.nombres_estados_creditos.En_estudio'));
+                break;
+            case 3:
+                $conditions    = array('Credit.state' => Configure::read('variables.nombres_estados_creditos.Detenido'));
+                break;
+            case 4:
+                $conditions    = array('Credit.state' => Configure::read('variables.nombres_estados_creditos.Aprobado_no_retirado'));
+                break;
+            case 5:
+                $conditions    = array('Credit.state' => Configure::read('variables.nombres_estados_creditos.Aprobado_retirado'));
+                break;
+            case 6:
+                $conditions    = array('Credit.state' => Configure::read('variables.nombres_estados_creditos.Pagado'));
+                break;
+
+            default:
+                $conditions    = array();
+                break;
+        }
+        return $conditions;
+    }
+
 	public function index() {
         $this->deleteCache();
+        $get                        = $this->request->query;
         if (AuthComponent::user('role') != Configure::read('variables.rolCliente')) {
-
-             $conditions                           = array(
-                                                        'Credit.state' => Configure::read('variables.nombres_estados_creditos.Pagado')
-                                                  );
-            $order                                = array('Credit.id' => 'desc');
-            $this->paginate                       = array(
-                                                        'order'         => $order,
-                                                        'limit'         => 5,
-                                                        'conditions'    => $conditions
-                                                  );
-            $credits                              = $this->paginate('Credit');
-            $creditos_solicitud                   = $this->Credit->all_data_state(Configure::read('variables.nombres_estados_creditos.Solicitud'));
-            $creditos_estudio                     = $this->Credit->all_data_state(Configure::read('variables.nombres_estados_creditos.En_estudio'));
-            $creditos_detenido                    = $this->Credit->all_data_state(Configure::read('variables.nombres_estados_creditos.Detenido'));
-            $creditos_aprobado_no_retirado        = $this->Credit->all_data_state(Configure::read('variables.nombres_estados_creditos.Aprobado_no_retirado'));
-            $creditos_aprobado_retirado           = $this->Credit->all_data_state(array(Configure::read('variables.nombres_estados_creditos.Aprobado_retirado'),Configure::read('variables.nombres_estados_creditos.Solicitud_de_desembolso')));
-            $creditos_negado                      = $this->Credit->all_data_state(Configure::read('variables.nombres_estados_creditos.Negado'));
-
+            $conditions                 = array(
+                                            'Credit.state' => Configure::read('variables.nombres_estados_creditos.Pagado')
+                                        );
+            $creditos_solicitud                     = array();
+            $creditos_estudio                       = array();
+            $creditos_detenido                      = array();
+            $creditos_aprobado_no_retirado          = array();
+            $creditos_aprobado_retirado             = array();
+            $creditos_negado                        = array();
+            if (!empty($get)) {
+                switch ($get['filterState']) {
+                    case 0:
+                        $creditos_negado                      = $this->Credit->all_data_state(Configure::read('variables.nombres_estados_creditos.Negado'));
+                        break;
+                    case 1:
+                        $creditos_solicitud                   = $this->Credit->all_data_state(Configure::read('variables.nombres_estados_creditos.Solicitud'));
+                        break;
+                    case 2:
+                        $creditos_estudio                     = $this->Credit->all_data_state(Configure::read('variables.nombres_estados_creditos.En_estudio'));
+                        break;
+                    case 3:
+                        $creditos_detenido                    = $this->Credit->all_data_state(Configure::read('variables.nombres_estados_creditos.Detenido'));
+                        break;
+                    case 4:
+                        $creditos_aprobado_no_retirado        = $this->Credit->all_data_state(Configure::read('variables.nombres_estados_creditos.Aprobado_no_retirado'));
+                        break;
+                    case 5:
+                        $creditos_aprobado_retirado           = $this->Credit->all_data_state(array(Configure::read('variables.nombres_estados_creditos.Aprobado_retirado'),Configure::read('variables.nombres_estados_creditos.Solicitud_de_desembolso')));
+                        break;
+                }
+            } else {
+                $creditos_solicitud                   = $this->Credit->all_data_state(Configure::read('variables.nombres_estados_creditos.Solicitud'));
+                $creditos_estudio                     = $this->Credit->all_data_state(Configure::read('variables.nombres_estados_creditos.En_estudio'));
+                $creditos_detenido                    = $this->Credit->all_data_state(Configure::read('variables.nombres_estados_creditos.Detenido'));
+                $creditos_aprobado_no_retirado        = $this->Credit->all_data_state(Configure::read('variables.nombres_estados_creditos.Aprobado_no_retirado'));
+                $creditos_aprobado_retirado           = $this->Credit->all_data_state(array(Configure::read('variables.nombres_estados_creditos.Aprobado_retirado'),Configure::read('variables.nombres_estados_creditos.Solicitud_de_desembolso')));
+                $creditos_negado                      = $this->Credit->all_data_state(Configure::read('variables.nombres_estados_creditos.Negado'));
+            }
         } else {
-
-            $get                        = $this->request->query;
             if (!empty($get)) {
                 if (isset($get['q'])) {
                     $conditions             = array(
@@ -47,13 +97,6 @@ class CreditsController extends AppController {
             } else {
                 $conditions         = array('Credit.user_id' => AuthComponent::user('id'));
             }
-            $order                      = array('Credit.id' => 'desc');
-            $this->paginate             = array(
-                                            'order'         => $order,
-                                            'limit'         => 10,
-                                            'conditions'    => $conditions
-                                        );
-            $credits                                = $this->paginate('Credit');
             $creditos_solicitud                     = array();
             $creditos_estudio                       = array();
             $creditos_detenido                      = array();
@@ -61,6 +104,13 @@ class CreditsController extends AppController {
             $creditos_aprobado_retirado             = array();
             $creditos_negado                        = array();
         }
+        $order                      = array('Credit.id' => 'desc');
+        $this->paginate             = array(
+                                        'order'         => $order,
+                                        'limit'         => 10,
+                                        'conditions'    => $conditions
+                                    );
+        $credits                    = $this->paginate('Credit');
 		$this->set(compact('credits','creditos_solicitud','creditos_estudio','creditos_detenido','creditos_aprobado_no_retirado','creditos_aprobado_retirado','creditos_negado'));
 	}
 
@@ -318,37 +368,6 @@ class CreditsController extends AppController {
         $suma                           = $this->Credit->sum_total_state(Configure::read('variables.nombres_estados_creditos.Negado'));
         return number_format($suma[0]['total'],0,",",".");
     }
-
-	public function filterStateGet($state){
-            switch ($state) {
-                case 0:
-                    $conditions    = array('Credit.state' => Configure::read('variables.nombres_estados_creditos.Negado'));
-                    break;
-                case 1:
-                    $conditions    = array('Credit.state' => Configure::read('variables.nombres_estados_creditos.Solicitud'));
-                    break;
-                case 2:
-                    $conditions    = array('Credit.state' => Configure::read('variables.nombres_estados_creditos.En_estudio'));
-                    break;
-                case 3:
-                    $conditions    = array('Credit.state' => Configure::read('variables.nombres_estados_creditos.Detenido'));
-                    break;
-                case 4:
-                    $conditions    = array('Credit.state' => Configure::read('variables.nombres_estados_creditos.Aprobado_no_retirado'));
-                    break;
-                case 5:
-                    $conditions    = array('Credit.state' => Configure::read('variables.nombres_estados_creditos.Aprobado_retirado'));
-                    break;
-                case 6:
-                    $conditions    = array('Credit.state' => Configure::read('variables.nombres_estados_creditos.Pagado'));
-                    break;
-
-                default:
-                    $conditions    = array();
-                    break;
-            }
-            return $conditions;
-        }
 
 	public function add() {
 		if ($this->request->is('post')) {
