@@ -76,7 +76,6 @@
 						<span class="txtEndSpan">Max File Size 15MB</span>
 					</div>
 					
-
 					<div class="col-md-4 form-group">
 						<label class="txtLabelImagenes">Adjunta el RUT</label>
 						<?php echo $this->Form->input('adjuntar_rut',array('type' => 'file','label' => false,"class" => "form-control",'required' => true)); ?>
@@ -100,10 +99,10 @@
 						<?php echo $this->Form->input('como_paga',array('empty' => 'Selecciona como paga','options' => $como_paga,'label' => false,"class" => "form-control",'required' => true)); ?>
 					</div>
 
-					<div class="col-md-2 form-group">
+					<div class="col-md-3 form-group">
 						<?php echo $this->Form->input('departamento',array('placeholder' => 'Departamento','label' => false,"class" => "form-control",'required' => true)); ?>
 					</div>
-					<div class="col-md-2 form-group">
+					<div class="col-md-3 form-group">
 						<?php echo $this->Form->input('cantidad_comercios',array('empty' => 'Cantidad de comercios','options' => $cantidad_comercios,'label' => false,"class" => "form-control",'required' => true,'id' => 'cantidad_comercios_val')); ?>
 					</div>
 					<div class="col-md-3 form-group cuanto_paga">
@@ -111,9 +110,6 @@
 					</div>
 					<div class="col-md-3 form-group">
 						<?php echo $this->Form->input('productos_servicios',array('placeholder' => 'Producto o servicio que ofrece','label' => false,"class" => "form-control",'required' => true)); ?>
-					</div>
-					<div class="col-md-2 form-group">
-						<?php echo $this->Form->input('codigo',array('placeholder' => 'Código','label' => false,"class" => "form-control",'required' => true)); ?>
 					</div>
 
 					<div class="col-md-3 form-group">

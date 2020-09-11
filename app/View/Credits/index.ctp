@@ -1,7 +1,7 @@
 <div class="content-wrapper">
 	<div class="container-fluid cuadro_panding">
-	
-		<?php if (AuthComponent::user('role') != Configure::read('variables.rolCliente')) { ?>
+		<?php $roles = array(Configure::read('variables.rolCliente'),Configure::read('variables.roles.Finanzas')); ?>
+        <?php if (!in_array(AuthComponent::user('role'), $roles)) { ?>
 			<div class="col-md-12">
 				<div class="content-tittles">
 	                <div class="line-tittles">|</div>
@@ -116,6 +116,7 @@
 															<?php echo h($credit['Credit']['nombre_persona']).' '.h($credit['Credit']['apellido_persona']).' - '.h($credit['Credit']['cedula_persona']).' - '.h($credit['Credit']['telefono_persona'])?>
 														</span>
 													</h2>
+													<p><span>Asesor encargado:</span><?php echo $this->Utilities->name_user($credit['Credit']['user_asesor']); ?></p>
 													<p>
 														<strong>$ <?php echo h(number_format($credit['Credit']['valor_credito'],0,",","."));?></strong>
 														<span class="txt_cuotas">
@@ -189,6 +190,7 @@
 															<?php echo h($credit['Credit']['nombre_persona']).' '.h($credit['Credit']['apellido_persona']).' - '.h($credit['Credit']['cedula_persona']).' - '.h($credit['Credit']['telefono_persona'])?>
 														</span>
 													</h2>
+													<p><span>Asesor encargado:</span><?php echo $this->Utilities->name_user($credit['Credit']['user_asesor']); ?></p>
 													<p>
 														<strong>$ <?php echo h(number_format($credit['Credit']['valor_credito'],0,",","."));?></strong>
 														<span class="txt_cuotas">
@@ -241,6 +243,7 @@
 															<?php echo h($credit['Credit']['nombre_persona']).' '.h($credit['Credit']['apellido_persona']).' - '.h($credit['Credit']['cedula_persona']).' - '.h($credit['Credit']['telefono_persona'])?>
 														</span>
 													</h2>
+													<p><span>Asesor encargado:</span><?php echo $this->Utilities->name_user($credit['Credit']['user_asesor']); ?></p>
 													<p>
 														<strong>$ <?php echo h(number_format($credit['Credit']['valor_credito'],0,",","."));?></strong>
 														<span class="txt_cuotas">
@@ -299,6 +302,7 @@
 															<?php echo h($credit['Credit']['nombre_persona']).' '.h($credit['Credit']['apellido_persona']).' - '.h($credit['Credit']['cedula_persona']).' - '.h($credit['Credit']['telefono_persona'])?>
 														</span>
 													</h2>
+													<p><span>Asesor encargado:</span><?php echo $this->Utilities->name_user($credit['Credit']['user_asesor']); ?></p>
 													<?php if ($credit['Credit']['state'] == Configure::read('variables.nombres_estados_creditos.Solicitud_de_desembolso')) { ?>
 														<p>
 															<?php echo Configure::read('variables.estados_creditos.7'); ?>
@@ -313,17 +317,19 @@
 														</p>
 													<?php } ?>
 													<span>
+													<?php if ($credit['Credit']['state'] != Configure::read('variables.nombres_estados_creditos.Solicitud_de_desembolso')): ?>
 														<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Adjuntar plan pago" class="adjuntar_plan_pago btn btn-sm btn-outline-primary" data-uid="<?php echo $credit['Credit']['id']; ?>">
 															<i class="fa fa-paperclip"></i>
-														</a>
-														<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Ver preaprobado" class="ver_preaprobado btn btn-sm btn-outline-primary" data-uid="<?php echo $credit['Credit']['id']; ?>">
-															<i class="fa fa-sort-numeric-desc"></i>
 														</a>
 														<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Registrar cupo retirado" class="registrar_cupo_aprobado btn btn-sm btn-outline-primary" data-uid="<?php echo $credit['Credit']['id']; ?>">
 															<i class="fa fa-edit"></i>
 														</a>
 														<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Ver cupo aprobado" class="ver_cupo_aprobado btn btn-sm btn-outline-primary" data-uid="<?php echo $credit['Credit']['id']; ?>">
 															<i class="fa fa-sort-numeric-asc"></i>
+														</a>
+													<?php endif ?>
+														<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Ver preaprobado" class="ver_preaprobado btn btn-sm btn-outline-primary" data-uid="<?php echo $credit['Credit']['id']; ?>">
+															<i class="fa fa-sort-numeric-desc"></i>
 														</a>
 														<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Ver datos del crédito" class="ver_credito btn btn-sm btn-outline-primary" data-uid="<?php echo $credit['Credit']['id']; ?>">
 															<i class="fa fa-eye"></i>
@@ -366,6 +372,7 @@
 															<?php echo h($credit['Credit']['nombre_persona']).' '.h($credit['Credit']['apellido_persona']).' - '.h($credit['Credit']['cedula_persona']).' - '.h($credit['Credit']['telefono_persona'])?>
 														</span>
 													</h2>
+													<p><span>Asesor encargado:</span><?php echo $this->Utilities->name_user($credit['Credit']['user_asesor']); ?></p>
 													<p>
 														<strong>$ <?php echo h(number_format($credit['Credit']['valor_credito'],0,",","."));?></strong>
 														<span class="txt_cuotas">
@@ -506,9 +513,11 @@
 					</div>
 					<div class="col-md-5 text-right">
 						<div class="input-group">
-							<a href="<?php echo $this->Html->url(array('action'=>'add')) ?>" class="btn btn-success mr-3 crearEnlace">
-								<i class="fa fa-1x fa-plus-square"></i> Nuevo crédito
-							</a>
+							<?php if (AuthComponent::user('role')==Configure::read('variables.rolCliente')): ?>
+								<a href="<?php echo $this->Html->url(array('action'=>'add')) ?>" class="btn btn-success mr-3 crearEnlace">
+									<i class="fa fa-1x fa-plus-square"></i> Nuevo crédito
+								</a>
+							<?php endif ?>
 							<?php if (isset($this->request->query['q'])){ ?>
 								<input type="text" class="form-control" value="<?php echo $this->request->query['q']; ?>" placeholder="Buscador por cédula"  disabled="disabled">
 								<div class="input-group-append">
@@ -579,17 +588,13 @@
 						<b><?php echo $this->Paginator->counter(array('format' => '{:count} registros en total')); ?></b>
 					</div>
 					<p class="txtIzquierdo">
-						Cupo aprobado:
-						<br>
-						Cupo preaprobado:
-					</p>
 				</div>
 			</div>
 		<?php } ?>
 	</div>
 </div>
 
-<?php if (AuthComponent::user('role') != Configure::read('variables.rolCliente')): ?>
+<?php if (!in_array(AuthComponent::user('role'), $roles)): ?>
 	<div class="modal modal-static fade" id="processing-modal" role="dialog" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
@@ -605,7 +610,7 @@
 <?php endif ?>
 
 <?php
-	if (AuthComponent::user('role') != Configure::read('variables.rolCliente')) {
+	if (!in_array(AuthComponent::user('role'), $roles)) {
 		echo $this->Html->css("controller/credits/indexA.css?".rand(),							array('block' => 'AppCss'));
 		echo $this->Html->script("controller/credits/indexA.js?".rand(),						array('block' => 'AppScript'));
 	} else {

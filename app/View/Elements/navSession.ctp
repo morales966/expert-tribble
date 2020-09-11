@@ -94,9 +94,6 @@
               </p>
             </a>
           </li>
-        <?php endif ?>
-
-        <?php if (in_array(AuthComponent::user('role'), $rolesPermisoEcutivos)): ?>
           <li class="nav-item">
             <a href="<?php echo $this->Html->url(array('controller'=>'Users','action'=>'messages_data')) ?>" class="nav-link" id="datosDejados">
               <p>
@@ -110,7 +107,7 @@
           <li class="nav-item">
             <a href="<?php echo $this->Html->url(array('controller'=>'Users','action'=>'comercios')) ?>" class="nav-link" id="comercios">
               <p>
-                Comercios
+                Comercios afiliados
               </p>
             </a>
           </li>

@@ -62,6 +62,7 @@ $config = array(
 			'5'							=> 'Aprobado, retirado',
 			'6' 						=> 'Pagado',
 			'7' 						=> 'Solicitud de desembolso',
+			'8'							=> 'Pago rechazado',
 			'description' 				=> 'Descripción',
 			'editar_cupo_aprobado'		=> 'Editar cupo aprobado',
 			'registrar_retiro_cupo' 	=> 'Registrar retiro del cupo',
@@ -173,7 +174,9 @@ $config = array(
 			'crear_usuario_sistema' 		=> 'Han registrado un nuevo usuario',
 			'crear_cliente' 				=> 'Se ha registrado un cliente',
 			'dejar_datos' 					=> 'Han dejado unos datos para que te comuniques con ellos',
-			'desenbolsar_dinero' 			=> 'Han solicitado el desenbolso de un crédito'
+			'desenbolsar_dinero' 			=> 'Han solicitado el desenbolso de un crédito',
+			'pago_realizado'				=> 'Se realizo el pago de un crédito',
+			'pago_rechazado' 				=> 'Un pago de un cr+edito fue rechazado'
 		),
 	)
 );

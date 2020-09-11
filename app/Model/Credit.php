@@ -62,6 +62,19 @@ class Credit extends AppModel {
 
 	/**
         * @author Diego Morales <dlmorales096@gmail.com>
+        * @date(11-09-2020)
+        * @description Metodo que se encarga de devolver los registros del estado solicitado del usuario
+        * @variables $state = Estado solicitado
+        * @return Los registros del estado solicitado en orden descendente por el usuario
+    */
+	public function all_data_state_user_id($state,$user_id) {
+		$conditions 		= array('Credit.state' => $state,'Credit.user_id' => $user_id);
+		$order				= array('Credit.id' => 'desc');
+		return $this->find('all',compact('conditions','order'));
+	}
+
+	/**
+        * @author Diego Morales <dlmorales096@gmail.com>
         * @date(12-06-2020)
         * @description Metodo que se encarga de devolver el total(valor_credito) del estado solicitado
         * @variables $state = Estado solicitado
@@ -95,6 +108,19 @@ class Credit extends AppModel {
     */
 	public function find_state($credit_id) {
 		$fields 			= array('Credit.state');
+		$conditions 		= array('Credit.id' => $credit_id);
+		return $this->find('first',compact('fields','conditions'));
+	}
+
+	/**
+        * @author Diego Morales <dlmorales096@gmail.com>
+        * @date(19-06-2020)
+        * @description Metodo que se encargara de devolver el id del usuario que solicito el crédito
+        * @variables $credit_id = id del credito
+        * @return El id del cliente
+    */
+	public function find_user_id($credit_id) {
+		$fields 			= array('Credit.user_id');
 		$conditions 		= array('Credit.id' => $credit_id);
 		return $this->find('first',compact('fields','conditions'));
 	}

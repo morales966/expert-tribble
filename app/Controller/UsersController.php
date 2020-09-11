@@ -119,7 +119,6 @@ class UsersController extends AppController {
                                         		)
                                    	 		);
         	}
-            
         } else {
             if (AuthComponent::user('role') == Configure::read('variables.roles.Ejecutivo')) {
            		$conditions             = array(
@@ -256,7 +255,7 @@ class UsersController extends AppController {
             $datos['Client']['banco'] 						= $this->request->data['User']['banco'];
             $datos['Client']['numero_cuenta'] 				= $this->request->data['User']['numero_cuenta'];
             $datos['Client']['tipo_cuenta'] 				= $this->request->data['User']['tipo_cuenta'];
-            $datos['Client']['codigo'] 						= $this->request->data['User']['codigo'];
+            $datos['Client']['codigo'] 						= uniqid();
             $datos['Client']['nombre_propietario_cuenta'] 	= $this->request->data['User']['nombre_propietario_cuenta'];
             $datos['Client']['cedula_propietario_cuenta'] 	= $this->request->data['User']['cedula_propietario_cuenta'];
             $datos['Client']['ejecutivo'] 					= AuthComponent::user('id');

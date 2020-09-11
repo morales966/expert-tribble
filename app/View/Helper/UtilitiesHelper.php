@@ -81,6 +81,16 @@ class UtilitiesHelper extends HtmlHelper {
 		return $texto;
 	}
 
+	public function estado_solicitud_pagado($state,$numero_comprobante) {
+		$texto = '';
+		if ($numero_comprobante != '') {
+			$texto = 'Pagado';
+		} else {
+			$texto = 'Procesando';
+		}
+		return $texto;
+	}
+
 	public function name_user($user_id) {
 		return $this->__User->name_user($user_id);
 	}

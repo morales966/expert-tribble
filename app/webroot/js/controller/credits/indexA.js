@@ -93,13 +93,19 @@ $("body").on("click", ".registrar_cupo_aprobado", function() {
 
 $("body").on("click", "#btn_add_retiro_cupo", function() {
     var credit_id              = $(this).data('uid');
+    var valor_maximo           = $(this).data('max');
+
     var txt_cupo_aprobado      = $('#txt_cupo_aprobado').val();
     if (txt_cupo_aprobado != '') {
-        $.post(copy_js.base_url+'Credits/addRetiroCupo',{credit_id:credit_id,txt_cupo_aprobado:txt_cupo_aprobado}, function(result){
-            $('#modalSessionCancelar').modal('hide');
-            $('#resultModalCancelar').empty();
-            message_alert("Se registro un retiro del cupo correctamente","Bien");
-        });
+        if (parseInt(valor_maximo) > parseInt(txt_cupo_aprobado)) {
+            $.post(copy_js.base_url+'Credits/addRetiroCupo',{credit_id:credit_id,txt_cupo_aprobado:txt_cupo_aprobado}, function(result){
+                $('#modalSessionCancelar').modal('hide');
+                $('#resultModalCancelar').empty();
+                message_alert("Se registro un retiro del cupo correctamente","Bien");
+            });
+        } else {
+            message_alert("Por favor valida ya que el valor ingresado es superior al total del cupo aprobado","Error");
+        }
     } else {
         message_alert("Por favor ingresa el valor del retiro","Error");
     }
@@ -321,7 +327,6 @@ function draggableInit() {
 $("body").on("click", "#btn_cupo", function() {
     var credit_id           = $(this).data('uid');
     var cupo_aprobado       = $('#cupo_aprobado').val();
-    alert(cupo_aprobado);
     if (parseInt(cupo_aprobado) > 1500000 || parseInt(cupo_aprobado) < 50000) {
         message_alert("Por favor valida el valor del cupo aprobado","Error");
     } else {

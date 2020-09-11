@@ -44,5 +44,18 @@ class Client extends AppModel {
 		}
 	}
 
-
+	/**
+        * @author Diego Morales <dlmorales096@gmail.com>
+        * @date(10-09-2020)
+        * @description Metodo que se encargara de devolver los datos del cliente  referente al banco
+        * @variables $user_id = id del cliente
+        * @return Ddatos del cliente para crear una solicitud de crédito
+    */
+	public function all_data_user_banco($user_id) {
+		$this->recursive 			= -1;
+		$fields 					= array('Client.tel_usuario','banco','numero_cuenta','tipo_cuenta','nombre_propietario_cuenta');
+		$conditions 				= array('Client.user_id' => $user_id);
+		$datos 						= $this->find('first',compact('conditions','fields'));
+		return $datos;
+	}
 }

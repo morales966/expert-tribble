@@ -37,9 +37,10 @@
                         <tr>
                             <th>Código del comercio</th>
                             <th>Monto solicitado</th>
-
                             <th>Información del pago al comercio</th>
-                            <th>Estado</th>
+                            <th>Estado de la solicitud</th>
+                            <th>Número del comprobante</th>
+                            <th>Nota</th>
                             <th>Acción</th>
                         </tr>
                     </thead>
@@ -50,17 +51,43 @@
                                 <td>
                                     <?php echo number_format($this->Utilities->find_cupo_aprobado_credito($credit['Credit']['id'],0,",","."));?>&nbsp;
                                 </td>
-
                                 <td>
                                     <a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Ver datos de la cuenta" class="datos_banco_cliente" data-uid="<?php echo $credit['Credit']['id']; ?>">
                                         <i class="fa fa-user"></i>
                                     </a>
                                 </td>
-                                <td><?php echo $this->Utilities->estados_pago($credit['Credit']['state']); ?>&nbsp;</td>
+                                <td><?php echo $this->Utilities->estado_solicitud_pagado($credit['Credit']['state'],$credit['Credit']['numero_comprobante']); ?>&nbsp;</td>
+                                <td>
+                                    <?php if ($credit['Credit']['numero_comprobante'] == '') { ?>
+                                        <a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Registrar número de comprobante y añadir una nota" class="txt_add_numero" data-uid="<?php echo $credit['Credit']['id']; ?>">
+                                            <i class="fa fa-edit"></i>
+                                        </a>
+                                    <?php } else { ?>
+                                        <?php echo $credit['Credit']['numero_comprobante'] ?>
+                                    <?php } ?>
+                                </td>
+                                <td>
+                                    <?php if ($credit['Credit']['numero_comprobante'] == '') { ?>
+                                        <a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Registrar número de comprobante y añadir una nota" class="txt_add_numero" data-uid="<?php echo $credit['Credit']['id']; ?>">
+                                            <i class="fa fa-edit"></i>
+                                        </a>
+                                    <?php } else { ?>
+                                        <?php echo $credit['Credit']['nota'] ?>
+                                    <?php } ?>
+                                </td>
                                 <td class="actions">
                                     <a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Ver datos del crédito" class="ver_credito" data-uid="<?php echo $credit['Credit']['id']; ?>">
                                         <i class="fa fa-eye"></i>
                                     </a>
+                                    <?php if ($credit['Credit']['numero_comprobante'] != '') { ?>
+                                        <a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Finalizar" class="finalizar_credito btn btn-sm btn-outline-primary" data-uid="<?php echo $credit['Credit']['id']; ?>">
+                                            <i class="fa fa-step-forward"></i>
+                                        </a>
+                                    <?php } else { ?>
+                                         <a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Rechazar pago" class="rechazar_credito btn btn-sm btn-outline-primary" data-uid="<?php echo $credit['Credit']['id']; ?>">
+                                            <i class="fa fa-lock"></i>
+                                        </a>
+                                    <?php } ?>
                                 </td>
                             </tr>
                         <?php endforeach; ?>
@@ -84,37 +111,8 @@
                 </div>
             </div>
         </div>
-
-
-
-
 	</div>
 </div>
-
-
-
-<!-- <a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Finalizado" class="finalizar_credito btn btn-sm btn-outline-primary" data-uid="<?php echo $credit['Credit']['id']; ?>">
-	<i class="fa fa-step-forward"></i>
-</a> -->
-
-<!-- $("body").on("click", ".finalizar_credito", function() {
-    var credit_id           = $(this).data('uid');
-    swal({
-        title: "¿Estas seguro de finalizar el crédito?",
-        text: "¿Deseas continuar con la acción?",
-        type: "warning",
-        showCancelButton: true,
-        confirmButtonClass: "btn-danger",
-        cancelButtonText:"Cancelar",
-        confirmButtonText: "Aceptar",
-        closeOnConfirm: false
-    },
-    function(){
-        $.post(copy_js.base_url+'Credits/finalizarCredito',{credit_id:credit_id}, function(result){
-            location.reload();
-        });
-    });
-}); -->
 
 <?php 
     echo $this->Html->script("controller/credits/paid_customers.js?".rand(),                        array('block' => 'AppScript'));
