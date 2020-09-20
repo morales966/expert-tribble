@@ -63,7 +63,7 @@ $("body").on("click", "#btn_monto_deducir", function() {
     var monto_deducir                   = $('#monto_deducir').val();
     var txt_descripcion_deducir         = $('#txt_descripcion_deducir').val();
     $.post(copy_js.base_url+'Credits/addMontoReducir',{user_id:user_id,monto_deducir:monto_deducir,txt_descripcion_deducir:txt_descripcion_deducir}, function(result){
-        $('#modalSessionCancelar').modal('hide');
+        location.reload();
     });
 });
 

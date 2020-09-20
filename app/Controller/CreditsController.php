@@ -376,15 +376,20 @@ class CreditsController extends AppController {
     public function solicitudDesenvolver() {
         $this->autoRender                       = false;
         if ($this->request->is('ajax')) {
+            $row                                    = $this->Credit->Stage->isset_pays_credit($this->request->data['credit_id']);
+            if ($row < 1) {
+                $state_name                         = Configure::read('variables.estados_creditos.registrar_retiro_cupo');
+                $this->saveStage($state_name,AuthComponent::user('id'),$this->request->data['credit_id'],'','',$this->request->data['txt_cupo_aprobado']);
+            }
             $datosC['Credit']['state']              = Configure::read('variables.nombres_estados_creditos.Solicitud_de_desembolso');
             $datosC['Credit']['id']                 = $this->request->data['credit_id'];
-            $state_name                             = Configure::read('variables.estados_creditos.7');
             $description                            = Configure::read('variables.description_notificaciones.desenbolsar_dinero');
             $url                                    = $this->webroot.'Credits/paid_customers';
             $usuarios                               = $this->Credit->User->all_role_finanzas();
             foreach ($usuarios as $user) {
                 $this->saveManagesUser($description,$user['User']['id'],$url);
             }
+            $state_name                             = Configure::read('variables.estados_creditos.7');
             $this->saveStage($state_name,AuthComponent::user('id'),$this->request->data['credit_id'],'','',0);
             $this->Credit->save($datosC);
             return true;

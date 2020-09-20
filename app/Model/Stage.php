@@ -92,4 +92,14 @@ class Stage extends AppModel {
 		$dato 				= $this->find('first',compact('conditions','fields'));
 		return $dato[0]['totalRetiro'];
 	}
+
+	public function isset_pays_credit($credit_id) {
+		$this->recursive 	= -1;
+		$conditions 		= array(
+								'Stage.credit_id' => $credit_id,
+								'Stage.state_credit' => array(Configure::read('variables.estados_creditos.registrar_retiro_cupo'))
+							);
+		return $this->find('count',compact('conditions'));
+
+	}
 }
