@@ -12,6 +12,15 @@ $("body").on("click", "#texto_busqueda", function() {
 	location.href = copy_js.base_url+copy_js.controller+'/'+copy_js.action;
 });
 
+$("body").on("click", ".ver_deducion", function() {
+    var user_id       = $(this).data('user');
+    $.post(copy_js.base_url+'Credits/ver_deduciones',{user_id:user_id}, function(result){
+        $('#resultModalGrande').html(result);
+        $('#modalTitleGrande').text('Deducciones');
+        $('#modalGrande').modal('show');
+    }); 
+});
+
 $("body").on("click", ".ver_datos_cliente", function() {
     var credit_id       = $(this).data('uid');
     $.post(copy_js.base_url+'Credits/view_user_client',{credit_id:credit_id}, function(result){

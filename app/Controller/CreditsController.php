@@ -210,10 +210,31 @@ class CreditsController extends AppController {
         $this->set(compact('credit_id'));
     }
 
+    public function add_monto_reducir() {
+        $this->layout                           = false;
+        $variable                               = '';
+        $this->set(compact('variable'));
+    }
+
+    public function addMontoReducir() {
+        $this->autoRender                           = false;
+        $codigo                                     = $this->request->data['user_id'];
+        $monto_deducir                              = $this->request->data['monto_deducir'];
+        $txt_descripcion_deducir                    = $this->request->data['txt_descripcion_deducir'];
+        $datosC['Deduct']['user_id']                = $codigo;
+        $datosC['Deduct']['asesor_id']              = AuthComponent::user('id');
+        $datosC['Deduct']['monto']                  = $monto_deducir;
+        $datosC['Deduct']['description_deducir']    = $txt_descripcion_deducir;
+        $datosC['Deduct']['state']                  = Configure::read('variables.estados_monto_deducion.por_cobrar');
+        $this->Credit->User->Deduct->create();
+        $this->Credit->User->Deduct->save($datosC);
+    }
+
     public function ver_cupo_aprobado() {
         $this->layout                           = false;
         $cupo_aprobado                          = $this->Credit->find_cupo_aprobado($this->request->data['credit_id']);
         $credit_id                              = $this->request->data['credit_id'];
+        $this->set(compact('cupo_aprobado','credit_id'));
     }
 
     public function editCupoAprobado() {
@@ -294,9 +315,23 @@ class CreditsController extends AppController {
         $this->set(compact('credit'));
     }
 
+    public function ver_deduciones() {
+        $this->layout                           = false;
+        $deducciones                                 = $this->Credit->User->Deduct->ver_deducciones($this->request->data['user_id']);
+        $this->set(compact('deducciones'));
+    }
+
+    public function eliminarDeduccion() {
+        $this->autoRender                       = false;
+        $datosC['Deduct']['id']                 = $this->request->data['deduccion_id'];
+        $datosC['Deduct']['state']              = Configure::read('variables.estados_monto_deducion.eliminado');
+        $this->Credit->User->Deduct->save($datosC);
+        return true;
+    }
+
     public function add_comentary() {
         $this->layout                           = false;
-        $credit_id = $this->request->data['credit_id'];
+        $credit_id                              = $this->request->data['credit_id'];
         $this->set(compact('credit_id'));
     }
 
@@ -359,11 +394,13 @@ class CreditsController extends AppController {
     public function finalizarCredito() {
         $this->autoRender                       = false;
         if ($this->request->is('ajax')) {
+            $user_id                                = $this->request->data['user_id'];
             $datosC['Credit']['state']              = Configure::read('variables.nombres_estados_creditos.Pagado');
             $datosC['Credit']['id']                 = $this->request->data['credit_id'];
             $state_name                             = Configure::read('variables.estados_creditos.6');
             $this->saveStage($state_name,AuthComponent::user('id'),$this->request->data['credit_id'],'','',0);
             $this->Credit->save($datosC);
+            $this->Credit->User->Deduct->update_state_pagado($user_id);
             $description                            = Configure::read('variables.description_notificaciones.pago_realizado');
             $url                                    = $this->webroot.'Credits/index';
             $user                                   = $this->Credit->find_user_id($this->request->data['credit_id']);
@@ -372,13 +409,14 @@ class CreditsController extends AppController {
         }
     }
 
-     public function rechazarCredito() {
+    public function rechazarCredito() {
         $this->autoRender                       = false;
         if ($this->request->is('ajax')) {
             $datosC['Credit']['state']              = Configure::read('variables.nombres_estados_creditos.Aprobado_retirado');
             $datosC['Credit']['id']                 = $this->request->data['credit_id'];
             $state_name                             = Configure::read('variables.estados_creditos.8');
-            $this->saveStage($state_name,AuthComponent::user('id'),$this->request->data['credit_id'],'','',0);
+            $cupo_aprobado                          = $this->Credit->find_cupo_aprobado($this->request->data['credit_id']);
+            $this->saveStage($state_name,AuthComponent::user('id'),$this->request->data['credit_id'],'','',$cupo_aprobado['Credit']['cupo_aprobado']);
             $this->Credit->save($datosC);
             $description                            = Configure::read('variables.description_notificaciones.pago_rechazado');
             $url                                    = $this->webroot.'Credits/index';
@@ -387,22 +425,6 @@ class CreditsController extends AppController {
             return true;
         }
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     public function sumTotalStateSolicitado() {
         $this->autoRender               = false;
@@ -534,8 +556,7 @@ class CreditsController extends AppController {
                                                 'Credit.user_id' => AuthComponent::user('id'),
                                                 'Credit.state'   => array(
                                                                         Configure::read('variables.nombres_estados_creditos.Aprobado_retirado'),
-                                                                        Configure::read('variables.nombres_estados_creditos.Solicitud_de_desembolso'),
-                                                                        Configure::read('variables.nombres_estados_creditos.Pagado')
+                                                                        Configure::read('variables.nombres_estados_creditos.Solicitud_de_desembolso')
                                                 ),
                                                 'OR' => array(
                                                     'Credit.cedula_persona LIKE'            => '%'.mb_strtolower($get['q']).'%'
@@ -547,13 +568,13 @@ class CreditsController extends AppController {
                                                     'Credit.user_id' => AuthComponent::user('id'),
                                                     'Credit.state' => array(
                                                                         Configure::read('variables.nombres_estados_creditos.Aprobado_retirado'),
-                                                                        Configure::read('variables.nombres_estados_creditos.Solicitud_de_desembolso'),
-                                                                        Configure::read('variables.nombres_estados_creditos.Pagado')
+                                                                        Configure::read('variables.nombres_estados_creditos.Solicitud_de_desembolso')
                                                                     )
                                                 );
         }
         $order                                  = array('Credit.id' => 'desc');
         $this->paginate                         = array(
+                                                    'recursive'     => -1,
                                                     'order'         => $order,
                                                     'limit'         => 10,
                                                     'conditions'    => $conditions

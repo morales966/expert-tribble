@@ -198,7 +198,7 @@
     <div class="col-md-12">
       <?php echo $this->Form->create('User',array('data-parsley-validate'=>true,'class'=>'form-inline')); ?>
         <div class="form-group">
-          <?php echo $this->Form->input('name',array('label' => false,'class' => 'form-control','placeholder' => 'código del negocio','id' => 'txt_codigo')); ?>
+          <?php echo $this->Form->input('name',array('label' => false,'class' => 'form-control','placeholder' => 'Código del negocio','id' => 'txt_codigo')); ?>
         </div>
         <div class="form-group">
           <?php echo $this->Form->button('Buscar negocio',array("type" => "button","class" => "btn btn-success","id" => "btn_buscar_negocio")); ?>

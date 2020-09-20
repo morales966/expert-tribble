@@ -28,6 +28,12 @@ $config = array(
 		'revision' 					=> '2',
 		'noti_por_leer'				=> '0',
 		'noti_vista'				=> '1',
+		'estados_monto_deducion' 	=> array(
+			'por_cobrar' 				=> '1',
+			'cobrado' 					=> '2',
+			'pagado' 					=> '3',
+			'eliminado' 				=> '4'
+		),
 		'tiempos_creditos'			=> array(
 			'2' 						=> '2 meses',
 			'3' 						=> '3 meses',

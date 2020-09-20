@@ -11,11 +11,13 @@ class UtilitiesHelper extends HtmlHelper {
 		App::import("model","Message");
 		App::import("model","Client");
 		App::import("model","Stage");
+		App::import("model","Deduct");
 
 		$this->__User			= new User();
 		$this->__Message 		= new Message();
 		$this->__Client			= new Client();
 		$this->__Stage			= new Stage();
+		$this->__Deduct			= new Deduct();
 	}
 
 	public function estado_usuario($state) {
@@ -115,8 +117,23 @@ class UtilitiesHelper extends HtmlHelper {
 		return $this->__Client->find_code_client($user_id);
 	}
 
+	public function find_deduciones_comercio($user_id) {
+		return $this->__Deduct->find_deduciones_comercio($user_id);
+	}
+
+	public function sum_deboluciones_comercio($user_id) {
+		return $this->__Deduct->sum_deboluciones_comercio($user_id);
+	}
+
 	public function find_cupo_aprobado_credito($credit_id) {
 		return $this->__Stage->find_cupo_aprobado_credito($credit_id);
+	}
+
+	public function total_pagar($user_id,$credit_id) {
+		$retirado 			= $this->__Stage->find_cupo_aprobado_credito($credit_id);
+		$deduccion  		= $this->__Deduct->sum_deboluciones_comercio($user_id);
+		$total 				= $retirado - $deduccion;
+		return $total;
 	}
 
 }

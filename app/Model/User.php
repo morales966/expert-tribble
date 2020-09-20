@@ -17,7 +17,7 @@ class User extends AppModel {
 			),
 		),
 		'email' => array(
-            'rule'    => array('email','isUnique'),
+            'rule'    => array('isUnique'),
             'message' => 'El correo electrónico ya existe en nuestra base de datos',
             'on' => 'create',
         ),
@@ -55,8 +55,12 @@ class User extends AppModel {
 			'className' => 'Credit',
 			'foreignKey' => 'user_id',
 			'dependent' => false
+		),
+		'Deduct' => array(
+			'className' => 'Deduct',
+			'foreignKey' => 'user_id',
+			'dependent' => false
 		)
-
 	);
 
 	/**

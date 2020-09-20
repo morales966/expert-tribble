@@ -84,17 +84,12 @@ class Stage extends AppModel {
     */
 	public function find_cupo_aprobado_credito($credit_id) {
 		$this->recursive 	= -1;
-		$fields 			= array('Stage.cupo_aprobado');
+		$fields 			= array('SUM(Stage.cupo_aprobado) as totalRetiro');
 		$conditions 		= array(
 								'Stage.credit_id' => $credit_id,
-								'Stage.state_credit !=' => array(
-																Configure::read('variables.estados_creditos.description'),
-																Configure::read('variables.estados_creditos.adjuntar_plan_pagos'),
-																Configure::read('variables.estados_creditos.7')
-								)
+								'Stage.state_credit' => array(Configure::read('variables.estados_creditos.registrar_retiro_cupo'))
 							);
-		$order				= array('Stage.id' => 'desc');
-		$dato 				= $this->find('first',compact('conditions','fields','order'));
-		return $dato['Stage']['cupo_aprobado'];
+		$dato 				= $this->find('first',compact('conditions','fields'));
+		return $dato[0]['totalRetiro'];
 	}
 }

@@ -18,7 +18,11 @@ $(document).ready(function () {
                 $('#clientes').addClass("activeNavS");
                 $('#profile').removeClass("activeNavS");
                 $('#datos').removeClass("activeNavS");
-            } else if (copy_js.action == 'view_data') {
+            } else if (copy_js.action == 'view_data' ) {
+                $('#datos').addClass("activeNavS");
+                $('#profile').removeClass("activeNavS");
+                $('#clientes').removeClass("activeNavS");
+            } else if (copy_js.action == 'contrato_view' ) {
                 $('#datos').addClass("activeNavS");
                 $('#profile').removeClass("activeNavS");
                 $('#clientes').removeClass("activeNavS");

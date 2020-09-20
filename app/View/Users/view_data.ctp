@@ -25,15 +25,17 @@
 			<p><b>Rol: </b><?php echo h($user['User']['role']); ?>&nbsp;</p>
 			<p><b>Correo eléctronico: </b><?php echo h($user['User']['email']); ?>&nbsp;</p>
 		</div>
+
         <?php if ($user['User']['role'] == Configure::read('variables.rolCliente')): ?>
 			<hr>
 			<div class="bg-white-content mb-4">
 				<div class="content-tittles">
 					<div class="line-tittles">|</div>
 					<div>  
-						<h1>Información </h1>
+						<h1>Inforgación </h1>
 						<h2>Registrada</h2>
 					</div>
+					<span><a href="<?php echo $this->Html->url(array('controller'=>'Users','action'=>'contrato_view')) ?>">Contrato e información del plan</a></span>
 				</div>
 			</div>
 			<div class="row">

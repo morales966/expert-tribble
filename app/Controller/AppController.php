@@ -67,7 +67,7 @@ class AppController extends Controller {
 
     public function saveStage($state_name,$asesor_id,$credit_id,$description,$description_denied,$cupo_aprobado) {
         $this->loadModel('Stage');
-        $datosS['Stage']['user_id']                 = $asesor_id;
+        $datosS['Stage']['user_id']                 = AuthComponent::user('id');
         $datosS['Stage']['credit_id']               = $credit_id;
         $datosS['Stage']['state_credit']            = $state_name;
         $datosS['Stage']['description']             = $description;
@@ -279,6 +279,10 @@ class AppController extends Controller {
                                     <td style="width:600px;">
                                         <p style="color: #031730;">
                                           Tu contraseña es: '.$password.'
+                                        </p>
+                                        <p>
+                                            Siempre podras acceder al contrato que tienes con nosotros accede 
+                                            <a href="'.Router::url("/", true).'Users/contrato_view'.'">aquí</a>
                                         </p>
                                     </td>
                                 </tr>  

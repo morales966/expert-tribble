@@ -2,14 +2,19 @@
 	<div class="container-fluid cuadro_panding">
         <div class="bg-white-content mb-2">
             <div class="row ">
-                <div class="col-md-7">
-                <div class="content-tittles">
-                    <div class="line-tittles">|</div>
-                    <div>  
-                        <h1>Créditos  </h1>
-                        <h2>por pagar</h2>
+                <div class="col-md-3">
+                    <div class="content-tittles">
+                        <div class="line-tittles">|</div>
+                        <div>  
+                            <h1>Créditos  </h1>
+                            <h2>por pagar</h2>
+                        </div>
                     </div>
                 </div>
+                <div class="col-md-4">
+                    <a href="javascript:void(0)" class="btn btn-success mr-3 add_monto_deducir">
+                        <i class="fa fa-1x fa-plus-square"></i> Registrar monto a deducir
+                    </a>
                 </div>
                 <div class="col-md-5 text-right">
                     <div class="input-group">
@@ -37,6 +42,9 @@
                         <tr>
                             <th>Código del comercio</th>
                             <th>Monto solicitado</th>
+                            <th>Actualizar deduciones</th>
+                            <th>Deduciones</th>
+                            <th>Total a pagar</th>
                             <th>Información del pago al comercio</th>
                             <th>Estado de la solicitud</th>
                             <th>Número del comprobante</th>
@@ -50,6 +58,16 @@
                                 <td><?php echo $this->Utilities->find_codigo_cliente($credit['Credit']['user_id']); ?></td>
                                 <td>
                                     <?php echo number_format($this->Utilities->find_cupo_aprobado_credito($credit['Credit']['id'],0,",","."));?>&nbsp;
+                                </td>
+                                <td><?php echo $this->Utilities->find_deduciones_comercio($credit['Credit']['user_id']); ?></td>
+                                <td>
+                                    <?php echo number_format($this->Utilities->sum_deboluciones_comercio($credit['Credit']['user_id'],0,",","."));?>&nbsp;
+                                    <a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Ver deduciones" class="ver_deducion" data-user="<?php echo $credit['Credit']['user_id']; ?>">
+                                        <i class="fa fa-eye"></i>
+                                    </a>
+                                </td>
+                                <td>
+                                    <?php echo number_format($this->Utilities->total_pagar($credit['Credit']['user_id'],$credit['Credit']['id'],0,",","."));?>&nbsp;
                                 </td>
                                 <td>
                                     <a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Ver datos de la cuenta" class="datos_banco_cliente" data-uid="<?php echo $credit['Credit']['id']; ?>">
@@ -80,7 +98,7 @@
                                         <i class="fa fa-eye"></i>
                                     </a>
                                     <?php if ($credit['Credit']['numero_comprobante'] != '') { ?>
-                                        <a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Finalizar" class="finalizar_credito btn btn-sm btn-outline-primary" data-uid="<?php echo $credit['Credit']['id']; ?>">
+                                        <a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Finalizar" class="finalizar_credito btn btn-sm btn-outline-primary" data-uid="<?php echo $credit['Credit']['id']; ?>" data-user="<?php echo $credit['Credit']['user_id']; ?>">
                                             <i class="fa fa-step-forward"></i>
                                         </a>
                                     <?php } else { ?>

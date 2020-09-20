@@ -64,6 +64,14 @@ class UsersController extends AppController {
 		$this->set(compact('user','id','credits'));
 	}
 
+	public function contrato_view() {
+		$user_id 					= AuthComponent::user('id');
+		$user 						= $this->User->get_data_model('User',$user_id);
+		unset($user['Credit']);
+		unset($user['Message']);
+		$this->set(compact('user','user_id'));
+	}
+
 	public function view_data() {
 		$user_id 					= AuthComponent::user('id');
 		$user 						= $this->User->get_data_model('User',$user_id);
@@ -558,6 +566,15 @@ class UsersController extends AppController {
 				$this->autoRender 				= false;
             	return $user_id;
             }
+        }
+    }
+
+    public function find_code_clients_deducir() {
+		$this->autoRender 					= false;
+        if ($this->request->is('ajax')) {
+            $txt_codigo                  	    = $this->request->data['txt_codigo'];
+            $user_id 							= $this->User->Client->find_code_client_solicitud_credito($txt_codigo);
+            return $user_id;
         }
     }
 
