@@ -240,6 +240,16 @@ class UsersController extends AppController {
 		return $r;
 	}
 
+	public function generateCode($length = 5) {
+	    $characters = '0123456789';
+	    $charactersLength = strlen($characters);
+	    $randomString = '';
+	    for ($i = 0; $i < $length; $i++) {
+	        $randomString .= $characters[rand(0, $charactersLength - 1)];
+	    }
+	    return $randomString;
+	}
+
 	public function addClientSave() {
 		$datos['User']['name'] 							= $this->request->data['User']['razon_social'];
 		$datos['User']['email'] 						= $this->request->data['User']['email'];
@@ -263,7 +273,9 @@ class UsersController extends AppController {
             $datos['Client']['banco'] 						= $this->request->data['User']['banco'];
             $datos['Client']['numero_cuenta'] 				= $this->request->data['User']['numero_cuenta'];
             $datos['Client']['tipo_cuenta'] 				= $this->request->data['User']['tipo_cuenta'];
-            $datos['Client']['codigo'] 						= uniqid();
+
+            $datos['Client']['codigo'] 						= $this->generateCode();
+
             $datos['Client']['nombre_propietario_cuenta'] 	= $this->request->data['User']['nombre_propietario_cuenta'];
             $datos['Client']['cedula_propietario_cuenta'] 	= $this->request->data['User']['cedula_propietario_cuenta'];
             $datos['Client']['ejecutivo'] 					= AuthComponent::user('id');
@@ -590,21 +602,15 @@ class UsersController extends AppController {
 			$this->User->Credit->create();
 			if ($this->User->Credit->save($this->request->data['Credit'])) {
                 $state_name                                                 = Configure::read('variables.estados_creditos.1');
-                $this->saveStage($state_name,AuthComponent::user('id'),$this->Credit->id,'','',0);
+                $this->saveStage($state_name,0,$this->User->Credit->id,'','',0);
                 $description                                                = Configure::read('variables.description_notificaciones.crear_credito');
                 $url                                                        = $this->webroot.'Credits/index';
-                $usuarios                                                   = $this->User->all_role_coordinador_analista();
                 $description_cliente                                        = Configure::read('variables.description_notificaciones.crear_credito_cliente');
-                foreach ($usuarios as $user) {
-                    $this->saveManagesUser($description,$user['User']['id'],$url);
-                }
                 $this->saveManagesUser($description_cliente,$this->request->data['Credit']['user_id'],$url);
-				$this->Session->setFlash('El crédito se ha guardado satisfactoriamente','Flash/success');
-				return $this->redirect(array('controller' => 'Pages','action' => 'home'));
 			} else {
 				$this->Session->setFlash('El crédito no se ha guardado, por favor inténtalo más tarde','Flash/error');
-				return $this->redirect(array('controller' => 'Pages','action' => 'home'));
 			}
+			return $this->redirect(array('controller' => 'Pages','action' => 'home'));
 		}
     }
 }

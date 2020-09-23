@@ -4,19 +4,19 @@ App::uses('AppController', 'Controller');
 
 class PagesController extends AppController {
 
-	public function beforeFilter() {
+    public function beforeFilter() {
         parent::beforeFilter();
         $this->Auth->allow('home','guardar_fotoCD','guardar_fotoCT','guardar_fotoFP','foto_guardaname_foto');
     }
 
     public function home(){
         $this->layout = "landing";
-    	if (AuthComponent::user('id')){
-			$this->redirect(array('controller' => 'Credits','action' => 'index'));
-		}
+        if (AuthComponent::user('id')){
+            $this->redirect(array('controller' => 'Users','action' => 'view_data'));
+        }
     }
 
-	public function index(){
+    public function index(){
 
     }
 

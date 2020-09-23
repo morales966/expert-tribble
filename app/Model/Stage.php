@@ -90,7 +90,11 @@ class Stage extends AppModel {
 								'Stage.state_credit' => array(Configure::read('variables.estados_creditos.registrar_retiro_cupo'))
 							);
 		$dato 				= $this->find('first',compact('conditions','fields'));
-		return $dato[0]['totalRetiro'];
+		$valor 				= $dato[0]['totalRetiro'];
+		if ($valor == '') {
+			$valor 			= 0;
+		}
+		return $valor;
 	}
 
 	public function isset_pays_credit($credit_id) {

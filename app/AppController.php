@@ -67,7 +67,7 @@ class AppController extends Controller {
 
     public function saveStage($state_name,$asesor_id,$credit_id,$description,$description_denied,$cupo_aprobado) {
         $this->loadModel('Stage');
-        if ($asesor_id ==  0) {
+        if ($user ==  0) {
             $datosS['Stage']['user_id']                 = 0;
         } else {
             $datosS['Stage']['user_id']                 = AuthComponent::user('id');
@@ -77,7 +77,8 @@ class AppController extends Controller {
         $datosS['Stage']['description']             = $description;
         $datosS['Stage']['description_denied']      = $description_denied;
         $datosS['Stage']['cupo_aprobado']           = $cupo_aprobado;
-        $this->Stage->save($datosS['Stage']);
+        // $this->Stage->save($datosS['Stage']);
+        $this->log($datosS,'debug');
     }
 
     // public function sendMailCake() {

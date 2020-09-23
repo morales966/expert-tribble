@@ -82,7 +82,6 @@ $("body").on("keyup", "#CreditValorCredito", function() {
 		} else {
 			$('.meses_credito').empty();
 			$('#CreditValorCuota').val('0');
-    		message_alert("El valor del crédito debe ser mayor o igual a 50.000","Error");
 		}
 	} else {
 		$('.meses_credito').empty();

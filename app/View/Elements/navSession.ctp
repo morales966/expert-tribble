@@ -2,7 +2,7 @@
   <ul class="navbar-nav">
     <li class="nav-item">
       <a class="nav-link" data-widget="pushmenu" href="javascript:void(0)" role="button">
-      	<i class="fa fa-align-center"></i>
+        <i class="fa fa-align-center"></i>
       </a>
     </li>
   </ul>
@@ -23,16 +23,16 @@
       <div class="dropdown-menu dropdown-menu-right" id="paint_notificaciones" aria-labelledby="alertsDropdown">
       </div>
     </li>
-  	<li class="nav-item">
-  		<a class="nav-link" href="<?php echo $this->Html->url(array('controller'=>'Users','action'=>'profile')) ?>" >
-      	<?php echo AuthComponent::user('name'); ?>
+    <li class="nav-item">
+      <a class="nav-link" href="<?php echo $this->Html->url(array('controller'=>'Users','action'=>'profile')) ?>" >
+        <?php echo AuthComponent::user('name'); ?>
       </a>
-	  </li>
-		<li class="nav-item">
-			<a href="<?php echo $this->Html->url(array('controller'=>'Users','action'=>'logout')) ?>" class="nav-link">
-				Cerrar
-			</a>
-		</li>
+    </li>
+    <li class="nav-item">
+      <a href="<?php echo $this->Html->url(array('controller'=>'Users','action'=>'logout')) ?>" class="nav-link">
+        Cerrar
+      </a>
+    </li>
   </ul>
 </nav>
 
@@ -54,8 +54,8 @@
 
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
   <div class="sidebar">
-		<nav class="mt-2">
-			<ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+    <nav class="mt-2">
+      <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 
         <li class="nav-item">
           <a href="<?php echo $this->Html->url(array('controller'=>'Users','action'=>'profile')) ?>" class="nav-link" id="profile">
@@ -71,13 +71,15 @@
             </p>
           </a>
         </li>
-        <li class="nav-item">
-          <a href="<?php echo $this->Html->url(array('controller'=>'Credits','action'=>'index')) ?>" class="nav-link" id="creditos">
-            <p>
-              Créditos
-            </p>
-          </a>
-        </li>
+        <?php if (AuthComponent::user('role') != Configure::read('variables.roles.Finanzas')): ?>
+          <li class="nav-item">
+            <a href="<?php echo $this->Html->url(array('controller'=>'Credits','action'=>'index')) ?>" class="nav-link" id="creditos">
+              <p>
+                Créditos
+              </p>
+            </a>
+          </li>
+        <?php endif ?>
 
         <?php if (in_array(AuthComponent::user('role'), $rolPermisosAdmin)): ?>
           <li class="nav-item">
@@ -130,7 +132,7 @@
             <?php } ?>
           </li>
         <?php endif ?>
-			</ul>
-		</nav>
+      </ul>
+    </nav>
   </div>
 </aside>

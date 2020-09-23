@@ -36,7 +36,7 @@
 					<thead class="thead-light ">
 						<tr>
 							<th>Identificación</th>
-							<th>Cupo aprobado (Valor retiros)</th>
+							<th>Cupo aprobado ó Valor retiros)</th>
 							<th>Valor deducido</th>
 							<th>Valor a retirar</th>
 							<th>Estado de pago</th>
@@ -52,16 +52,16 @@
 									<?php echo h($credit['Credit']['cedula_persona']); ?>
 								</td>
 								<td>
-									<?php echo number_format($this->Utilities->find_cupo_aprobado_credito($credit['Credit']['id'],0,",","."));?>&nbsp;
-								</td>
+                                    <?php echo number_format($this->Utilities->find_cupo_aprobado_credito($credit['Credit']['id']),0,",",".");?>&nbsp;
+                                </td>
 								<td>
-									<?php echo number_format($this->Utilities->sum_deboluciones_comercio($credit['Credit']['user_id'],0,",","."));?>&nbsp;
+									<?php echo number_format($this->Utilities->sum_deboluciones_comercio($credit['Credit']['user_id'],$credit['Credit']['state']),0,",",".");?>&nbsp;
                                     <a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Ver deduciones" class="ver_deducion" data-user="<?php echo $credit['Credit']['user_id']; ?>">
                                         <i class="fa fa-eye"></i>
                                     </a>
                                 </td>
 								<td>
-									<?php echo number_format($this->Utilities->total_pagar($credit['Credit']['user_id'],$credit['Credit']['id'],0,",","."));?>&nbsp;
+									<?php echo number_format($this->Utilities->total_pagar($credit['Credit']['user_id'],$credit['Credit']['id'],$credit['Credit']['state']),0,",",".");?>&nbsp;
 								</td>
 								<td><?php echo $this->Utilities->estados_pago($credit['Credit']['state']); ?>&nbsp;</td>
 								<td>

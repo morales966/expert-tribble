@@ -57,17 +57,17 @@
                             <tr>
                                 <td><?php echo $this->Utilities->find_codigo_cliente($credit['Credit']['user_id']); ?></td>
                                 <td>
-                                    <?php echo number_format($this->Utilities->find_cupo_aprobado_credito($credit['Credit']['id'],0,",","."));?>&nbsp;
+                                    <?php echo number_format($this->Utilities->find_cupo_aprobado_credito($credit['Credit']['id']),0,",",".");?>&nbsp;
                                 </td>
                                 <td><?php echo $this->Utilities->find_deduciones_comercio($credit['Credit']['user_id']); ?></td>
                                 <td>
-                                    <?php echo number_format($this->Utilities->sum_deboluciones_comercio($credit['Credit']['user_id'],0,",","."));?>&nbsp;
+                                    <?php echo number_format($this->Utilities->sum_deboluciones_comercio($credit['Credit']['user_id'],$credit['Credit']['state']),0,",",".");?>&nbsp;
                                     <a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Ver deduciones" class="ver_deducion" data-user="<?php echo $credit['Credit']['user_id']; ?>">
                                         <i class="fa fa-eye"></i>
                                     </a>
                                 </td>
                                 <td>
-                                    <?php echo number_format($this->Utilities->total_pagar($credit['Credit']['user_id'],$credit['Credit']['id'],0,",","."));?>&nbsp;
+                                    <?php echo number_format($this->Utilities->total_pagar($credit['Credit']['user_id'],$credit['Credit']['id'],$credit['Credit']['state']),0,",",".");?>&nbsp;
                                 </td>
                                 <td>
                                     <a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Ver datos de la cuenta" class="datos_banco_cliente" data-uid="<?php echo $credit['Credit']['id']; ?>">

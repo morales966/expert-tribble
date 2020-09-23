@@ -67,10 +67,11 @@ class Credit extends AppModel {
         * @variables $state = Estado solicitado
         * @return Los registros del estado solicitado en orden descendente por el usuario
     */
-	public function all_data_state_user_id($state,$user_id) {
-		$conditions 		= array('Credit.state' => $state,'Credit.user_id' => $user_id);
+	public function all_data_state_user_id($state) {
+		$recursive  		= 1;
+		$conditions 		= array('Credit.state' => $state);
 		$order				= array('Credit.id' => 'desc');
-		return $this->find('all',compact('conditions','order'));
+		return $this->find('all',compact('conditions','order','recursive'));
 	}
 
 	/**
@@ -133,7 +134,7 @@ class Credit extends AppModel {
         * @return El cupo aprobado del credito
     */
 	public function find_cupo_aprobado($credit_id) {
-		$fields 			= array('Credit.cupo_aprobado');
+		$fields 			= array('Credit.cupo_aprobado','Credit.valor_credito');
 		$conditions 		= array('Credit.id' => $credit_id);
 		return $this->find('first',compact('fields','conditions'));
 	}

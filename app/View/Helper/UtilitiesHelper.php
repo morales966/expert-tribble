@@ -12,12 +12,14 @@ class UtilitiesHelper extends HtmlHelper {
 		App::import("model","Client");
 		App::import("model","Stage");
 		App::import("model","Deduct");
+		App::import("model","Credit");
 
 		$this->__User			= new User();
 		$this->__Message 		= new Message();
 		$this->__Client			= new Client();
 		$this->__Stage			= new Stage();
 		$this->__Deduct			= new Deduct();
+		$this->__Credit			= new Credit();
 	}
 
 	public function estado_usuario($state) {
@@ -85,7 +87,7 @@ class UtilitiesHelper extends HtmlHelper {
 
 	public function estado_solicitud_pagado($state,$numero_comprobante) {
 		$texto = '';
-		if ($numero_comprobante != '') {
+		if ($numero_comprobante  != '') {
 			$texto = 'Pagado';
 		} else {
 			$texto = 'Procesando';
@@ -121,19 +123,43 @@ class UtilitiesHelper extends HtmlHelper {
 		return $this->__Deduct->find_deduciones_comercio($user_id);
 	}
 
-	public function sum_deboluciones_comercio($user_id) {
-		return $this->__Deduct->sum_deboluciones_comercio($user_id);
+	public function sum_deboluciones_comercio($user_id,$state) {
+		if ($state != Configure::read('variables.nombres_estados_creditos.Solicitud_de_desembolso')) {
+			return 0;
+		} else {
+			return $this->__Deduct->sum_deboluciones_comercio($user_id);
+		}
 	}
 
 	public function find_cupo_aprobado_credito($credit_id) {
-		return $this->__Stage->find_cupo_aprobado_credito($credit_id);
+		$valor = $this->__Stage->find_cupo_aprobado_credito($credit_id);
+		if ($valor == 0) {
+			$datos = $this->__Credit->find_cupo_aprobado($credit_id);
+			return $datos['Credit']['valor_credito'];
+		} else {
+			return $valor;
+		}
 	}
 
-	public function total_pagar($user_id,$credit_id) {
-		$retirado 			= $this->__Stage->find_cupo_aprobado_credito($credit_id);
-		$deduccion  		= $this->__Deduct->sum_deboluciones_comercio($user_id);
-		$total 				= $retirado - $deduccion;
-		return $total;
+	public function total_pagar($user_id,$credit_id,$state) {
+		if ($state != Configure::read('variables.nombres_estados_creditos.Solicitud_de_desembolso')) {
+			$retirado 			= $this->__Stage->find_cupo_aprobado_credito($credit_id);
+			if ($retirado == 0) {
+				$datos 			= $this->__Credit->find_cupo_aprobado($credit_id);
+				$retirado 		= $datos['Credit']['valor_credito'];
+			}
+			$total 				= $retirado;
+			return $total;
+		} else {
+			$retirado 			= $this->__Stage->find_cupo_aprobado_credito($credit_id);
+			if ($retirado == 0) {
+				$datos 			= $this->__Credit->find_cupo_aprobado($credit_id);
+				$retirado 		= $datos['Credit']['valor_credito'];
+			}
+			$deduccion  		= $this->__Deduct->sum_deboluciones_comercio($user_id);
+			$total 				= $retirado - $deduccion;
+			return $total;
+		}
 	}
 
 }

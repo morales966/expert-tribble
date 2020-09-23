@@ -1,7 +1,6 @@
 <div class="content-wrapper">
 	<div class="container-fluid cuadro_panding">
-		<?php $roles = array(Configure::read('variables.rolCliente'),Configure::read('variables.roles.Finanzas')); ?>
-        <?php if (!in_array(AuthComponent::user('role'), $roles)) { ?>
+        <?php if (AuthComponent::user('role') != Configure::read('variables.rolCliente')) { ?>
 			<div class="col-md-12">
 				<div class="content-tittles">
 	                <div class="line-tittles">|</div>
@@ -559,7 +558,8 @@
 									<td><?php echo h($credit['Credit']['telefono_persona']); ?>&nbsp;</td>
 									<td><?php echo h(number_format($credit['Credit']['valor_credito'],0,",","."));?>&nbsp;</td>
 									<td><?php echo $this->Utilities->estados_creditos($credit['Credit']['state']); ?>&nbsp;</td>
-									<td><?php echo $credit['Credit']['cupo_aprobado'] ?></td>
+									<td><?php echo h(number_format($credit['Credit']['cupo_aprobado'],0,",","."));?>&nbsp;</td>
+
 									<td><?php echo h($credit['Credit']['created']); ?>&nbsp;</td>
 									<td class="actions">
 										<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Ver datos del crédito" class="btn btn-outline-primary ver_credito" data-uid="<?php echo $credit['Credit']['id']; ?>">
@@ -592,8 +592,7 @@
 		<?php } ?>
 	</div>
 </div>
-
-<?php if (!in_array(AuthComponent::user('role'), $roles)): ?>
+<?php if (AuthComponent::user('role') != Configure::read('variables.rolCliente')): ?>
 	<div class="modal modal-static fade" id="processing-modal" role="dialog" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
@@ -608,8 +607,8 @@
 	</div>
 <?php endif ?>
 
-<?php
-	if (!in_array(AuthComponent::user('role'), $roles)) {
+<?php 
+	if (AuthComponent::user('role') != Configure::read('variables.rolCliente')) {
 		echo $this->Html->css("controller/credits/indexA.css?".rand(),							array('block' => 'AppCss'));
 		echo $this->Html->script("controller/credits/indexA.js?".rand(),						array('block' => 'AppScript'));
 	} else {
