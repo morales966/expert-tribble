@@ -152,7 +152,9 @@
 						</h5>
 						<small class="text-muted"><b><?php echo 'Fecha de registro:' ?></b><?php echo $credit['Stage']['created']; ?></small>
 				    </div>
-				    <p class="mb-0"><b><?php echo 'Usuario:' ?></b><?php echo $this->Utilities->name_user($credit['Stage']['user_id']); ?></p>
+				    <?php if ($credit['Stage']['user_id'] != 0): ?>
+				    	<p class="mb-0"><b><?php echo 'Usuario:' ?></b><?php echo $this->Utilities->name_user($credit['Stage']['user_id']); ?></p>
+				    <?php endif ?>
 				</div>
 			<?php endforeach; ?>
 	  	</div>	

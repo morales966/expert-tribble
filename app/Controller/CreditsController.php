@@ -8,7 +8,6 @@ class CreditsController extends AppController {
     public function index() {
         $this->deleteCache();
         $get                        = $this->request->query;
-        $roles                      = array(Configure::read('variables.rolCliente'));
         if (AuthComponent::user('role') != Configure::read('variables.rolCliente')) {
             $conditions                 = array(
                                             'Credit.state' => Configure::read('variables.nombres_estados_creditos.Pagado')
